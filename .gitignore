@@ -1,0 +1,6 @@
+# Flutter generates these files locally and in CI.
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+.DS_Store
