@@ -81,9 +81,7 @@ void main() {
           if (task == 'sell_surplus') expect(after.grain, before.grain - 40);
           expect(tester.widget<OutlinedButton>(button).onPressed, isNull);
           if (task == 'commerce') {
-            await tester.tap(
-              find.byKey(const ValueKey('treasury-back-to-ledger')),
-            );
+            await tester.tap(find.byKey(const ValueKey('section-back')));
             await tester.pumpAndSettle();
             await tester.tap(find.byKey(const ValueKey('treasury-open-4')));
             await tester.pumpAndSettle();
@@ -444,7 +442,7 @@ void main() {
             findsOneWidget,
           );
           expect(tester.takeException(), isNull);
-          final back = find.byKey(const ValueKey('harem-back-to-capital'));
+          final back = find.byKey(const ValueKey('section-back'));
           await tester.ensureVisible(back);
           await tester.tap(back);
           await tester.pumpAndSettle();
@@ -648,7 +646,12 @@ void main() {
     await tester.ensureVisible(warning);
     expect(warning, findsOneWidget);
     expect(find.text('Uy quyền nguy cấp'), findsOneWidget);
-    await tester.tap(find.text('Khép lại mùa  →'));
+    expect(find.textContaining('Khép lại mùa'), findsNothing);
+    await tester.tap(find.byKey(const ValueKey('section-back')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('section-back')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('citadel-end-turn')));
     await tester.pumpAndSettle();
     expect(find.text('Vua trở thành bù nhìn'), findsOneWidget);
     expect(find.textContaining('Uy quyền đã giảm về 0'), findsOneWidget);

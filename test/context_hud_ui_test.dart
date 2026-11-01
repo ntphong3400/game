@@ -46,57 +46,89 @@ void main() {
     const Size(390, 844),
     const Size(320, 568),
   ]) {
-    testWidgets('only relevant counters and no left menu at $size', (
-      tester,
-    ) async {
-      final controller = await mount(tester, size);
-      final before = controller.state!.toJson();
-      final router = routerOf(tester);
-      const counters = [
-        'treasury',
-        'population',
-        'food',
-        'military',
-        'people',
-        'authority',
-        'health',
-        'stability',
-      ];
-      const screens = {
-        '/citadel': counters,
-        '/capital': ['treasury', 'authority', 'stability'],
-        '/court': ['treasury', 'people', 'authority', 'stability'],
-        '/treasury': ['treasury', 'food'],
-        '/people': ['treasury', 'authority', 'stability'],
-        '/harem': ['treasury', 'food', 'stability'],
-        '/health': ['treasury', 'health'],
-        '/journal': <String>[],
-        '/scores': <String>[],
-        '/population': ['population', 'food', 'people'],
-        '/military': ['treasury', 'food', 'military'],
-        '/locality': ['treasury', 'population', 'food', 'people'],
-        '/locality/agriculture': ['treasury', 'food'],
-        '/locality/village': ['population', 'food', 'people'],
-        '/frontier/north': ['treasury', 'food', 'military'],
-        '/country/north': ['treasury', 'military', 'authority'],
-      };
-      for (final entry in screens.entries) {
-        router.go(entry.key);
-        await tester.pumpAndSettle();
-        for (final counter in counters) {
+    testWidgets(
+      'all pages share a season-only top bar and one back link at $size',
+      (tester) async {
+        final controller = await mount(tester, size);
+        final before = controller.state!.toJson();
+        final router = routerOf(tester);
+        const counters = [
+          'treasury',
+          'population',
+          'food',
+          'military',
+          'people',
+          'authority',
+          'health',
+          'stability',
+        ];
+        const screens = {
+          '/citadel': 'Giang Sơn',
+          '/capital': 'Kinh Thành',
+          '/court': 'Triều chính',
+          '/treasury': 'Ngân khố',
+          '/people': 'Triều thần',
+          '/people/government': 'Bộ máy triều đình',
+          '/harem': 'Hậu cung',
+          '/harem/management': 'Học tập & cung vụ',
+          '/health': 'Long thể',
+          '/journal': 'Sử quán',
+          '/scores': 'Vọng Thiên Các',
+          '/population': 'Dân cư & Lao động',
+          '/military': 'Quân sự',
+          '/locality': 'Địa phương',
+          '/locality/administration': 'Phủ nha',
+          '/locality/agriculture': 'Đồng ruộng',
+          '/locality/village': 'Thôn làng',
+          '/frontier/north': 'Bắc Ải',
+          '/frontier/north/camp': 'Doanh Trại',
+          '/country/north': 'Hàn Kỳ',
+          '/country/north/embassy': 'Sứ quán',
+        };
+        for (final entry in screens.entries) {
+          router.go(entry.key);
+          await tester.pumpAndSettle();
+          expect(find.byType(WebGameHud), findsOneWidget);
           expect(
-            find.byKey(ValueKey('web-hud-stat-$counter')),
-            entry.value.contains(counter) ? findsOneWidget : findsNothing,
-            reason: '${entry.key}: $counter',
+            tester
+                .widget<Text>(find.byKey(const ValueKey('hud-page-title')))
+                .data,
+            entry.value,
           );
+          expect(
+            find.byKey(const ValueKey('section-back')),
+            entry.key == '/citadel' ? findsNothing : findsOneWidget,
+          );
+          for (final counter in counters) {
+            expect(
+              find.byKey(ValueKey('web-hud-stat-$counter')),
+              findsNothing,
+              reason: entry.key,
+            );
+          }
+          for (final key in [
+            'capital-back',
+            'locality-back',
+            'frontier-back',
+            'country-back',
+            'harem-back-to-capital',
+            'back-to-harem',
+            'court-government-back',
+            'locality-personnel-back',
+            'locality-detail-back',
+            'frontier-detail-back',
+            'country-detail-back',
+          ]) {
+            expect(find.byKey(ValueKey(key)), findsNothing);
+          }
+          expect(find.byType(Drawer), findsNothing);
+          expect(find.byType(NavigationRail), findsNothing);
+          expect(find.byTooltip('Mở danh mục'), findsNothing);
+          expect(tester.takeException(), isNull, reason: entry.key);
         }
-        expect(find.byType(Drawer), findsNothing);
-        expect(find.byType(NavigationRail), findsNothing);
-        expect(find.byTooltip('Mở danh mục'), findsNothing);
-        expect(tester.takeException(), isNull, reason: entry.key);
-      }
-      expect(controller.state!.toJson(), before);
-    });
+        expect(controller.state!.toJson(), before);
+      },
+    );
 
     testWidgets('map entrances and back buttons preserve navigation at $size', (
       tester,
@@ -113,11 +145,11 @@ void main() {
       await tap(tester, 'section-back');
       expect(router.routeInformationProvider.value.uri.path, '/capital');
       await tap(tester, 'citadel-location-harem');
-      expect(find.byKey(const ValueKey('section-back')), findsNothing);
-      await tap(tester, 'harem-back-to-capital');
+      await tap(tester, 'section-back');
       expect(router.routeInformationProvider.value.uri.path, '/capital');
-      await tap(tester, 'capital-back');
-      await tap(tester, 'web-hud-stat-military');
+      await tap(tester, 'section-back');
+      router.go('/military');
+      await tester.pumpAndSettle();
       expect(router.routeInformationProvider.value.uri.path, '/military');
       await tap(tester, 'section-back');
       expect(router.routeInformationProvider.value.uri.path, '/citadel');
@@ -125,7 +157,7 @@ void main() {
       expect(tester.takeException(), isNull);
     });
 
-    testWidgets('court and harem meetings have no national HUD at $size', (
+    testWidgets('meetings have one top back link to their roster at $size', (
       tester,
     ) async {
       final controller = await mount(tester, size);
@@ -136,7 +168,8 @@ void main() {
         final section = person.isConsort ? 'harem' : 'people';
         router.go('/$section/meet/${person.publicId}');
         await tester.pumpAndSettle();
-        expect(find.byType(WebGameHud), findsNothing);
+        expect(find.byType(WebGameHud), findsOneWidget);
+        expect(find.byKey(const ValueKey('hud-page-title')), findsOneWidget);
         expect(find.byType(Drawer), findsNothing);
         expect(
           find.byKey(const ValueKey('meeting-action-audience')),
@@ -145,7 +178,7 @@ void main() {
         expect(find.textContaining('1 hành động'), findsWidgets);
         await tap(tester, 'meeting-back');
         expect(router.routeInformationProvider.value.uri.path, '/$section');
-        expect(find.byKey(const ValueKey('section-back')), findsNothing);
+        expect(find.byKey(const ValueKey('section-back')), findsOneWidget);
       }
       expect(controller.state!.toJson(), before);
       expect(tester.takeException(), isNull);

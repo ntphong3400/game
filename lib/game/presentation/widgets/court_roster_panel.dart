@@ -19,14 +19,12 @@ class CourtRosterPanel extends StatefulWidget {
     required this.busy,
     required this.onPerson,
     required this.onOffice,
-    required this.onBack,
     required this.onGovernment,
   });
   final GameState state;
   final bool busy;
   final Future<void> Function(Courtier) onPerson;
   final Future<void> Function(CourtOffice) onOffice;
-  final VoidCallback onBack;
   final VoidCallback onGovernment;
   @override
   State<CourtRosterPanel> createState() => _CourtRosterPanelState();
@@ -130,11 +128,6 @@ class _CourtRosterPanelState extends State<CourtRosterPanel> {
             runSpacing: 8,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              OutlinedButton.icon(
-                onPressed: widget.onBack,
-                icon: const Icon(Icons.arrow_back, size: 17),
-                label: const Text('Về Kinh Thành'),
-              ),
               if (!compact)
                 const Text(
                   'Triều thần',

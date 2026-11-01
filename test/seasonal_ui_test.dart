@@ -46,12 +46,9 @@ void main() {
           GameApp(initialRoute: 'court', controller: controller),
         );
         await tester.pumpAndSettle();
-        if (size.width >= 720) {
-          expect(find.text('Mùa Xuân'), findsOneWidget);
-          expect(find.text('Năm trị vì 1 · 18 tuổi'), findsOneWidget);
-        } else {
-          expect(find.text('Thiên Hòa · năm 1'), findsOneWidget);
-        }
+        expect(find.text('Mùa Xuân'), findsOneWidget);
+        expect(find.text('Thiên Hòa · năm 1'), findsOneWidget);
+        expect(find.text('Năm trị vì 1 · 18 tuổi'), findsNothing);
         expect(find.text('12 hành động còn lại'), findsOneWidget);
         expect(
           find.textContaining('4–6 tấu chương'),

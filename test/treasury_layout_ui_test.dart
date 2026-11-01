@@ -115,9 +115,7 @@ void main() {
           if (i == 4) {
             expect(find.textContaining('Kiểm toán đang chờ'), findsOneWidget);
           }
-          await tester.tap(
-            find.byKey(const ValueKey('treasury-back-to-ledger')),
-          );
+          await tester.tap(find.byKey(const ValueKey('section-back')));
           await tester.pumpAndSettle();
           expect(tester.takeException(), isNull);
         }

@@ -11,14 +11,12 @@ class CourtGovernmentPanel extends StatelessWidget {
     super.key,
     required this.state,
     required this.busy,
-    required this.onBack,
     required this.onPerson,
     required this.onAppoint,
     required this.onDismiss,
   });
   final GameState state;
   final bool busy;
-  final VoidCallback onBack;
   final Future<void> Function(Courtier) onPerson;
   final Future<void> Function(CourtOffice) onAppoint, onDismiss;
 
@@ -49,13 +47,6 @@ class CourtGovernmentPanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          OutlinedButton.icon(
-            key: const ValueKey('court-government-back'),
-            onPressed: onBack,
-            icon: const Icon(Icons.arrow_back, size: 17),
-            label: const Text('Về Triều thần'),
-          ),
-          const SizedBox(height: 10),
           Row(
             children: [
               Expanded(

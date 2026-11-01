@@ -37,50 +37,74 @@ Future<GameController> start(
 }
 
 void main() {
-  for (final width in [1440.0, 1280.0, 1024.0, 844.0]) {
-    for (final route in ['citadel', 'court']) {
-      testWidgets('contextual HUD counters at $width on $route', (
+  for (final size in [
+    const Size(1440, 900),
+    const Size(1024, 768),
+    const Size(844, 390),
+    const Size(390, 844),
+    const Size(320, 568),
+  ]) {
+    for (final route in ['citadel', 'capital', 'court']) {
+      testWidgets('top bar shows page, parent and season at $size on $route', (
         tester,
       ) async {
-        final controller = await start(tester, Size(width, 720), route: route);
+        final controller = await start(tester, size, route: route);
         final before = controller.state!.toJson();
-        expect(find.byType(WebGameHud), findsOneWidget);
-        expect(find.byTooltip('Mở danh mục'), findsNothing);
         final hud = find.byType(WebGameHud);
+        expect(hud, findsOneWidget);
+        final title = find.byKey(const ValueKey('hud-page-title'));
+        expect(
+          tester.widget<Text>(title).data,
+          {
+            'citadel': 'Giang Sơn',
+            'capital': 'Kinh Thành',
+            'court': 'Triều chính',
+          }[route],
+        );
+        expect(tester.getCenter(title).dx, closeTo(size.width / 2, 1));
+        expect(find.byKey(const ValueKey('room-calendar')), findsOneWidget);
+        expect(
+          find.descendant(of: hud, matching: find.byType(TextButton)),
+          route == 'citadel' ? findsNothing : findsOneWidget,
+        );
+        expect(find.byKey(const ValueKey('web-hud-stat-scroll')), findsNothing);
+        expect(find.byKey(const ValueKey('citadel-actions')), findsNothing);
         for (final label in [
           'Ngân khố',
-          if (route == 'citadel') 'Số dân',
-          if (route == 'citadel') 'Lương thực (tạ)',
-          if (route == 'citadel') 'Quân lực',
+          'Số dân',
+          'Lương thực (tạ)',
+          'Quân lực',
           'Lòng dân',
           'Uy quyền',
-          if (route == 'citadel') 'Sức khỏe',
+          'Sức khỏe',
           'Ổn định',
+          controller.state!.playerName,
         ]) {
           expect(
             find.descendant(of: hud, matching: find.text(label)),
-            findsOneWidget,
+            findsNothing,
           );
         }
-        if (route == 'citadel') {
+        if (route != 'citadel') {
+          final back = find.byKey(const ValueKey('section-back'));
           expect(
-            find.descendant(of: hud, matching: find.text('1.000.000')),
+            find.descendant(
+              of: back,
+              matching: find.text(
+                route == 'capital' ? 'Giang Sơn' : 'Kinh Thành',
+              ),
+            ),
             findsOneWidget,
           );
-        }
-        if (route == 'citadel') {
+          await tester.tap(back);
+          await tester.pumpAndSettle();
           expect(
-            find.descendant(of: hud, matching: find.text('4.000.000')),
-            findsOneWidget,
+            tester
+                .widget<Text>(find.byKey(const ValueKey('hud-page-title')))
+                .data,
+            route == 'capital' ? 'Giang Sơn' : 'Kinh Thành',
           );
         }
-        expect(find.byKey(const ValueKey('web-hud-one-row')), findsOneWidget);
-        expect(find.byKey(const ValueKey('web-hud-two-rows')), findsNothing);
-        expect(tester.getSize(hud).height, lessThanOrEqualTo(65));
-        final last = find.byKey(const ValueKey('web-hud-stat-stability'));
-        await tester.ensureVisible(last);
-        await tester.pumpAndSettle();
-        expect(last.hitTestable(), findsOneWidget);
         expect(controller.state!.toJson(), before);
         expect(tester.takeException(), isNull);
       });
@@ -88,82 +112,71 @@ void main() {
   }
 
   testWidgets(
-    'population and food counters navigate without changing the save and refresh after load',
+    'loading the save refreshes the calendar without restoring metrics',
     (tester) async {
-      final controller = await start(tester, const Size(1440, 900));
-      final before = controller.state!.toJson();
-      await tester.tap(find.byKey(const ValueKey('web-hud-stat-population')));
-      await tester.pumpAndSettle();
-      expect(find.text('Dân số và phân bổ lao động'), findsOneWidget);
-      await tester.tap(find.byTooltip('Về Giang Sơn'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const ValueKey('web-hud-stat-food')));
-      await tester.pumpAndSettle();
-      expect(find.text('Việc tăng thu'), findsOneWidget);
-      expect(controller.state!.toJson(), before);
-      expect((await controller.gateway.load()).active!.toJson(), before);
+      final controller = await start(tester, const Size(390, 844));
       await (controller.gateway as LocalGameGateway).store.update((archive) {
-        archive.active!.population!.population = 1234567;
-        archive.active!.grain = 2345678;
+        archive.active!.completedWeeks += 1;
+        archive.active!.treasury = 1234567;
       });
       await controller.load();
       await tester.pumpAndSettle();
-      final hud = find.byType(WebGameHud);
       expect(
-        find.byKey(const ValueKey('web-hud-stat-population')),
-        findsNothing,
+        tester.widget<Text>(find.byKey(const ValueKey('room-calendar'))).data,
+        'Mùa ${controller.state!.season}',
       );
-      expect(
-        find.descendant(of: hud, matching: find.text('2.345.678')),
-        findsOneWidget,
-      );
-      await tester.tap(find.byKey(const ValueKey('section-back')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const ValueKey('capital-back')));
-      await tester.pumpAndSettle();
-      expect(
-        find.descendant(
-          of: find.byType(WebGameHud),
-          matching: find.text('1.234.567'),
+      expect(find.byKey(const ValueKey('web-hud-stat-treasury')), findsNothing);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets('legacy save uses the same top bar without population metrics', (
+    tester,
+  ) async {
+    await start(tester, const Size(320, 568), legacy: true, route: 'capital');
+    expect(find.byKey(const ValueKey('room-calendar')), findsOneWidget);
+    expect(find.byKey(const ValueKey('web-hud-stat-population')), findsNothing);
+    expect(find.byKey(const ValueKey('capital-back')), findsNothing);
+    await tester.tap(find.byKey(const ValueKey('section-back')));
+    await tester.pumpAndSettle();
+    expect(
+      tester.widget<Text>(find.byKey(const ValueKey('hud-page-title'))).data,
+      'Giang Sơn',
+    );
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('long names fit a narrow top bar with large text', (
+    tester,
+  ) async {
+    final controller = await start(tester, const Size(320, 568));
+    await tester.pumpWidget(
+      MaterialApp(
+        home: MediaQuery(
+          data: const MediaQueryData(
+            size: Size(320, 568),
+            textScaler: TextScaler.linear(2),
+          ),
+          child: Scaffold(
+            body: Align(
+              alignment: Alignment.topCenter,
+              child: WebGameHud(
+                state: controller.state!,
+                section: 'people-government',
+                onNavigate: (_) {},
+              ),
+            ),
+          ),
         ),
-        findsOneWidget,
-      );
-      expect(tester.takeException(), isNull);
-    },
-  );
-
-  testWidgets(
-    'legacy saves show unavailable population and retain their food unit',
-    (tester) async {
-      await start(tester, const Size(1280, 720), legacy: true);
-      final hud = find.byType(WebGameHud);
-      expect(
-        find.descendant(of: hud, matching: find.text('—')),
-        findsOneWidget,
-      );
-      expect(
-        find.descendant(of: hud, matching: find.text('Lương thực (thóc)')),
-        findsOneWidget,
-      );
-      await tester.tap(find.byKey(const ValueKey('web-hud-stat-population')));
-      await tester.pumpAndSettle();
-      expect(find.text('Điện nghị sự'), findsOneWidget);
-      expect(tester.takeException(), isNull);
-    },
-  );
-
-  testWidgets(
-    'phone viewport keeps all eight Giang Son counters without a menu',
-    (tester) async {
-      await start(tester, const Size(390, 844));
-      expect(find.byType(WebGameHud), findsOneWidget);
-      expect(find.text('Số dân'), findsOneWidget);
-      expect(
-        find.byKey(const ValueKey('web-hud-stat-stability')),
-        findsOneWidget,
-      );
-      expect(find.byTooltip('Mở danh mục'), findsNothing);
-      expect(tester.takeException(), isNull);
-    },
-  );
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Bộ máy triều đình'), findsOneWidget);
+    expect(find.text('Triều thần'), findsOneWidget);
+    expect(
+      tester.getCenter(find.byKey(const ValueKey('hud-page-title'))).dx,
+      closeTo(160, 1),
+    );
+    expect(tester.takeException(), isNull);
+  });
 }

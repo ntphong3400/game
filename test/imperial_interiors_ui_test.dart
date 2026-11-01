@@ -200,7 +200,7 @@ void main() {
     expect(tester.takeException(), isNull);
   });
   testWidgets(
-    'treasury panes scroll while HUD, resources and season control stay fixed',
+    'treasury panes scroll while HUD and resources stay fixed without season control',
     (tester) async {
       viewport(tester, const Size(1440, 900));
       final controller = await makeController();
@@ -212,7 +212,7 @@ void main() {
       final hud = find.byType(RoomHud);
       final endSeason = find.widgetWithText(FilledButton, 'Khép lại mùa  →');
       final hudRect = tester.getRect(hud);
-      final seasonRect = tester.getRect(endSeason);
+      expect(endSeason, findsNothing);
       expect(
         find.text(
           '${controller.state!.grain} thóc · Đê điều ${controller.state!.levee}/100',
@@ -231,7 +231,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(work.hitTestable(), findsOneWidget);
       expect(tester.getRect(hud), hudRect);
-      expect(tester.getRect(endSeason), seasonRect);
+      expect(endSeason, findsNothing);
       expect(controller.state!.toJson(), before);
       expect(tester.takeException(), isNull);
     },
@@ -308,7 +308,7 @@ void main() {
         expect(find.byKey(const ValueKey('open-palace-study')), findsOneWidget);
         expect(controller.state!.toJson(), before);
         expect(tester.takeException(), isNull);
-        final back = find.byKey(const ValueKey('back-to-harem'));
+        final back = find.byKey(const ValueKey('section-back'));
         await tester.ensureVisible(back);
         await tester.tap(back);
         await tester.pumpAndSettle();

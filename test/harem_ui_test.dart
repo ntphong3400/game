@@ -184,7 +184,7 @@ void main() {
             findsNothing,
           );
 
-          final back = find.byKey(const ValueKey('harem-back-to-capital'));
+          final back = find.byKey(const ValueKey('section-back'));
           await tester.ensureVisible(back);
           await tester.tap(back);
           await tester.pumpAndSettle();

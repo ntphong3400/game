@@ -192,12 +192,12 @@ void main() {
             if (country == 'south') {
               await capture(tester, '$country-$place-${size.width.toInt()}');
             }
-            await tester.tap(find.byKey(const ValueKey('country-detail-back')));
+            await tester.tap(find.byKey(const ValueKey('section-back')));
             await tester.pumpAndSettle();
           }
           expect(jsonEncode(c.state!.toJson()), before);
           expect(jsonEncode((await c.gateway.load()).active!.toJson()), before);
-          await tester.tap(find.byKey(const ValueKey('country-back')));
+          await tester.tap(find.byKey(const ValueKey('section-back')));
           await tester.pumpAndSettle();
           expect(
             find.byKey(const ValueKey('giang-son-map-scroll')),
@@ -297,7 +297,7 @@ void main() {
       expect(find.text('Xác nhận'), findsOneWidget);
       await tester.tap(find.text('Để sau'));
       await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const ValueKey('country-detail-back')));
+      await tester.tap(find.byKey(const ValueKey('section-back')));
       await tester.pumpAndSettle();
       await click(
         tester,
@@ -330,30 +330,31 @@ void main() {
     },
   );
 
-  testWidgets('end turn and overtime are disabled while saving', (
-    tester,
-  ) async {
-    final c = await setup(tester, const Size(320, 568));
-    c.state!.points = 0;
-    var calls = 0;
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: CountryHub(
-            state: c.state!,
-            countryId: 'south',
-            busy: true,
-            onNavigate: (_) {},
-            onEndTurn: () => calls++,
-            onOvertime: () => calls++,
+  testWidgets(
+    'season control is absent and overtime is disabled while saving',
+    (tester) async {
+      final c = await setup(tester, const Size(320, 568));
+      c.state!.points = 0;
+      var calls = 0;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: CountryHub(
+              state: c.state!,
+              countryId: 'south',
+              busy: true,
+              onNavigate: (_) {},
+              onEndTurn: () => calls++,
+              onOvertime: () => calls++,
+            ),
           ),
         ),
-      ),
-    );
-    await tester.pump();
-    await tester.tap(find.byKey(const ValueKey('country-end-turn')));
-    await tester.tap(find.byKey(const ValueKey('country-overtime')));
-    expect(calls, 0);
-    expect(tester.takeException(), isNull);
-  });
+      );
+      await tester.pump();
+      expect(find.byKey(const ValueKey('country-end-turn')), findsNothing);
+      await tester.tap(find.byKey(const ValueKey('country-overtime')));
+      expect(calls, 0);
+      expect(tester.takeException(), isNull);
+    },
+  );
 }

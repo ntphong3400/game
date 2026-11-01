@@ -145,11 +145,11 @@ void main() {
           );
           expect(tester.takeException(), isNull);
           if (country == 'south') await capture(tester, '$country-$place-1440');
-          await tester.tap(find.byKey(const ValueKey('frontier-detail-back')));
+          await tester.tap(find.byKey(const ValueKey('section-back')));
           await tester.pumpAndSettle();
         }
         expect(jsonEncode(c.state!.toJson()), before);
-        await tester.tap(find.byKey(const ValueKey('frontier-back')));
+        await tester.tap(find.byKey(const ValueKey('section-back')));
         await tester.pumpAndSettle();
         expect(
           find.byKey(const ValueKey('giang-son-map-scroll')),
@@ -172,7 +172,7 @@ void main() {
         await click(tester, find.byKey(ValueKey('frontier-location-$place')));
         expect(tester.takeException(), isNull);
         await capture(tester, 'south-$place-${size.width.toInt()}');
-        await tester.tap(find.byKey(const ValueKey('frontier-detail-back')));
+        await tester.tap(find.byKey(const ValueKey('section-back')));
         await tester.pumpAndSettle();
       }
       expect(tester.takeException(), isNull);

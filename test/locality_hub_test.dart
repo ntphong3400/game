@@ -73,10 +73,10 @@ void main() {
           find.byKey(ValueKey('locality-panel-${place.name}')),
           findsOneWidget,
         );
-        await tap(tester, find.byKey(const ValueKey('locality-detail-back')));
+        await tap(tester, find.byKey(const ValueKey('section-back')));
         expect(find.byType(LocalityHub), findsOneWidget);
       }
-      await tap(tester, find.byKey(const ValueKey('locality-back')));
+      await tap(tester, find.byKey(const ValueKey('section-back')));
       expect(find.byType(CitadelHub), findsOneWidget);
       expect(c.state!.toJson(), before);
       expect((await c.gateway.load()).active!.toJson(), before);
@@ -114,7 +114,7 @@ void main() {
           (await c.gateway.load()).active!.projects.single.officerId,
           'treasurer',
         );
-        await tap(tester, find.byKey(const ValueKey('locality-detail-back')));
+        await tap(tester, find.byKey(const ValueKey('section-back')));
         await tap(
           tester,
           find.byKey(const ValueKey('locality-location-administration')),
@@ -147,14 +147,8 @@ void main() {
         await tester.pumpAndSettle();
         await tap(tester, find.byKey(const ValueKey('meeting-back')));
         await tap(tester, find.byKey(const ValueKey('locality-personnel')));
-        expect(
-          find.byKey(const ValueKey('locality-personnel-back')),
-          findsOneWidget,
-        );
-        await tap(
-          tester,
-          find.byKey(const ValueKey('locality-personnel-back')),
-        );
+        expect(find.byKey(const ValueKey('section-back')), findsOneWidget);
+        await tap(tester, find.byKey(const ValueKey('section-back')));
         expect(
           find.byKey(const ValueKey('locality-panel-administration')),
           findsOneWidget,
@@ -219,7 +213,7 @@ void main() {
   );
 
   testWidgets(
-    'locality end turn preserves expiry confirmation and can be cancelled',
+    'locality returns to Giang Son to end the season with expiry confirmation',
     (tester) async {
       viewport(tester, const Size(1440, 900));
       final c = await controller();
@@ -227,16 +221,16 @@ void main() {
       final before = c.state!.toJson();
       await tester.pumpWidget(GameApp(controller: c, initialRoute: 'locality'));
       await tester.pumpAndSettle();
-      await tap(tester, find.byKey(const ValueKey('locality-end-turn')));
+      expect(find.byKey(const ValueKey('locality-end-turn')), findsNothing);
+      await tap(tester, find.byKey(const ValueKey('section-back')));
+      await tap(tester, find.byKey(const ValueKey('citadel-end-turn')));
       expect(find.text('Còn tấu chương tới hạn'), findsOneWidget);
       await tap(tester, find.text('Quay lại xử lý'));
       expect(c.state!.toJson(), before);
     },
   );
 
-  testWidgets('locality disables duplicate end turn while saving', (
-    tester,
-  ) async {
+  testWidgets('locality has no season control while saving', (tester) async {
     viewport(tester, const Size(1440, 900));
     final c = await controller();
     var ends = 0;
@@ -254,7 +248,7 @@ void main() {
       ),
     );
     await tester.pump(const Duration(milliseconds: 200));
-    await tester.tap(find.byKey(const ValueKey('locality-end-turn')));
+    expect(find.byKey(const ValueKey('locality-end-turn')), findsNothing);
     expect(ends, 0);
   });
 

@@ -48,16 +48,6 @@ class LocalityHub extends StatelessWidget {
                     child: _LocalityMap(state: state, onNavigate: onNavigate),
                   ),
                   Positioned(
-                    left: narrow ? 12 : 20,
-                    top: 16,
-                    child: _LocalityLabel(
-                      key: const ValueKey('locality-back'),
-                      label: 'Giang Sơn',
-                      icon: Icons.arrow_back,
-                      onPressed: () => onNavigate('citadel'),
-                    ),
-                  ),
-                  Positioned(
                     right: narrow ? 12 : 20,
                     top: 16,
                     child: IgnorePointer(
@@ -121,23 +111,24 @@ class LocalityHub extends StatelessWidget {
                         ),
                       ),
                     ),
-                  Positioned(
-                    right: 20,
-                    bottom: 18,
-                    width: narrow ? 168 : 205,
-                    child: Tooltip(
-                      message: formatGameNumbers(
-                        '${state.points} hành động còn lại',
-                      ),
-                      child: _LocalityLabel(
-                        key: const ValueKey('locality-end-turn'),
-                        label: state.seasonal ? 'Khóa mùa' : 'Sang tuần',
-                        icon: Icons.arrow_forward,
-                        primary: true,
-                        onPressed: busy ? null : onEndTurn,
+                  if (!state.seasonal)
+                    Positioned(
+                      right: 20,
+                      bottom: 18,
+                      width: narrow ? 168 : 205,
+                      child: Tooltip(
+                        message: formatGameNumbers(
+                          '${state.points} hành động còn lại',
+                        ),
+                        child: _LocalityLabel(
+                          key: const ValueKey('locality-end-turn'),
+                          label: 'Sang tuần',
+                          icon: Icons.arrow_forward,
+                          primary: true,
+                          onPressed: busy ? null : onEndTurn,
+                        ),
                       ),
                     ),
-                  ),
                 ],
               );
             },

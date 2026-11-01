@@ -91,7 +91,7 @@ void main() {
           isNull,
         );
 
-        await tap(find.byKey(const ValueKey('treasury-back-to-ledger')));
+        await tap(find.byKey(const ValueKey('section-back')));
         await tap(find.byKey(const ValueKey('treasury-open-3')));
         expect(
           find.byKey(const ValueKey('agriculture-harvest-plan')),
@@ -107,7 +107,7 @@ void main() {
           find.byKey(const ValueKey('action-upgrade_farm')),
           findsOneWidget,
         );
-        await tap(find.byKey(const ValueKey('treasury-back-to-ledger')));
+        await tap(find.byKey(const ValueKey('section-back')));
         await tap(find.byKey(const ValueKey('treasury-open-4')));
         expect(find.textContaining('Ước tính'), findsOneWidget);
         expect(find.textContaining('0/1 kỳ · dự kiến cuối'), findsOneWidget);

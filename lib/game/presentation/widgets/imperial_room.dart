@@ -115,7 +115,7 @@ class ImperialWorkspace extends StatelessWidget {
   );
 }
 
-/// Independent scroll panes keep the shared HUD and end-turn controls visible.
+/// Independent scroll panes keep the shared top bar visible.
 class RoomPane extends StatelessWidget {
   const RoomPane({
     super.key,
@@ -196,10 +196,12 @@ class RoomHud extends StatelessWidget {
     required this.section,
     required this.onNavigate,
     this.onBack,
-    this.backLabel = 'Về Kinh Thành',
+    this.backLabel,
+    this.title,
   });
   final GameState state;
-  final String section, backLabel;
+  final String section;
+  final String? backLabel, title;
   final VoidCallback? onBack;
   final ValueChanged<String> onNavigate;
   @override
@@ -209,6 +211,7 @@ class RoomHud extends StatelessWidget {
     onNavigate: onNavigate,
     onBack: onBack,
     backLabel: backLabel,
+    title: title,
   );
 }
 

@@ -104,7 +104,8 @@ void main() {
         expect(find.byKey(const ValueKey('action-rest')), findsOneWidget);
         expect(find.byKey(const ValueKey('action-revel')), findsOneWidget);
         await navigate('court');
-        await tap(find.byKey(const ValueKey('court-to-citadel')));
+        await tap(find.byKey(const ValueKey('section-back')));
+        await tap(find.byKey(const ValueKey('section-back')));
         expect(find.byKey(const ValueKey('giang-son-map')), findsOneWidget);
         expect(controller.state!.toJson(), before);
         expect((await gateway.load()).active!.toJson(), before);

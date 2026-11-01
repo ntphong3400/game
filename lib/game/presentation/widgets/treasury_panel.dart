@@ -17,12 +17,16 @@ class TreasuryPanel extends StatefulWidget {
   const TreasuryPanel({
     super.key,
     required this.state,
+    required this.section,
+    required this.onSectionChanged,
     required this.busy,
     required this.onAction,
     required this.blockedReason,
     required this.onPolicy,
   });
   final GameState state;
+  final int section;
+  final ValueChanged<int> onSectionChanged;
   final bool busy;
   final Future<void> Function(ActionDefinition) onAction;
   final String? Function(ActionDefinition) blockedReason;
@@ -34,7 +38,7 @@ class TreasuryPanel extends StatefulWidget {
 class _TreasuryPanelState extends State<TreasuryPanel> {
   final ledgerScroll = ScrollController();
   final documentScroll = ScrollController();
-  int section = 0;
+  int get section => widget.section;
   GameState get s => widget.state;
   static const titles = [
     'Thuế & ngân sách',
@@ -57,7 +61,7 @@ class _TreasuryPanelState extends State<TreasuryPanel> {
   }
 
   void open(int value) {
-    setState(() => section = value);
+    widget.onSectionChanged(value);
     if (value != 0 && documentScroll.hasClients) documentScroll.jumpTo(0);
   }
 
@@ -80,18 +84,6 @@ class _TreasuryPanelState extends State<TreasuryPanel> {
               : Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextButton.icon(
-                      key: const ValueKey('treasury-back-to-ledger'),
-                      onPressed: () => open(0),
-                      icon: const Icon(Icons.arrow_back, size: 17),
-                      label: const Text(
-                        'Về sổ ngân khố',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ),
-                  ),
                   Expanded(
                     child: _scroll(
                       documentScroll,
@@ -241,8 +233,9 @@ class _TreasuryPanelState extends State<TreasuryPanel> {
 
   Widget _dossier(int value) => LayoutBuilder(
     builder: (context, bounds) {
+      // Include the paper margins and text padding in the compact breakpoint.
       final small =
-          bounds.maxHeight < 108 ||
+          bounds.maxHeight < 128 ||
           MediaQuery.textScalerOf(context).scale(14) > 17;
       return MemorialPaper(
         readKey: ValueKey('treasury-paper-$value'),

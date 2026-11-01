@@ -17,14 +17,12 @@ class PalacePanel extends StatelessWidget {
     super.key,
     required this.state,
     required this.onAssign,
-    required this.onBack,
     this.busy = false,
   });
   final GameState state;
   GameState get s => state;
   final PalaceAssign onAssign;
   final bool busy;
-  final VoidCallback onBack;
 
   @override
   Widget build(BuildContext context) {
@@ -56,12 +54,6 @@ class PalacePanel extends StatelessWidget {
         runSpacing: 10,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          OutlinedButton.icon(
-            key: const ValueKey('back-to-harem'),
-            onPressed: onBack,
-            icon: const Icon(Icons.arrow_back, size: 18),
-            label: const Text('Về Hậu cung'),
-          ),
           const Text(
             'Cung vụ & học tập',
             style: TextStyle(fontFamily: 'Lora', fontSize: 25),

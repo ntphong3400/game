@@ -210,6 +210,7 @@ class CharacterMeetingPage extends StatefulWidget {
     this.onAction,
     this.onProfile,
     this.onBack,
+    this.header,
     this.profileLabel = 'Hồ sơ nhân vật',
     this.profileDescription,
     this.profileButtonKey = const ValueKey('meeting-profile'),
@@ -218,6 +219,7 @@ class CharacterMeetingPage extends StatefulWidget {
   });
 
   final MeetingScene scene;
+  final Widget? header;
   final String backLabel, profileLabel;
   final String? profileDescription;
   final Key profileButtonKey;
@@ -333,7 +335,7 @@ class _CharacterMeetingPageState extends State<CharacterMeetingPage> {
               final compact = bounds.maxWidth < 760;
               return Column(
                 children: [
-                  _header(compact),
+                  widget.header ?? _header(compact),
                   Expanded(
                     child:
                         compact

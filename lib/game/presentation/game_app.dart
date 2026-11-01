@@ -37,6 +37,7 @@ import 'widgets/country_hub.dart';
 import 'widgets/country_panel.dart';
 import '../logic/frontier_rules.dart';
 import 'widgets/web_game_hud.dart';
+import 'widgets/hud_policy.dart';
 import 'widgets/imperial_widgets.dart';
 import 'widgets/imperial_assets.dart';
 import 'widgets/imperial_room.dart';
@@ -329,6 +330,7 @@ class _GameShellState extends State<GameShell> {
   String courtAvailability = 'Tất cả', haremAvailability = 'Tất cả';
   bool courtListView = false;
   String? selectedCareId;
+  int treasurySection = 0;
   String? get localityPersonnelReturn {
     final section = GameLocation.sectionFor(widget.location.returnTo);
     return section != null && LocalityPlace.fromRoute(section) != null
@@ -352,6 +354,7 @@ class _GameShellState extends State<GameShell> {
   @override
   void didUpdateWidget(covariant GameShell oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (oldWidget.location.screen != route) treasurySection = 0;
     if (oldWidget.location.uri != widget.location.uri &&
         !['ending', 'ending-summary'].contains(widget.location.section)) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -653,24 +656,31 @@ class _GameShellState extends State<GameShell> {
     return _roomShell();
   }
 
-  String? get _roomBackDestination {
-    if (route == 'harem' ||
-        (route == 'people' && s.hasCourtSystem) ||
-        localityPersonnelReturn != null) {
-      return null;
-    }
-    return switch (route) {
-      'kingdom' => 'court',
-      'population' || 'military' => 'citadel',
-      _ => 'capital',
-    };
+  String get _roomBackDestination {
+    if (route == 'treasury' && treasurySection != 0) return 'treasury';
+    return localityPersonnelReturn ??
+        hudParentFor(widget.location.backgroundSection) ??
+        'capital';
   }
 
-  String get _roomBackLabel => switch (_roomBackDestination) {
-    'court' => 'Về Triều chính',
-    'citadel' => 'Về Giang Sơn',
-    _ => 'Về Kinh Thành',
-  };
+  void _roomBack() {
+    if (route == 'treasury' && treasurySection != 0) {
+      setState(() => treasurySection = 0);
+    } else {
+      navigate(_roomBackDestination);
+    }
+  }
+
+  String? get _hudTitle =>
+      route == 'treasury' && treasurySection != 0
+          ? [
+            'Ngân khố',
+            'Thuế & ngân sách',
+            'Việc tăng thu',
+            'Kho lương & đê điều',
+            'Đang thực hiện',
+          ][treasurySection]
+          : null;
 
   Widget _roomShell() => ImperialRoomScope(
     child: Theme(
@@ -705,11 +715,9 @@ class _GameShellState extends State<GameShell> {
                     RoomHud(
                       state: s,
                       section: widget.location.backgroundSection,
-                      onBack:
-                          _roomBackDestination == null
-                              ? null
-                              : () => navigate(_roomBackDestination!),
-                      backLabel: _roomBackLabel,
+                      title: _hudTitle,
+                      onBack: _roomBack,
+                      backLabel: hudTitleFor(s, _roomBackDestination),
                       onNavigate: navigate,
                     ),
                   if (busy)
@@ -717,19 +725,6 @@ class _GameShellState extends State<GameShell> {
                       minHeight: 2,
                       color: imperialGold,
                       backgroundColor: imperialDeep,
-                    ),
-                  if (localityPersonnelReturn != null)
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: TextButton.icon(
-                        key: const ValueKey('locality-personnel-back'),
-                        onPressed: () => navigate(localityPersonnelReturn!),
-                        icon: const Icon(Icons.arrow_back, color: imperialGold),
-                        label: const Text(
-                          'Về Phủ nha',
-                          style: TextStyle(color: imperialIvory),
-                        ),
-                      ),
                     ),
                   Expanded(
                     child: RoomStage(
@@ -764,17 +759,6 @@ class _GameShellState extends State<GameShell> {
                   children: [
                     WebGameHud(state: s, section: route, onNavigate: navigate),
                     if (busy) const LinearProgressIndicator(minHeight: 2),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: TextButton.icon(
-                        key: const ValueKey('frontier-detail-back'),
-                        onPressed: () => navigate(frontierRoute(country)),
-                        icon: const Icon(Icons.arrow_back, size: 17),
-                        label: Text(
-                          formatGameNumbers('Về ${garrisonNames[country]}'),
-                        ),
-                      ),
-                    ),
                     Expanded(
                       child: RoomStage(
                         scene: route,
@@ -811,19 +795,6 @@ class _GameShellState extends State<GameShell> {
                   children: [
                     WebGameHud(state: s, section: route, onNavigate: navigate),
                     if (busy) const LinearProgressIndicator(minHeight: 2),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: TextButton.icon(
-                        key: const ValueKey('country-detail-back'),
-                        onPressed: () => navigate(countryRoute(country)),
-                        icon: const Icon(Icons.arrow_back, size: 17),
-                        label: Text(
-                          formatGameNumbers(
-                            'Về ${s.warfare?.neighbors.where((n) => n.id == country).firstOrNull?.name ?? countryNames[country]}',
-                          ),
-                        ),
-                      ),
-                    ),
                     Expanded(
                       child: RoomStage(
                         scene: route,
@@ -860,15 +831,6 @@ class _GameShellState extends State<GameShell> {
                   children: [
                     WebGameHud(state: s, section: route, onNavigate: navigate),
                     if (busy) const LinearProgressIndicator(minHeight: 2),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: TextButton.icon(
-                        key: const ValueKey('locality-detail-back'),
-                        onPressed: () => navigate('locality'),
-                        icon: const Icon(Icons.arrow_back, size: 17),
-                        label: const Text('Về Địa phương'),
-                      ),
-                    ),
                     Expanded(
                       child: RoomStage(
                         scene: place.route,
@@ -914,39 +876,17 @@ class _GameShellState extends State<GameShell> {
     }
   }
 
-  Widget _archiveHud() => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-    decoration: const BoxDecoration(
-      color: imperialDeep,
-      border: Border(bottom: BorderSide(color: imperialGold)),
-    ),
-    child: Row(
-      children: [
-        IconButton(
-          key: const ValueKey('section-back'),
-          tooltip:
-              controller.state == null || s.ended
-                  ? 'Về trang giới thiệu'
-                  : 'Về Kinh Thành',
-          onPressed:
-              () => navigate(
-                controller.state == null || s.ended ? 'home' : 'capital',
-              ),
-          icon: const Icon(Icons.arrow_back, color: imperialGold),
-        ),
-        const Expanded(
-          child: Text(
-            'VẠN TUẾ · ĐIỆN LƯU DANH',
-            style: TextStyle(
-              fontFamily: 'Lora',
-              fontSize: 18,
-              color: imperialIvory,
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
+  Widget _archiveHud() {
+    final active = controller.state;
+    if (active != null && !active.ended) {
+      return WebGameHud(state: active, section: 'scores', onNavigate: navigate);
+    }
+    return GameTopBar(
+      title: 'Vọng Thiên Các',
+      backLabel: 'Trang chủ',
+      onBack: () => navigate('home'),
+    );
+  }
 
   Widget _page() => switch (route) {
     'scores' => _scores(),
@@ -1111,11 +1051,6 @@ class _GameShellState extends State<GameShell> {
               key: const ValueKey('court-to-kingdom'),
               onPressed: () => navigate('kingdom'),
               child: const Text('Đến Quốc sự'),
-            ),
-            OutlinedButton(
-              key: const ValueKey('court-to-citadel'),
-              onPressed: () => navigate('citadel'),
-              child: const Text('Về Giang Sơn'),
             ),
           ],
         ),
@@ -1824,6 +1759,8 @@ class _GameShellState extends State<GameShell> {
 
   Widget _treasury() => TreasuryPanel(
     state: s,
+    section: treasurySection,
+    onSectionChanged: (value) => setState(() => treasurySection = value),
     busy: busy,
     onAction: _performAction,
     blockedReason: _actionBlocked,
@@ -1842,7 +1779,6 @@ class _GameShellState extends State<GameShell> {
         return CourtGovernmentPanel(
           state: s,
           busy: busy,
-          onBack: () => navigate('people'),
           onPerson: _openCharacterMeeting,
           onAppoint:
               (office) => chooseCourtAppointment(
@@ -1874,7 +1810,6 @@ class _GameShellState extends State<GameShell> {
               (type, target, option) =>
                   act(type, target: target, option: option),
             ),
-        onBack: () => navigate('capital'),
         onGovernment: () => navigate('people-government'),
       );
     }
@@ -1882,7 +1817,6 @@ class _GameShellState extends State<GameShell> {
       return PalacePanel(
         state: s,
         busy: busy,
-        onBack: () => _showPalaceManagement(false),
         onAssign:
             (personId, option) =>
                 act('palace', target: personId, option: option),
@@ -2140,13 +2074,6 @@ class _GameShellState extends State<GameShell> {
             runSpacing: 8,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              if (harem)
-                OutlinedButton.icon(
-                  key: const ValueKey('harem-back-to-capital'),
-                  onPressed: () => navigate('capital'),
-                  icon: const Icon(Icons.arrow_back, size: 17),
-                  label: const Text('Về Kinh Thành'),
-                ),
               Text(
                 formatGameNumbers(harem ? 'Hậu cung' : 'Triều thần'),
                 style: const TextStyle(
@@ -2670,15 +2597,24 @@ class _GameShellState extends State<GameShell> {
       }
     }
 
+    final backLabel = hudTitleFor(
+      s,
+      GameLocation.sectionFor(widget.location.backPath) ??
+          widget.location.section,
+    );
     return CharacterMeetingPage(
+      backLabel: backLabel,
       scene: meetingSceneFor(current, state: s),
       onBack: _closeCharacterMeeting,
-      backLabel:
-          widget.location.returnTo?.startsWith('/locality/') == true
-              ? 'Về Địa phương'
-              : current.isConsort
-              ? 'Về Hậu cung'
-              : 'Về Triều thần',
+      header: WebGameHud(
+        state: s,
+        section: current.isConsort ? 'harem' : 'people',
+        title: 'Tiếp kiến',
+        onNavigate: navigate,
+        onBack: _closeCharacterMeeting,
+        backKey: const ValueKey('meeting-back'),
+        backLabel: backLabel,
+      ),
       actions: _meetingActions(current),
       profileLabel: s.hasCourtSystem ? 'Thăng phẩm' : 'Hồ sơ & chức vụ',
       profileDescription:
@@ -4159,10 +4095,11 @@ class _GameShellState extends State<GameShell> {
                   onPressed: () => navigate('citadel'),
                   child: const Text('Tiếp tục trị vì'),
                 ),
-              OutlinedButton(
-                onPressed: () => navigate('home'),
-                child: const Text('Về trang chính'),
-              ),
+              if (controller.state != null && !s.ended)
+                OutlinedButton(
+                  onPressed: () => navigate('home'),
+                  child: const Text('Về trang chính'),
+                ),
             ],
           ),
         ],
@@ -4285,24 +4222,21 @@ class _GameShellState extends State<GameShell> {
                   ),
                 ),
               ),
-            FilledButton(
-              style: FilledButton.styleFrom(
-                backgroundColor: terracotta,
-                foregroundColor: imperialIvory,
-                side: const BorderSide(color: imperialGold),
-              ),
-              onPressed: busy ? null : _nextWeek,
-              child: Text(
-                formatGameNumbers(
-                  s.seasonal
-                      ? 'Khép lại mùa  →'
-                      : desktop
-                      ? 'Sang tuần tiếp theo   →'
-                      : 'Sang tuần  →',
+            if (!s.seasonal)
+              FilledButton(
+                style: FilledButton.styleFrom(
+                  backgroundColor: terracotta,
+                  foregroundColor: imperialIvory,
+                  side: const BorderSide(color: imperialGold),
                 ),
-                style: const TextStyle(fontSize: 12),
+                onPressed: busy ? null : _nextWeek,
+                child: Text(
+                  formatGameNumbers(
+                    desktop ? 'Sang tuần tiếp theo   →' : 'Sang tuần  →',
+                  ),
+                  style: const TextStyle(fontSize: 12),
+                ),
               ),
-            ),
           ],
         ),
       ),

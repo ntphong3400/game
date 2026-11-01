@@ -76,16 +76,6 @@ class CountryHub extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    left: narrow ? 12 : 20,
-                    top: 16,
-                    child: _CountryLabel(
-                      key: const ValueKey('country-back'),
-                      label: 'Giang Sơn',
-                      icon: Icons.arrow_back,
-                      onPressed: () => onNavigate('citadel'),
-                    ),
-                  ),
-                  Positioned(
                     right: narrow ? 12 : 20,
                     top: 16,
                     child: _CountryPlaque(
@@ -121,23 +111,24 @@ class CountryHub extends StatelessWidget {
                         ),
                       ),
                     ),
-                  Positioned(
-                    right: 20,
-                    bottom: 18,
-                    width: narrow ? 168 : 205,
-                    child: Tooltip(
-                      message: formatGameNumbers(
-                        '${state.points} hành động còn lại',
-                      ),
-                      child: _CountryLabel(
-                        key: const ValueKey('country-end-turn'),
-                        label: state.seasonal ? 'Khóa mùa' : 'Sang tuần',
-                        icon: Icons.arrow_forward,
-                        primary: true,
-                        onPressed: busy ? null : onEndTurn,
+                  if (!state.seasonal)
+                    Positioned(
+                      right: 20,
+                      bottom: 18,
+                      width: narrow ? 168 : 205,
+                      child: Tooltip(
+                        message: formatGameNumbers(
+                          '${state.points} hành động còn lại',
+                        ),
+                        child: _CountryLabel(
+                          key: const ValueKey('country-end-turn'),
+                          label: 'Sang tuần',
+                          icon: Icons.arrow_forward,
+                          primary: true,
+                          onPressed: busy ? null : onEndTurn,
+                        ),
                       ),
                     ),
-                  ),
                 ],
               );
             },

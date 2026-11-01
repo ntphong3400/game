@@ -228,7 +228,7 @@ void main() {
     final controller = await savedController();
     await tester.pumpWidget(GameApp(controller: controller));
     await tester.pumpAndSettle();
-    expect(find.text('Về Địa phương'), findsOneWidget);
+    expect(find.text('Phủ nha'), findsOneWidget);
     await tester.tap(find.byKey(const ValueKey('meeting-back')));
     await tester.pumpAndSettle();
     expect(

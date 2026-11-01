@@ -121,12 +121,7 @@ void main() {
           );
           await tester.pumpAndSettle();
           expectFormattedText(tester);
-          if (![
-            'population',
-            'journal',
-            'scores',
-            'local-village',
-          ].contains(route)) {
+          if (route == 'treasury') {
             expect(
               find.textContaining('1.234.567'),
               findsWidgets,

@@ -129,6 +129,7 @@ void main() {
         await tester.tap(find.byKey(const ValueKey('giang-son-palace')));
         await tester.pumpAndSettle();
         expect(find.byType(CapitalHub), findsOneWidget);
+        expect(find.text('Khóa mùa'), findsNothing);
         expect(find.byType(BottomSheet), findsNothing);
         expect(
           find.descendant(
@@ -147,26 +148,26 @@ void main() {
         await tester.tap(location);
         await tester.pumpAndSettle();
         expect(find.byType(CapitalHub), findsNothing);
+        expect(find.textContaining('Khép lại mùa'), findsNothing);
+        expect(find.text('Khóa mùa'), findsNothing);
         expect(tester.takeException(), isNull);
         if (route == 'scores') {
           await tester.ensureVisible(find.text('Tiếp tục trị vì'));
           await tester.tap(find.text('Tiếp tục trị vì'));
         } else {
-          final back =
-              route == 'harem'
-                  ? find.byKey(const ValueKey('harem-back-to-capital'))
-                  : find.byKey(const ValueKey('section-back'));
+          final back = find.byKey(const ValueKey('section-back'));
           await tester.ensureVisible(back);
           await tester.tap(back);
           await tester.pumpAndSettle();
           expect(find.byType(CapitalHub), findsOneWidget);
-          await tester.tap(find.byKey(const ValueKey('capital-back')));
+          expect(find.text('Khóa mùa'), findsNothing);
+          await tester.tap(find.byKey(const ValueKey('section-back')));
         }
         await tester.pumpAndSettle();
       }
       await tester.tap(find.byKey(const ValueKey('giang-son-palace')));
       await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const ValueKey('capital-back')));
+      await tester.tap(find.byKey(const ValueKey('section-back')));
       await tester.pumpAndSettle();
       expect(find.byType(CitadelHub), findsOneWidget);
       expect(controller.state!.toJson(), before);
@@ -189,12 +190,12 @@ void main() {
         expect(find.byType(CitadelHub), findsOneWidget);
         expect(
           find.text('${controller.state!.points} hành động còn lại'),
-          findsOneWidget,
+          findsNothing,
         );
         await tester.tap(find.byKey(const ValueKey('giang-son-farms')));
         await tester.pumpAndSettle();
         expect(find.byType(LocalityHub), findsOneWidget);
-        await tester.tap(find.byKey(const ValueKey('locality-back')));
+        await tester.tap(find.byKey(const ValueKey('section-back')));
         await tester.pumpAndSettle();
         expect(find.byType(CitadelHub), findsOneWidget);
         expect(controller.state!.toJson(), before);
@@ -229,7 +230,7 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('giang-son-farms')));
       await tester.pumpAndSettle();
       expect(find.byType(LocalityHub), findsOneWidget);
-      await tester.tap(find.byKey(const ValueKey('locality-back')));
+      await tester.tap(find.byKey(const ValueKey('section-back')));
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const ValueKey('giang-son-north-pass')));
       await tester.pumpAndSettle();
@@ -353,7 +354,7 @@ void main() {
       ),
     );
     await tester.pump();
-    await tester.tap(find.byKey(const ValueKey('capital-end-turn')));
+    expect(find.byKey(const ValueKey('capital-end-turn')), findsNothing);
     await tester.tap(find.byKey(const ValueKey('capital-overtime')));
     await tester.pump();
     expect(end, 0);
