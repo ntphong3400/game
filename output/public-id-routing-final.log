@@ -1,0 +1,14 @@
+00:00 +0: loading /Users/phongnguyen/king/test/game_routing_test.dart
+00:00 +0: every section has one unique URL and round trips to its internal key
+00:00 +1: base URL remains the introduction with an existing save
+00:00 +2: people character deep link waits for the saved game and can return
+00:01 +3: people UUID opens directly and is used by roster links
+00:01 +4: harem character deep link waits for the saved game and can return
+00:01 +5: harem UUID opens directly and is used by roster links
+00:02 +6: subpages open directly and router navigation does not mutate the save
+00:02 +7: a regional character URL restores its origin after remounting
+00:02 +8: no save returns to intro and resumes the requested page after starting
+00:03 +9: missing and wrong-roster characters resolve safely
+00:03 +10: unknown routes show a recoverable not-found screen
+00:03 +11: changing the URL dismisses the old page dialog
+00:03 +12: All tests passed!

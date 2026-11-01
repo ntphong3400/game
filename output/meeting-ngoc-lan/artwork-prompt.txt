@@ -1,0 +1,17 @@
+Tool: built-in image_gen (transparent_background: true).
+Reference: assets/images/portraits/harem-001.webp, young woman in the left third.
+Saved character: assets/images/meetings/ngoc-lan-fullbody-v1.png (1024 x 1536, alpha preserved).
+Existing scenery reused without modification: assets/images/harem-interior.webp.
+
+Prompt:
+Use case: identity-preserve. Asset type: full-body transparent character sprite for a historical Vietnamese imperial-court game. The input is a three-age portrait atlas of one fictional character, Nguyen Ngoc Lan. Use ONLY the YOUNG woman in the LEFT THIRD as identity and costume reference, not the middle-aged or elderly panels. Create ONE full-length head-to-toe standing young adult Vietnamese woman, age 21, preserving the young reference's facial identity, black updo, delicate gold floral ornaments, jade drop earrings, teal blue-green embroidered silk robe with muted gold botanical patterns and ivory inner collar. Extend the garment naturally into a long formal court robe with a modest sash and sleeves, elegant gold-edged fabric shoes visible beneath the hem. Natural slender adult anatomy, standing poised, hands gently folded at waist, softly attentive expression, body turned slightly three-quarter toward viewer's right. Refined semi-realistic painted historical game art matching the reference, soft warm daylight from upper left, realistic silk folds, detailed face. Portrait canvas, one character centered, entire hair ornament through both shoes fully visible, small even transparent padding around silhouette. Actual transparent alpha background, NO scenery, NO frame, NO text, NO UI, NO extra people, no duplicate views, no ground plane, no broad cast shadow, no cropped feet or head. This sprite will be composited over a separately rendered palace terrace.
+
+Implementation:
+CharacterMeetingPage accepts a MeetingScene and origin-specific backLabel.
+MeetingScene carries separate background/character assets, identity, stats and a short character introduction. Action descriptors and async callbacks are supplied separately by the host screen.
+meeting_scenes.dart currently registers only consort_lan. Other characters retain the previous blank page until their artwork is prepared.
+The four restored actions (audience, reward, investigate, invite) use the existing courtier commands, costs and persistence. The open meeting page listens to controller changes and updates role, affection and action eligibility immediately. Feedback is displayed inside the panel so it does not cover mobile action buttons.
+No official full-body artwork or official navigation changes are included in this prototype.
+
+Visual QA:
+Run tools/meeting_visual_test.dart to regenerate the actual Flutter screenshots at 1440x900, 1024x768, 844x390, 390x844 and 320x568.

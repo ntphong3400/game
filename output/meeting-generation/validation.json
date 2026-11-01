@@ -1,0 +1,12 @@
+{
+  "identities": 90,
+  "female": 30,
+  "male": 60,
+  "runtimeAssetBytes": 28752336,
+  "functionalTests": 86,
+  "visualTests": 10,
+  "analysis": "passed",
+  "releaseBuild": "passed",
+  "releaseAssetManifest": "90/90",
+  "screenshots": "output/meeting-generation/screenshots/"
+}

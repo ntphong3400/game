@@ -1,0 +1,5 @@
+Analyzing king...                                               
+
+   info • Statements in an if should be enclosed in a block • lib/game/presentation/game_app.dart:1298:29 • curly_braces_in_flow_control_structures
+
+1 issue found. (ran in 1.4s)

@@ -1,0 +1,7 @@
+00:00 +0: loading /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart
+00:00 +0: palace management opens separately and returns without mutations at Size(1440.0, 900.0)
+00:01 +1: palace management opens separately and returns without mutations at Size(1280.0, 720.0)
+00:01 +2: palace management opens separately and returns without mutations at Size(844.0, 390.0)
+00:01 +3: palace management opens separately and returns without mutations at Size(390.0, 844.0)
+00:01 +4: palace management opens separately and returns without mutations at Size(320.0, 568.0)
+00:02 +5: All tests passed!

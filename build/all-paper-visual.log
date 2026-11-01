@@ -1,0 +1,4 @@
+00:00 +0: loading /Users/phongnguyen/king/build/paper_rooms_visual_test.dart
+00:00 +0: render all paper rooms at Size(1440.0, 900.0)
+00:04 +1: render all paper rooms at Size(390.0, 844.0)
+00:07 +2: All tests passed!

@@ -1,0 +1,1 @@
+{"profile":"0.27","policy":"extractive","seeds":100,"startSeed":1,"capSeasons":60,"min":13,"median":38,"p90":60,"max":60,"survive20":94,"survive40":47,"endings":{"illness":12,"coup":45,"poisoning":15,"alive":16,"exhaustion":11,"rebellion":1},"runsWithDebt":90,"majorsResolved":445,"fullMajorResponses":264,"rejectedCommands":0,"rejectionExamples":[]}

@@ -1,0 +1,17 @@
+{
+  "method": "Built-in image generation; compressed to WebP quality 86",
+  "assets": [
+    {
+      "path": "assets/images/journal-room.webp",
+      "prompt": "Use case: historical-scene. Asset type: full-screen landscape background for the Vietnamese imperial strategy game Vạn Tuế. Primary request: a quiet royal archive and historian's study, shelves of bound chronicles and rolled manuscripts, writing brushes, a carved desk and warm lattice-window light, no readable writing. Style: richly detailed painterly realistic historical palace environment, matching a game with warm amber wood, jade-green accents and antique gold. Composition: wide 16:9 room view from eye level, major scenic detail concentrated across upper third and sides; broad calm darker wooden foreground in lower two-thirds that will be covered by native flat paper UI. Lighting: soft warm daylight, restrained cinematic contrast, legible architecture. Constraints: pure environment art only; no UI, no panels, no borders, no books in front of camera, no text, no letters, no numbers, no watermark, no logos; no large foreground people."
+    },
+    {
+      "path": "assets/images/scores-room.webp",
+      "prompt": "Use case: historical-scene. Asset type: full-screen landscape background for the Vietnamese imperial strategy game Vạn Tuế. Primary request: an imperial hall of remembrance and honor, symmetrical carved red wooden pillars, gold dragon ornaments, display niches with ceremonial seals and blank honor plaques, distant throne, warm daylight. Style: richly detailed painterly realistic historical palace environment, matching a game with warm amber wood, jade-green accents and antique gold. Composition: wide 16:9 room view from eye level, major scenic detail concentrated across upper third and sides; broad calm darker wooden foreground in lower two-thirds that will be covered by native flat paper UI. Lighting: soft warm daylight, restrained cinematic contrast, legible architecture. Constraints: pure environment art only; no UI, no panels, no borders, no books in front of camera, no text, no letters, no numbers, no watermark, no logos; no large foreground people."
+    },
+    {
+      "path": "assets/images/kingdom-room.webp",
+      "prompt": "Use case: historical-scene. Asset type: full-screen landscape background for the Vietnamese imperial strategy game Vạn Tuế. Primary request: a royal council and strategy chamber, broad wooden planning table with a blank relief terrain model, small unmarked banners and scrolls, carved wooden pillars, open lattice windows overlooking distant mountains. Style: richly detailed painterly realistic historical palace environment, matching a game with warm amber wood, jade-green accents and antique gold. Composition: wide 16:9 room view from eye level, major scenic detail concentrated across upper third and sides; broad calm darker wooden foreground in lower two-thirds that will be covered by native flat paper UI. Lighting: soft warm daylight, restrained cinematic contrast, legible architecture. Constraints: pure environment art only; no UI, no panels, no borders, no books in front of camera, no text, no letters, no numbers, no watermark, no logos; no large foreground people."
+    }
+  ]
+}

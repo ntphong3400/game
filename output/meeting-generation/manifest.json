@@ -1,0 +1,550 @@
+{
+  "method": "built-in image_gen",
+  "identities": 90,
+  "female": 30,
+  "male": 60,
+  "missing": [],
+  "bytes": 28752336,
+  "assets": [
+    {
+      "id": "harem-001",
+      "asset": "assets/images/meetings/ngoc-lan-fullbody-v1.png",
+      "bytes": 2203507,
+      "sha256": "b0f80769c0e436a359241fdb81fef891d99876c9fc59cc4894b9ad6e9c0d0704"
+    },
+    {
+      "id": "harem-002",
+      "asset": "assets/images/meetings/thanh-mai-fullbody-v2.png",
+      "bytes": 2260453,
+      "sha256": "2957a1dd6202bdb9eff724910e38cdce20cc1d7c4469649d250d6437520f53e6"
+    },
+    {
+      "id": "harem-003",
+      "asset": "assets/images/meetings/harem-003-fullbody-v2.webp",
+      "bytes": 244970,
+      "sha256": "8b0decaa3ae1bc798d28875b964631ca2a2f55797942a7bfd7df536479699d09"
+    },
+    {
+      "id": "harem-004",
+      "asset": "assets/images/meetings/harem-004-fullbody-v2.webp",
+      "bytes": 309822,
+      "sha256": "c5d2fd26e127ec61c505bdadd7f9502510d88d261a2ff9108e3e334d809d61d8"
+    },
+    {
+      "id": "harem-005",
+      "asset": "assets/images/meetings/harem-005-fullbody-v2.webp",
+      "bytes": 288348,
+      "sha256": "b730d508cdf5ce5c03baf31218dc96095a7068caac5b079b369d04365b592c80"
+    },
+    {
+      "id": "harem-006",
+      "asset": "assets/images/meetings/harem-006-fullbody-v2.webp",
+      "bytes": 285036,
+      "sha256": "49a3c144c0797eaebae13cb6263d2d9642fe57767a2ea8e5685f95200c219c36"
+    },
+    {
+      "id": "harem-007",
+      "asset": "assets/images/meetings/harem-007-fullbody-v2.webp",
+      "bytes": 298040,
+      "sha256": "5cee8aa4b767fb03876d550b88150a53beb3df8fd115e9000916f5e21eb8b50a"
+    },
+    {
+      "id": "harem-008",
+      "asset": "assets/images/meetings/harem-008-fullbody-v2.webp",
+      "bytes": 295276,
+      "sha256": "44a5f9c6e977099a28653dcbb80fd5dc1a4885231229c05af4daef84ed515000"
+    },
+    {
+      "id": "harem-009",
+      "asset": "assets/images/meetings/harem-009-fullbody-v2.webp",
+      "bytes": 265680,
+      "sha256": "a09885faa14970e9d60386d135b680de3dd37c1415364c624ad0ba58e271d1af"
+    },
+    {
+      "id": "harem-010",
+      "asset": "assets/images/meetings/harem-010-fullbody-v2.webp",
+      "bytes": 276794,
+      "sha256": "d61e4a8af3ce7e645f642c000ca4756772bedc7aab9caccd79c0f68d13a4b573"
+    },
+    {
+      "id": "harem-011",
+      "asset": "assets/images/meetings/harem-011-fullbody-v2.webp",
+      "bytes": 297052,
+      "sha256": "12977f0002dbd9b87f79e9ec2da140b4e9e78e3dfe4dc6b9ee716719a0efa0fd"
+    },
+    {
+      "id": "harem-012",
+      "asset": "assets/images/meetings/harem-012-fullbody-v2.webp",
+      "bytes": 286920,
+      "sha256": "56e4b81df9b36d48a4db019d5e224075997b53244de309c59000b68d4b9d4607"
+    },
+    {
+      "id": "harem-013",
+      "asset": "assets/images/meetings/harem-013-fullbody-v2.webp",
+      "bytes": 278356,
+      "sha256": "23844f81c976a92d84ee7cbb09d4cd83c512d11ebda6afbf863d7d80759fe124"
+    },
+    {
+      "id": "harem-014",
+      "asset": "assets/images/meetings/harem-014-fullbody-v2.webp",
+      "bytes": 293942,
+      "sha256": "1657a54f8795711419d48ef5d5898849ac5ce2dc8a71343a9176b1944fd79820"
+    },
+    {
+      "id": "harem-015",
+      "asset": "assets/images/meetings/harem-015-fullbody-v2.webp",
+      "bytes": 288438,
+      "sha256": "398cb39ac67b48db7f9d9ad6917182078b1376b0874a4ddbc6d602231fa2839b"
+    },
+    {
+      "id": "harem-016",
+      "asset": "assets/images/meetings/harem-016-fullbody-v2.webp",
+      "bytes": 284716,
+      "sha256": "5ef4bb0bce791d61f91a7a4988c43ad7a3206c0171e8e382521706307df5b834"
+    },
+    {
+      "id": "harem-017",
+      "asset": "assets/images/meetings/harem-017-fullbody-v2.webp",
+      "bytes": 304054,
+      "sha256": "0a624b6584e1edf3923a716cbce3977ca747e8c9675bcba2749cae380aa69c00"
+    },
+    {
+      "id": "harem-018",
+      "asset": "assets/images/meetings/harem-018-fullbody-v2.webp",
+      "bytes": 281666,
+      "sha256": "2492cbe069d8d245d873782b89b942e1cf920ef563a366a3a92ffb591f38e0b6"
+    },
+    {
+      "id": "harem-019",
+      "asset": "assets/images/meetings/harem-019-fullbody-v2.webp",
+      "bytes": 262786,
+      "sha256": "a8d712b18a4f010cfab8ca4b6e08cd67cda16ce6975cf5b84334dab3ed7b682e"
+    },
+    {
+      "id": "harem-020",
+      "asset": "assets/images/meetings/harem-020-fullbody-v2.webp",
+      "bytes": 276114,
+      "sha256": "a31f308ab20d8c9e3612f515de294580bcf4414cb202b05935de612863e42780"
+    },
+    {
+      "id": "harem-021",
+      "asset": "assets/images/meetings/harem-021-fullbody-v2.webp",
+      "bytes": 285094,
+      "sha256": "65aff02631b02f0333f411fa0a86bb4fa35ab1248490aed10d4139ddbd5ae6dd"
+    },
+    {
+      "id": "harem-022",
+      "asset": "assets/images/meetings/harem-022-fullbody-v2.webp",
+      "bytes": 267316,
+      "sha256": "05f82283632a5429dc6b7440df03a54a28466633684938e34bd12e132621478d"
+    },
+    {
+      "id": "harem-023",
+      "asset": "assets/images/meetings/harem-023-fullbody-v2.webp",
+      "bytes": 266378,
+      "sha256": "8c13887e1656fd7f772c45dec553f19822e8c483b7d5bc737fd22618081f9f1e"
+    },
+    {
+      "id": "harem-024",
+      "asset": "assets/images/meetings/harem-024-fullbody-v2.webp",
+      "bytes": 281786,
+      "sha256": "4dc08cc4841a5a0430b7ab9ad13b4f2bed2717b4ae9027cd06142f0e8efb6f40"
+    },
+    {
+      "id": "harem-025",
+      "asset": "assets/images/meetings/harem-025-fullbody-v2.webp",
+      "bytes": 264720,
+      "sha256": "bf0f3ac1398a0b73bf0c2509098e5d740c587f103b30cd3f607aa887b5fa8846"
+    },
+    {
+      "id": "harem-026",
+      "asset": "assets/images/meetings/harem-026-fullbody-v2.webp",
+      "bytes": 268932,
+      "sha256": "b8a15e8f3ce213b98139324892738c59058a042f0ff2372585fbb79c10733111"
+    },
+    {
+      "id": "harem-027",
+      "asset": "assets/images/meetings/harem-027-fullbody-v2.webp",
+      "bytes": 272054,
+      "sha256": "369f305b4288d56519a1fd0c55c0bf8282bf4979c392a2be7253048368ea129e"
+    },
+    {
+      "id": "harem-028",
+      "asset": "assets/images/meetings/harem-028-fullbody-v2.webp",
+      "bytes": 270760,
+      "sha256": "0669105ae0cc4bd5acb78a71ef9ccee91120b89eebf4a022bad15ccd5415cb3b"
+    },
+    {
+      "id": "harem-029",
+      "asset": "assets/images/meetings/harem-029-fullbody-v2.webp",
+      "bytes": 298440,
+      "sha256": "a8f20aab59c31358e89ee38f203af14f0db2c132370d396e0ddb72656d639eb7"
+    },
+    {
+      "id": "harem-030",
+      "asset": "assets/images/meetings/harem-030-fullbody-v2.webp",
+      "bytes": 301710,
+      "sha256": "bd463c5a6bd967b865810fed3c492a17876abd90fc92b4eba77a8a5b241b9704"
+    },
+    {
+      "id": "official-001",
+      "asset": "assets/images/meetings/official-001-fullbody-v2.webp",
+      "bytes": 306542,
+      "sha256": "3e6de69cb8b5f3551d67cbf4c51dcc54d12427cefb3fc8fd5e9f6398c0623494"
+    },
+    {
+      "id": "official-002",
+      "asset": "assets/images/meetings/official-002-fullbody-v2.webp",
+      "bytes": 276758,
+      "sha256": "446a1631481d7e91f5cc9abb871003796b6c119c836c7f9ca5f8cb2e0058880e"
+    },
+    {
+      "id": "official-003",
+      "asset": "assets/images/meetings/official-003-fullbody-v2.webp",
+      "bytes": 292952,
+      "sha256": "08d7184395739c07e76b5e9d2c2d8f80170c9be64343f0c935c2a472ec3e029f"
+    },
+    {
+      "id": "official-004",
+      "asset": "assets/images/meetings/official-004-fullbody-v2.webp",
+      "bytes": 299480,
+      "sha256": "535176545ababef8610332b1b6c4f3aa35f20c67f0d2abb40d7400def2a3d97f"
+    },
+    {
+      "id": "official-005",
+      "asset": "assets/images/meetings/official-005-fullbody-v2.webp",
+      "bytes": 299480,
+      "sha256": "390209a76479545bca4267bce9b875dbbb6bbd8c5df0467261c63121ca3ad669"
+    },
+    {
+      "id": "official-006",
+      "asset": "assets/images/meetings/official-006-fullbody-v2.webp",
+      "bytes": 285884,
+      "sha256": "582a6f7afd9e041fb52859192cb018212dec46b24d7aff269e4f65a7a441f8d5"
+    },
+    {
+      "id": "official-007",
+      "asset": "assets/images/meetings/official-007-fullbody-v2.webp",
+      "bytes": 272084,
+      "sha256": "d3cdc5d82a730ff63a5a2a98a5cb6f104fad4e2314e4ba7847bdab64563a4188"
+    },
+    {
+      "id": "official-008",
+      "asset": "assets/images/meetings/official-008-fullbody-v2.webp",
+      "bytes": 272062,
+      "sha256": "b98e0298bd46a770da71387b1521bdb266016f3bafba98a2c7d3768bba42ac77"
+    },
+    {
+      "id": "official-009",
+      "asset": "assets/images/meetings/official-009-fullbody-v2.webp",
+      "bytes": 274406,
+      "sha256": "3e63a6d1380252f79f28edbf38848d7bf0100acf1b40a67c4eaf6779b4ace316"
+    },
+    {
+      "id": "official-010",
+      "asset": "assets/images/meetings/official-010-fullbody-v2.webp",
+      "bytes": 293598,
+      "sha256": "c0def3b807c40aa8842988a843fb9af0aaad902ea6113ad94ee12ec436dcdb95"
+    },
+    {
+      "id": "official-011",
+      "asset": "assets/images/meetings/official-011-fullbody-v2.webp",
+      "bytes": 284992,
+      "sha256": "937f1191666dc22211e6a9740a68862f8414fe0597665a0903eda5758e29e78d"
+    },
+    {
+      "id": "official-012",
+      "asset": "assets/images/meetings/official-012-fullbody-v2.webp",
+      "bytes": 279792,
+      "sha256": "194205b1473961ca358a94fe8c34a9cde8c1901fff4fa4b930c440c4d4fb0024"
+    },
+    {
+      "id": "official-013",
+      "asset": "assets/images/meetings/official-013-fullbody-v2.webp",
+      "bytes": 283750,
+      "sha256": "272cd7b739717ac80fbd40daa24e927ebb2fd3a797ae181660890e3428b81da1"
+    },
+    {
+      "id": "official-014",
+      "asset": "assets/images/meetings/official-014-fullbody-v2.webp",
+      "bytes": 308188,
+      "sha256": "b1f1d275a6ae1e80e3ddf453a351abd755c527d1638869c9db6cfe3df6697fb7"
+    },
+    {
+      "id": "official-015",
+      "asset": "assets/images/meetings/official-015-fullbody-v2.webp",
+      "bytes": 290522,
+      "sha256": "8f9e94f738b4abeaa17ecf23a2960e0d2f1a19598c91ebc37946f684917f85cb"
+    },
+    {
+      "id": "official-016",
+      "asset": "assets/images/meetings/official-016-fullbody-v2.webp",
+      "bytes": 282806,
+      "sha256": "fc87c345473189e9ca30e561520690588779992ce2e4318aaf5d28de589d07a4"
+    },
+    {
+      "id": "official-017",
+      "asset": "assets/images/meetings/official-017-fullbody-v3.webp",
+      "bytes": 218840,
+      "sha256": "c9247be3489f49fa95d281ba99c74b9863159f0e86fce4c5464dd79885598b73"
+    },
+    {
+      "id": "official-018",
+      "asset": "assets/images/meetings/official-018-fullbody-v3.webp",
+      "bytes": 248838,
+      "sha256": "2c3e480bf170616abb80574853d3621c8cb2ab3f327e43766645c6df9028764f"
+    },
+    {
+      "id": "official-019",
+      "asset": "assets/images/meetings/official-019-fullbody-v3.webp",
+      "bytes": 234056,
+      "sha256": "42cfcf2cce76297596d37cadc89edbd28a662dc5ab10d380474a541649f72d50"
+    },
+    {
+      "id": "official-020",
+      "asset": "assets/images/meetings/official-020-fullbody-v3.webp",
+      "bytes": 231614,
+      "sha256": "8e0d40614a0deeef0b4d8c034557f20e05829d6fc0f6691bc0720d073c4720d3"
+    },
+    {
+      "id": "official-021",
+      "asset": "assets/images/meetings/official-021-fullbody-v3.webp",
+      "bytes": 234102,
+      "sha256": "746b8a533207ac4672aa2b4924d24c0dd211ab5e3c6b3968ce5a8ff170e28e70"
+    },
+    {
+      "id": "official-022",
+      "asset": "assets/images/meetings/official-022-fullbody-v3.webp",
+      "bytes": 232296,
+      "sha256": "30bb6d7f3c7b5ec0c7c958edaed4a5a1c4574b4f6a827334e22930055119499d"
+    },
+    {
+      "id": "official-023",
+      "asset": "assets/images/meetings/official-023-fullbody-v3.webp",
+      "bytes": 232018,
+      "sha256": "844859780a92c8d00d44f7aeefc73f6be51dd125eea71c123c8e8fa1b831f0ae"
+    },
+    {
+      "id": "official-024",
+      "asset": "assets/images/meetings/official-024-fullbody-v3.webp",
+      "bytes": 253114,
+      "sha256": "3d3234fc11705a36f18c1e4a77d869fb15c42875dee59e4241890088d7d69084"
+    },
+    {
+      "id": "official-025",
+      "asset": "assets/images/meetings/official-025-fullbody-v3.webp",
+      "bytes": 241582,
+      "sha256": "c45a9813c860c4307eb50b1ac24a316cfcf01df1ab2dc90697edb6ffcfa2a865"
+    },
+    {
+      "id": "official-026",
+      "asset": "assets/images/meetings/official-026-fullbody-v3.webp",
+      "bytes": 238892,
+      "sha256": "4e8b1dc6212d18d75f228cdabce28e89607f492cc6909c178b1dff2ea7f68a56"
+    },
+    {
+      "id": "official-027",
+      "asset": "assets/images/meetings/official-027-fullbody-v3.webp",
+      "bytes": 234816,
+      "sha256": "539bbaffcb47806adc7361ea477c12663b818c4d79cc8f0ddd179f899fa25c8d"
+    },
+    {
+      "id": "official-028",
+      "asset": "assets/images/meetings/official-028-fullbody-v3.webp",
+      "bytes": 242778,
+      "sha256": "fc278ee8a1c590f3c5af7d82e2f7ce5242295b06e30c56bd4c7125a020094234"
+    },
+    {
+      "id": "official-029",
+      "asset": "assets/images/meetings/official-029-fullbody-v2.webp",
+      "bytes": 273574,
+      "sha256": "77dbe626440dd66617c12750be0cab9f6d2d04dee0d9c4dfe2d4270fac06c6b9"
+    },
+    {
+      "id": "official-030",
+      "asset": "assets/images/meetings/official-030-fullbody-v2.webp",
+      "bytes": 262478,
+      "sha256": "452b388ccc947a69272d18e4dfbd959b5fe075ebdbba39e72d78faa9a89d4f2b"
+    },
+    {
+      "id": "official-031",
+      "asset": "assets/images/meetings/official-031-fullbody-v2.webp",
+      "bytes": 277754,
+      "sha256": "0f2f81a1ea3f58d1098da2878d8266041054bbee33a2f120ae7701bfefb36be9"
+    },
+    {
+      "id": "official-032",
+      "asset": "assets/images/meetings/official-032-fullbody-v2.webp",
+      "bytes": 269852,
+      "sha256": "caa78eb0e38176c994bf3ea04393346741775f222795e0c44b668d41eecec92b"
+    },
+    {
+      "id": "official-033",
+      "asset": "assets/images/meetings/official-033-fullbody-v2.webp",
+      "bytes": 298370,
+      "sha256": "f8e7baa66562bc2e8a8f9d2659f8ca572eb86776dda649ee1792913d469a4168"
+    },
+    {
+      "id": "official-034",
+      "asset": "assets/images/meetings/official-034-fullbody-v2.webp",
+      "bytes": 291462,
+      "sha256": "15e5e3fb1d5cf1f55dcba8c17c7de4e5496c281c0791a20c03b40181c63c7103"
+    },
+    {
+      "id": "official-035",
+      "asset": "assets/images/meetings/official-035-fullbody-v2.webp",
+      "bytes": 299804,
+      "sha256": "86517e373a2d6885dcfd82ed1cdcb7e6fcc1d41bd764f51b81dfa7df5535dd44"
+    },
+    {
+      "id": "official-036",
+      "asset": "assets/images/meetings/official-036-fullbody-v2.webp",
+      "bytes": 284282,
+      "sha256": "318705e536c29c1c69938d01fdac818e053f0f187570d52a455d06ce80d6e865"
+    },
+    {
+      "id": "official-037",
+      "asset": "assets/images/meetings/official-037-fullbody-v2.webp",
+      "bytes": 281056,
+      "sha256": "c672750d28f4ad35b3861341ae8fc010041014edc850516af8937988f3ce2b4e"
+    },
+    {
+      "id": "official-038",
+      "asset": "assets/images/meetings/official-038-fullbody-v2.webp",
+      "bytes": 272828,
+      "sha256": "ee473e7889b93e0c375dd1ca3797d16a5af0c0c6f89af0144eb79a52e9267449"
+    },
+    {
+      "id": "official-039",
+      "asset": "assets/images/meetings/official-039-fullbody-v2.webp",
+      "bytes": 276010,
+      "sha256": "f5cab558151af26bed14bb55cd39e4b18f3d26282502fb68d599768d97c4135f"
+    },
+    {
+      "id": "official-040",
+      "asset": "assets/images/meetings/official-040-fullbody-v2.webp",
+      "bytes": 274970,
+      "sha256": "dec311249434038fdc3f6686835e0a49e8161d0535ad69f3418a225a2e3437cd"
+    },
+    {
+      "id": "official-041",
+      "asset": "assets/images/meetings/official-041-fullbody-v2.webp",
+      "bytes": 264678,
+      "sha256": "f92d40e8ebd9c9d3be055f0cb8ee754ed84f4a2afbf5b3bd3998b65ae5f75200"
+    },
+    {
+      "id": "official-042",
+      "asset": "assets/images/meetings/official-042-fullbody-v2.webp",
+      "bytes": 275088,
+      "sha256": "1435ddc480bc87ce57faac98db649774bcad76c496fe49c81ea9fdc2cd3cf860"
+    },
+    {
+      "id": "official-043",
+      "asset": "assets/images/meetings/official-043-fullbody-v3.webp",
+      "bytes": 255128,
+      "sha256": "1d6eeb21a47d8c81f2ad985bb124fcb0d5bdbd98870ebcff745ca0cd74165006"
+    },
+    {
+      "id": "official-044",
+      "asset": "assets/images/meetings/official-044-fullbody-v3.webp",
+      "bytes": 269274,
+      "sha256": "1cd58c37946036e65e3b33d1a669e6495817d7a329bfcc5c1ecda4a6ec582cd8"
+    },
+    {
+      "id": "official-045",
+      "asset": "assets/images/meetings/official-045-fullbody-v2.webp",
+      "bytes": 308382,
+      "sha256": "6d4e10ad22aefe0771f298dc09d0824d5d1214c9d3dd004ac6738e2bd52a761c"
+    },
+    {
+      "id": "official-046",
+      "asset": "assets/images/meetings/official-046-fullbody-v2.webp",
+      "bytes": 260244,
+      "sha256": "e3f16c1aa59868c426115e907c795b4f769752817d1a8146f81654f923c04c34"
+    },
+    {
+      "id": "official-047",
+      "asset": "assets/images/meetings/official-047-fullbody-v3.webp",
+      "bytes": 274898,
+      "sha256": "3905a56bdf1bdeb912eaf893f2ae57cd4cf94a4327585041e0024789eda83327"
+    },
+    {
+      "id": "official-048",
+      "asset": "assets/images/meetings/official-048-fullbody-v3.webp",
+      "bytes": 261438,
+      "sha256": "c2d6999f4530a934e546c39d42b74fcecbe30b4b1efeb3ab4185c633d01d317f"
+    },
+    {
+      "id": "official-049",
+      "asset": "assets/images/meetings/official-049-fullbody-v2.webp",
+      "bytes": 297060,
+      "sha256": "a262ab3da86113e4cf6abb7825d8a5d9d4541a29c4d60f8e543baf4b8d066344"
+    },
+    {
+      "id": "official-050",
+      "asset": "assets/images/meetings/official-050-fullbody-v2.webp",
+      "bytes": 304770,
+      "sha256": "36b8d5555a8817b3c136f37ac8f8b1530c39d79ed465442df826518c8583a281"
+    },
+    {
+      "id": "official-051",
+      "asset": "assets/images/meetings/official-051-fullbody-v2.webp",
+      "bytes": 291974,
+      "sha256": "e25349510f31c1ee371c4d09b0281b1a4b116c7e10d5222fb3698c2899a913a1"
+    },
+    {
+      "id": "official-052",
+      "asset": "assets/images/meetings/official-052-fullbody-v2.webp",
+      "bytes": 260126,
+      "sha256": "4fcfd67626632c1027df439533b4587867edbb04a4cfc564a7cc237648f09e19"
+    },
+    {
+      "id": "official-053",
+      "asset": "assets/images/meetings/official-053-fullbody-v2.webp",
+      "bytes": 283908,
+      "sha256": "620e36ffbb93f1ea82b73d42ee66dafdc53ba0e527b6a758e33ab1ca9a8b1572"
+    },
+    {
+      "id": "official-054",
+      "asset": "assets/images/meetings/official-054-fullbody-v2.webp",
+      "bytes": 308726,
+      "sha256": "f84aa84fe15c7dbb0e59306d753e50f9f5922353dd7f3f8e3d51681946ebc65f"
+    },
+    {
+      "id": "official-055",
+      "asset": "assets/images/meetings/official-055-fullbody-v2.webp",
+      "bytes": 274618,
+      "sha256": "1511205eb17a12b6b607787c48c0afb0ce50ac9acea731b308b4ae1c53154abd"
+    },
+    {
+      "id": "official-056",
+      "asset": "assets/images/meetings/official-056-fullbody-v2.webp",
+      "bytes": 280394,
+      "sha256": "5d6f921540659452d7a2b60a7ef8a8077845e4fb9107963d51fcf42d08516c4d"
+    },
+    {
+      "id": "official-057",
+      "asset": "assets/images/meetings/official-057-fullbody-v2.webp",
+      "bytes": 275700,
+      "sha256": "0dd0980ba2d4d468231f125025e423799a3427afefb763e9e83eeb571e94d41e"
+    },
+    {
+      "id": "official-058",
+      "asset": "assets/images/meetings/official-058-fullbody-v2.webp",
+      "bytes": 271434,
+      "sha256": "9ee669d3d035245f1cebf3a13be426bdd84a51c2f4e8670d5de34479a7846127"
+    },
+    {
+      "id": "official-059",
+      "asset": "assets/images/meetings/official-059-fullbody-v2.webp",
+      "bytes": 280274,
+      "sha256": "4f0b147ac1239e40f980f18f3e0681ad2c179e8320bb12f0b58d5869f3a81ac5"
+    },
+    {
+      "id": "official-060",
+      "asset": "assets/images/meetings/official-060-fullbody-v2.webp",
+      "bytes": 286380,
+      "sha256": "45ce293fecc1d1e86993272316a06517323d773474e3ca43a4dacb5ec3828061"
+    }
+  ]
+}

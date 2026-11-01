@@ -1,0 +1,26 @@
+00:00 +0: loading /Users/phongnguyen/king/test/character_public_id_test.dart
+00:00 +0: /Users/phongnguyen/king/test/character_public_id_test.dart: new reigns allocate unique UUIDs independently of gameplay RNG
+00:00 +1: /Users/phongnguyen/king/test/character_public_id_test.dart: new reigns allocate unique UUIDs independently of gameplay RNG
+00:00 +2: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:00 +3: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:00 +4: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:00 +5: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:00 +6: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:00 +7: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:00 +8: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:00 +9: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:00 +10: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:01 +11: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:01 +12: /Users/phongnguyen/king/test/game_routing_test.dart: people UUID opens directly and is used by roster links
+00:01 +13: /Users/phongnguyen/king/test/game_routing_test.dart: people UUID opens directly and is used by roster links
+00:01 +14: /Users/phongnguyen/king/test/outcome_ui_test.dart: no premature popup for unfinished work
+00:02 +15: /Users/phongnguyen/king/test/game_routing_test.dart: harem character deep link waits for the saved game and can return
+00:02 +16: /Users/phongnguyen/king/test/outcome_ui_test.dart: fatal delayed result is reported before showing the ending
+00:02 +17: /Users/phongnguyen/king/test/game_routing_test.dart: harem UUID opens directly and is used by roster links
+00:02 +18: /Users/phongnguyen/king/test/game_routing_test.dart: subpages open directly and router navigation does not mutate the save
+00:02 +19: /Users/phongnguyen/king/test/game_routing_test.dart: a regional character URL restores its origin after remounting
+00:03 +20: /Users/phongnguyen/king/test/game_routing_test.dart: no save returns to intro and resumes the requested page after starting
+00:03 +21: /Users/phongnguyen/king/test/game_routing_test.dart: missing and wrong-roster characters resolve safely
+00:03 +22: /Users/phongnguyen/king/test/game_routing_test.dart: unknown routes show a recoverable not-found screen
+00:03 +23: /Users/phongnguyen/king/test/game_routing_test.dart: changing the URL dismisses the old page dialog
+00:03 +24: All tests passed!

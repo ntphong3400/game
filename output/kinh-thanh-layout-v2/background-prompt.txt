@@ -1,0 +1,21 @@
+Generation: built-in image_gen, historical-scene, prior artwork used as a style reference.
+Asset: assets/images/kinh-thanh-watercolor-v2.webp, 1536 x 1024, WebP quality 90.
+
+Use case: historical-scene.
+Asset type: NEW replacement background plate for the Kinh Thành screen of a Vietnamese imperial game, landscape 1536 x 1024, 3:2.
+Input image: reference image is STYLE and architectural-detail reference only. Repaint with a NEW clearly legible spatial plan described below. Preserve the Vietnamese traditional watercolor and ink look, warm ivory paper grain, restrained ochre roofs, muted jade foliage, terracotta timber, subtle blue gray mountains, lively people in áo ngũ thân and nón lá, fine organic brushwork. No text, lettering, map pins, labels, UI or watermarks.
+
+Primary request: a bustling ancient Vietnamese capital with a CLEARLY ENCLOSED INNER FORBIDDEN PALACE (Tử Cấm Thành), and an inhabited outer city. Elevated three-quarter panoramic view, high enough to distinguish seven specific buildings and the palace enclosure. The inner palace occupies the middle/upper area from approximately x=0.13 to 0.89 and y=0.14 to 0.60. A continuous pale stone wall with red tile cap encloses ALL FOUR of the inner destinations, with a single clearly visible main gate at front center around (0.48, 0.60). Visually unambiguous inside-versus-outside relationship.
+
+FOUR distinct INSIDE-palace destinations; each needs its OWN recognizable complete building, visible roof, courtyard and space around it, physically INSIDE the same continuous palace wall:
+1) Main throne hall Điện Vĩnh An at (0.46,0.25): largest dignified ochre golden tile hall, broad steps and ceremonial courtyard, upper center.
+2) Cung Ngọc Hoa at (0.72,0.25): a separate graceful residential palace with pink flowering garden and private courtyard, upper right within the enclosure.
+3) Ngân khố at (0.25,0.44): a secure orderly royal treasury compound of two solid timber storehouse halls with ochre tiled roofs, a guarded courtyard with a few sealed chests, on inner LEFT, behind and clearly INSIDE the palace's FRONT WALL. It must NOT be in the public market.
+4) Điện Dưỡng Tâm at (0.69,0.46): one DISTINCT elegant medium-size royal retreat hall with a visible red timber facade, pale tiled walkway, small lotus pond and medicinal garden. On inner RIGHT, below and spatially separated from the residential palace. Entire hall and its private courtyard must clearly be INSIDE the palace walls, not a random pagoda or an empty patch of trees.
+
+THREE distinct OUTSIDE-palace destinations in the lively outer city's civic quarter BELOW the palace front wall, plus many market houses around them:
+5) Phủ Bá Quan at (0.20,0.72): a substantial administrative manor outside the wall, with dark ochre roof, open official courtyard, a few small robed officials and couriers, on lower LEFT beside the approach street. Clearly OUTSIDE the Tử Cấm Thành.
+6) Viện Quốc Sử at (0.80,0.70): a quiet scholar/archive courtyard manor with timber study halls and covered verandas, on lower RIGHT outside the palace. Clearly distinguishable from the treasury.
+7) Vọng Thiên Các at (0.51,0.82): a distinctive elegant two-storey square timber observation pavilion with layered tiled roof in its own small public garden square at lower CENTER, surrounded by the capital's street life. NOT the main palace gate.
+
+Keep all seven architectural destinations well separated with no overlapping silhouettes, no giant indistinguishable forest of roofs. Main avenue from bottom foreground around the observation pavilion to the palace gate, bustling shops and market stalls along it, tiny pedestrians and carts, water canals and stone bridges along side edges, distant city roofs and mountains. No new large religious monument. Human activity plentiful but tiny enough to let building footprints read clearly. Palace enclosure and the seven buildings are the composition's anchor points, with the wider capital alive around them. Important buildings within x=0.12..0.88, y=0.20..0.84; top 10 percent mostly mountain wash. Fill the entire image with watercolor painting on ivory paper. No photorealism, no 3D, no glossy saturation.

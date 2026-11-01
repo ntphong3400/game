@@ -1,0 +1,485 @@
+00:00 +0: loading /Users/phongnguyen/king/test/finance_ui_test.dart
+00:00 +0: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +1: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +2: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +3: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +4: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: No element
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:676:25)
+#1      WidgetController.element (package:flutter_test/src/controller.dart:864:30)
+#2      WidgetController.ensureVisible (package:flutter_test/src/controller.dart:2301:32)
+#3      main.<anonymous closure> (file:///Users/phongnguyen/king/test/autumn_tax_ui_test.dart:46:22)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  tax selection stays pending until autumn and UI separates annual tax from seasonal cash at
+  Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +4 -1: /Users/phongnguyen/king/test/finance_ui_test.dart: financial history and forecast are readable without changing game state at Size(1440.0, 1000.0)
+00:01 +4 -1: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0) [E]
+  Test failed. See exception logs above.
+  The test description was: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+  
+00:01 +4 -1: /Users/phongnguyen/king/test/finance_ui_test.dart: financial history and forecast are readable without changing game state at Size(1440.0, 1000.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Sổ thu chi ngân khố": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/finance_ui_test.dart:63:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/finance_ui_test.dart line 63
+The test description was:
+  financial history and forecast are readable without changing game state at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +4 -2: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:01 +4 -2: /Users/phongnguyen/king/test/finance_ui_test.dart: financial history and forecast are readable without changing game state at Size(1440.0, 1000.0) [E]
+  Test failed. See exception logs above.
+  The test description was: financial history and forecast are readable without changing game state at Size(1440.0, 1000.0)
+  
+00:01 +4 -2: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Tăng ngân khố": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:51:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 51
+The test description was:
+  revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +4 -3: /Users/phongnguyen/king/test/seasonal_ui_test.dart: seasonal dashboard, focused national affairs, all opening petitions work at Size(1440.0, 1000.0)
+00:01 +4 -3: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0) [E]
+  Test failed. See exception logs above.
+  The test description was: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+  
+00:01 +5 -3: /Users/phongnguyen/king/test/seasonal_ui_test.dart: seasonal dashboard, focused national affairs, all opening petitions work at Size(1440.0, 1000.0)
+00:01 +6 -3: /Users/phongnguyen/king/test/seasonal_ui_test.dart: seasonal dashboard, focused national affairs, all opening petitions work at Size(1440.0, 1000.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Tăng ngân khố": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/seasonal_ui_test.dart:102:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/seasonal_ui_test.dart line 102
+The test description was:
+  seasonal dashboard, focused national affairs, all opening petitions work at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +6 -4: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(390.0, 844.0)
+00:01 +6 -4: /Users/phongnguyen/king/test/seasonal_ui_test.dart: seasonal dashboard, focused national affairs, all opening petitions work at Size(1440.0, 1000.0) [E]
+  Test failed. See exception logs above.
+  The test description was: seasonal dashboard, focused national affairs, all opening petitions work at Size(1440.0, 1000.0)
+  
+00:01 +6 -4: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(390.0, 844.0)
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 20 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column Column:file:///Users/phongnguyen/king/lib/game/presentation/widgets/imperial_room.dart:194:14
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#cb2bd relayoutBoundary=up6 OVERFLOWING:
+  creator: Column ← Padding ← CustomPaint ← ImperialSkin ← RoomPlaque ← Align ← Padding ←
+    SizedBox-[<'scene-header-treasury'>] ← Column ← SizedBox ← Stack ← LayoutBuilder ← ⋯
+  parentData: offset=Offset(24.0, 14.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=342.0, 0.0<=h<=20.0)
+  size: Size(342.0, 20.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: min
+  crossAxisAlignment: center
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: No element
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:676:25)
+#1      WidgetController.element (package:flutter_test/src/controller.dart:864:30)
+#2      WidgetController.ensureVisible (package:flutter_test/src/controller.dart:2301:32)
+#3      main.<anonymous closure> (file:///Users/phongnguyen/king/test/autumn_tax_ui_test.dart:46:22)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  tax selection stays pending until autumn and UI separates annual tax from seasonal cash at
+  Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +6 -5: /Users/phongnguyen/king/test/finance_ui_test.dart: financial history and forecast are readable without changing game state at Size(390.0, 844.0)
+00:01 +6 -5: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(390.0, 844.0) [E]
+  Test failed. See exception logs above.
+  The test description was: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(390.0, 844.0)
+  
+00:01 +6 -5: /Users/phongnguyen/king/test/finance_ui_test.dart: financial history and forecast are readable without changing game state at Size(390.0, 844.0)
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 20 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column Column:file:///Users/phongnguyen/king/lib/game/presentation/widgets/imperial_room.dart:194:14
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#a16b6 relayoutBoundary=up6 OVERFLOWING:
+  creator: Column ← Padding ← CustomPaint ← ImperialSkin ← RoomPlaque ← Align ← Padding ←
+    SizedBox-[<'scene-header-treasury'>] ← Column ← SizedBox ← Stack ← LayoutBuilder ← ⋯
+  parentData: offset=Offset(24.0, 14.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=342.0, 0.0<=h<=20.0)
+  size: Size(342.0, 20.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: min
+  crossAxisAlignment: center
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Sổ thu chi ngân khố": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/finance_ui_test.dart:63:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/finance_ui_test.dart line 63
+The test description was:
+  financial history and forecast are readable without changing game state at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +6 -6: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(1440.0, 1000.0)
+00:01 +6 -6: /Users/phongnguyen/king/test/finance_ui_test.dart: financial history and forecast are readable without changing game state at Size(390.0, 844.0) [E]
+  Test failed. See exception logs above.
+  The test description was: financial history and forecast are readable without changing game state at Size(390.0, 844.0)
+  
+00:01 +6 -6: /Users/phongnguyen/king/test/finance_ui_test.dart: mobile financial report distinguishes real spending and unpaid obligations
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Thực chi: −16": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/finance_ui_test.dart:146:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/finance_ui_test.dart line 146
+The test description was:
+  mobile financial report distinguishes real spending and unpaid obligations
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +6 -7: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(1440.0, 1000.0)
+00:01 +6 -7: /Users/phongnguyen/king/test/finance_ui_test.dart: mobile financial report distinguishes real spending and unpaid obligations [E]
+  Test failed. See exception logs above.
+  The test description was: mobile financial report distinguishes real spending and unpaid obligations
+  
+00:01 +7 -7: /Users/phongnguyen/king/test/citadel_hub_test.dart: existing seasonal save opens in citadel and returns from treasury
+00:02 +7 -7: /Users/phongnguyen/king/test/seasonal_ui_test.dart: seasonal dashboard, focused national affairs, all opening petitions work at Size(390.0, 844.0)
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 20 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column Column:file:///Users/phongnguyen/king/lib/game/presentation/widgets/imperial_room.dart:194:14
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#338f2 relayoutBoundary=up6 OVERFLOWING:
+  creator: Column ← Padding ← CustomPaint ← ImperialSkin ← RoomPlaque ← Align ← Padding ←
+    SizedBox-[<'scene-header-treasury'>] ← Column ← SizedBox ← Stack ← LayoutBuilder ← ⋯
+  parentData: offset=Offset(24.0, 14.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=342.0, 0.0<=h<=20.0)
+  size: Size(342.0, 20.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: min
+  crossAxisAlignment: center
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Tăng ngân khố": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/seasonal_ui_test.dart:102:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/seasonal_ui_test.dart line 102
+The test description was:
+  seasonal dashboard, focused national affairs, all opening petitions work at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +7 -8: /Users/phongnguyen/king/test/citadel_hub_test.dart: existing seasonal save opens in citadel and returns from treasury
+00:02 +7 -8: /Users/phongnguyen/king/test/seasonal_ui_test.dart: seasonal dashboard, focused national affairs, all opening petitions work at Size(390.0, 844.0) [E]
+  Test failed. See exception logs above.
+  The test description was: seasonal dashboard, focused national affairs, all opening petitions work at Size(390.0, 844.0)
+  
+00:02 +7 -8: /Users/phongnguyen/king/test/citadel_hub_test.dart: existing seasonal save opens in citadel and returns from treasury
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Tăng ngân khố": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/citadel_hub_test.dart:113:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/citadel_hub_test.dart line 113
+The test description was:
+  existing seasonal save opens in citadel and returns from treasury
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +7 -9: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:02 +7 -9: /Users/phongnguyen/king/test/citadel_hub_test.dart: existing seasonal save opens in citadel and returns from treasury [E]
+  Test failed. See exception logs above.
+  The test description was: existing seasonal save opens in citadel and returns from treasury
+  
+00:02 +7 -9: /Users/phongnguyen/king/test/citadel_hub_test.dart: existing weekly save opens in citadel and returns from treasury
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Tăng ngân khố": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/citadel_hub_test.dart:113:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/citadel_hub_test.dart line 113
+The test description was:
+  existing weekly save opens in citadel and returns from treasury
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +7 -10: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:02 +7 -10: /Users/phongnguyen/king/test/citadel_hub_test.dart: existing weekly save opens in citadel and returns from treasury [E]
+  Test failed. See exception logs above.
+  The test description was: existing weekly save opens in citadel and returns from treasury
+  
+00:02 +8 -10: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:02 +9 -10: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:02 +10 -10: /Users/phongnguyen/king/test/citadel_hub_test.dart: continue from the scoreboard returns to citadel without a command
+00:02 +11 -10: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+00:02 +12 -10: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 20 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column Column:file:///Users/phongnguyen/king/lib/game/presentation/widgets/imperial_room.dart:194:14
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#2dcba relayoutBoundary=up6 OVERFLOWING:
+  creator: Column ← Padding ← CustomPaint ← ImperialSkin ← RoomPlaque ← Align ← Padding ←
+    SizedBox-[<'scene-header-treasury'>] ← Column ← SizedBox ← Stack ← LayoutBuilder ← ⋯
+  parentData: offset=Offset(24.0, 14.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=342.0, 0.0<=h<=20.0)
+  size: Size(342.0, 20.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: min
+  crossAxisAlignment: center
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Tăng ngân khố": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:51:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 51
+The test description was:
+  revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +12 -11: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0) [E]
+  Test failed. See exception logs above.
+  The test description was: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+  
+00:03 +12 -11: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(390.0, 844.0)
+00:03 +13 -11: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0)
+00:03 +14 -11: /Users/phongnguyen/king/test/game_ui_test.dart: national work shows fit, chance, reward and risk before committing
+00:04 +15 -11: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(1440.0, 1000.0)
+00:04 +16 -11: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 20 pixels on the bottom.>
+Ngân khố
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:397:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 397
+The test description was:
+  all screens render without overflow at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:05 +16 -12: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0) [E]
+  Test failed. See exception logs above.
+  The test description was: all screens render without overflow at Size(390.0, 844.0)
+  
+00:05 +16 -12: /Users/phongnguyen/king/test/game_ui_test.dart: complete a run, show score and recover ending from storage
+00:05 +17 -12: /Users/phongnguyen/king/test/game_ui_test.dart: old rules scores remain viewable separately from current scores
+00:05 +18 -12: /Users/phongnguyen/king/test/game_ui_test.dart: critical court warning leads to a saved collapse ending on mobile
+00:05 +19 -12: /Users/phongnguyen/king/test/game_ui_test.dart: authority warning leads to a saved puppet ending on mobile
+00:05 +20 -12: /Users/phongnguyen/king/test/game_ui_test.dart: all five zero-stat warnings fit on mobile while recovery remains possible
+00:05 +21 -12: /Users/phongnguyen/king/test/game_ui_test.dart: long assassination explanation fits mobile before the time summary
+00:05 +22 -12: /Users/phongnguyen/king/test/game_ui_test.dart: seasonal recommendation accepts the named tú nữ without palace admission
+00:05 +23 -12: Some tests failed.

@@ -1,0 +1,50 @@
+{
+  "generator": "built-in image_gen.imagegen",
+  "purpose": "Four decorative paintings for the approved fixed dossier rail; all labels, counts, progress and navigation are live Flutter widgets.",
+  "prompt": "Create a production watercolor illustration atlas for the four right-hand dossier illustrations in the supplied game UI mockup. Use the reference image for art direction only. ARTWORK ONLY, absolutely no UI, borders, icons, text, lettering, numerals, symbols or seals with writing. Precisely 2 columns by 2 rows, four equally sized square tiles on a square 1024x1024 canvas. Tiles meet at EXACT half-width and half-height, no gutters. Each individual tile: centered composition, delicate historical Vietnamese court ink and watercolor on warm pale ivory paper #F8EED5, muted ochre, antique gold, forest jade, brown ink; hand-painted fine detail, gentle feathered/faded edges on all four sides. Soft blank margins inside each tile ensure individual cropping.\nTOP LEFT: an exquisite stack of dark jade bound accounting books tied with fine gold cord, antique coins, bamboo brush and small ink pot, faint bamboo stems and palace lattice in the background. Represents obligations and revenues.\nTOP RIGHT: an elegantly rolled ivory imperial edict tied with red silk cord, brush and small bronze incense vessel, faint jade and cinnabar ceremonial banners behind. No writing at all on the scroll. Represents emergency policies.\nBOTTOM LEFT: two small farmers reclaiming rice fields, one bending to plant rice, one with hoe, a small wooden pavilion, river and misty mountains, historical Vietnamese landscape. Represents work in progress.\nBOTTOM RIGHT: a seated Vietnamese scholar with traditional black headpiece and muted jade robe, reading an unmarked open scroll beside a writing table, bamboo stems and faint distant landscape. Represents received reports.\nKeep every subject fully within its own tile, cohesive painting scale and color, high craft, quiet luminous ivory background. Do not draw frames, paper edges or interface elements; these are added later in Flutter. Do not reproduce the entire UI mockup. Only four paintings in the exact 2x2 grid.",
+  "reference": "docs/kingdom-dossiers-mockup.png",
+  "source_atlas": "output/imagegen/kingdom-dossiers-atlas.png",
+  "source_size": [
+    1254,
+    1254
+  ],
+  "packaging": "cwebp -q 90 -crop x y 627 627; WebP encoder aligns odd origins to chroma boundaries.",
+  "assets": [
+    {
+      "path": "assets/images/kingdom/dossier-obligations.webp",
+      "crop": [
+        0,
+        0,
+        627,
+        627
+      ]
+    },
+    {
+      "path": "assets/images/kingdom/dossier-emergency.webp",
+      "crop": [
+        627,
+        0,
+        627,
+        627
+      ]
+    },
+    {
+      "path": "assets/images/kingdom/dossier-progress.webp",
+      "crop": [
+        0,
+        627,
+        627,
+        627
+      ]
+    },
+    {
+      "path": "assets/images/kingdom/dossier-reports.webp",
+      "crop": [
+        627,
+        627,
+        627,
+        627
+      ]
+    }
+  ]
+}

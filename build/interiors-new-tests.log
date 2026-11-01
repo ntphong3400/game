@@ -1,0 +1,50 @@
+00:00 +0: loading /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart
+00:00 +0: court interior renders without overflow or game mutation at Size(1440.0, 900.0)
+00:00 +1: treasury interior renders without overflow or game mutation at Size(1440.0, 900.0)
+00:00 +2: people interior renders without overflow or game mutation at Size(1440.0, 900.0)
+00:01 +3: harem interior renders without overflow or game mutation at Size(1440.0, 900.0)
+00:01 +4: health interior renders without overflow or game mutation at Size(1440.0, 900.0)
+00:01 +5: court interior renders without overflow or game mutation at Size(844.0, 390.0)
+00:01 +6: treasury interior renders without overflow or game mutation at Size(844.0, 390.0)
+00:01 +7: people interior renders without overflow or game mutation at Size(844.0, 390.0)
+00:01 +8: harem interior renders without overflow or game mutation at Size(844.0, 390.0)
+00:01 +9: health interior renders without overflow or game mutation at Size(844.0, 390.0)
+00:01 +10: court interior renders without overflow or game mutation at Size(390.0, 844.0)
+00:01 +11: treasury interior renders without overflow or game mutation at Size(390.0, 844.0)
+00:01 +12: people interior renders without overflow or game mutation at Size(390.0, 844.0)
+00:01 +13: harem interior renders without overflow or game mutation at Size(390.0, 844.0)
+00:01 +14: health interior renders without overflow or game mutation at Size(390.0, 844.0)
+00:01 +15: court interior renders without overflow or game mutation at Size(320.0, 568.0)
+00:02 +16: treasury interior renders without overflow or game mutation at Size(320.0, 568.0)
+00:02 +17: people interior renders without overflow or game mutation at Size(320.0, 568.0)
+00:02 +18: harem interior renders without overflow or game mutation at Size(320.0, 568.0)
+00:02 +19: health interior renders without overflow or game mutation at Size(320.0, 568.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 58 pixels on the right.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/imperial_interiors_ui_test.dart:55:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/imperial_interiors_ui_test.dart line 55
+The test description was:
+  health interior renders without overflow or game mutation at Size(320.0, 568.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +19 -1: health interior renders without overflow or game mutation at Size(320.0, 568.0) [E]
+  Test failed. See exception logs above.
+  The test description was: health interior renders without overflow or game mutation at Size(320.0, 568.0)
+  
+00:02 +19 -1: inline desk selection and assignee preview are local until explicit confirmation
+00:02 +20 -1: portrait, compare list and profile action preserve known qualities for harem=false
+00:03 +21 -1: portrait, compare list and profile action preserve known qualities for harem=true
+00:03 +22 -1: care preview does not spend resources before the action arrow
+00:03 +23 -1: Some tests failed.

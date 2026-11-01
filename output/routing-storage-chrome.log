@@ -1,0 +1,30 @@
+00:00 +0: loading /Users/phongnguyen/king/test/browser_storage_test.dart
+00:00 +0: test/browser_storage_test.dart: story petitions survive real IndexedDB reopen, duplicate delivery and competing choices
+00:00 +1: test/browser_storage_test.dart: palace assignment, partial progress and result survive real IndexedDB reopen, retries and competing tabs
+00:00 +2: test/browser_storage_test.dart: two tabs reveal a legacy partial season only once and retain it on reopen
+00:00 +3: test/browser_storage_test.dart: native annual tax settlement and pending winter policy survive reopen and retry
+00:00 +4: test/browser_storage_test.dart: native seasonal save preserves all opening petitions, cadence, random and major calendar on reopen/retry
+00:00 +5: test/browser_storage_test.dart: current save missing optional ledger starts a partial ledger and retries once
+00:00 +6: test/browser_storage_test.dart: mvp-0.2.0 IndexedDB data survives an explicit new-rules start and reopen
+00:00 +7: test/browser_storage_test.dart: mvp-0.3.0 IndexedDB data survives an explicit new-rules start and reopen
+00:00 +8: test/browser_storage_test.dart: mvp-0.4.0 IndexedDB data survives an explicit new-rules start and reopen
+00:00 +9: test/browser_storage_test.dart: mvp-0.5.0 IndexedDB data survives an explicit new-rules start and reopen
+00:00 +10: test/browser_storage_test.dart: mvp-0.6.0 IndexedDB data survives an explicit new-rules start and reopen
+00:00 +11: test/browser_storage_test.dart: mvp-0.7.0 IndexedDB data survives an explicit new-rules start and reopen
+00:00 +12: test/browser_storage_test.dart: mvp-0.7.1 IndexedDB data survives an explicit new-rules start and reopen
+00:00 +13: test/browser_storage_test.dart: mvp-0.7.2 IndexedDB data survives an explicit new-rules start and reopen
+00:00 +14: test/browser_storage_test.dart: mvp-0.7.3 IndexedDB data survives an explicit new-rules start and reopen
+00:00 +15: test/browser_storage_test.dart: mvp-0.7.4 IndexedDB data survives an explicit new-rules start and reopen
+00:00 +16: test/browser_storage_test.dart: IndexedDB reopens major objectives, story decisions and obligations without duplicate charges
+00:00 +17: test/browser_storage_test.dart: native IndexedDB preserves new recurring income, milestones and successor state across reopen and retry
+00:00 +18: test/browser_storage_test.dart: native content-7 save continues with its active objective when the 66-event catalog loads
+00:00 +19: test/browser_storage_test.dart: native IndexedDB persists, serializes connections and rolls back invalid writes
+00:00 +20: loading /Users/phongnguyen/king/test/chain_settlement_browser_test.dart
+00:02 +20: test/chain_settlement_browser_test.dart: market progress and final settlement persist atomically in IndexedDB
+00:02 +21: test/chain_settlement_browser_test.dart: exams progress and final settlement persist atomically in IndexedDB
+00:02 +22: test/chain_settlement_browser_test.dart: haremHarmony progress and final settlement persist atomically in IndexedDB
+00:02 +23: loading /Users/phongnguyen/king/test/challenging_economy_browser_test.dart
+00:04 +23: test/challenging_economy_browser_test.dart: new-profile final settlement survives two-tab replay and reopen
+00:04 +24: loading /Users/phongnguyen/king/test/development_browser_test.dart
+00:06 +24: test/development_browser_test.dart: IndexedDB keeps upgrade capital, frozen chances and crop samples across tabs
+00:06 +25: All tests passed!

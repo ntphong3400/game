@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-01",
+  "rules": "mvp-0.27.0",
+  "content": 24,
+  "seeds": {
+    "first": 1,
+    "last": 100
+  },
+  "capSeasons": 60,
+  "gameSourceSha256": "d1e194255a2800adee5d10cf39442760460d5432f5c8ddc8d65eea7cdc39543f",
+  "policySha256": "7d91313345ef8976be69bda48938a7d83fe30ae0c175652c0283c0f05bfb80f0",
+  "stateChanges": "engine commands only",
+  "baseline": "same engine, challengeBalance false"
+}

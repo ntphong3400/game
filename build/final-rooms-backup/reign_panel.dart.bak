@@ -1,0 +1,572 @@
+import '../../logic/chain_settlement_rules.dart';
+import 'package:flutter/material.dart';
+import '../../data/reign_content.dart';
+import '../../data/expanded_events.dart' show eventEffectText;
+import '../../logic/reign_rules.dart';
+import '../../logic/personality_rules.dart';
+import '../../models/game_state.dart';
+
+typedef ReignCommand =
+    Future<void> Function(String type, String target, String option);
+const _green = Color(0xFF3E5947),
+    _red = Color(0xFFA55F49),
+    _muted = Color(0xFF788076);
+
+class ReignPanel extends StatelessWidget {
+  const ReignPanel({
+    super.key,
+    required this.state,
+    required this.busy,
+    required this.send,
+    this.compact = false,
+    this.onOpen,
+    this.onPetitions,
+  });
+  final GameState state;
+  final bool busy, compact;
+  final ReignCommand send;
+  final VoidCallback? onOpen;
+  final VoidCallback? onPetitions;
+
+  Widget _box(List<Widget> children, {Key? key}) => Container(
+    key: key,
+    width: double.infinity,
+    margin: const EdgeInsets.only(bottom: 16),
+    padding: const EdgeInsets.all(18),
+    decoration: BoxDecoration(
+      color: const Color(0xFFFCFAF5),
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(color: const Color(0xFFE4E3D8)),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: children,
+    ),
+  );
+  Widget _title(String text) => Padding(
+    padding: const EdgeInsets.only(bottom: 8),
+    child: Text(text, style: const TextStyle(fontFamily: 'Lora', fontSize: 19)),
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    final m = state.major;
+    final definition = m == null ? null : majorDefinition(m.kind);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _box([
+          _title('Thế cục · ${reignStageName(state)}'),
+          Text(
+            reignStageHint(state),
+            style: const TextStyle(fontSize: 11, color: _muted),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            m == null
+                ? (state.seasonal
+                    ? 'Đại biến cố sớm nhất ${state.date(state.nextMajorWeek)}. Nghỉ 3–5 mùa trọn vẹn sau tổng kết.'
+                    : 'Đại biến cố tiếp theo dự kiến tuần ${state.nextMajorWeek}. Khoảng nghỉ 4–24 tuần sau mỗi lần kết thúc.')
+                : 'Đang ứng phó một đại biến cố; chưa phát sinh đại biến cố độc lập khác.',
+            style: const TextStyle(fontSize: 11),
+          ),
+          Text(
+            'Thư viện ${majorDefinitions.length} đại biến cố · ưu tiên loại chưa gặp phù hợp tình hình và giãn hai nhóm vừa xuất hiện.',
+            key: const ValueKey('major-catalog-size'),
+            style: const TextStyle(fontSize: 11, color: _muted),
+          ),
+          if (state.heirId.isNotEmpty)
+            Text(
+              'Người kế vị: ${state.court.where((c) => c.id == state.heirId).firstOrNull?.name ?? 'chưa xác định'} · ${heirConditionLabel(state.heirCondition)} · hồ sơ kế vị ${state.successionCertified ? 'đã xác nhận' : 'chưa xác nhận'}.',
+              key: const ValueKey('heir-status'),
+              style: const TextStyle(fontSize: 11),
+            ),
+          for (final c in activeCrises(state))
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(
+                '${crisisNames[c]} · ${state.crisisWeeks[c] ?? 0} ${state.periodName} chưa ứng phó. ${crisisRemedies[c]} '
+                '${state.responsesThisWeek.containsKey(c) ? 'Đã có ứng phó phù hợp ${state.periodName} này.' : 'Tiếp kiến/chấn chỉnh không giải quyết vấn đề này.'}',
+                style: const TextStyle(fontSize: 11, color: _red),
+              ),
+            ),
+        ], key: const ValueKey('reign-situation')),
+        if (m != null && m.petitionDriven)
+          _box([
+            _title('Đại biến cố · ${definition!.title}'),
+            Text(
+              'Đã xử lý ${m.decisions.length}/${m.objectives.length} phần · mức ${m.severity}. '
+              '${m.stage < m.objectives.length && m.objectives[m.stage].working
+                  ? 'Đang chờ kết quả chỉ dụ đã giao; công việc tiếp tục với kinh phí đã cấp.'
+                  : m.dueWeek > state.week
+                  ? 'Bản tấu tiếp theo: ${state.date(m.dueWeek)}.'
+                  : 'Bản tấu đang chờ tại Tấu chương.'}',
+              style: const TextStyle(fontSize: 12),
+            ),
+            const Text(
+              'Mỗi chỉ dụ ảnh hưởng mùa sau. Chi phí lớn; bỏ quá hạn chịu tổn thất ngay và có thể kết thúc triều đại.',
+              style: TextStyle(fontSize: 11, color: _red),
+            ),
+            if (m.decisionLabels.isNotEmpty)
+              Text(
+                'Chỉ dụ trước: ${m.decisionLabels.last}',
+                style: const TextStyle(fontSize: 11),
+              ),
+            if (m.damageTaken.isNotEmpty)
+              Text(
+                'Tổn thất đã xảy ra: ${eventEffectText(m.damageTaken)}.',
+                style: const TextStyle(fontSize: 11, color: _red),
+              ),
+            if (onPetitions != null)
+              TextButton(
+                onPressed: onPetitions,
+                child: const Text('Đến tấu chương →'),
+              ),
+          ], key: const ValueKey('major-petition-summary')),
+        if (m != null && !m.petitionDriven)
+          _box([
+            _title(
+              'Đại biến cố · ${definition!.code.isEmpty ? '' : '${definition.code} · '}${definition.title}',
+            ),
+            Text(
+              majorGroupNames[definition.group]!,
+              style: const TextStyle(fontSize: 11, color: _muted),
+            ),
+            Text(majorBody(state, m), style: const TextStyle(fontSize: 12)),
+            const SizedBox(height: 10),
+            Text(
+              '${m.achieved}/4 mục tiêu · hạn cuối ${state.date(m.deadline)} · còn ${m.deadline - state.week + 1} ${state.periodName} · mức ${m.severity}',
+              key: const ValueKey('major-progress'),
+              style: const TextStyle(color: _red, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 8),
+            LinearProgressIndicator(value: m.achieved / 4, color: _green),
+            const SizedBox(height: 10),
+            Text(
+              'Chuẩn bị ${m.preparedness}/2: giảm ${m.preparedness * 10}% thiệt hại. Đủ 4 mục tiêu sẽ tổng kết sớm, không chờ hết hạn.',
+              style: const TextStyle(fontSize: 11),
+            ),
+            if (!compact) ...[
+              const SizedBox(height: 12),
+              for (final o in m.objectives) _objective(context, m, o),
+              const Divider(),
+              Text(
+                '4/4: ứng phó toàn diện · ${eventEffectText(definition.rewards)}.\n'
+                '3/4: thiệt hại đáng kể · 2/4: nặng · 1/4: rất nặng + dư âm ${state.seasonal ? 1 : 2} ${state.periodName} · 0/4: thảm họa + dư âm ${state.seasonal ? 2 : 4} ${state.periodName}.',
+                style: const TextStyle(fontSize: 11),
+              ),
+              if (definition.successText.isNotEmpty)
+                Text(
+                  'Đạt đủ: ${definition.successText}',
+                  style: const TextStyle(fontSize: 11, color: _green),
+                ),
+              if (definition.failureText.isNotEmpty)
+                Text(
+                  'Bỏ mặc: ${definition.failureText}',
+                  style: const TextStyle(fontSize: 11, color: _red),
+                ),
+              const SizedBox(height: 8),
+              Text(
+                'Nếu chốt theo tiến độ hiện tại (${m.achieved}/4): ${eventEffectText(missionEffects(m))}. '
+                'Mỗi mục tiêu hoàn tất bảo vệ phần tương ứng; chi phí đã cấp không bị trừ lại.',
+                key: const ValueKey('major-projection'),
+                style: const TextStyle(fontSize: 11, color: _red),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Đại biến cố có thể làm chỉ số chạm 0 và kết thúc lượt chơi ngay, kể cả khi trước đó đang ở mức trung bình.',
+                style: TextStyle(fontSize: 11, color: _red),
+              ),
+              if (missionTerminalRisks(state, m).isNotEmpty)
+                Text(
+                  'NGUY CƠ KẾT THÚC LƯỢT: ${missionTerminalRisks(state, m).join('; ')} nếu chốt theo tiến độ và chỉ số hiện tại. Chưa tính diễn biến khác cuối ${state.periodName}.',
+                  key: const ValueKey('major-terminal-warning'),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: _red,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              if (definition.agreement != null)
+                Text(
+                  majorCommitmentHint(definition, state),
+                  style: const TextStyle(fontSize: 11, color: _muted),
+                ),
+              if (m.achieved <= 1 && majorAftermath(m).isNotEmpty)
+                Text(
+                  'Dư âm nếu chốt hiện tại: ${eventEffectText(majorAftermath(m))}/${state.periodName} × ${state.seasonal ? (m.achieved == 0 ? 2 : 1) : (m.achieved == 0 ? 4 : 2)} ${state.periodName} từ sau tổng kết.',
+                  style: const TextStyle(fontSize: 11, color: _red),
+                ),
+            ] else if (onOpen != null)
+              TextButton(
+                onPressed: onOpen,
+                child: const Text('Xem mục tiêu và giao việc →'),
+              ),
+          ], key: const ValueKey('major-mission')),
+        if (state.seasonal && state.chains.isNotEmpty)
+          _box([
+            _title('Chuỗi tấu chương'),
+            for (final arc in state.chains)
+              Text(
+                '${chainDefinitionFor(arc).title}\n'
+                '${usesChainSettlement(arc) ? '${chainSettlementSummary(state, arc)}\n' : ''}'
+                '${arc.dueWeek > state.week ? 'Bản tấu tiếp theo: ${state.date(arc.dueWeek)}.' : 'Có bản tấu đang chờ ngự phê.'}',
+                style: const TextStyle(fontSize: 12),
+              ),
+            if (onPetitions != null)
+              TextButton(
+                onPressed: onPetitions,
+                child: const Text('Đến tấu chương →'),
+              ),
+          ], key: const ValueKey('chain-petition-summary')),
+        if (!state.seasonal &&
+            compact &&
+            state.chains.isNotEmpty &&
+            onOpen != null)
+          _box([
+            Text(
+              'Chuỗi sự kiện: ${chainDefinitionFor(state.chains.first).title}',
+            ),
+            TextButton(
+              onPressed: onOpen,
+              child: const Text('Xem hồ sơ và quyết định →'),
+            ),
+          ]),
+        if (!compact) ...[
+          if (!state.seasonal)
+            for (final arc in state.chains) _chain(context, arc),
+          _box([
+            _title('Giải pháp cứu nguy'),
+            Text(
+              'Thuế tồn còn mức thu cơ bản ${(45 - state.arrearsUses * 6).clamp(15, 45)} tiền. '
+              'Mỗi lần thử tiếp giảm 6, thấp nhất 15; dân vẫn chịu tác động và có thời gian chờ.',
+              style: const TextStyle(fontSize: 11, color: _muted),
+            ),
+            for (final kind in emergencyNames.keys)
+              Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      emergencyHint(state, kind),
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                    OutlinedButton(
+                      key: ValueKey('emergency-$kind'),
+                      onPressed:
+                          busy || emergencyBlocked(state, kind) != null
+                              ? null
+                              : () => _emergency(context, kind),
+                      child: Text(emergencyNames[kind]!),
+                    ),
+                    if (emergencyBlocked(state, kind) != null)
+                      Text(
+                        emergencyBlocked(state, kind)!,
+                        style: const TextStyle(fontSize: 10, color: _muted),
+                      ),
+                  ],
+                ),
+              ),
+          ]),
+          if (state.seasonal)
+            _box([
+              _title('Lịch đại biến cố theo mùa'),
+              for (var i = 0; i < 4; i++)
+                Text(
+                  '${state.date(state.week + i)}: ${majorSeasonHint(seasonNames[(state.completedWeeks + i) % 4])}'
+                  '${state.week + i < state.nextMajorWeek ? ' · đang trong khoảng nghỉ' : ' · có thể phát sinh khi không có đại biến cố đang chạy'}',
+                  style: const TextStyle(fontSize: 11, height: 1.8),
+                ),
+              const Text(
+                'Lịch nêu chủ đề ưu tiên, không bảo đảm một kịch bản cố định. Loại chưa gặp và điều kiện thực tế vẫn được ưu tiên.',
+                style: TextStyle(fontSize: 10, color: _muted),
+              ),
+            ], key: const ValueKey('seasonal-major-calendar')),
+          _box([
+            _title('Nghĩa vụ, nguồn thu và hậu quả kéo dài'),
+            if (state.obligations.isEmpty)
+              const Text(
+                'Chưa có nghĩa vụ đang hiệu lực.',
+                style: TextStyle(fontSize: 12, color: _muted),
+              ),
+            for (final o in state.obligations)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Text(
+                  '${o.title}\nTừ cuối ${state.periodName} ${o.nextWeek} · còn ${o.remaining} kỳ'
+                  '${o.amount > 0 ? ' · chi ${o.amount} tiền/kỳ (tổng còn ${o.amount * o.remaining})' : ''}'
+                  '${o.income > 0 ? ' · thu +${o.income} tiền/kỳ (tổng còn ${o.income * o.remaining})' : ''}'
+                  '${o.effects.isNotEmpty ? '\n${o.kind == 'demand' ? 'Nếu không trả đủ: ' : 'Mỗi kỳ: '}${eventEffectText(o.effects)}' : ''}',
+                  style: const TextStyle(fontSize: 11),
+                ),
+              ),
+            const Text(
+              'Khoản thu/chi được tính trong dự toán và sổ thu chi. Thiếu tiền sẽ ghi nợ; hết thời hạn nghĩa vụ không xóa khoản nợ đã phát sinh.',
+              style: TextStyle(fontSize: 10, color: _muted),
+            ),
+          ], key: const ValueKey('obligations')),
+          if (state.majorHistory.isNotEmpty)
+            _box([
+              _title('Đại biến cố đã qua'),
+              for (final past in state.majorHistory.reversed)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Text(
+                    '${majorDefinition(past.kind).title} · ${state.date(past.openedWeek)}–${state.date(past.resolvedWeek)}\n'
+                    '${past.petitionDriven ? '${past.decisions.length} bản tấu · ${past.achieved} phần bảo vệ đầy đủ' : '${past.achieved}/4'} · ${past.result}'
+                    '${past.petitionDriven ? '\n${past.decisionLabels.join(' → ')}' : ''}',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                ),
+            ]),
+        ],
+      ],
+    );
+  }
+
+  Widget _objective(BuildContext context, MajorMission m, MissionObjective o) {
+    final d = majorDefinition(
+      m.kind,
+    ).objectives.firstWhere((d) => d.key == o.key);
+    final name =
+        state.court.where((c) => c.id == o.officerId).firstOrNull?.name ??
+        'Người phụ trách';
+    final officers = missionOfficers(state, d);
+    final unavailable = majorGoalUnavailable(state, m, d);
+    final blocked =
+        unavailable != null ||
+        state.points < 1 ||
+        state.treasury < missionRemainingCost(missionCost(m, d), o) ||
+        state.grain < missionRemainingCost(missionGrain(m, d), o) ||
+        !officers.any(
+          (c) => state.week + missionDuration(d, c) - 1 <= m.deadline,
+        );
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '${o.done
+                ? '✓'
+                : o.working
+                ? '◷'
+                : '○'} ${d.title}',
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
+          ),
+          if (o.done)
+            Text('Đã hoàn thành', style: TextStyle(color: _green, fontSize: 11))
+          else if (o.working)
+            Text(
+              '$name · nhận kết quả cuối ${state.periodName} ${o.finishWeek}',
+              style: const TextStyle(fontSize: 11),
+            )
+          else ...[
+            if (o.delivered > 0)
+              Text(
+                'Đã nhận ${o.delivered}% khối lượng; cần giao lại phần thiếu.',
+                style: const TextStyle(fontSize: 11, color: _red),
+              ),
+            Text(
+              '${missionRemainingCost(missionCost(m, d), o)} tiền · ${missionRemainingCost(missionGrain(m, d), o)} thóc · 1 hành động · chuyên môn ${d.specialty}${m.demanding ? ', năng lực ≥${missionMinimumAbility(m)}' : ''} · cơ bản ${d.duration} ${state.periodName}',
+              style: const TextStyle(fontSize: 11, color: _muted),
+            ),
+            Text(
+              'Bảo vệ phần thiệt hại: ${eventEffectText(d.damage)} (trước hệ số mức độ).',
+              style: const TextStyle(fontSize: 10, color: _muted),
+            ),
+            OutlinedButton(
+              key: ValueKey('mission-${o.key}'),
+              onPressed: busy || blocked ? null : () => _assign(context, m, d),
+              child: const Text('Chọn quan, giao việc'),
+            ),
+            if (blocked)
+              Text(
+                unavailable ??
+                    'Cần đủ nguồn lực, hành động và một quan rảnh có thể hoàn tất đúng hạn.',
+                style: const TextStyle(fontSize: 10, color: _red),
+              ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Future<void> _assign(
+    BuildContext context,
+    MajorMission m,
+    ObjectiveDefinition d,
+  ) async {
+    final objective = m.objectives.firstWhere((o) => o.key == d.key);
+    final officer = await showDialog<Courtier>(
+      context: context,
+      builder:
+          (ctx) => SimpleDialog(
+            title: Text(d.title),
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Text(
+                  '${m.demanding ? 'Cần năng lực từ ${missionMinimumAbility(m)}/100 và chuyên môn ${d.specialty} hoặc liên quan. ' : ''}Mệt cao kéo dài thời gian. Người phụ trách bận cho tới khi hoàn tất.',
+                  style: const TextStyle(fontSize: 11),
+                ),
+              ),
+              for (final c in missionOfficers(state, d))
+                SimpleDialogOption(
+                  onPressed:
+                      state.week + missionDuration(d, c) - 1 > m.deadline
+                          ? null
+                          : () => Navigator.pop(ctx, c),
+                  child: Text(
+                    '${c.name} · ${c.specialty} · năng lực ${c.ability}\nMệt ${c.strain} · ${missionDuration(d, c)} ${state.periodName} · xong cuối ${state.periodName} ${state.week + missionDuration(d, c) - 1}'
+                    '${state.week + missionDuration(d, c) - 1 > m.deadline ? ' — quá hạn' : ''}\nƯớc tính thành công ${missionAssessment(state, d, c, knownOnly: true).successChance}%\n${personalityWorkHint(state, c)}',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                ),
+            ],
+          ),
+    );
+    if (officer == null || !context.mounted) return;
+    final yes = await showDialog<bool>(
+      context: context,
+      builder:
+          (ctx) => AlertDialog(
+            title: Text('Xác nhận giao nhiệm vụ'),
+            content: Text(
+              '${d.title}\n${officer.name} phụ trách.\nChi ${missionRemainingCost(missionCost(m, d), objective)} tiền, ${missionRemainingCost(missionGrain(m, d), objective)} thóc, 1 hành động. '
+              'Nhận kết quả cuối ${state.periodName} ${state.week + missionDuration(d, officer) - 1}, hạn cuối ${state.date(m.deadline)}. '
+              'Ước tính thành công ${missionAssessment(state, d, officer, knownOnly: true).successChance}%. Quan hệ, tính cách và liêm chính ảnh hưởng kết quả; chỉ tính mục tiêu khi nhận đủ 100% khối lượng. Thất bại hoặc thất thoát có thể cần giao lại trước hạn. '
+              'Nếu người phụ trách qua đời, công việc bị gián đoạn và cần giao lại.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, false),
+                child: const Text('Hủy'),
+              ),
+              FilledButton(
+                key: const ValueKey('confirm-mission'),
+                onPressed: () => Navigator.pop(ctx, true),
+                child: const Text('Xác nhận giao việc'),
+              ),
+            ],
+          ),
+    );
+    if (yes == true) await send('mission', d.key, officer.id);
+  }
+
+  Widget _chain(BuildContext context, StoryArc arc) {
+    final d = chainDefinitionFor(arc),
+        stage = chainDefinitionFor(arc).stages[arc.stage];
+    final ready = arc.dueWeek <= state.week;
+    return _box([
+      _title('Chuỗi · ${d.title}'),
+      Text('Giai đoạn ${arc.stage + 1}/3 · ${stage.title}'),
+      if (arc.decisions.isNotEmpty)
+        Text(
+          'Lựa chọn trước: ${arc.decisions.map((i) => i + 1).join(' → ')}. '
+          'Mỗi giai đoạn trước bị bỏ mặc làm mất thêm 3 ${arc.kind == 'border' ? 'quân lực' : 'lòng dân'} khi khép lại.',
+          style: const TextStyle(fontSize: 11, color: _muted),
+        ),
+      if (!ready)
+        Text(
+          'Hồ sơ đang được xử lý. Tiếp tục từ ${state.periodName} ${arc.dueWeek}.',
+          style: const TextStyle(fontSize: 12),
+        )
+      else ...[
+        Text(
+          '${stage.body}\nHạn cuối ${state.periodName} ${arc.dueWeek + (state.seasonal ? 1 : 2)}; quá hạn áp dụng phương án cuối.',
+          style: const TextStyle(fontSize: 12),
+        ),
+        if (arc.kind == 'embezzlement')
+          const Text(
+            'Điều tra công khai từ đầu đến cuối và xử theo chứng cứ: thu hồi thêm 30 tiền, uy quyền +2. Nhờ thế gia ở đầu chuỗi: khi khép lại phe thế gia −4.',
+            style: TextStyle(fontSize: 11, color: _muted),
+          ),
+        if (arc.kind == 'border')
+          const Text(
+            'Cử sứ giả, đàm phán bình đẳng rồi ký hiệp ước: giảm thêm chiến tranh 1.',
+            style: TextStyle(fontSize: 11, color: _muted),
+          ),
+        if (arc.kind == 'granary')
+          const Text(
+            'Kiểm kê từ đầu rồi cấp giống ở cuối: có thêm 10 thóc.',
+            style: TextStyle(fontSize: 11, color: _muted),
+          ),
+        for (var i = 0; i < stage.choices.length; i++)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: OutlinedButton(
+              key: ValueKey('chain-${arc.id}-$i'),
+              onPressed:
+                  busy ||
+                          state.points < stage.choices[i].points ||
+                          state.treasury < stage.choices[i].cost ||
+                          state.grain < stage.choices[i].grainCost
+                      ? null
+                      : () => _chooseChain(context, arc, i),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '${stage.choices[i].label}\n${stage.choices[i].hint}',
+                  style: const TextStyle(fontSize: 11),
+                ),
+              ),
+            ),
+          ),
+      ],
+    ], key: ValueKey('chain-${arc.id}'));
+  }
+
+  Future<void> _chooseChain(
+    BuildContext context,
+    StoryArc arc,
+    int index,
+  ) async {
+    final choice = chainDefinitionFor(arc).stages[arc.stage].choices[index];
+    final yes = await showDialog<bool>(
+      context: context,
+      builder:
+          (ctx) => AlertDialog(
+            title: Text(choice.label),
+            content: Text(
+              '${choice.hint}\nQuyết định được lưu và ảnh hưởng các giai đoạn sau.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, false),
+                child: const Text('Đọc sau'),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.pop(ctx, true),
+                child: const Text('Xác nhận quyết định'),
+              ),
+            ],
+          ),
+    );
+    if (yes == true) await send('chain', arc.id, '$index');
+  }
+
+  Future<void> _emergency(BuildContext context, String kind) async {
+    final yes = await showDialog<bool>(
+      context: context,
+      builder:
+          (ctx) => AlertDialog(
+            title: Text(emergencyNames[kind]!),
+            content: Text(emergencyHint(state, kind)),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, false),
+                child: const Text('Hủy'),
+              ),
+              FilledButton(
+                key: const ValueKey('confirm-emergency'),
+                onPressed: () => Navigator.pop(ctx, true),
+                child: const Text('Ban lệnh'),
+              ),
+            ],
+          ),
+    );
+    if (yes == true) await send('emergency', kind, '');
+  }
+}

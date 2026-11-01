@@ -1,0 +1,16 @@
+Computing fixes in lib...
+Applying fixes...
+
+game/logic/court_personnel_engine.dart
+  curly_braces_in_flow_control_structures - 3 fixes
+
+game/logic/court_personnel_rules.dart
+  curly_braces_in_flow_control_structures - 3 fixes
+
+game/logic/game_engine.dart
+  curly_braces_in_flow_control_structures - 1 fix
+
+game/presentation/widgets/petition_decision.dart
+  curly_braces_in_flow_control_structures - 1 fix
+
+8 fixes made in 4 files.

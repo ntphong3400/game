@@ -1,0 +1,17 @@
+{
+  "results": [
+    "No save -> intro -> start -> requested character",
+    "Court and harem aliases redirect to persisted UUIDs without an extra browser history entry",
+    "In-app navigation + browser Back/Forward preserve the document and correct screens",
+    "Reload restores character URL and page",
+    "All 45 active-game section URLs open directly",
+    "Regional character origin survives reload",
+    "Missing IDs, wrong roster, and legacy hash bookmarks resolve safely",
+    "Unknown URL has a working recovery action",
+    "Offline reload restores a previously loaded character path",
+    "IndexedDB game archive remains byte-for-byte unchanged after navigation and reloads",
+    "A legacy IndexedDB save migrates once, changes only identity metadata, and retains UUIDs on reload",
+    "A new reign has new UUIDs; an old UUID cannot accidentally open its new officeholder"
+  ],
+  "errors": []
+}

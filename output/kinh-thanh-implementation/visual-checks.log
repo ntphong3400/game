@@ -1,0 +1,118 @@
+00:00 +0: loading /Users/phongnguyen/king/tools/capital_visual_test.dart
+00:00 +0: render capital at Size(1440.0, 900.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The value of a painting debug variable was changed by the test.
+
+When the exception was thrown, this was the stack:
+#0      debugAssertAllPaintingVarsUnset.<anonymous closure> (package:flutter/src/painting/debug.dart:203:7)
+#1      debugAssertAllPaintingVarsUnset (package:flutter/src/painting/debug.dart:206:4)
+#2      TestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1116:7)
+#3      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1588:11)
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1083:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  render capital at Size(1440.0, 900.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -1: render capital at Size(1440.0, 900.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render capital at Size(1440.0, 900.0)
+  
+00:00 +0 -1: render capital at Size(1024.0, 768.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The value of a painting debug variable was changed by the test.
+
+When the exception was thrown, this was the stack:
+#0      debugAssertAllPaintingVarsUnset.<anonymous closure> (package:flutter/src/painting/debug.dart:203:7)
+#1      debugAssertAllPaintingVarsUnset (package:flutter/src/painting/debug.dart:206:4)
+#2      TestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1116:7)
+#3      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1588:11)
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1083:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  render capital at Size(1024.0, 768.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -2: render capital at Size(1024.0, 768.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render capital at Size(1024.0, 768.0)
+  
+00:01 +0 -2: render capital at Size(844.0, 390.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The value of a painting debug variable was changed by the test.
+
+When the exception was thrown, this was the stack:
+#0      debugAssertAllPaintingVarsUnset.<anonymous closure> (package:flutter/src/painting/debug.dart:203:7)
+#1      debugAssertAllPaintingVarsUnset (package:flutter/src/painting/debug.dart:206:4)
+#2      TestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1116:7)
+#3      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1588:11)
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1083:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  render capital at Size(844.0, 390.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -3: render capital at Size(844.0, 390.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render capital at Size(844.0, 390.0)
+  
+00:01 +0 -3: render capital at Size(390.0, 844.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 2.0 pixels on the right.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/tools/capital_visual_test.dart:80:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/tools/capital_visual_test.dart line 80
+The test description was:
+  render capital at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -4: render capital at Size(390.0, 844.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render capital at Size(390.0, 844.0)
+  
+00:01 +0 -4: render capital at Size(320.0, 568.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 2.0 pixels on the right.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/tools/capital_visual_test.dart:80:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/tools/capital_visual_test.dart line 80
+The test description was:
+  render capital at Size(320.0, 568.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -5: render capital at Size(320.0, 568.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render capital at Size(320.0, 568.0)
+  
+00:01 +0 -5: Some tests failed.

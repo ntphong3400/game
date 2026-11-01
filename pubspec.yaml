@@ -1,0 +1,65 @@
+name: van_tue
+description: "Vạn Tuế — mô phỏng trị vì theo mùa, xử lý FE và lưu local."
+publish_to: 'none'
+version: 0.27.1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  go_router: ^17.0.0
+  idb_shim: ^2.6.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/imperial/
+    - assets/images/petitions/
+    - assets/images/kingdom/
+    - assets/images/citadel-landscape.webp
+    - assets/images/giang-son-map.webp
+    - assets/images/kinh-thanh-watercolor-v2.webp
+    - assets/images/dia-phuong-watercolor.webp
+    - assets/images/frontier-watercolor.webp
+    - assets/images/frontier-north-watercolor.webp
+    - assets/images/frontier-west-watercolor.webp
+    - assets/images/country-north-watercolor.webp
+    - assets/images/country-west-watercolor.webp
+    - assets/images/country-south-watercolor.webp
+    - assets/images/court-interior.webp
+    - assets/images/treasury-interior.webp
+    - assets/images/harem-interior.webp
+    - assets/images/people-interior.webp
+    - assets/images/health-interior.webp
+    - assets/images/portraits/
+    - assets/images/meetings/
+    - assets/images/court-room.webp
+    - assets/images/treasury-room.webp
+    - assets/images/harem-room.webp
+    - assets/images/people-room.webp
+    - assets/images/health-room.webp
+    - assets/images/treasury-objects.webp
+    - assets/images/journal-room.webp
+    - assets/images/scores-room.webp
+    - assets/images/kingdom-room.webp
+  fonts:
+    - family: BeVietnam
+      fonts:
+        - asset: assets/fonts/BeVietnamPro-Regular.ttf
+        - asset: assets/fonts/BeVietnamPro-SemiBold.ttf
+          weight: 600
+    - family: Lora
+      fonts:
+        - asset: assets/fonts/Lora.ttf
+    - family: Charm
+      fonts:
+        - asset: assets/fonts/Charm-Regular.ttf

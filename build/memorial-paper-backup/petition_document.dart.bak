@@ -1,0 +1,214 @@
+import 'package:flutter/material.dart';
+import 'imperial_theme.dart';
+import 'petition_art.dart';
+
+/// A memorial is opened by selecting the paper, never approved from this list.
+class PetitionDocument extends StatelessWidget {
+  const PetitionDocument({
+    super.key,
+    required this.readKey,
+    required this.title,
+    required this.category,
+    required this.deadline,
+    required this.selected,
+    required this.urgent,
+    required this.onOpen,
+  });
+  final Key readKey;
+  final String title, category, deadline;
+  final bool selected, urgent;
+  final VoidCallback? onOpen;
+
+  @override
+  Widget build(BuildContext context) => Semantics(
+    button: true,
+    selected: selected,
+    enabled: onOpen != null,
+    onTap: onOpen,
+    label: 'Bản tấu: $title. $category. $deadline. Chờ ngự phê.',
+    child: Padding(
+      padding: const EdgeInsets.only(right: 3, bottom: 5),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: const Color(0xFFE8D7B6),
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x39704719),
+              offset: Offset(2, 4),
+              blurRadius: 5,
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 2, bottom: 3),
+          child: Material(
+            color: const Color(0xFFF8EED5),
+            clipBehavior: Clip.antiAlias,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4),
+              side: BorderSide(
+                color:
+                    selected
+                        ? const Color(0xFFAF9256)
+                        : const Color(0xFFCCB481),
+              ),
+            ),
+            child: Ink(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xFFFFF8E7), Color(0xFFF0E0B9)],
+                ),
+                image: DecorationImage(
+                  image: AssetImage('assets/images/imperial/parchment.webp'),
+                  fit: BoxFit.cover,
+                  opacity: .35,
+                ),
+              ),
+              child: InkWell(
+                key: readKey,
+                onTap: onOpen,
+                excludeFromSemantics: true,
+                child: ExcludeSemantics(
+                  child: IntrinsicHeight(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          width: 10,
+                          margin: const EdgeInsets.fromLTRB(5, 6, 0, 6),
+                          decoration: BoxDecoration(
+                            color: selected ? forest : Colors.transparent,
+                            border:
+                                selected
+                                    ? const Border.symmetric(
+                                      vertical: BorderSide(color: gold),
+                                    )
+                                    : null,
+                          ),
+                          child:
+                              selected
+                                  ? const Center(
+                                    child: Icon(
+                                      Icons.filter_vintage_outlined,
+                                      size: 9,
+                                      color: Color(0xFFD9B873),
+                                    ),
+                                  )
+                                  : null,
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(6, 13, 12, 12),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: 54,
+                                  height: 111,
+                                  child: PetitionPainting(
+                                    category: category,
+                                    thumbnail: true,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        selected
+                                            ? 'ĐANG NGỰ LÃM'
+                                            : 'KÍNH TRÌNH',
+                                        style: TextStyle(
+                                          fontFamily: 'BeVietnam',
+                                          fontSize: 9,
+                                          letterSpacing: 1,
+                                          fontWeight: FontWeight.w600,
+                                          color: selected ? forest : muted,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 7),
+                                      Text(
+                                        title,
+                                        style: const TextStyle(
+                                          fontFamily: 'Lora',
+                                          fontSize: 16,
+                                          height: 1.45,
+                                          color: ink,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Text(
+                                        category,
+                                        style: const TextStyle(
+                                          fontSize: 11,
+                                          color: muted,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 12),
+                                      Wrap(
+                                        spacing: 10,
+                                        runSpacing: 8,
+                                        crossAxisAlignment:
+                                            WrapCrossAlignment.center,
+                                        children: [
+                                          Text(
+                                            deadline,
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              color:
+                                                  urgent ? terracotta : muted,
+                                            ),
+                                          ),
+                                          const _MemorialSeal(),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+class _MemorialSeal extends StatelessWidget {
+  const _MemorialSeal();
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(2),
+    decoration: BoxDecoration(
+      border: Border.all(color: terracotta.withValues(alpha: .8)),
+    ),
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+      decoration: BoxDecoration(
+        border: Border.all(color: terracotta.withValues(alpha: .5)),
+      ),
+      child: const Text(
+        'CHỜ\nNGỰ PHÊ',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontFamily: 'Lora',
+          fontSize: 9,
+          height: 1.2,
+          fontWeight: FontWeight.w600,
+          color: terracotta,
+        ),
+      ),
+    ),
+  );
+}

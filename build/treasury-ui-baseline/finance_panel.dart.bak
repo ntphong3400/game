@@ -1,0 +1,353 @@
+import 'package:flutter/material.dart';
+import '../../models/game_state.dart';
+import '../../logic/finance_rules.dart';
+import 'imperial_theme.dart';
+import 'imperial_room.dart';
+
+class FinancePanel extends StatefulWidget {
+  const FinancePanel({super.key, required this.state, this.flat = false});
+  final GameState state;
+  final bool flat;
+  @override
+  State<FinancePanel> createState() => _FinancePanelState();
+}
+
+class _FinancePanelState extends State<FinancePanel> {
+  int? selectedWeek;
+  @override
+  Widget build(BuildContext context) {
+    final s = widget.state;
+    final reports = s.financialWeeks;
+    final selected =
+        reports.where((w) => w.week == selectedWeek).firstOrNull ??
+        reports.lastOrNull;
+    final forecast = BudgetProjection(s);
+    final actual = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'ĐÃ PHÁT SINH',
+          style: TextStyle(fontSize: 10, letterSpacing: 1.6, color: gold),
+        ),
+        const SizedBox(height: 12),
+
+        Text(
+          'Sổ thu chi ngân khố',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(height: 10),
+        Wrap(
+          spacing: 20,
+          runSpacing: 8,
+          children: [
+            Text(
+              'Ngân khố hiện tại: ${s.treasury} tiền',
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+            Text('Nợ hiện tại: ${s.debt} tiền'),
+          ],
+        ),
+        const SizedBox(height: 16),
+        if (selected == null) ...[
+          const Text(
+            'Chưa có sổ chi tiết cho bản lưu này. Các khoản sẽ được ghi từ hành động tiếp theo; thu/chi trước đó không được dựng lại.',
+            style: TextStyle(fontSize: 12),
+          ),
+          if (s.completedWeeks > 0)
+            Text(
+              'Số tổng cũ của kỳ thường lệ gần nhất: thu ${s.lastIncome}, thực chi ${s.lastExpense}; chưa gồm nhiệm vụ và sự kiện.',
+              style: const TextStyle(fontSize: 11),
+            ),
+        ] else ...[
+          DropdownButtonFormField<int>(
+            key: const ValueKey('finance-week-selector'),
+            value: selected.week,
+            isExpanded: true,
+            decoration: InputDecoration(
+              labelText: 'Xem sổ tiền theo ${s.periodName}',
+              isDense: true,
+            ),
+            items: [
+              for (final report in reports.reversed)
+                DropdownMenuItem(
+                  value: report.week,
+                  child: Text(
+                    '${s.seasonal ? s.date(report.week) : '${s.periodTitle} ${report.week}'} · ${report.closed ? 'đã chốt' : 'đang ghi'}',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                ),
+            ],
+            onChanged: (value) => setState(() => selectedWeek = value),
+          ),
+          const SizedBox(height: 16),
+          Wrap(
+            spacing: 20,
+            runSpacing: 8,
+            children: [
+              Text(
+                'Tổng thu: +${selected.income}',
+                key: const ValueKey('finance-total-income'),
+              ),
+              Text(
+                'Thực chi: −${selected.expense}',
+                key: const ValueKey('finance-total-expense'),
+              ),
+              Text('Nợ phát sinh: +${selected.newDebt}'),
+              Text('Nợ giảm: −${selected.debtReduction}'),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(
+            '${selected.partial ? 'Số dư lúc bắt đầu ghi' : 'Ngân khố đầu ${s.periodName}'} ${selected.openingBalance} + thu ${selected.income} − chi ${selected.expense} = ${selected.closed ? 'cuối ${s.periodName}' : 'đang có'} ${selected.closingBalance}.',
+            key: const ValueKey('finance-reconciliation'),
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
+          Text(
+            'Nợ ${selected.openingDebt} + phát sinh ${selected.newDebt} − giảm ${selected.debtReduction} = ${selected.closingDebt}.',
+            style: const TextStyle(fontSize: 11),
+          ),
+          if (selected.partial)
+            Padding(
+              padding: EdgeInsets.only(top: 8),
+              child: Text(
+                '${s.periodTitle} này chỉ ghi từ lúc cập nhật game. Các khoản đã xảy ra trước đó chưa có dữ liệu chi tiết.',
+                style: TextStyle(fontSize: 11, color: Color(0xFFA55F49)),
+              ),
+            ),
+          if (selected.entries.isEmpty)
+            Padding(
+              padding: EdgeInsets.only(top: 12),
+              child: Text(
+                '${s.periodTitle} này chưa có khoản tiền nào phát sinh.',
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+          if (selected.entries.isNotEmpty)
+            ExpansionTile(
+              key: ValueKey('finance-entries-${selected.week}'),
+              tilePadding: EdgeInsets.zero,
+              childrenPadding: EdgeInsets.zero,
+              initiallyExpanded: true,
+              title: Text(
+                'Chi tiết thu/chi ${s.date(selected.week)} (${selected.entries.length} khoản)',
+                style: const TextStyle(fontSize: 13),
+              ),
+              children: [for (final entry in selected.entries) _entry(entry)],
+            ),
+        ],
+      ],
+    );
+    final plan = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'KẾ HOẠCH & DỰ TOÁN',
+          style: TextStyle(fontSize: 10, letterSpacing: 1.6, color: gold),
+        ),
+        const SizedBox(height: 12),
+
+        if (s.seasonal) ...[
+          Text(
+            'Thuế vụ Thu — kế hoạch thu năm',
+            key: const ValueKey('annual-tax-plan'),
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+          ),
+          Text(taxPolicyHint(s), style: const TextStyle(fontSize: 11)),
+          Text(
+            'Tạm tính kỳ ${s.date(s.nextTaxTurn)}: +${annualTaxRevenue(s, year: s.nextTaxYear)} tiền, theo lòng dân hiện tại. '
+            '${s.autumnTaxDue ? 'Khoản này có trong dự toán cuối mùa Thu bên dưới.' : 'Không có thuế trong dự toán mùa này; số dự kiến chưa được cộng vào ngân khố.'}',
+            key: const ValueKey('annual-tax-estimate'),
+            style: const TextStyle(fontSize: 11),
+          ),
+          const SizedBox(height: 12),
+        ],
+        ExpansionTile(
+          key: const ValueKey('finance-projection'),
+          tilePadding: EdgeInsets.zero,
+          childrenPadding: EdgeInsets.zero,
+          title: Text(
+            'Dự toán thường lệ cuối ${s.date(s.week)}',
+            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+          ),
+          subtitle: Text(
+            'Thu +${forecast.totalIncome} · nghĩa vụ chi ${forecast.requiredExpense} · trả nợ dự kiến ${forecast.repayment}',
+            style: const TextStyle(fontSize: 11),
+          ),
+          children: [
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'NGUỒN THU THƯỜNG LỆ',
+                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600),
+              ),
+            ),
+            for (final item in forecast.income)
+              _line(item.title, '+${item.amount}', item.detail),
+            const SizedBox(height: 8),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'CHI THƯỜNG LỆ THEO THỨ TỰ ƯU TIÊN',
+                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600),
+              ),
+            ),
+            for (var i = 0; i < forecast.expenses.length; i++)
+              _line(
+                forecast.expenses[i].title,
+                '${forecast.expenses[i].amount}',
+                '${forecast.expenses[i].detail} Dự kiến trả ${forecast.payable[i]}/${forecast.expenses[i].amount}; thiếu ${forecast.expenses[i].amount - forecast.payable[i]}.',
+                warning: forecast.payable[i] < forecast.expenses[i].amount,
+              ),
+            _line(
+              'Trả nợ chi trả',
+              '${forecast.repayment}',
+              'Sau chi thường lệ, trả tối đa 10 tiền nợ/${s.periodName} và giữ lại ít nhất 20 tiền trong ngân khố.',
+            ),
+            const SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Nếu chỉ tính thường lệ: ${s.treasury} + ${forecast.totalIncome} − ${forecast.paidExpense} = ${forecast.closingBalance} tiền; nợ còn ${forecast.closingDebt}.',
+                style: const TextStyle(fontSize: 12),
+              ),
+            ),
+            if (forecast.shortfall > 0)
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Thiếu ${forecast.shortfall} tiền chi thường lệ sẽ thành nợ và gây mất chỉ số ở khoản không được trả đủ.',
+                  style: TextStyle(color: Color(0xFFA55F49), fontSize: 12),
+                ),
+              ),
+            const SizedBox(height: 10),
+            const Text(
+              'Đây là dự toán theo tình hình hiện tại, chưa ghi vào ngân khố. Quyết định, tấu chương quá hạn, công việc và sự kiện đến hạn có thể làm thay đổi số thực tế. Chi bằng thóc không tính thành chi tiền.',
+              style: TextStyle(fontSize: 11),
+            ),
+            const SizedBox(height: 10),
+          ],
+        ),
+      ],
+    );
+    if (widget.flat) {
+      return Row(
+        key: const ValueKey('finance-ledger-book'),
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(child: RoomPane(child: actual)),
+          const VerticalDivider(color: gold, width: 1),
+          Expanded(child: RoomPane(child: plan)),
+        ],
+      );
+    }
+    return Container(
+      key: const ValueKey('finance-ledger-book'),
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: paper,
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: line),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x14000000),
+            blurRadius: 18,
+            offset: Offset(0, 6),
+          ),
+        ],
+      ),
+      child: LayoutBuilder(
+        builder:
+            (context, bounds) =>
+                bounds.maxWidth < 760
+                    ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [actual, const Divider(height: 32), plan],
+                    )
+                    : Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(child: actual),
+                        Container(
+                          width: 2,
+                          height: 360,
+                          margin: const EdgeInsets.symmetric(horizontal: 24),
+                          color: line,
+                        ),
+                        Expanded(child: plan),
+                      ],
+                    ),
+      ),
+    );
+  }
+
+  Widget _entry(FinanceEntry e) {
+    final label =
+        e.amount > 0
+            ? '+${e.amount}'
+            : e.amount < 0
+            ? '−${-e.amount}'
+            : e.debtChange > 0
+            ? (e.requiredAmount > 0 ? 'Chưa trả' : 'Nợ tăng')
+            : e.debtChange < 0
+            ? 'Nợ giảm'
+            : '0';
+    final payment =
+        e.requiredAmount > 0
+            ? '\nCần trả ${e.requiredAmount} · đã chi ${-e.amount} · chưa trả ${e.requiredAmount + e.amount}.'
+            : '';
+    final debt =
+        e.debtChange == 0
+            ? ''
+            : '\nNợ ${e.debtChange > 0 ? '+' : ''}${e.debtChange}.';
+    return _line(
+      e.title,
+      label,
+      widget.state.calendarText(
+        '${e.detail}$payment$debt\nNgân khố sau khoản này: ${e.balanceAfter}; nợ: ${e.debtAfter}.',
+      ),
+      warning: e.debtChange > 0,
+    );
+  }
+
+  Widget _line(
+    String title,
+    String amount,
+    String detail, {
+    bool warning = false,
+  }) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 9),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Text(
+                title,
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Flexible(
+              child: Text(
+                amount,
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: warning ? Color(0xFFA55F49) : Color(0xFF3E5947),
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Text(
+          detail,
+          style: TextStyle(fontSize: 11, height: 1.6, color: Color(0xFF788076)),
+        ),
+      ],
+    ),
+  );
+}

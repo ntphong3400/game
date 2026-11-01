@@ -1,0 +1,89 @@
+00:00 +0: loading /Users/phongnguyen/king/test/treasury_layout_ui_test.dart
+00:00 +0: /Users/phongnguyen/king/test/treasury_layout_ui_test.dart: treasury dossiers stay reachable and ledger scrolls independently at Size(1440.0, 900.0) scale=1.0
+00:00 +1: /Users/phongnguyen/king/test/treasury_layout_ui_test.dart: treasury dossiers stay reachable and ledger scrolls independently at Size(1440.0, 900.0) scale=1.0
+00:01 +2: /Users/phongnguyen/king/test/treasury_layout_ui_test.dart: treasury dossiers stay reachable and ledger scrolls independently at Size(1440.0, 900.0) scale=1.0
+00:01 +3: /Users/phongnguyen/king/test/treasury_layout_ui_test.dart: treasury dossiers stay reachable and ledger scrolls independently at Size(1440.0, 900.0) scale=1.0
+00:01 +4: /Users/phongnguyen/king/test/treasury_layout_ui_test.dart: treasury dossiers stay reachable and ledger scrolls independently at Size(1440.0, 900.0) scale=1.0
+00:01 +5: /Users/phongnguyen/king/test/finance_ui_test.dart: ledger compares current cash and forecast, historical periods exclude forecast at Size(1440.0, 1000.0)
+00:01 +6: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:01 +7: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:01 +8: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:01 +9: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +10: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +11: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +12: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +13: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'OutlinedButton' is not a subtype of type 'IconButton' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:804:44)
+#1      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:89:25)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +13 -1: /Users/phongnguyen/king/test/seasonal_ui_test.dart: seasonal dashboard, focused national affairs, all opening petitions work at Size(390.0, 844.0)
+00:02 +13 -1: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0) [E]
+  Test failed. See exception logs above.
+  The test description was: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+  
+00:02 +14 -1: /Users/phongnguyen/king/test/seasonal_ui_test.dart: seasonal dashboard, focused national affairs, all opening petitions work at Size(390.0, 844.0)
+00:02 +15 -1: /Users/phongnguyen/king/test/seasonal_ui_test.dart: seasonal dashboard, focused national affairs, all opening petitions work at Size(390.0, 844.0)
+00:02 +16 -1: /Users/phongnguyen/king/test/seasonal_ui_test.dart: seasonal dashboard, focused national affairs, all opening petitions work at Size(390.0, 844.0)
+00:02 +17 -1: /Users/phongnguyen/king/test/citadel_hub_test.dart: existing seasonal save opens in citadel and returns from treasury
+00:02 +18 -1: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(1440.0, 1000.0)
+00:02 +19 -1: /Users/phongnguyen/king/test/treasury_layout_ui_test.dart: treasury dossiers stay reachable and ledger scrolls independently at Size(760.0, 600.0) scale=1.0
+00:02 +20 -1: /Users/phongnguyen/king/test/citadel_hub_test.dart: existing weekly save opens in citadel and returns from treasury
+00:02 +21 -1: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:02 +22 -1: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:02 +23 -1: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:03 +24 -1: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:03 +25 -1: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:03 +26 -1: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:03 +27 -1: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:03 +28 -1: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:03 +29 -1: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'OutlinedButton' is not a subtype of type 'IconButton' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:804:44)
+#1      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:89:25)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +29 -2: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0) [E]
+  Test failed. See exception logs above.
+  The test description was: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+  
+00:03 +29 -2: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(390.0, 844.0)
+00:04 +30 -2: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0)
+00:04 +31 -2: /Users/phongnguyen/king/test/game_ui_test.dart: national work shows fit, chance, reward and risk before committing
+00:04 +32 -2: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(1440.0, 1000.0)
+00:05 +33 -2: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)
+00:06 +34 -2: /Users/phongnguyen/king/test/game_ui_test.dart: complete a run, show score and recover ending from storage
+00:06 +35 -2: /Users/phongnguyen/king/test/game_ui_test.dart: old rules scores remain viewable separately from current scores
+00:06 +36 -2: /Users/phongnguyen/king/test/game_ui_test.dart: critical court warning leads to a saved collapse ending on mobile
+00:06 +37 -2: /Users/phongnguyen/king/test/game_ui_test.dart: authority warning leads to a saved puppet ending on mobile
+00:06 +38 -2: /Users/phongnguyen/king/test/game_ui_test.dart: all five zero-stat warnings fit on mobile while recovery remains possible
+00:06 +39 -2: /Users/phongnguyen/king/test/game_ui_test.dart: long assassination explanation fits mobile before the time summary
+00:06 +40 -2: /Users/phongnguyen/king/test/game_ui_test.dart: seasonal recommendation accepts the named tú nữ without palace admission
+00:06 +41 -2: Some tests failed.

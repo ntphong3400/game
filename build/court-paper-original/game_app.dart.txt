@@ -1,0 +1,3851 @@
+import 'package:flutter/material.dart';
+import 'widgets/imperial_dialog.dart';
+import '../../app/game_controller.dart';
+import '../data/content.dart';
+import '../data/reign_content.dart' show majorDefinition;
+import '../models/game_state.dart';
+import '../logic/personnel_rules.dart';
+import 'widgets/palace_art.dart';
+import 'widgets/treasury_panel.dart';
+import 'widgets/outcome_panel.dart';
+import 'widgets/kingdom_panel.dart';
+import '../logic/reign_rules.dart';
+import '../logic/harem_rules.dart';
+import '../logic/palace_rules.dart';
+import '../logic/petition_assignment_rules.dart';
+import '../logic/health_rules.dart';
+import '../logic/chain_settlement_rules.dart';
+import 'widgets/palace_panel.dart';
+import 'widgets/citadel_hub.dart';
+import 'widgets/imperial_widgets.dart';
+import 'widgets/imperial_assets.dart';
+import 'widgets/imperial_room.dart';
+import 'widgets/imperial_theme.dart';
+import 'widgets/petition_decision.dart';
+import 'widgets/petition_document.dart';
+import 'widgets/petition_art.dart';
+import 'widgets/memorial_paper.dart';
+import 'outcome_read_store.dart';
+export 'widgets/imperial_theme.dart';
+
+class GameApp extends StatelessWidget {
+  const GameApp({
+    super.key,
+    required this.controller,
+    this.initialRoute = 'citadel',
+    this.outcomeReadStore,
+  });
+  final GameController controller;
+  final OutcomeReadStore? outcomeReadStore;
+
+  /// Starting section; existing section tests can open their subject directly.
+  final String initialRoute;
+  @override
+  Widget build(BuildContext context) => MaterialApp(
+    title: 'Vạn Tuế — Một đời đế vương',
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      useMaterial3: true,
+      fontFamily: 'BeVietnam',
+      scaffoldBackgroundColor: parchment,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: forest,
+        primary: forest,
+        surface: paper,
+        onSurface: ink,
+      ),
+      textTheme: const TextTheme(
+        bodyMedium: TextStyle(fontSize: 13, height: 1.65, color: ink),
+        bodySmall: TextStyle(fontSize: 11, height: 1.65, color: muted),
+      ),
+      dividerColor: line,
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: forest,
+          foregroundColor: paper,
+          minimumSize: const Size(0, 46),
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 15),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: forest,
+          side: const BorderSide(color: line),
+          minimumSize: const Size(0, 44),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: paper,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: line),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: line),
+        ),
+      ),
+      snackBarTheme: SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: ink,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+      dialogTheme: DialogTheme(
+        backgroundColor: paper,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+    ),
+    home: GameShell(
+      controller: controller,
+      initialRoute: initialRoute,
+      outcomeReadStore: outcomeReadStore,
+    ),
+  );
+}
+
+class GameShell extends StatefulWidget {
+  const GameShell({
+    super.key,
+    required this.controller,
+    this.initialRoute = 'citadel',
+    this.outcomeReadStore,
+  });
+  final GameController controller;
+  final OutcomeReadStore? outcomeReadStore;
+  final String initialRoute;
+  @override
+  State<GameShell> createState() => _GameShellState();
+}
+
+class _GameShellState extends State<GameShell> {
+  late String route = widget.initialRoute;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  GameController get controller => widget.controller;
+  GameState get s => controller.state!;
+  bool get busy => controller.busy;
+  final scrollController = ScrollController();
+  final courtReadingController = ScrollController();
+  final courtSearch = TextEditingController();
+  final haremSearch = TextEditingController();
+  String courtCategory = 'Tất cả', haremCategory = 'Tất cả';
+  String courtFaction = 'Tất cả', haremFaction = 'Tất cả';
+  String scoreRules = rulesVersion;
+  String? acknowledgedEnding;
+  String? selectedPetitionId, approvedPetitionTitle;
+  bool petitionDialogOpen = false;
+  bool personDialogOpen = false;
+  bool palaceManagementOpen = false;
+  String? selectedOfficialId, selectedConsortId;
+  String courtAvailability = 'Tất cả', haremAvailability = 'Tất cả';
+  bool courtListView = false, haremListView = false;
+  String? selectedCareId;
+  int selectedChronicleIndex = 0;
+  late final _outcomeReadStore = widget.outcomeReadStore ?? OutcomeReadStore();
+  String? _outcomeReadRun;
+  bool _outcomeReadReady = false;
+  final _readOutcomeIds = <String>{};
+  static const navigation = <(String, IconData, String)>[
+    ('citadel', Icons.castle_outlined, 'Hoàng thành'),
+    ('court', Icons.account_balance_outlined, 'Triều chính'),
+    ('kingdom', Icons.landscape_outlined, 'Quốc sự'),
+    ('treasury', Icons.toll_outlined, 'Ngân khố'),
+    ('people', Icons.groups_outlined, 'Triều thần'),
+    ('harem', Icons.local_florist_outlined, 'Hậu cung'),
+    ('health', Icons.favorite_border, 'Long thể'),
+    ('journal', Icons.menu_book_outlined, 'Sử ký'),
+    ('scores', Icons.emoji_events_outlined, 'Bảng xếp hạng'),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    controller.addListener(_loadOutcomeReadState);
+    _loadOutcomeReadState();
+  }
+
+  @override
+  void didUpdateWidget(covariant GameShell oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.controller != controller) {
+      oldWidget.controller.removeListener(_loadOutcomeReadState);
+      controller.addListener(_loadOutcomeReadState);
+      _outcomeReadRun = null;
+      _loadOutcomeReadState();
+    }
+  }
+
+  void _loadOutcomeReadState() {
+    final run = controller.state?.runId;
+    if (run == _outcomeReadRun) return;
+    _outcomeReadRun = run;
+    _outcomeReadReady = false;
+    _readOutcomeIds.clear();
+    if (run == null) return;
+    _outcomeReadStore.read(run).then((ids) {
+      if (!mounted || _outcomeReadRun != run) return;
+      setState(() {
+        _readOutcomeIds.addAll(ids);
+        _outcomeReadReady = true;
+      });
+    });
+  }
+
+  Future<void> _viewOutcomeReports(List<OutcomeReport> reports) async {
+    final run = s.runId;
+    await showOutcomeReports(context, reports, seasonal: s.seasonal);
+    if (!mounted || controller.state?.runId != run) return;
+    final ids = reports.map((r) => r.id).toSet();
+    setState(() => _readOutcomeIds.addAll(ids));
+    await _outcomeReadStore.markRead(run, ids);
+  }
+
+  @override
+  void dispose() {
+    controller.removeListener(_loadOutcomeReadState);
+    scrollController.dispose();
+    courtReadingController.dispose();
+    courtSearch.dispose();
+    haremSearch.dispose();
+    super.dispose();
+  }
+
+  void navigate(String value) {
+    setState(() {
+      route = value;
+      palaceManagementOpen = false;
+    });
+    if (scrollController.hasClients) scrollController.jumpTo(0);
+  }
+
+  Future<bool> act(
+    String type, {
+    String target = '',
+    String option = '',
+    String assigneeId = '',
+  }) async {
+    final previousOutcomes = controller.state?.outcomes.length ?? 0;
+    final ok = await controller.act(
+      type,
+      target: target,
+      option: option,
+      assigneeId: assigneeId,
+    );
+    if (!mounted) return ok;
+    final messenger = ScaffoldMessenger.of(context);
+    messenger.hideCurrentSnackBar();
+    if (!ok) {
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            s.calendarText(controller.error ?? 'Chưa thực hiện được.'),
+          ),
+        ),
+      );
+    } else if (type != 'endWeek' && !s.ended) {
+      messenger.showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 2),
+          content: Row(
+            children: [
+              Icon(Icons.check_circle_outline, color: Colors.white, size: 18),
+              const SizedBox(width: 10),
+              Expanded(child: Text(s.journal.first.title)),
+            ],
+          ),
+        ),
+      );
+    }
+    if (ok && s.outcomes.length > previousOutcomes) {
+      await _viewOutcomeReports(s.outcomes.skip(previousOutcomes).toList());
+    }
+    return ok;
+  }
+
+  Future<void> startDialog() async {
+    final name = TextEditingController(
+      text: controller.state?.playerName ?? '',
+    );
+    final form = GlobalKey<FormState>();
+    final result = await showDialog<String>(
+      context: context,
+      builder:
+          (context) => ImperialAlertDialog(
+            title: const Text(
+              'Một triều đại mới',
+              style: TextStyle(fontFamily: 'Lora'),
+            ),
+            content: SizedBox(
+              width: 380,
+              child: Form(
+                key: form,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Mười tám tuổi, bạn nhận ngọc tỷ. Từ hôm nay, vận mệnh giang sơn nằm trong từng quyết định.',
+                    ),
+                    const SizedBox(height: 22),
+                    TextFormField(
+                      controller: name,
+                      autofocus: true,
+                      maxLength: 32,
+                      decoration: const InputDecoration(
+                        labelText: 'Tên người chơi',
+                        hintText: 'Bạn muốn được ghi tên thế nào?',
+                      ),
+                      validator:
+                          (value) =>
+                              value == null || value.trim().isEmpty
+                                  ? 'Vui lòng nhập tên người chơi.'
+                                  : null,
+                      onFieldSubmitted: (_) {
+                        if (form.currentState!.validate()) {
+                          Navigator.pop(context, name.text.trim());
+                        }
+                      },
+                    ),
+                    if (controller.state != null && !s.ended)
+                      const Text(
+                        'Bắt đầu lại sẽ thay lượt đang chơi. Lượt bị bỏ không được ghi thành tích.',
+                        style: TextStyle(color: terracotta, fontSize: 12),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Để sau'),
+              ),
+              FilledButton(
+                onPressed: () {
+                  if (form.currentState!.validate()) {
+                    Navigator.pop(context, name.text.trim());
+                  }
+                },
+                child: const Text('Nhận ngọc tỷ'),
+              ),
+            ],
+          ),
+    );
+    // A dialog can still be unmounting during its reverse animation.
+    Future<void>.delayed(const Duration(milliseconds: 500), name.dispose);
+    if (result == null || !mounted) return;
+    final ok = await controller.start(result);
+    if (!mounted) return;
+    if (ok) {
+      navigate('citadel');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(controller.error ?? 'Không thể bắt đầu lượt mới.'),
+        ),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => AnimatedBuilder(
+    animation: controller,
+    builder: (context, _) {
+      if (controller.loading) {
+        return const Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Crest(size: 56),
+                SizedBox(height: 24),
+                CircularProgressIndicator(strokeWidth: 2),
+              ],
+            ),
+          ),
+        );
+      }
+      if (route == 'home' || (controller.state == null && route != 'scores')) {
+        return _landing();
+      }
+      if (controller.state?.ended == true && route != 'scores') {
+        return acknowledgedEnding == s.runId ? _ending() : _endingReason();
+      }
+      if (route == 'citadel') {
+        return Scaffold(
+          key: scaffoldKey,
+          backgroundColor: const Color(0xFF142D28),
+          drawer: Drawer(backgroundColor: paper, child: _sidebar()),
+          body: CitadelHub(
+            state: s,
+            busy: busy,
+            onNavigate: navigate,
+            onMenu: () => scaffoldKey.currentState?.openDrawer(),
+            onEndTurn: _nextWeek,
+            onOvertime: _overtimeDialog,
+          ),
+        );
+      }
+      if ([
+        'court',
+        'treasury',
+        'people',
+        'harem',
+        'health',
+        'kingdom',
+        'journal',
+        'scores',
+      ].contains(route)) {
+        return _roomShell();
+      }
+      return LayoutBuilder(
+        builder: (context, constraints) {
+          final desktop = constraints.maxWidth >= 1050;
+          return Scaffold(
+            key: scaffoldKey,
+            drawer:
+                desktop
+                    ? null
+                    : Drawer(backgroundColor: paper, child: _sidebar()),
+            body: Row(
+              children: [
+                if (desktop) SizedBox(width: 184, child: _sidebar()),
+                Expanded(
+                  child: Column(
+                    children: [
+                      _toolbar(desktop),
+                      if (busy) const LinearProgressIndicator(minHeight: 2),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          controller: scrollController,
+                          padding: EdgeInsets.all(desktop ? 24 : 16),
+                          child: Center(
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(maxWidth: 1320),
+                              child: _page(),
+                            ),
+                          ),
+                        ),
+                      ),
+                      if (controller.state != null &&
+                          !s.ended &&
+                          route != 'scores')
+                        _weekbar(desktop),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    },
+  );
+
+  Widget _roomShell() => ImperialRoomScope(
+    child: Theme(
+      data: roomTheme(context),
+      child: Builder(
+        builder:
+            (context) => LayoutBuilder(
+              builder: (context, bounds) {
+                final desktop = bounds.maxWidth >= 1050;
+                final title = switch (route) {
+                  'court' => 'Giang sơn trong tay người',
+                  'treasury' =>
+                    desktop ? 'Hộ bộ · Sổ tiền và kho lương' : 'Hộ bộ',
+                  'people' => 'Những người bên ngai vàng',
+                  'kingdom' => 'Điện nghị sự',
+                  'journal' => 'Sử quán',
+                  'scores' => 'Điện lưu danh',
+                  'harem' =>
+                    palaceManagementOpen ? 'Học tập & cung vụ' : 'Sau rèm châu',
+                  _ => 'Long thể & nhịp sống',
+                };
+                return Scaffold(
+                  key: scaffoldKey,
+                  backgroundColor: imperialDeep,
+                  drawer:
+                      desktop
+                          ? null
+                          : Drawer(
+                            backgroundColor: imperialDeep,
+                            child: _sidebar(),
+                          ),
+                  body: SafeArea(
+                    child: Column(
+                      children: [
+                        if (controller.state == null)
+                          _archiveHud(desktop)
+                        else
+                          RoomHud(
+                            state: s,
+                            desktop: desktop,
+                            onMenu:
+                                () => scaffoldKey.currentState?.openDrawer(),
+                            onHome: () => navigate('citadel'),
+                            onNavigate: navigate,
+                          ),
+                        if (busy)
+                          const LinearProgressIndicator(
+                            minHeight: 2,
+                            color: imperialGold,
+                            backgroundColor: imperialDeep,
+                          ),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              if (desktop)
+                                RoomRail(
+                                  entries: navigation,
+                                  active: route,
+                                  onNavigate: navigate,
+                                ),
+                              Expanded(
+                                child: RoomStage(
+                                  scene: route,
+                                  title: title,
+                                  fitViewport:
+                                      route == 'kingdom' || route == 'treasury',
+                                  focusContent:
+                                      route == 'court' ||
+                                      route == 'kingdom' ||
+                                      route == 'treasury',
+                                  compactHeaderHeight:
+                                      (route == 'kingdom' ||
+                                              route == 'treasury')
+                                          ? 48 *
+                                              MediaQuery.textScalerOf(
+                                                context,
+                                              ).scale(17) /
+                                              17
+                                          : null,
+                                  controller: scrollController,
+                                  child: _page(),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        if (controller.state != null &&
+                            !s.ended &&
+                            route != 'scores')
+                          _weekbar(desktop),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+      ),
+    ),
+  );
+
+  Widget _archiveHud(bool desktop) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+    decoration: const BoxDecoration(
+      color: imperialDeep,
+      border: Border(bottom: BorderSide(color: imperialGold)),
+    ),
+    child: Row(
+      children: [
+        if (!desktop)
+          IconButton(
+            tooltip: 'Mở danh mục',
+            onPressed: () => scaffoldKey.currentState?.openDrawer(),
+            icon: const Icon(Icons.menu, color: imperialGold),
+          ),
+        IconButton(
+          tooltip: 'Về trang chính',
+          onPressed: () => navigate('home'),
+          icon: const Icon(Icons.castle_outlined, color: imperialGold),
+        ),
+        const Expanded(
+          child: Text(
+            'VẠN TUẾ · ĐIỆN LƯU DANH',
+            style: TextStyle(
+              fontFamily: 'Lora',
+              fontSize: 18,
+              color: imperialIvory,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+
+  Widget _sidebar() => Container(
+    decoration: const BoxDecoration(
+      color: imperialDeep,
+      border: Border(right: BorderSide(color: line)),
+    ),
+    child: SafeArea(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 28),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              InkWell(
+                onTap: () => navigate('home'),
+                borderRadius: BorderRadius.circular(8),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    children: [
+                      Crest(size: 38),
+                      SizedBox(width: 12),
+                      Expanded(
+                        child: FittedBox(
+                          alignment: Alignment.centerLeft,
+                          fit: BoxFit.scaleDown,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'VẠN TUẾ',
+                                style: TextStyle(
+                                  fontFamily: 'Lora',
+                                  fontSize: 19,
+                                  color: imperialIvory,
+                                  letterSpacing: 2,
+                                ),
+                              ),
+                              Text(
+                                'MỘT ĐỜI ĐẾ VƯƠNG',
+                                style: TextStyle(
+                                  fontSize: 7,
+                                  color: imperialGold,
+                                  letterSpacing: 1.6,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 44),
+              const Padding(
+                padding: EdgeInsets.only(left: 13, bottom: 14),
+                child: Text(
+                  'CHỐN HOÀNG THÀNH',
+                  style: TextStyle(
+                    fontSize: 9,
+                    color: imperialGold,
+                    letterSpacing: 1.6,
+                  ),
+                ),
+              ),
+              ...navigation.map((item) {
+                final selected = route == item.$1;
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Material(
+                    color: selected ? imperialJade : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                    child: InkWell(
+                      key: ValueKey('nav-${item.$1}'),
+                      borderRadius: BorderRadius.circular(8),
+                      onTap: () {
+                        if (scaffoldKey.currentState?.isDrawerOpen == true) {
+                          Navigator.pop(context);
+                        }
+                        navigate(item.$1);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 13,
+                          vertical: 14,
+                        ),
+                        child: Row(
+                          children: [
+                            ImperialIcon(item.$1, size: 34),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                item.$3,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight:
+                                      selected
+                                          ? FontWeight.w600
+                                          : FontWeight.normal,
+                                  color:
+                                      selected ? imperialIvory : imperialGold,
+                                ),
+                              ),
+                            ),
+                            if (item.$1 == 'court' &&
+                                controller.state != null &&
+                                s.petitions.isNotEmpty)
+                              Badge.count(
+                                count: s.petitions.length,
+                                backgroundColor: gold,
+                                textColor: paper,
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }),
+              const SizedBox(height: 24),
+              Container(
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: imperialJade,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.spa_outlined, color: imperialGold, size: 22),
+                    SizedBox(height: 10),
+                    Text(
+                      'Giữ nước, giữ lòng người.\nVà giữ cả chính mình.',
+                      style: TextStyle(
+                        fontFamily: 'Lora',
+                        color: imperialIvory,
+                        fontSize: 12,
+                        height: 1.7,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 18),
+              const Row(
+                children: [
+                  Icon(Icons.check_circle_outline, size: 13, color: forest),
+                  SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      'Tự lưu trên thiết bị',
+                      style: TextStyle(fontSize: 10, color: imperialGold),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 5),
+              Text(
+                'BẢN CHƠI THỬ  ·  ${rulesVersion.replaceFirst('mvp-', '')}',
+                style: const TextStyle(
+                  fontSize: 8,
+                  color: imperialGold,
+                  letterSpacing: 1.5,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+
+  Widget _toolbar(bool desktop) =>
+      controller.state == null
+          ? _legacyToolbar(desktop)
+          : ImperialStatusBar(
+            state: s,
+            title: navigation.firstWhere((n) => n.$1 == route).$3,
+            desktop: desktop,
+            onMenu: () => scaffoldKey.currentState?.openDrawer(),
+            onHome: () => navigate('citadel'),
+            onNavigate: navigate,
+          );
+
+  Widget _legacyToolbar(bool desktop) => Container(
+    height: 78,
+    padding: EdgeInsets.symmetric(horizontal: desktop ? 32 : 12),
+    decoration: BoxDecoration(border: Border(bottom: BorderSide(color: line))),
+    child: Row(
+      children: [
+        if (desktop)
+          IconButton(
+            tooltip: 'Về Hoàng thành',
+            onPressed: () => navigate('citadel'),
+            icon: const Icon(Icons.castle_outlined, color: forest),
+          ),
+        if (!desktop)
+          IconButton(
+            tooltip: 'Mở danh mục',
+            onPressed: () => scaffoldKey.currentState?.openDrawer(),
+            icon: const Icon(Icons.menu),
+          ),
+        Expanded(
+          child: Text(
+            desktop
+                ? 'HOÀNG THÀNH   /   ${navigation.firstWhere((n) => n.$1 == route).$3.toUpperCase()}'
+                : 'VẠN TUẾ',
+            style: TextStyle(fontSize: 10, color: muted, letterSpacing: 1.5),
+          ),
+        ),
+        if (controller.state != null) ...[
+          if (desktop)
+            Text(
+              'THIÊN HÒA NĂM ${s.year}',
+              style: TextStyle(fontSize: 10, color: gold, letterSpacing: 1.2),
+            ),
+          const SizedBox(width: 20),
+          ClipOval(
+            child: CharacterPortrait(
+              emperor: true,
+              emperorAge: s.age,
+              width: 34,
+              height: 34,
+            ),
+          ),
+          const SizedBox(width: 9),
+          Text(s.playerName, style: const TextStyle(fontSize: 12)),
+        ] else
+          TextButton(
+            onPressed: () => navigate('home'),
+            child: const Text('Về trang chính'),
+          ),
+      ],
+    ),
+  );
+
+  Widget _page() => switch (route) {
+    'scores' => _scores(),
+    'kingdom' => _kingdom(),
+    'treasury' => _treasury(),
+    'people' => _people(false),
+    'harem' => _people(true),
+    'health' => _health(),
+    'journal' => _journal(),
+    _ => _dashboard(),
+  };
+
+  Widget _heading(String title, String subtitle, {Widget? trailing}) => Padding(
+    padding: const EdgeInsets.only(bottom: 26),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(fontFamily: 'Lora', fontSize: 30, height: 1.3),
+              ),
+              const SizedBox(height: 8),
+              Text(subtitle, style: TextStyle(color: muted, fontSize: 12)),
+            ],
+          ),
+        ),
+        if (trailing != null) trailing,
+      ],
+    ),
+  );
+
+  Widget _dashboard() => ImperialWorkspace(padding: 8, child: _courtDesk());
+
+  Widget _courtAlert(String key, String message, String destination) => Padding(
+    padding: const EdgeInsets.only(bottom: 8),
+    child: TextButton.icon(
+      onPressed: () => navigate(destination),
+      style: TextButton.styleFrom(
+        foregroundColor: terracotta,
+        alignment: Alignment.centerLeft,
+      ),
+      icon: const Icon(Icons.warning_amber_outlined, size: 18),
+      label: Text(
+        message,
+        key: ValueKey(key),
+        style: const TextStyle(fontSize: 12, height: 1.6),
+      ),
+    ),
+  );
+
+  Widget _courtNotices() {
+    final unread =
+        s.outcomes.where((r) => !_readOutcomeIds.contains(r.id)).toList();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (_outcomeReadReady && unread.isNotEmpty)
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton.icon(
+              key: const ValueKey('open-outcomes'),
+              onPressed: () => _viewOutcomeReports(unread),
+              icon: const Icon(Icons.assignment_turned_in_outlined, size: 18),
+              label: Text('Kết quả mới (${unread.length})'),
+            ),
+          ),
+        if (s.stability <= 20)
+          _courtAlert(
+            'court-collapse-warning',
+            'Ổn định triều đình ${s.stability}/100. Về 0 sẽ bị phế truất. Đến Quốc sự để ứng phó.',
+            'kingdom',
+          ),
+        if (s.authority <= 20)
+          _courtAlert(
+            'authority-zero-warning',
+            'Uy quyền ${s.authority}/100. Về 0 sẽ trở thành bù nhìn. Đến Quốc sự để ứng phó.',
+            'kingdom',
+          ),
+        if (s.people <= 20)
+          _courtAlert(
+            'people-zero-warning',
+            'Lòng dân ${s.people}/100. Về 0 sẽ bị lật đổ. Đến Quốc sự để ứng phó.',
+            'kingdom',
+          ),
+        if (s.army <= 20)
+          _courtAlert(
+            'army-zero-warning',
+            'Quân lực ${s.army}/100. Về 0 sẽ mất ngôi hoặc mất nước. Đến Quốc sự để ứng phó.',
+            'kingdom',
+          ),
+        if (s.health <= 20)
+          _courtAlert(
+            'health-zero-warning',
+            'Sức khỏe ${s.health}/100. Về 0 sẽ băng hà. Đến Long thể để chăm sóc.',
+            'health',
+          )
+        else if (s.fatigue > 55 || s.stress > 55 || s.indulgence > 5)
+          _courtAlert(
+            'court-health-warning',
+            'Cần chăm sóc long thể. Đến Long thể để xem tình trạng và dưỡng sức.',
+            'health',
+          ),
+        if (s.affairsThisWeek == 0)
+          _courtAlert(
+            'neglect-warning',
+            'Chưa xử lý việc nước ${s.periodName} này. Khép ${s.periodName} ngay sẽ giảm uy quyền, ổn định và lòng dân. Đến Quốc sự để xử lý.',
+            'kingdom',
+          ),
+        if (s.major != null)
+          _courtAlert(
+            'court-major-warning',
+            'Đang ứng phó ${majorDefinition(s.major!.kind).title}. '
+                '${s.major!.petitionDriven ? 'Ngự phê phương án tại Tấu chương.' : 'Đến Quốc sự để củng cố nguồn lực.'}',
+            s.major!.petitionDriven ? 'court' : 'kingdom',
+          ),
+      ],
+    );
+  }
+
+  Widget _courtDone() => Padding(
+    key: const ValueKey('court-complete'),
+    padding: const EdgeInsets.symmetric(vertical: 28),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Icon(Icons.check_circle_outline, color: forest, size: 32),
+        const SizedBox(height: 14),
+        Text(
+          'Đã xử lý hết tấu chương ${s.periodName} này.',
+          style: const TextStyle(fontFamily: 'Lora', fontSize: 22),
+        ),
+        const SizedBox(height: 18),
+        Wrap(
+          spacing: 12,
+          runSpacing: 10,
+          children: [
+            FilledButton(
+              key: const ValueKey('court-to-kingdom'),
+              onPressed: () => navigate('kingdom'),
+              child: const Text('Đến Quốc sự'),
+            ),
+            OutlinedButton(
+              key: const ValueKey('court-to-citadel'),
+              onPressed: () => navigate('citadel'),
+              child: const Text('Về Hoàng thành'),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+
+  Widget _courtDesk() => LayoutBuilder(
+    builder: (context, bounds) {
+      if (bounds.maxWidth < 700) {
+        return RoomPane(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Ngự thư phòng',
+                style: TextStyle(fontFamily: 'Lora', fontSize: 26),
+              ),
+              _courtNotices(),
+              if (s.petitions.isEmpty) _courtDone() else _petitions(),
+            ],
+          ),
+        );
+      }
+      final petition =
+          s.petitions.where((p) => p.id == selectedPetitionId).firstOrNull ??
+          (approvedPetitionTitle == null ? s.petitions.firstOrNull : null);
+      return Row(
+        key: const ValueKey('petition-desk'),
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(
+            width: (bounds.maxWidth * .31).clamp(250.0, 350.0),
+            child: RoomPane(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [_petitions(compact: true)],
+              ),
+            ),
+          ),
+          const VerticalDivider(color: gold, width: 1),
+          Expanded(
+            child: RoomPane(
+              controller: courtReadingController,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [_courtNotices(), _courtReading(petition)],
+              ),
+            ),
+          ),
+        ],
+      );
+    },
+  );
+
+  Widget _courtReading(Petition? petition) => Column(
+    key: const ValueKey('court-reading'),
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      if (s.petitions.isEmpty)
+        _courtDone()
+      else if (petition != null) ...[
+        LayoutBuilder(
+          builder:
+              (context, bounds) => SizedBox(
+                height: (bounds.maxWidth / 4.8).clamp(120.0, 130.0),
+                width: double.infinity,
+                child: PetitionPainting(
+                  category: eventForState(s, petition.definitionId).category,
+                ),
+              ),
+        ),
+        const SizedBox(height: 4),
+        Wrap(
+          spacing: 12,
+          runSpacing: 8,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Icon(
+              petitionCategoryIcon(
+                eventForState(s, petition.definitionId).category,
+              ),
+              color: forest,
+              size: 22,
+            ),
+            Text(
+              eventForState(s, petition.definitionId).category.toUpperCase(),
+              style: const TextStyle(
+                fontSize: 11,
+                letterSpacing: 1,
+                color: forest,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Text(
+              petition.deadline <= s.week
+                  ? 'Hạn: cuối ${s.periodName} này'
+                  : 'Còn ${petition.deadline - s.week + 1} ${s.periodName}',
+              style: const TextStyle(color: terracotta, fontSize: 12),
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        Text(
+          eventForState(s, petition.definitionId).title,
+          style: const TextStyle(
+            fontFamily: 'Lora',
+            fontSize: 26,
+            height: 1.35,
+            color: forest,
+          ),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          s.authoredText(petitionText(petition, s)),
+          style: const TextStyle(fontSize: 14, height: 1.7),
+        ),
+        if (!petitionDialogOpen) ...[
+          const SizedBox(height: 10),
+          const PetitionRule(),
+          const SizedBox(height: 6),
+          PetitionDecision(
+            key: ValueKey('desk-decision-${petition.id}'),
+            state: s,
+            petition: petition,
+            busy: busy,
+            pickAssignee: _choosePetitionAssignee,
+            onReadLater:
+                () => setState(() {
+                  selectedPetitionId = null;
+                  approvedPetitionTitle = '';
+                }),
+            onConfirm:
+                (index, assignee) =>
+                    _approvePetition(petition, index, assignee),
+          ),
+        ],
+      ] else if (approvedPetitionTitle?.isNotEmpty == true) ...[
+        const SizedBox(height: 30),
+        Center(
+          child: const ApprovedMemorialSeal(key: ValueKey('approval-seal')),
+        ),
+        const SizedBox(height: 20),
+        Text(
+          approvedPetitionTitle!,
+          style: const TextStyle(fontFamily: 'Lora', fontSize: 20),
+        ),
+      ] else
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 40),
+          child: Text(
+            'Chọn một bản tấu để ngự lãm.',
+            style: TextStyle(color: muted, fontSize: 15),
+          ),
+        ),
+    ],
+  );
+
+  Widget _section(String title, {Widget? trailing}) => Padding(
+    padding: const EdgeInsets.only(bottom: 13),
+    child: Row(
+      children: [
+        Expanded(
+          child: Text(
+            title,
+            style: const TextStyle(fontFamily: 'Lora', fontSize: 18),
+          ),
+        ),
+        if (trailing != null) trailing,
+      ],
+    ),
+  );
+
+  Widget _outcomeSummary() {
+    final latestWeek = s.outcomes.last.week;
+    final latest = s.outcomes.where((r) => r.week == latestWeek).toList();
+    return Padding(
+      padding: const EdgeInsets.only(top: 16),
+      child: Surface(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Cuối ${s.periodName} $latestWeek: ${latest.length} kết quả đã nhận',
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              latest
+                  .map((r) => '${r.title}: ${r.statusLabel.toLowerCase()}')
+                  .join(' · '),
+              style: const TextStyle(fontSize: 11, color: muted),
+            ),
+            TextButton.icon(
+              key: const ValueKey('open-outcomes'),
+              onPressed: () => _viewOutcomeReports(latest),
+              icon: const Icon(Icons.assignment_turned_in_outlined, size: 16),
+              label: const Text('Xem kết quả'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _petitions({bool compact = false}) {
+    final petitions = [...s.petitions]..sort((a, b) {
+      int priority(Petition p) =>
+          p.storyKind == 'major'
+              ? 0
+              : p.isStory
+              ? 1
+              : 2;
+      final order = priority(a).compareTo(priority(b));
+      return order != 0 ? order : a.deadline.compareTo(b.deadline);
+    });
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _section(
+          compact
+              ? 'Tấu chương'
+              : s.seasonal
+              ? 'Tấu chương mùa ${s.season}'
+              : 'Tấu chương trong tuần',
+          trailing: Tag('${s.petitions.length} CHỜ'),
+        ),
+        if (s.seasonal && !compact)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Text(
+              '${s.actionsPerTurn} hành động mỗi mùa · 4–6 tấu chương · trình đầy đủ ngay đầu mùa.',
+              style: const TextStyle(fontSize: 10, color: muted),
+            ),
+          ),
+        if (petitions.isEmpty)
+          const Text(
+            'Không còn tấu chờ xử lý.',
+            style: TextStyle(color: muted),
+          ),
+        for (final p in petitions)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: PetitionDocument(
+              key: ValueKey('petition-card-${p.id}'),
+              readKey: ValueKey('read-petition-${p.id}'),
+              title: eventForState(s, p.definitionId).title,
+              category: eventForState(s, p.definitionId).category,
+              deadline:
+                  p.deadline <= s.week
+                      ? 'Hạn: cuối ${s.periodName} này'
+                      : 'Còn ${p.deadline - s.week + 1} ${s.periodName}',
+              urgent:
+                  p.deadline <= s.week ||
+                  p.storyKind == 'major' ||
+                  [
+                    'Khủng hoảng',
+                    'Âm mưu',
+                  ].contains(eventForState(s, p.definitionId).category),
+              selected:
+                  compact &&
+                  (selectedPetitionId == p.id ||
+                      (selectedPetitionId == null &&
+                          approvedPetitionTitle == null &&
+                          s.petitions.firstOrNull?.id == p.id)),
+              onOpen:
+                  busy
+                      ? null
+                      : () {
+                        if (compact) {
+                          setState(() {
+                            selectedPetitionId = p.id;
+                            approvedPetitionTitle = null;
+                          });
+                          if (courtReadingController.hasClients) {
+                            courtReadingController.jumpTo(0);
+                          }
+                        } else {
+                          _petitionDialog(p);
+                        }
+                      },
+            ),
+          ),
+      ],
+    );
+  }
+
+  String _petitionExpiryText(Petition p) {
+    final e = eventForState(s, p.definitionId);
+    final arc = s.chains.where((a) => a.id == p.storyId).firstOrNull;
+    if (arc != null && usesChainSettlement(arc)) {
+      return '${e.title}\nDừng ở ${arc.completedSteps}/4 và quyết toán: ${chainSettlementRewardText(s, arc)}';
+    }
+    return '${e.title}\n${e.choices.last.label}: ${e.choices.last.hint}';
+  }
+
+  Future<void> _petitionDialog(Petition petition) async {
+    setState(() => petitionDialogOpen = true);
+    final choice = await showDialog<(int, String)>(
+      context: context,
+      builder:
+          (dialogContext) => PetitionDecision(
+            state: s,
+            petition: petition,
+            inDialog: true,
+            busy: busy,
+            pickAssignee: _choosePetitionAssignee,
+            onReadLater: () => Navigator.pop(dialogContext),
+            onConfirm: (index, assignee) async {
+              Navigator.pop(dialogContext, (index, assignee));
+              return true;
+            },
+          ),
+    );
+    if (!mounted) return;
+    setState(() => petitionDialogOpen = false);
+    if (choice != null) await _approvePetition(petition, choice.$1, choice.$2);
+  }
+
+  Future<bool> _approvePetition(
+    Petition petition,
+    int index,
+    String assignee,
+  ) async {
+    final title = eventForState(s, petition.definitionId).title;
+    final ok = await act(
+      'petition',
+      target: petition.id,
+      option: index < 0 ? 'abandon' : '$index',
+      assigneeId: assignee,
+    );
+    if (ok && mounted) {
+      setState(() {
+        selectedPetitionId = null;
+        approvedPetitionTitle = title;
+      });
+    }
+    return ok;
+  }
+
+  Future<String?> _choosePetitionAssignee(
+    EventDefinition e,
+    EventChoice c,
+  ) => showDialog<String>(
+    context: context,
+    builder:
+        (context) => ImperialSimpleDialog(
+          title: const Text('Chọn người xử lý tấu chương'),
+          children: [
+            ImperialDialogOption(
+              key: const ValueKey('petition-unassigned'),
+              onPressed: () => Navigator.pop(context, ''),
+              child: Text('Không giao ai xử lý · ${petitionBaseChance(c)}%'),
+            ),
+            if (petitionAssignees(s, e, c).isEmpty)
+              const Padding(
+                padding: EdgeInsets.all(24),
+                child: Text(
+                  'Chưa có triều thần hoặc người trong hậu cung đủ điều kiện và đang rảnh.',
+                ),
+              ),
+            for (final p in petitionAssignees(s, e, c))
+              ImperialDialogOption(
+                key: ValueKey('petition-person-${p.id}'),
+                leading: CharacterPortrait(person: p, width: 42, height: 56),
+                onPressed: () => Navigator.pop(context, p.id),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 7),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('${p.name} · ${p.displayRole}'),
+                      Text(
+                        '${p.specialty} · năng lực ${p.ability} · mệt ${p.strain} · bất mãn ${p.discontent}\n${petitionChance(s, e, c, p)}% thành công',
+                        style: const TextStyle(fontSize: 11, color: muted),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+          ],
+        ),
+  );
+
+  IconData _actionIcon(String key) => switch (key) {
+    'court' => Icons.account_balance_outlined,
+    'people' => Icons.volunteer_activism_outlined,
+    'army' => Icons.shield_outlined,
+    'levee' => Icons.water_outlined,
+    'grain' => Icons.grass_outlined,
+    'health' => Icons.spa_outlined,
+    'revel' => Icons.music_note_outlined,
+    'security' => Icons.security_outlined,
+    'treasury' => Icons.savings_outlined,
+    _ => Icons.public_outlined,
+  };
+
+  String _actionDescription(ActionDefinition a) => s.authoredText(
+    (a.id == 'treat'
+            ? treatmentActionDescription(
+              s,
+              baseCost: a.cost,
+              cost: actionCost(s, a),
+            )
+            : null) ??
+        revenueTaskBlocked(s, a.id) ??
+        (a.id == 'security' ? securityBlocked(s) : null) ??
+        careActionDescription(s, a.id) ??
+        seasonalActionDescription(s, a.id) ??
+        a.description,
+  );
+
+  String? _actionBlocked(ActionDefinition a) {
+    if (busy) return 'Đang xử lý lệnh trước.';
+    if (s.points < 1) return 'Cần 1 hành động.';
+    if (s.treasury < actionCost(s, a)) return 'Không đủ ngân khố.';
+    if (s.grain < a.grainCost) return 'Không đủ lương thực.';
+    final reason =
+        revenueTaskBlocked(s, a.id) ??
+        (a.id == 'security' ? securityBlocked(s) : null);
+    if (reason != null) return reason;
+    if (a.id == 'mediate' && (s.actionCounts[a.id] ?? 0) > 0) {
+      return 'Đã hòa giải các phe trong ${s.periodName} này.';
+    }
+    return null;
+  }
+
+  Widget _actionRow(ActionDefinition a) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8),
+    child: Row(
+      children: [
+        Container(
+          width: 37,
+          height: 37,
+          decoration: BoxDecoration(
+            color: parchment,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(_actionIcon(a.icon), size: 19, color: forest),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                a.title,
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(height: 3),
+              Text(
+                _actionDescription(a),
+                style: const TextStyle(fontSize: 11, color: muted),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 6),
+        IconButton(
+          key: ValueKey('action-${a.id}'),
+          tooltip: a.title,
+          onPressed: _actionBlocked(a) == null ? () => _performAction(a) : null,
+          icon: const Icon(Icons.arrow_outward, size: 18),
+          color: forest,
+        ),
+      ],
+    ),
+  );
+
+  EdgeInsets _personnelDialogInsets(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
+    return EdgeInsets.symmetric(
+      horizontal: width > 760 ? (width - 680) / 2 : 24,
+      vertical: 24,
+    );
+  }
+
+  Future<void> _performAction(ActionDefinition a) async {
+    String officer = '';
+    if (taskSpecialties.containsKey(a.id)) {
+      final result = await showDialog<String>(
+        context: context,
+        builder:
+            (context) => ImperialSimpleDialog(
+              insetPadding: _personnelDialogInsets(context),
+              title: Text(
+                'Giao ai phụ trách ${a.title.toLowerCase()}?',
+                style: TextStyle(fontFamily: 'Lora'),
+              ),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Surface(
+                    padding: 14,
+                    child: Text(
+                      '${_actionDescription(a)}\n\nCần chuyên môn ${taskSpecialties[a.id]}. Ước tính dựa trên năng lực, chuyên môn, mệt mỏi, quan hệ và tính cách đã biết. Phẩm chất chưa rõ có thể đổi kết quả; thành công không được bảo đảm. Người đang làm công việc dài hạn không có trong danh sách. ${taskFailureHint(a.id)}',
+                      style: const TextStyle(fontSize: 12, height: 1.7),
+                    ),
+                  ),
+                ),
+                ...taskOfficers(s, a.id).map(
+                  (c) => ImperialDialogOption(
+                    key: ValueKey('assign-${a.id}-${c.id}'),
+                    leading: CharacterPortrait(
+                      person: c,
+                      width: 42,
+                      height: 56,
+                    ),
+                    onPressed: () => Navigator.pop(context, c.id),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 7),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${c.name} · ${c.displayRole}',
+                            style: const TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            'Năng lực ${c.ability} · ${c.specialty} · mệt ${c.strain}/100\n${personalityWorkHint(s, c)}',
+                            style: const TextStyle(fontSize: 12),
+                          ),
+                          Text(
+                            '${fitLabel(TaskAssessment.preview(a.id, c, s).fit)} · ước tính thành công ${TaskAssessment.preview(a.id, c, s).successChance}% · mức thu ${TaskAssessment.preview(a.id, c, s).rewardPercent}% cơ bản',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color:
+                                  TaskAssessment.preview(a.id, c, s).fit == 20
+                                      ? terracotta
+                                      : forest,
+                            ),
+                          ),
+                          if (revenueTasks.contains(a.id)) ...[
+                            const SizedBox(height: 5),
+                            Text(
+                              revenueRewardPreview(a.id, c, s),
+                              style: const TextStyle(fontSize: 11),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                if (taskOfficers(s, a.id).isEmpty)
+                  const Padding(
+                    padding: EdgeInsets.all(24),
+                    child: Text(
+                      'Chưa có người rảnh để nhận việc. Hãy chờ công việc đang chạy hoàn tất.',
+                    ),
+                  ),
+              ],
+            ),
+      );
+      if (result == null || !mounted) return;
+      officer = result;
+      final person = s.court.firstWhere((c) => c.id == result);
+      final yes = await showDialog<bool>(
+        context: context,
+        builder:
+            (context) => ImperialAlertDialog(
+              insetPadding: _personnelDialogInsets(context),
+              title: Text(
+                'Giao việc cho ${person.name}',
+                style: const TextStyle(fontFamily: 'Lora'),
+              ),
+              content: SingleChildScrollView(
+                child: Text(
+                  '${a.title}\nChuyên môn ${person.specialty} · năng lực ${person.ability}/100\n${fitLabel(TaskAssessment.preview(a.id, person, s).fit)} · ước tính thành công ${TaskAssessment.preview(a.id, person, s).successChance}%\n\nChi ${actionCost(s, a)} tiền${a.grainCost > 0 ? ' và ${a.grainCost} lương thực' : ''}, 1 hành động. Mức thu khi thành công: ${TaskAssessment.preview(a.id, person, s).rewardPercent}% cơ bản; thành quả có thể bị thất thoát tùy liêm chính.\n${personalityWorkHint(s, person)}\n\n${revenueTasks.contains(a.id) ? '${revenueRewardPreview(a.id, person, s)}\n\n' : ''}${taskFailureHint(a.id)} Kinh phí không hoàn lại khi thất bại.',
+                  style: const TextStyle(height: 1.8),
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context, false),
+                  child: const Text('Cân nhắc lại'),
+                ),
+                FilledButton(
+                  onPressed: () => Navigator.pop(context, true),
+                  child: const Text('Xác nhận giao việc'),
+                ),
+              ],
+            ),
+      );
+      if (yes != true) return;
+    }
+    await act('action', target: a.id, option: officer);
+  }
+
+  Widget _kingdom() => ImperialWorkspace(
+    padding: 8,
+    child: KingdomPanel(
+      state: s,
+      busy: busy,
+      readState: () => s,
+      isBusy: () => busy,
+      actions:
+          actions
+              .where(
+                (a) =>
+                    ![
+                      'rest',
+                      'revel',
+                      'treat',
+                      'buy_grain',
+                      'repair',
+                      ...revenueTasks,
+                    ].contains(a.id),
+              )
+              .toList(),
+      onAction: _performAction,
+      blockedReason: _actionBlocked,
+      send: (type, target, option) async {
+        await act(type, target: target, option: option);
+      },
+    ),
+  );
+
+  Widget _treasury() => ImperialWorkspace(
+    padding: 8,
+    child: TreasuryPanel(
+      state: s,
+      busy: busy,
+      onAction: _performAction,
+      blockedReason: _actionBlocked,
+      onPolicy: (type, option) async {
+        await act(type, option: option);
+      },
+    ),
+  );
+
+  Widget _people(bool harem) {
+    if (harem && s.seasonal && palaceManagementOpen) {
+      return ImperialWorkspace(
+        padding: 8,
+        child: PalacePanel(
+          state: s,
+          busy: busy,
+          onBack: () => _showPalaceManagement(false),
+          onAssign:
+              (personId, option) =>
+                  act('palace', target: personId, option: option),
+        ),
+      );
+    }
+
+    final all =
+        s.court.where((c) => c.available && c.isConsort == harem).toList();
+    final category = harem ? haremCategory : courtCategory;
+    final faction = harem ? haremFaction : courtFaction;
+    final availability = harem ? haremAvailability : courtAvailability;
+    final search = harem ? haremSearch : courtSearch;
+    final query = search.text.trim().toLowerCase();
+    final listView = harem ? haremListView : courtListView;
+    final categories = [
+      'Tất cả',
+      if (harem) ...[
+        'Hoàng hậu',
+        'Phi tần',
+        'Tú nữ',
+      ] else
+        ...officialCategories,
+    ];
+    final people =
+        all
+            .where(
+              (c) =>
+                  (category == 'Tất cả' || c.category == category) &&
+                  (faction == 'Tất cả' || c.faction == faction) &&
+                  (availability == 'Tất cả' ||
+                      officerBusy(s, c.id) == (availability == 'Đang bận')) &&
+                  '${c.name} ${c.displayRole} ${c.faction}'
+                      .toLowerCase()
+                      .contains(query),
+            )
+            .toList();
+    final chosenId = harem ? selectedConsortId : selectedOfficialId;
+    final chosen =
+        chosenId == null
+            ? people.firstOrNull
+            : people.where((c) => c.id == chosenId).firstOrNull;
+    final filters = Surface(
+      padding: 4,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: [
+                    for (final item in categories)
+                      ChoiceChip(
+                        key: ValueKey('catalog-$harem-$item'),
+                        label: Text(
+                          '$item (${item == 'Tất cả' ? all.length : all.where((c) => c.category == item).length})',
+                          style: const TextStyle(fontSize: 11),
+                        ),
+                        selected: category == item,
+                        onSelected:
+                            (_) => setState(() {
+                              if (harem) {
+                                haremCategory = item;
+                              } else {
+                                courtCategory = item;
+                              }
+                            }),
+                      ),
+                  ],
+                ),
+              ),
+              IconButton(
+                key: ValueKey('roster-cards-$harem'),
+                tooltip: 'Xem thẻ chân dung',
+                onPressed:
+                    () => setState(() {
+                      if (harem) {
+                        haremListView = false;
+                      } else {
+                        courtListView = false;
+                      }
+                    }),
+                icon: Icon(
+                  Icons.grid_view_outlined,
+                  color: listView ? muted : forest,
+                ),
+              ),
+              IconButton(
+                key: ValueKey('roster-list-$harem'),
+                tooltip: 'Xem danh sách so sánh',
+                onPressed:
+                    () => setState(() {
+                      if (harem) {
+                        haremListView = true;
+                      } else {
+                        courtListView = true;
+                      }
+                    }),
+                icon: Icon(
+                  Icons.view_list_outlined,
+                  color: listView ? forest : muted,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          LayoutBuilder(
+            builder:
+                (context, box) => Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: [
+                    SizedBox(
+                      width:
+                          box.maxWidth > 620
+                              ? box.maxWidth - 340
+                              : box.maxWidth,
+                      child: TextField(
+                        key: ValueKey('people-search-$harem'),
+                        controller: search,
+                        onChanged: (_) => setState(() {}),
+                        decoration: const InputDecoration(
+                          isDense: true,
+                          prefixIcon: Icon(Icons.search, size: 20),
+                          hintText: 'Tìm tên, chức vụ hoặc phe…',
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: box.maxWidth > 620 ? 166 : (box.maxWidth - 10) / 2,
+                      child: DropdownButtonFormField<String>(
+                        key: ValueKey('faction-filter-$harem'),
+                        value: faction,
+                        isExpanded: true,
+                        decoration: const InputDecoration(
+                          isDense: true,
+                          labelText: 'Phe phái',
+                        ),
+                        items:
+                            ['Tất cả', ...factionOpponents.keys]
+                                .map(
+                                  (f) => DropdownMenuItem(
+                                    value: f,
+                                    child: Text(
+                                      f == 'Tất cả' ? 'Tất cả các phe' : f,
+                                      style: const TextStyle(fontSize: 11),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                        onChanged:
+                            (value) => setState(() {
+                              if (harem) {
+                                haremFaction = value!;
+                              } else {
+                                courtFaction = value!;
+                              }
+                            }),
+                      ),
+                    ),
+                    SizedBox(
+                      width: box.maxWidth > 620 ? 154 : (box.maxWidth - 10) / 2,
+                      child: DropdownButtonFormField<String>(
+                        key: ValueKey('availability-filter-$harem'),
+                        value: availability,
+                        isExpanded: true,
+                        decoration: const InputDecoration(
+                          isDense: true,
+                          labelText: 'Công việc',
+                        ),
+                        items:
+                            ['Tất cả', 'Đang rảnh', 'Đang bận']
+                                .map(
+                                  (f) => DropdownMenuItem(
+                                    value: f,
+                                    child: Text(
+                                      f,
+                                      style: const TextStyle(fontSize: 11),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                        onChanged:
+                            (value) => setState(() {
+                              if (harem) {
+                                haremAvailability = value!;
+                              } else {
+                                courtAvailability = value!;
+                              }
+                            }),
+                      ),
+                    ),
+                  ],
+                ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Đang xem ${people.length}/${all.length} người',
+            style: const TextStyle(fontSize: 11, color: muted),
+          ),
+        ],
+      ),
+    );
+    final roster = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        filters,
+        const SizedBox(height: 8),
+        if (people.isEmpty)
+          const Surface(
+            child: Text(
+              'Không có nhân vật phù hợp. Hãy đổi phân loại, phe hoặc từ tìm kiếm.',
+              style: TextStyle(color: muted),
+            ),
+          ),
+        if (listView)
+          ...people.map(
+            (c) => Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: _characterListRow(c, harem),
+            ),
+          )
+        else
+          LayoutBuilder(
+            builder: (context, box) {
+              final columns =
+                  box.maxWidth > 540
+                      ? 3
+                      : box.maxWidth > 420
+                      ? 2
+                      : 1;
+              return Wrap(
+                spacing: 14,
+                runSpacing: 14,
+                children: [
+                  for (final c in people)
+                    SizedBox(
+                      width: (box.maxWidth - (columns - 1) * 14) / columns,
+                      child: _characterCard(c, harem),
+                    ),
+                ],
+              );
+            },
+          ),
+      ],
+    );
+    final details = _characterProfile(chosen, harem);
+    return ImperialWorkspace(
+      padding: 8,
+      child: LayoutBuilder(
+        builder: (context, box) {
+          final heading = Padding(
+            padding: const EdgeInsets.fromLTRB(12, 2, 12, 4),
+            child: Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              spacing: 12,
+              runSpacing: 8,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Text(
+                  harem ? 'Hậu cung' : 'Triều thần',
+                  style: const TextStyle(
+                    fontFamily: 'Lora',
+                    fontSize: 27,
+                    color: ink,
+                  ),
+                ),
+                if (harem && s.seasonal)
+                  OutlinedButton.icon(
+                    key: const ValueKey('open-palace-management'),
+                    onPressed: () => _showPalaceManagement(true),
+                    icon: const Icon(Icons.auto_stories_outlined, size: 17),
+                    label: const Text('Học tập & cung vụ'),
+                  ),
+              ],
+            ),
+          );
+          if (box.maxWidth < 760) {
+            return RoomPane(
+              child: Column(children: [heading, roster, details]),
+            );
+          }
+          return Column(
+            children: [
+              heading,
+              const Divider(height: 1, color: gold),
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      flex: 7,
+                      child: RoomPane(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (!harem) ...[
+                              Wrap(
+                                spacing: 7,
+                                runSpacing: 6,
+                                children: [
+                                  for (final entry in s.factions.entries)
+                                    Tag(
+                                      '${entry.key.toUpperCase()}  ${entry.value}',
+                                      color:
+                                          entry.value < 35
+                                              ? terracotta
+                                              : forest,
+                                    ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                            ],
+                            roster,
+                          ],
+                        ),
+                      ),
+                    ),
+                    const VerticalDivider(width: 1, color: gold),
+                    Expanded(flex: 5, child: RoomPane(child: details)),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _characterListRow(Courtier c, bool harem) => Surface(
+    padding: 14,
+    selected: (harem ? selectedConsortId : selectedOfficialId) == c.id,
+    child: Row(
+      children: [
+        CharacterPortrait(person: c, width: 56, height: 70),
+        const SizedBox(width: 14),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                c.name,
+                style: const TextStyle(fontFamily: 'Lora', fontSize: 17),
+              ),
+              Text(
+                '${c.displayRole} · ${c.faction}',
+                style: const TextStyle(fontSize: 11, color: gold),
+              ),
+              Text(
+                '${c.specialty} · năng lực ${c.ability} · thiện cảm ${c.affection}',
+                style: const TextStyle(fontSize: 11),
+              ),
+              Text(
+                officerBusy(s, c.id)
+                    ? 'Đang bận'
+                    : c.isConsort && !c.inHarem
+                    ? 'Chưa nhập cung'
+                    : 'Đang rảnh',
+                style: const TextStyle(fontSize: 10, color: muted),
+              ),
+            ],
+          ),
+        ),
+        IconButton(
+          key: ValueKey('list-profile-${c.id}'),
+          tooltip: 'Xem hồ sơ ${c.name}',
+          icon: const Icon(Icons.chevron_right),
+          onPressed:
+              () => setState(() {
+                if (harem) {
+                  selectedConsortId = c.id;
+                } else {
+                  selectedOfficialId = c.id;
+                }
+              }),
+        ),
+      ],
+    ),
+  );
+
+  void _showPalaceManagement(bool open) {
+    setState(() => palaceManagementOpen = open);
+    if (scrollController.hasClients) scrollController.jumpTo(0);
+  }
+
+  Widget _characterProfile(Courtier? c, bool harem) {
+    if (c == null || personDialogOpen) {
+      return Surface(
+        key: ValueKey('character-profile-$harem'),
+        padding: 10,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 30),
+              child: Text(
+                'Chọn một chân dung để xem hồ sơ và các hành động.',
+                style: TextStyle(fontFamily: 'Lora', fontSize: 21),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+    final information = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '${c.name} · ${c.displayRole}',
+          style: const TextStyle(fontFamily: 'Lora', fontSize: 25, height: 1.3),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          '${c.faction} · ${c.age} tuổi',
+          style: const TextStyle(fontSize: 12, color: gold),
+        ),
+        const Divider(height: 24, color: gold),
+        LayoutBuilder(
+          builder:
+              (context, bounds) => Row(
+                children: [
+                  CharacterPortrait(
+                    person: c,
+                    width: bounds.maxWidth >= 420 ? 112 : 76,
+                    height: bounds.maxWidth >= 420 ? 144 : 98,
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Năng lực ${c.ability}',
+                          style: const TextStyle(
+                            fontFamily: 'Lora',
+                            fontSize: 20,
+                          ),
+                        ),
+                        Text(
+                          'Chuyên môn: ${c.specialty}',
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          officerBusy(s, c.id)
+                              ? 'Đang bận'
+                              : c.isConsort && !c.inHarem
+                              ? 'Chưa nhập cung'
+                              : 'Đang rảnh',
+                          style: const TextStyle(fontSize: 11, color: muted),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+        ),
+        const SizedBox(height: 16),
+        _smallMeter('Thiện cảm', c.affection),
+        const SizedBox(height: 12),
+        KeyedSubtree(
+          key: ValueKey('discontent-${c.id}'),
+          child: _smallMeter('Bất mãn', c.discontent, inverse: true),
+        ),
+        const SizedBox(height: 12),
+        Text(
+          c.qualitiesText,
+          key: ValueKey('qualities-${c.id}'),
+          style: TextStyle(
+            fontSize: 11,
+            color: c.investigated ? forest : muted,
+          ),
+        ),
+        const SizedBox(height: 12),
+        Text(
+          'Đã biết: ${c.knownPersonalityText}\n${c.personalityProgress}',
+          style: const TextStyle(fontSize: 11, color: muted),
+        ),
+        if (harem && s.seasonal) ...[
+          const SizedBox(height: 10),
+          Text(palaceProgress(s, c), style: const TextStyle(fontSize: 11)),
+          Text(
+            c.ability >= 100
+                ? 'Năng lực đã tối đa'
+                : 'Kinh nghiệm ${c.palaceExperience}/${palaceExperienceNeeded(c.ability)} · ${c.palaceDutiesCompleted} cung vụ · ${c.palaceCoursesCompleted} khóa học',
+            style: const TextStyle(fontSize: 10, color: muted),
+          ),
+          ExpansionTile(
+            tilePadding: EdgeInsets.zero,
+            title: const Text(
+              'Đóng góp & điều kiện',
+              style: TextStyle(fontSize: 11),
+            ),
+            children: [
+              Text(
+                haremPassivePreview(c),
+                key: ValueKey('harem-passive-${c.id}'),
+                style: const TextStyle(fontSize: 11, color: forest),
+              ),
+            ],
+          ),
+        ],
+      ],
+    );
+    final actions = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const Text(
+          'Hành động',
+          style: TextStyle(fontFamily: 'Lora', fontSize: 20),
+        ),
+        const SizedBox(height: 12),
+        for (final option in _personOptions(c))
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: OutlinedButton(
+              key: ValueKey('profile-action-${c.id}-${option.$1}'),
+              onPressed:
+                  busy || s.points < 1 || s.treasury < option.$4
+                      ? null
+                      : () => _handlePersonOption(c, option.$1),
+              style: OutlinedButton.styleFrom(
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.all(12),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    option.$2,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    option.$3,
+                    style: const TextStyle(fontSize: 10, color: muted),
+                  ),
+                ],
+              ),
+            ),
+          ),
+      ],
+    );
+    return Surface(
+      key: ValueKey('character-profile-$harem'),
+      padding: 10,
+      child: LayoutBuilder(
+        builder: (context, bounds) {
+          if (bounds.maxWidth < 520) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                information,
+                const Divider(height: 24, color: gold),
+                actions,
+              ],
+            );
+          }
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(flex: 5, child: information),
+              const SizedBox(width: 16),
+              Expanded(
+                flex: 6,
+                child: Container(
+                  padding: const EdgeInsets.only(left: 16),
+                  decoration: const BoxDecoration(
+                    border: Border(left: BorderSide(color: gold)),
+                  ),
+                  child: actions,
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _characterCard(Courtier c, bool harem) {
+    final selected = (harem ? selectedConsortId : selectedOfficialId) == c.id;
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(12),
+      child: InkWell(
+        key: ValueKey('select-person-${c.id}'),
+        borderRadius: BorderRadius.circular(12),
+        onTap:
+            () => setState(() {
+              if (harem) {
+                selectedConsortId = c.id;
+              } else {
+                selectedOfficialId = c.id;
+              }
+            }),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color:
+                    selected
+                        ? const Color(0x80D8A13F)
+                        : const Color(0x283E210B),
+                blurRadius: selected ? 14 : 6,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+          child: ImperialSkin(
+            edge: 24,
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  LayoutBuilder(
+                    builder:
+                        (context, bounds) => CharacterPortrait(
+                          person: c,
+                          width: bounds.maxWidth,
+                          height: (bounds.maxWidth * 1.12).clamp(110.0, 180.0),
+                        ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    c.name,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontFamily: 'Lora',
+                      fontSize: 16,
+                      height: 1.3,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '${c.displayRole} · ${c.age} tuổi',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 10, color: gold),
+                  ),
+                  const SizedBox(height: 8),
+                  Tag(
+                    c.isConsort && !c.inHarem
+                        ? 'CHƯA NHẬP CUNG'
+                        : officerBusy(s, c.id)
+                        ? 'ĐANG BẬN'
+                        : 'ĐANG RẢNH',
+                    color: officerBusy(s, c.id) ? terracotta : forest,
+                  ),
+                  const SizedBox(height: 6),
+                  OutlinedButton(
+                    onPressed: busy ? null : () => _personDialog(c),
+                    child: Text(
+                      harem
+                          ? (c.inHarem ? 'Tiếp kiến' : 'Gặp gỡ')
+                          : 'Triệu kiến',
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  List<(String, String, String, int)> _personOptions(
+    Courtier c,
+  ) => <(String, String, String, int)>[
+    (
+      'audience',
+      'Trò chuyện, lắng nghe',
+      '1 hành động · thiện cảm cơ bản +6 và giảm bất mãn theo mức thực nhận; tùy tính cách, lặp/quan hệ cao giảm hiệu quả · thái độ phe đối lập −3; mỗi nhân vật phe đó −2 thiện cảm, gồm tú nữ/phi tần; đồng thời +2 bất mãn · mỗi 3 lần mở thêm 1 tính cách',
+      0,
+    ),
+    (
+      'reward',
+      'Ban thưởng',
+      '1 hành động · chi 25 · thiện cảm cơ bản +8 và giảm bất mãn theo mức thực nhận, tùy tính cách · phe đối lập −3 thiện cảm và +3 bất mãn',
+      25,
+    ),
+    (
+      'investigate',
+      'Điều tra kín',
+      '1 hành động · chi ${investigationCost(s)} · kết quả cuối ${s.date(s.week + investigationDuration(s) - 1)}; âm mưu lớn khó lấy chứng cứ${s.seasonal ? ', thành công giảm 6 tiến độ của người bị điều tra' : ''}',
+      investigationCost(s),
+    ),
+    if (!c.isConsort)
+      (
+        'dismiss',
+        'Bãi chức, thay người',
+        'Chọn ứng viên · 1 hành động · phí theo năng lực, địa vị và chức vụ · ảnh hưởng các phe',
+        0,
+      ),
+    if (c.isConsort && !c.inHarem)
+      (
+        'invite',
+        'Tuyển vào hậu cung',
+        '1 hành động · chi 35 · sinh hoạt +${s.seasonal ? 6 : 2} tiền/${s.periodName} · mỗi nhân vật phe đối lập −2 thiện cảm${s.seasonal ? '\n${haremPassivePreview(c)}' : ''}',
+        35,
+      ),
+    if (c.inHarem && !c.queen)
+      (
+        'queen',
+        'Sắc phong Hoàng hậu',
+        '1 hành động · chi 60 · ảnh hưởng các gia tộc${s.seasonal ? '\n${haremPassivePreview(c, asQueen: true)}' : ''}',
+        60,
+      ),
+    if (c.inHarem && c.isConsort && s.seasonal) ...[
+      ('palace-duty', 'Giao cung vụ', palaceProgress(s, c), 0),
+      (
+        'palace-study',
+        'Theo học trong cung',
+        '20 tiền · 1 hành động · 2 mùa · ${palaceProgress(s, c)}',
+        20,
+      ),
+    ],
+    if (c.inHarem)
+      (
+        'visit',
+        'Cùng dạo Ngự uyển',
+        '1 hành động · chi 10 · thêm 1 lần hưởng lạc',
+        10,
+      ),
+  ];
+
+  Future<void> _personDialog(Courtier c) async {
+    setState(() => personDialogOpen = true);
+    final options = _personOptions(c);
+    final option = await showDialog<String>(
+      context: context,
+      builder:
+          (context) => ImperialSimpleDialog(
+            insetPadding: _personnelDialogInsets(context),
+            title: Row(
+              children: [
+                CharacterPortrait(person: c, width: 66, height: 82),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    c.name,
+                    style: const TextStyle(fontFamily: 'Lora'),
+                  ),
+                ),
+              ],
+            ),
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 18),
+                child: Surface(
+                  padding: 14,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 6,
+                        children: [
+                          Tag(c.displayRole, color: forest),
+                          Tag(c.faction),
+                          Tag('${c.age} tuổi'),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        'Đã biết: ${c.knownPersonalityText}\n${c.personalityProgress}\n${c.knownPersonalities.map((p) => '${p.label}: ${p.description}').join('\n')}',
+                        key: const ValueKey('personality-details'),
+                        style: const TextStyle(fontSize: 12, height: 1.7),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        abilityExplanation(c),
+                        key: const ValueKey('person-ability-help'),
+                        style: const TextStyle(fontSize: 12, height: 1.8),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        s.calendarText(
+                          c.isConsort && s.seasonal
+                              ? haremPassivePreview(c)
+                              : '${roleAbilityExplanation(c)}\n${officerWorkHint(c, s)}',
+                        ),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: forest,
+                          height: 1.8,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Năng lực cao không bảo đảm trung thành hay liêm chính. Các phẩm chất chưa điều tra vẫn chưa được xác minh.',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: muted,
+                          height: 1.7,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              ...options.map(
+                (option) => ImperialDialogOption(
+                  leading: ImperialIcon(switch (option.$1) {
+                    'reward' => 'treasury',
+                    'investigate' => 'scroll',
+                    'dismiss' => 'people',
+                    'invite' => 'harem',
+                    'palace-duty' => 'court',
+                    'palace-study' => 'journal',
+                    _ => 'citizens',
+                  }, size: 38),
+                  onPressed:
+                      s.points < 1 || s.treasury < option.$4
+                          ? null
+                          : () => Navigator.pop(context, option.$1),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        option.$2,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: option.$1 == 'dismiss' ? terracotta : ink,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        option.$3,
+                        style: const TextStyle(fontSize: 11, color: muted),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+    );
+    if (!mounted) return;
+    setState(() => personDialogOpen = false);
+    await _handlePersonOption(c, option);
+  }
+
+  Future<void> _handlePersonOption(Courtier c, String? option) async {
+    if (option == 'dismiss') {
+      await _replacementDialog(c);
+    } else if (option == 'palace-duty' && mounted) {
+      await choosePalaceDuty(
+        context,
+        s,
+        (id, option) => act('palace', target: id, option: option),
+        person: c,
+      );
+    } else if (option == 'palace-study' && mounted) {
+      await choosePalaceStudy(
+        context,
+        s,
+        (id, option) => act('palace', target: id, option: option),
+        person: c,
+      );
+    } else if (option != null) {
+      await act('courtier', target: c.id, option: option);
+    }
+  }
+
+  Future<void> _replacementDialog(Courtier outgoing) async {
+    final candidates = [...s.officialsPool]..sort((a, b) {
+      final fit = specialtyFit(
+        b.specialty,
+        specialtyForRole(outgoing.role),
+      ).compareTo(specialtyFit(a.specialty, specialtyForRole(outgoing.role)));
+      return fit != 0 ? fit : b.ability.compareTo(a.ability);
+    });
+    final chosen = await showDialog<String>(
+      context: context,
+      builder:
+          (context) => ImperialSimpleDialog(
+            insetPadding: _personnelDialogInsets(context),
+            title: Text(
+              'Chọn người tiếp nhận chức ${outgoing.role}',
+              style: const TextStyle(fontFamily: 'Lora'),
+            ),
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
+                child: Text(
+                  'Thay ${outgoing.name}. Ngân khố ${s.treasury}. Mỗi lần thay tốn 1 hành động, Ổn định triều đình −${replacementDisruption(outgoing)}; phí theo năng lực, địa vị (ảnh hưởng) của ứng viên và chức vụ tiếp nhận: bậc ${appointmentRank(outgoing.role)}/4. Chức càng cao, phí càng lớn. Danh sách được giữ khi tải lại. Công việc thường chuyển sang người mới và giữ tiến độ. Tấu chương đã giao riêng cho người bị bãi chức sẽ gián đoạn, không tự chuyển phân công.',
+                  style: const TextStyle(fontSize: 12, height: 1.8),
+                ),
+              ),
+              for (final c in candidates)
+                ImperialDialogOption(
+                  key: ValueKey('appoint-candidate-${c.id}'),
+                  leading: CharacterPortrait(person: c, width: 42, height: 56),
+                  onPressed:
+                      s.points < 1 ||
+                              s.treasury < appointmentCost(c, outgoing.role)
+                          ? null
+                          : () => Navigator.pop(context, c.id),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${c.name} · ${c.faction}',
+                          style: const TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          'Năng lực ${c.ability} · ${c.specialty} · ${fitLabel(specialtyFit(c.specialty, specialtyForRole(outgoing.role)))}\nĐịa vị: ảnh hưởng ${c.influence}/100 · bất mãn ${c.discontent}/100\nĐã biết: ${c.knownPersonalityText} · tính cách khác chưa rõ',
+                          style: const TextStyle(fontSize: 11),
+                        ),
+                        Text(
+                          'Bổ nhiệm: ${appointmentCost(c, outgoing.role)} tiền${s.treasury < appointmentCost(c, outgoing.role) ? ' · Không đủ ngân khố' : ''}',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color:
+                                s.treasury < appointmentCost(c, outgoing.role)
+                                    ? terracotta
+                                    : forest,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+            ],
+          ),
+    );
+    if (chosen == null || !mounted) return;
+    final candidate = s.officialsPool.firstWhere((c) => c.id == chosen);
+    final yes = await showDialog<bool>(
+      context: context,
+      builder:
+          (context) => ImperialAlertDialog(
+            insetPadding: _personnelDialogInsets(context),
+            title: Text(
+              'Bổ nhiệm ${candidate.name}?',
+              style: const TextStyle(fontFamily: 'Lora'),
+            ),
+            content: SizedBox(
+              width: 640,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _appointmentComparison(outgoing, candidate),
+                    const SizedBox(height: 20),
+                    Text(
+                      'Tiếp nhận chức ${outgoing.role} (bậc ${appointmentRank(outgoing.role)}/4) thay ${outgoing.name}.\nNăng lực ${candidate.ability} · chuyên môn ${candidate.specialty}. Địa vị: ảnh hưởng ${candidate.influence}/100. Phí dựa trên cả năng lực, địa vị và chức vụ tiếp nhận.\n\nChi ${appointmentCost(candidate, outgoing.role)} tiền · 1 hành động · uy quyền +1 · Ổn định triều đình −${replacementDisruption(outgoing)}.\nPhe ${candidate.faction} +5 thái độ, phe ${factionOpponents[candidate.faction]} −6; thành viên phe đối lập giảm 2 thiện cảm. ${outgoing.faction != candidate.faction ? 'Phe ${outgoing.faction} còn giảm 4 vì người cũ bị bãi chức.' : ''}\n\n${outgoing.influence >= 60 ? 'Phe người cũ còn bất mãn −1/${s.periodName} trong ${s.seasonal ? 1 : 3} ${s.periodName}. ' : ''}Công việc đang giao chuyển sang người mới, giữ tiến độ; thời hạn nhiệm vụ đại biến cố đã cam kết giữ nguyên. Các việc thường tính kết quả theo năng lực/chuyên môn của người mới. Tấu chương đã giao riêng cho người bị bãi chức sẽ gián đoạn, không tự chuyển phân công.${s.stability <= replacementDisruption(outgoing) ? '\n\nCẢNH BÁO: thay người lúc này sẽ khiến Ổn định triều đình về 0 và kết thúc lượt chơi.' : ''}',
+                      style: const TextStyle(height: 1.8),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('Hủy'),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: Text(
+                  'Bổ nhiệm · ${appointmentCost(candidate, outgoing.role)} tiền',
+                ),
+              ),
+            ],
+          ),
+    );
+    if (yes == true) {
+      await act('appoint', target: outgoing.id, option: candidate.id);
+    }
+  }
+
+  Widget _appointmentComparison(Courtier outgoing, Courtier candidate) {
+    Widget entry(Courtier c, String title) => Surface(
+      padding: 14,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 10,
+              color: gold,
+              letterSpacing: 1.2,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Center(child: CharacterPortrait(person: c, width: 100, height: 124)),
+          const SizedBox(height: 12),
+          Text(
+            c.name,
+            style: const TextStyle(fontFamily: 'Lora', fontSize: 18),
+          ),
+          Text(
+            '${c.displayRole} · ${c.faction}',
+            style: const TextStyle(fontSize: 11, color: muted),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            'Năng lực ${c.ability}/100',
+            style: const TextStyle(fontSize: 12),
+          ),
+          Text(
+            c.specialty,
+            style: const TextStyle(fontSize: 11, color: forest),
+          ),
+          Text(
+            'Ảnh hưởng ${c.influence}/100',
+            style: const TextStyle(fontSize: 11),
+          ),
+          Text(
+            'Đã biết: ${c.knownPersonalityText}',
+            style: const TextStyle(fontSize: 10, color: muted),
+          ),
+        ],
+      ),
+    );
+    return MediaQuery.sizeOf(context).width < 650
+        ? Column(
+          children: [
+            entry(outgoing, 'NGƯỜI ĐƯƠNG NHIỆM'),
+            const SizedBox(height: 12),
+            entry(candidate, 'ỨNG VIÊN TIẾP NHẬN'),
+          ],
+        )
+        : Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(child: entry(outgoing, 'NGƯỜI ĐƯƠNG NHIỆM')),
+            const SizedBox(width: 16),
+            Expanded(child: entry(candidate, 'ỨNG VIÊN TIẾP NHẬN')),
+          ],
+        );
+  }
+
+  Widget _health() => ImperialWorkspace(
+    padding: 8,
+    child: LayoutBuilder(
+      builder: (context, box) {
+        final portrait = Surface(
+          child: Column(
+            children: [
+              CharacterPortrait(
+                emperor: true,
+                emperorAge: s.age,
+                width: 156,
+                height: 202,
+              ),
+              const SizedBox(height: 18),
+              Text(
+                s.playerName,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontFamily: 'Lora', fontSize: 22),
+              ),
+              const SizedBox(height: 8),
+              Tag('${s.age} TUỔI · NĂM TRỊ VÌ ${s.year}'),
+              const SizedBox(height: 14),
+              Text(
+                s.health <= 20
+                    ? 'Long thể nguy cấp'
+                    : s.illness > 0
+                    ? 'Cần chăm sóc long thể'
+                    : 'Long thể an hòa',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: s.health <= 20 ? terracotta : forest,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Đã trị vì ${s.duration}',
+                style: const TextStyle(fontSize: 11, color: muted),
+              ),
+            ],
+          ),
+        );
+        final status = Surface(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Wrap(
+                spacing: 12,
+                runSpacing: 8,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.favorite_border,
+                    color: terracotta,
+                    size: 34,
+                  ),
+                  Text(
+                    '${s.health}',
+                    style: const TextStyle(fontFamily: 'Lora', fontSize: 42),
+                  ),
+                  Text(' / 100', style: TextStyle(color: muted)),
+                  Tag('${s.age} TUỔI'),
+                ],
+              ),
+              const SizedBox(height: 24),
+              _smallMeter('Mệt mỏi tích lũy', s.fatigue, inverse: true),
+              const SizedBox(height: 20),
+              _smallMeter('Căng thẳng', s.stress, inverse: true),
+              const SizedBox(height: 20),
+              _smallMeter(
+                'Mức hưởng lạc tích lũy',
+                s.indulgence,
+                maximum: 40,
+                inverse: true,
+              ),
+              const SizedBox(height: 20),
+              _smallMeter('Mức bệnh', s.illness, inverse: true),
+              const SizedBox(height: 24),
+              const Divider(),
+              const SizedBox(height: 12),
+              Text(
+                s.calendarText(s.healthReport),
+                style: const TextStyle(color: forest),
+              ),
+              const SizedBox(height: 16),
+              Wrap(
+                spacing: 16,
+                runSpacing: 8,
+                children: [
+                  Text('${s.periodTitle} này: ${s.workThisWeek} mức công việc'),
+                  Text('${s.restThisWeek} lần nghỉ'),
+                  Text('${s.revelThisWeek} mức hưởng lạc'),
+                ],
+              ),
+              if (s.exhaustedWeeks > 0)
+                Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: Text(
+                    'Đã mệt mỏi kéo dài ${s.exhaustedWeeks} ${s.periodName}.',
+                    style: const TextStyle(color: terracotta),
+                  ),
+                ),
+            ],
+          ),
+        );
+        final care = Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _section('Chăm sóc bản thân'),
+            for (final a in actions.where(
+              (a) => ['rest', 'revel', 'treat'].contains(a.id),
+            ))
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: InkWell(
+                  key: ValueKey('care-preview-${a.id}'),
+                  onTap: () => setState(() => selectedCareId = a.id),
+                  child: Surface(
+                    selected: selectedCareId == a.id,
+                    padding: 16,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Tag(
+                          a.id == 'treat'
+                              ? 'HIỆU QUẢ NGAY'
+                              : 'KHI KHÉP ${s.periodName.toUpperCase()}',
+                          color: a.id == 'treat' ? forest : gold,
+                        ),
+                        const SizedBox(height: 8),
+                        _actionRow(a),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            if (selectedCareId != null)
+              Surface(
+                key: const ValueKey('care-preview-panel'),
+                padding: 16,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'BỆ HẠ ĐANG CÂN NHẮC',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: gold,
+                        letterSpacing: 1.4,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      actions.firstWhere((a) => a.id == selectedCareId).title,
+                      style: const TextStyle(fontFamily: 'Lora', fontSize: 20),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      _actionDescription(
+                        actions.firstWhere((a) => a.id == selectedCareId),
+                      ),
+                      style: const TextStyle(fontSize: 12, height: 1.8),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Nhấn nút mũi tên trên thẻ để thực hiện. Chỉ xem trước chưa tiêu hành động.',
+                      style: TextStyle(fontSize: 11, color: muted),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        );
+
+        if (box.maxWidth < 900) {
+          return RoomPane(
+            child: Column(
+              children: [
+                portrait,
+                const SizedBox(height: 16),
+                status,
+                const SizedBox(height: 16),
+                care,
+              ],
+            ),
+          );
+        }
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(width: 204, child: RoomPane(padding: 4, child: portrait)),
+            const VerticalDivider(width: 1, color: gold),
+            Expanded(child: RoomPane(child: status)),
+            const VerticalDivider(width: 1, color: gold),
+            SizedBox(width: 320, child: RoomPane(child: care)),
+          ],
+        );
+      },
+    ),
+  );
+
+  Widget _smallMeter(
+    String label,
+    int value, {
+    int maximum = 100,
+    bool inverse = false,
+  }) {
+    final bad = inverse ? value / maximum > .55 : value / maximum < .3;
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Text(label, style: TextStyle(fontSize: 11, color: muted)),
+            ),
+            Text(
+              '$value${maximum == 100 ? '/100' : '/$maximum'}',
+              style: TextStyle(fontSize: 10, color: bad ? terracotta : forest),
+            ),
+          ],
+        ),
+        const SizedBox(height: 7),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: LinearProgressIndicator(
+            minHeight: 4,
+            value: (value / maximum).clamp(0, 1),
+            backgroundColor: line,
+            color: bad ? terracotta : const Color(0xFF9AA98C),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _journal() {
+    final entries = s.journal.take(150).toList();
+    final selected =
+        entries.isEmpty
+            ? null
+            : entries[selectedChronicleIndex.clamp(0, entries.length - 1)];
+    final index = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const Text(
+          'BIÊN NIÊN TRIỀU ĐẠI',
+          style: TextStyle(fontSize: 10, color: gold, letterSpacing: 1.2),
+        ),
+        const SizedBox(height: 12),
+        for (var i = 0; i < entries.length; i++)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Material(
+              color:
+                  identical(entries[i], selected)
+                      ? const Color(0xFFE5CFA0)
+                      : Colors.transparent,
+              child: InkWell(
+                key: ValueKey('chronicle-entry-$i'),
+                onTap: () => setState(() => selectedChronicleIndex = i),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        s.seasonal
+                            ? s.date(entries[i].week)
+                            : '${s.periodTitle} ${entries[i].week}',
+                        style: const TextStyle(fontSize: 10, color: gold),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        s.calendarText(entries[i].title),
+                        style: TextStyle(
+                          fontFamily: 'Lora',
+                          fontSize: 16,
+                          color:
+                              ['danger', 'warning'].contains(entries[i].tone)
+                                  ? terracotta
+                                  : ink,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        if (s.journal.length > 150)
+          const Text(
+            'Hiển thị 150 ghi chép gần nhất; lịch sử đầy đủ vẫn nằm trong bản lưu.',
+            style: TextStyle(fontSize: 11, color: muted),
+          ),
+      ],
+    );
+    final reading = Column(
+      key: const ValueKey('chronicle-reading'),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _heading(
+          'Sử ký Thiên Hòa',
+          'Những quyết định đã ban và những điều giang sơn còn nhớ.',
+        ),
+        if (selected == null)
+          const Text(
+            'Sử quan đang chờ ghi chép đầu tiên.',
+            style: TextStyle(fontFamily: 'Lora', fontSize: 21),
+          )
+        else ...[
+          Tag(
+            s.seasonal
+                ? s.date(selected.week)
+                : '${s.periodTitle} ${selected.week}',
+          ),
+          const SizedBox(height: 18),
+          Text(
+            s.calendarText(selected.title),
+            style: const TextStyle(
+              fontFamily: 'Lora',
+              fontSize: 26,
+              height: 1.4,
+            ),
+          ),
+          const Divider(height: 32, color: gold),
+          Text(
+            s.calendarText(selected.text),
+            style: const TextStyle(fontSize: 14, height: 1.8),
+          ),
+        ],
+      ],
+    );
+    return ImperialWorkspace(
+      padding: 8,
+      child: LayoutBuilder(
+        builder: (context, bounds) {
+          if (bounds.maxWidth < 760) {
+            return RoomPane(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  reading,
+                  const Divider(height: 28, color: gold),
+                  index,
+                ],
+              ),
+            );
+          }
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(width: 300, child: RoomPane(child: index)),
+              const VerticalDivider(width: 1, color: gold),
+              Expanded(child: RoomPane(padding: 24, child: reading)),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _scores() {
+    final scores = rankedScores(controller.archive.scores, rules: scoreRules);
+    final oldRules =
+        controller.archive.scores
+            .map((s) => s.rules)
+            .where((r) => r != rulesVersion)
+            .toSet()
+            .toList()
+          ..sort();
+    return ImperialWorkspace(
+      child: RoomPane(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _heading(
+              'Những triều đại dài nhất',
+              'Chỉ có thời gian giữ ngai vàng quyết định thứ hạng.',
+            ),
+            const Tag('THÀNH TÍCH TRÊN THIẾT BỊ NÀY'),
+            if (oldRules.isNotEmpty) ...[
+              const SizedBox(height: 14),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  ChoiceChip(
+                    label: Text(
+                      'Luật ${rulesVersion.replaceFirst('mvp-', '')}',
+                    ),
+                    selected: scoreRules == rulesVersion,
+                    onSelected:
+                        (_) => setState(() => scoreRules = rulesVersion),
+                  ),
+                  for (final rules in oldRules)
+                    ChoiceChip(
+                      label: Text(
+                        'Luật ${rules.replaceFirst('mvp-', '').replaceFirst(RegExp(r'\.0$'), '')} (cũ)',
+                      ),
+                      selected: scoreRules == rules,
+                      onSelected: (_) => setState(() => scoreRules = rules),
+                    ),
+                ],
+              ),
+            ],
+            const SizedBox(height: 22),
+            Surface(
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 55,
+                          child: Text(
+                            'HẠNG',
+                            style: TextStyle(fontSize: 9, color: muted),
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            'NGƯỜI CHƠI',
+                            style: TextStyle(fontSize: 9, color: muted),
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            'THỜI GIAN TRỊ VÌ',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(fontSize: 9, color: muted),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(),
+                  if (scores.isEmpty)
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 55),
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.emoji_events_outlined,
+                            color: gold,
+                            size: 42,
+                          ),
+                          SizedBox(height: 16),
+                          Text(
+                            'Sử sách vẫn đang chờ tên bạn',
+                            style: TextStyle(fontFamily: 'Lora', fontSize: 20),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            'Hoàn thành một lượt chơi để ghi thành tích đầu tiên.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 11, color: muted),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ...scores.map(
+                    (entry) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 55,
+                            child: Text(
+                              '${entry.rank}'.padLeft(2, '0'),
+                              style: TextStyle(
+                                fontFamily: 'Lora',
+                                fontSize: 23,
+                                color: entry.rank == 1 ? gold : muted,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              entry.score.playerName,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              reignTime(
+                                entry.score.weeks,
+                                seasonal: entry.score.seasonal,
+                              ),
+                              textAlign: TextAlign.right,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: forest,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Mỗi tên lưu thành tích tốt nhất. Bằng thời gian trị vì thì đồng hạng. Lượt bỏ dở không được ghi điểm.',
+              style: TextStyle(fontSize: 11, color: muted),
+            ),
+            const SizedBox(height: 26),
+            Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              children: [
+                FilledButton(
+                  onPressed: busy ? null : startDialog,
+                  child: const Text('Bắt đầu triều đại mới'),
+                ),
+                if (controller.state != null && !s.ended)
+                  OutlinedButton(
+                    onPressed: () => navigate('citadel'),
+                    child: const Text('Tiếp tục trị vì'),
+                  ),
+                OutlinedButton(
+                  onPressed: () => navigate('home'),
+                  child: const Text('Về trang chính'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  List<String> get _criticalStatNames => [
+    if (s.stability <= 20) stabilityLabel,
+    if (s.authority <= 20) 'Uy quyền',
+    if (s.people <= 20) 'Lòng dân',
+    if (s.army <= 20) 'Quân lực',
+    if (s.health <= 20) 'Sức khỏe',
+  ];
+
+  Widget _weekbar(bool desktop) => DefaultTextStyle(
+    style: const TextStyle(
+      fontFamily: 'BeVietnam',
+      fontSize: 12,
+      color: imperialIvory,
+    ),
+    child: Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: desktop ? 32 : 16,
+        vertical: route == 'court' || route == 'kingdom' ? 8 : 16,
+      ),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFF08251E), Color(0xFF123D30), Color(0xFF061D18)],
+        ),
+        image: DecorationImage(
+          image: AssetImage('assets/images/imperial/jade-texture.webp'),
+          fit: BoxFit.cover,
+          opacity: .25,
+        ),
+        border: Border(top: BorderSide(color: imperialGold)),
+      ),
+      child: SafeArea(
+        top: false,
+        child: Row(
+          children: [
+            if (desktop) ...[
+              const ImperialIcon('time', size: 38),
+              const SizedBox(width: 12),
+            ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    '${s.points} hành động còn lại',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                  ),
+                  if (_criticalStatNames.isNotEmpty) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      _criticalStatNames.length == 1
+                          ? '${_criticalStatNames.single} nguy cấp'
+                          : '${_criticalStatNames.length} chỉ số nguy cấp',
+                      style: const TextStyle(
+                        fontSize: 9,
+                        color: Color(0xFFFFAC8E),
+                      ),
+                    ),
+                  ],
+                  if (s.affairsThisWeek == 0) ...[
+                    const SizedBox(height: 4),
+                    const Text(
+                      'Chưa xử lý quốc sự',
+                      style: TextStyle(fontSize: 9, color: Color(0xFFFFAC8E)),
+                    ),
+                  ],
+                  const SizedBox(height: 5),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        for (var i = 0; i < s.actionsPerTurn; i++)
+                          Container(
+                            width: 17,
+                            height: 3,
+                            margin: const EdgeInsets.only(right: 4),
+                            decoration: BoxDecoration(
+                              color: i < s.points ? gold : line,
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                          ),
+                        if (desktop)
+                          const Padding(
+                            padding: EdgeInsets.only(left: 9),
+                            child: Text(
+                              'Thời gian chỉ trôi khi bạn sẵn sàng.',
+                              style: TextStyle(
+                                fontSize: 9,
+                                color: imperialGold,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (s.points == 0 && s.overtime == 0)
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: TextButton(
+                  onPressed: busy ? null : _overtimeDialog,
+                  child: const Text(
+                    'Làm thêm',
+                    style: TextStyle(fontSize: 11, color: Color(0xFFFFAC8E)),
+                  ),
+                ),
+              ),
+            FilledButton(
+              style: FilledButton.styleFrom(
+                backgroundColor: terracotta,
+                foregroundColor: imperialIvory,
+                side: const BorderSide(color: imperialGold),
+              ),
+              onPressed: busy ? null : _nextWeek,
+              child: Text(
+                s.seasonal
+                    ? 'Khép lại mùa  →'
+                    : desktop
+                    ? 'Sang tuần tiếp theo   →'
+                    : 'Sang tuần  →',
+                style: const TextStyle(fontSize: 12),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+
+  Future<void> _overtimeDialog() async {
+    final yes = await showDialog<bool>(
+      context: context,
+      builder:
+          (context) => ImperialAlertDialog(
+            title: const Text(
+              'Chong đèn làm thêm?',
+              style: TextStyle(fontFamily: 'Lora'),
+            ),
+            content: Text(
+              'Có thêm ${s.seasonal ? 2 : 1} hành động, tối đa một lần mỗi ${s.periodName}. Mệt mỏi và căng thẳng tăng; sức khỏe cuối ${s.periodName} chịu thêm tác hại.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: Text('Để ${s.periodName} sau'),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: Text(
+                  s.seasonal ? 'Nhận thêm 2 hành động' : 'Làm thêm một việc',
+                ),
+              ),
+            ],
+          ),
+    );
+    if (yes == true) await act('overtime');
+  }
+
+  Future<void> _nextWeek() async {
+    final expired = s.petitions.where((p) => p.deadline <= s.week).toList();
+    if (expired.isNotEmpty) {
+      final yes = await showDialog<bool>(
+        context: context,
+        builder:
+            (context) => ImperialAlertDialog(
+              title: const Text(
+                'Còn tấu chương tới hạn',
+                style: TextStyle(fontFamily: 'Lora'),
+              ),
+              content: SizedBox(
+                width: 450,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Nếu khép ${s.periodName}, các việc này sẽ được xử lý như sau:',
+                      ),
+                      const SizedBox(height: 14),
+                      ...expired.map((p) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: Text(
+                            s.authoredText(_petitionExpiryText(p)),
+                            style: TextStyle(fontSize: 12, color: terracotta),
+                          ),
+                        );
+                      }),
+                      if (expired.any(
+                        (p) => [
+                          'Khủng hoảng',
+                          'Âm mưu',
+                        ].contains(eventForState(s, p.definitionId).category),
+                      ))
+                        Text(
+                          'Bỏ mặc khủng hoảng/âm mưu còn làm giảm 4 uy quyền và 3 Ổn định triều đình mỗi tấu chương, tối đa hai tấu chương mỗi ${s.periodName}.',
+                          style: TextStyle(fontSize: 12, color: terracotta),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context, false),
+                  child: const Text('Quay lại xử lý'),
+                ),
+                FilledButton(
+                  onPressed: () => Navigator.pop(context, true),
+                  child: Text('Vẫn sang ${s.periodName}'),
+                ),
+              ],
+            ),
+      );
+      if (yes != true) return;
+    }
+    await act('endWeek');
+    if (mounted && scrollController.hasClients) {
+      scrollController.animateTo(
+        0,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeOut,
+      );
+    }
+  }
+
+  Widget _landing() => Scaffold(
+    body: LayoutBuilder(
+      builder:
+          (context, bounds) => SingleChildScrollView(
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1180),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: bounds.maxWidth > 700 ? 48 : 24,
+                    vertical: 32,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Crest(size: 42),
+                          const SizedBox(width: 13),
+                          const Expanded(
+                            child: Text(
+                              'VẠN TUẾ',
+                              style: TextStyle(
+                                fontFamily: 'Lora',
+                                fontSize: 21,
+                                letterSpacing: 3,
+                              ),
+                            ),
+                          ),
+                          if (bounds.maxWidth > 500)
+                            TextButton(
+                              onPressed: () => navigate('scores'),
+                              child: const Text(
+                                'Bảng xếp hạng',
+                                style: TextStyle(fontSize: 11),
+                              ),
+                            )
+                          else
+                            IconButton(
+                              tooltip: 'Bảng xếp hạng',
+                              onPressed: () => navigate('scores'),
+                              icon: const Icon(
+                                Icons.emoji_events_outlined,
+                                color: gold,
+                              ),
+                            ),
+                        ],
+                      ),
+                      const SizedBox(height: 50),
+                      Container(
+                        width: double.infinity,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFE9EBDD),
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        child: Stack(
+                          children: [
+                            const Positioned(
+                              right: -30,
+                              bottom: 0,
+                              width: 670,
+                              height: 380,
+                              child: PalaceArt(),
+                            ),
+                            Positioned.fill(
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      const Color(0xFFE9EBDD),
+                                      const Color(
+                                        0xFFE9EBDD,
+                                      ).withValues(alpha: .15),
+                                    ],
+                                    stops: const [.15, 1],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(
+                                bounds.maxWidth > 700 ? 48 : 26,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Tag('MỘT ĐỜI ĐẾ VƯƠNG'),
+                                  const SizedBox(height: 24),
+                                  Text(
+                                    'Mười tám tuổi.\nMột giang sơn.',
+                                    style: TextStyle(
+                                      fontFamily: 'Lora',
+                                      fontSize: bounds.maxWidth > 700 ? 53 : 37,
+                                      height: 1.25,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 22),
+                                  const SizedBox(
+                                    width: 360,
+                                    child: Text(
+                                      'Ngai vàng đã thuộc về bạn.\nNhưng bạn sẽ giữ được nó bao lâu?',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        height: 1.9,
+                                        color: forest,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 30),
+                                  Wrap(
+                                    spacing: 12,
+                                    runSpacing: 12,
+                                    children: [
+                                      FilledButton(
+                                        onPressed: busy ? null : startDialog,
+                                        child: const Text('Bắt đầu trị vì   →'),
+                                      ),
+                                      if (controller.state != null && !s.ended)
+                                        OutlinedButton(
+                                          onPressed: () => navigate('citadel'),
+                                          child: Text(
+                                            'Tiếp tục · ${s.duration}',
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 14),
+                                  const Text(
+                                    'Chơi theo mùa · 12 hành động mỗi mùa · Tự lưu',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: muted,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 38),
+                      LayoutBuilder(
+                        builder: (context, inner) {
+                          const items = <(IconData, String, String)>[
+                            (
+                              Icons.account_balance_outlined,
+                              'Một nước trong tay',
+                              'Lo việc dân, giữ biên cương, cân bằng những thế lực trong triều.',
+                            ),
+                            (
+                              Icons.history_edu_outlined,
+                              'Bốn mùa một năm',
+                              'Quyết định hôm nay có thể trở lại vào một mùa mưa khác.',
+                            ),
+                            (
+                              Icons.favorite_border,
+                              'Giữ ngai, giữ mình',
+                              'Làm quá sức hay ham mê tửu sắc đều có thể khép lại triều đại.',
+                            ),
+                          ];
+                          return Wrap(
+                            spacing: 28,
+                            runSpacing: 26,
+                            children:
+                                items
+                                    .map(
+                                      (item) => SizedBox(
+                                        width:
+                                            inner.maxWidth > 700
+                                                ? (inner.maxWidth - 56) / 3
+                                                : inner.maxWidth,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Icon(
+                                              item.$1,
+                                              color: gold,
+                                              size: 25,
+                                            ),
+                                            const SizedBox(height: 14),
+                                            Text(
+                                              item.$2,
+                                              style: const TextStyle(
+                                                fontFamily: 'Lora',
+                                                fontSize: 19,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 9),
+                                            Text(
+                                              item.$3,
+                                              style: const TextStyle(
+                                                color: muted,
+                                                fontSize: 11,
+                                                height: 1.9,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                          );
+                        },
+                      ),
+                      if (controller.archive.archivedRuns.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 24),
+                          child: Surface(
+                            child: Text(
+                              'Bản 0.8 thêm đại biến cố có mục tiêu và thời hạn, chuỗi quyết định, nghĩa vụ và áp lực trị vì. ${controller.archive.archivedRuns.length} lượt cũ được giữ nguyên trong kho local; hãy bắt đầu triều đại mới để dùng luật mới. Thành tích các bản cũ được xem riêng trong bảng xếp hạng.',
+                              style: const TextStyle(
+                                color: muted,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ),
+                      if (controller.error != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 24),
+                          child: Surface(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  controller.error!,
+                                  style: const TextStyle(color: terracotta),
+                                ),
+                                TextButton(
+                                  onPressed: controller.load,
+                                  child: const Text('Thử đọc lại bản lưu'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      const SizedBox(height: 40),
+                      const Divider(),
+                      const SizedBox(height: 16),
+                      Text(
+                        'VẠN TUẾ  /  BẢN CHƠI THỬ ${rulesVersion.replaceFirst('mvp-', '')}     •     Mỗi triều đại đều bắt đầu từ một quyết định.',
+                        style: const TextStyle(fontSize: 9, color: muted),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+    ),
+  );
+
+  Widget _endingReason() {
+    final title = switch (s.endKind) {
+      'poisoning' => 'Bị mưu sát',
+      'coup' => 'Ngai vàng bị đoạt',
+      'courtCollapse' => 'Triều đình tan rã',
+      'puppet' => 'Vua trở thành bù nhìn',
+      'armyCollapse' => 'Quân đội tan rã',
+      'rebellion' => 'Dân chúng nổi dậy',
+      'invasion' => 'Giang sơn thất thủ',
+      'oldAge' => 'Một đời đế vương khép lại',
+      'illness' => 'Nhà vua băng hà',
+      'exhaustion' => 'Long thể suy kiệt',
+      _ => 'Triều đại khép lại',
+    };
+    final contextText = switch (s.endKind) {
+      'coup' || 'courtCollapse' || 'puppet' =>
+        'Uy quyền ${s.authority}/100 · Ổn định triều đình ${s.stability}/100',
+      'rebellion' => 'Lòng dân ${s.people}/100 · Quân lực ${s.army}/100',
+      'invasion' => 'Quân lực ${s.army}/100 · Kinh thành đã thất thủ',
+      'armyCollapse' =>
+        'Quân lực ${s.army}/100 · Nhà vua không còn lực lượng bảo vệ',
+      'poisoning' =>
+        'Sức khỏe ${s.health}/100 · Dấu vết đầu độc đã được xác minh',
+      'illness' || 'exhaustion' =>
+        'Sức khỏe ${s.health}/100 · Mệt mỏi ${s.fatigue}/100 · Căng thẳng ${s.stress}/100',
+      'oldAge' => 'Nhà vua hưởng thọ ${s.age} tuổi.',
+      _ => '',
+    };
+    return Scaffold(
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 620),
+            child: Surface(
+              padding: 30,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    children: [
+                      Icon(
+                        Icons.history_edu_outlined,
+                        color: terracotta,
+                        size: 23,
+                      ),
+                      SizedBox(width: 10),
+                      Tag('BIẾN CỐ CUỐI CÙNG', color: terracotta),
+                    ],
+                  ),
+                  const SizedBox(height: 26),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontFamily: 'Lora',
+                      fontSize: 32,
+                      color: ink,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Nguyên nhân kết thúc',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: gold,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    s.calendarText(s.endReason!),
+                    key: const ValueKey('ending-reason'),
+                    style: const TextStyle(fontSize: 14, height: 1.9),
+                  ),
+                  if (contextText.isNotEmpty) ...[
+                    const SizedBox(height: 20),
+                    const Divider(),
+                    const SizedBox(height: 12),
+                    Text(
+                      contextText,
+                      style: const TextStyle(
+                        fontSize: 11,
+                        color: muted,
+                        height: 1.8,
+                      ),
+                    ),
+                  ],
+                  const SizedBox(height: 30),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed:
+                          () => setState(() => acknowledgedEnding = s.runId),
+                      child: const Text('Xem thời gian trị vì  →'),
+                    ),
+                  ),
+                  if (s.outcomes.isNotEmpty) _outcomeSummary(),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _ending() => Scaffold(
+    body: Center(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(28),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Crest(size: 64),
+              const SizedBox(height: 40),
+              const Text(
+                'Bạn đã trị vì được',
+                style: TextStyle(fontFamily: 'Lora', fontSize: 25),
+              ),
+              const SizedBox(height: 18),
+              Text(
+                s.duration,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontFamily: 'Lora',
+                  fontSize: 48,
+                  color: forest,
+                  height: 1.4,
+                ),
+              ),
+              const SizedBox(height: 38),
+              Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                alignment: WrapAlignment.center,
+                children: [
+                  FilledButton(
+                    onPressed: busy ? null : startDialog,
+                    child: const Text('Chơi lại'),
+                  ),
+                  OutlinedButton(
+                    onPressed: () => navigate('scores'),
+                    child: const Text('Xem scoreboard'),
+                  ),
+                  TextButton(
+                    onPressed: () => navigate('home'),
+                    child: const Text('Về màn hình chính'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+class Crest extends StatelessWidget {
+  const Crest({super.key, this.size = 40});
+  final double size;
+  @override
+  Widget build(BuildContext context) => Container(
+    width: size,
+    height: size,
+    decoration: BoxDecoration(
+      color: forest,
+      borderRadius: BorderRadius.circular(size * .23),
+    ),
+    child: ImperialIcon('citadel', size: size),
+  );
+}

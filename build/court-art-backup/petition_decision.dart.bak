@@ -1,0 +1,351 @@
+import 'package:flutter/material.dart';
+import 'imperial_dialog.dart';
+import '../../data/content.dart';
+import '../../models/game_state.dart';
+import '../../logic/petition_assignment_rules.dart';
+import '../../logic/chain_settlement_rules.dart';
+import 'imperial_theme.dart';
+
+class PetitionDecision extends StatefulWidget {
+  const PetitionDecision({
+    super.key,
+    required this.state,
+    required this.petition,
+    required this.pickAssignee,
+    required this.onConfirm,
+    required this.onReadLater,
+    this.inDialog = false,
+    this.busy = false,
+  });
+  final GameState state;
+  final Petition petition;
+  final Future<String?> Function(EventDefinition, EventChoice) pickAssignee;
+  final Future<bool> Function(int, String) onConfirm;
+  final VoidCallback onReadLater;
+  final bool inDialog, busy;
+  @override
+  State<PetitionDecision> createState() => _PetitionDecisionState();
+}
+
+class _PetitionDecisionState extends State<PetitionDecision> {
+  GameState get s => widget.state;
+  Petition get petition => widget.petition;
+  EventDefinition get e => eventForState(s, petition.definitionId);
+  StoryArc? get arc =>
+      s.chains.where((a) => a.id == petition.storyId).firstOrNull;
+  bool get settlement => arc != null && usesChainSettlement(arc!);
+  int? selected;
+  String assigneeId = '';
+  bool submitting = false;
+  Courtier? person() => s.court.where((c) => c.id == assigneeId).firstOrNull;
+
+  // Existing eligibility checks, now with a visible reason for each disabled
+  // choice. Selection and expansion never send a game command.
+  String? blockedReason(int index) {
+    if (index < 0) {
+      return settlement && s.points >= 1
+          ? null
+          : 'Cần 1 hành động để xác nhận.';
+    }
+    final c = e.choices[index];
+    if (settlement) {
+      final reason = chainSettlementChoiceBlocked(s, arc!, index);
+      if (reason != null) return reason;
+    }
+    if (s.treasury < c.cost) {
+      return 'Thiếu ${c.cost - s.treasury} tiền để chọn phương án này.';
+    }
+    if (s.grain < c.grainCost) {
+      return 'Thiếu ${c.grainCost - s.grain} lương thực để chọn phương án này.';
+    }
+    final points = petitionPoints(s, c);
+    if (s.points < points) return 'Cần $points hành động để xác nhận.';
+    return null;
+  }
+
+  bool enabled(int index) => blockedReason(index) == null;
+
+  String detailHint(int index) {
+    final c = e.choices[index];
+    var hint = petitionChoiceHint(s, e, c, person: person());
+    if (petitionCanAssign(s, c)) {
+      final chance = petitionChance(s, e, c, person());
+      // The assignee control below owns the person and current probability.
+      // Keep conditional outcomes in the explanation without repeating it.
+      final suffix =
+          ' · ${person()?.name ?? 'Không giao ai'}: $chance% thành công';
+      if (hint.endsWith(suffix)) {
+        hint = hint.substring(0, hint.length - suffix.length);
+      }
+      hint = hint.replaceAll('$chance% thành công', 'Nếu thành công');
+    }
+    if (!RegExp(r'\d+ hành động').hasMatch(hint)) {
+      hint = '$hint · ${petitionPoints(s, c)} hành động';
+    }
+    return hint;
+  }
+
+  Widget choiceDetails(int index) {
+    final c = e.choices[index];
+    return Padding(
+      key: ValueKey('petition-details-$index'),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Chi tiết phương án',
+            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            detailHint(index),
+            key: ValueKey('petition-choice-detail-$index'),
+            style: const TextStyle(fontSize: 13, height: 1.7),
+          ),
+          if (petitionCanAssign(s, c)) ...[
+            const SizedBox(height: 14),
+            Text(
+              'Người xử lý · chuyên môn ${petitionSpecialty(e, c)}',
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 8),
+            OutlinedButton(
+              key: const ValueKey('petition-assignee'),
+              onPressed:
+                  widget.busy || submitting
+                      ? null
+                      : () async {
+                        final id = await widget.pickAssignee(e, c);
+                        if (id != null && mounted && selected == index) {
+                          setState(() => assigneeId = id);
+                        }
+                      },
+              child: Text(person()?.name ?? 'Không giao ai xử lý (mặc định)'),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Tỷ lệ thành công: ${petitionChance(s, e, c, person())}%',
+              key: const ValueKey('petition-success-chance'),
+              style: const TextStyle(
+                color: forest,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SizedBox(height: 6),
+            const Text(
+              'Giao người không tốn thêm hành động. Người được giao sẽ bận đến khi có kết quả. Để mặc định sẽ không tự chọn người thay bạn.',
+              style: TextStyle(fontSize: 12, color: muted, height: 1.6),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget choice(int index) {
+    final active = selected == index;
+    final reason = blockedReason(index);
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          OutlinedButton(
+            key: ValueKey('petition-choice-$index'),
+            onPressed:
+                reason != null || widget.busy || submitting
+                    ? null
+                    : () => setState(() {
+                      if (selected != index) {
+                        selected = index;
+                        assigneeId = '';
+                      }
+                    }),
+            style: OutlinedButton.styleFrom(
+              foregroundColor: ink,
+              disabledForegroundColor: muted,
+              textStyle: const TextStyle(
+                fontFamily: 'BeVietnam',
+                fontWeight: FontWeight.w400,
+              ),
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.all(14),
+              backgroundColor: active ? const Color(0xFFE4EBDD) : paper,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              backgroundBuilder:
+                  (context, states, child) => child ?? const SizedBox.shrink(),
+              side: BorderSide(
+                color: active ? forest : line,
+                width: active ? 2 : 1,
+              ),
+            ),
+            child: Semantics(
+              selected: active,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    active
+                        ? Icons.radio_button_checked
+                        : Icons.radio_button_unchecked,
+                    size: 20,
+                    color: active ? forest : muted,
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      e.choices[index].label,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Icon(
+                    active ? Icons.expand_less : Icons.expand_more,
+                    size: 18,
+                    color: muted,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          if (reason != null)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(14, 6, 14, 0),
+              child: Text(
+                reason,
+                key: ValueKey('petition-blocked-$index'),
+                style: const TextStyle(fontSize: 12, color: terracotta),
+              ),
+            ),
+          if (active) choiceDetails(index),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final content = Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (widget.inDialog) ...[
+          Tag(e.category.toUpperCase()),
+          const SizedBox(height: 12),
+          Text(
+            s.authoredText(petitionText(petition, s)),
+            style: const TextStyle(fontSize: 14),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            petition.deadline <= s.week
+                ? 'Hạn: cuối ${s.periodName} này'
+                : 'Còn ${petition.deadline - s.week + 1} ${s.periodName}',
+            style: const TextStyle(color: terracotta, fontSize: 12),
+          ),
+          const SizedBox(height: 20),
+        ],
+        const Text(
+          'Ý chỉ của bệ hạ',
+          style: TextStyle(fontFamily: 'Lora', fontSize: 20),
+        ),
+        const SizedBox(height: 6),
+        const Text(
+          'Chọn phương án để xem chi tiết. Xác nhận ngự phê mới áp dụng.',
+          style: TextStyle(fontSize: 12, color: muted),
+        ),
+        const SizedBox(height: 14),
+        for (var i = 0; i < e.choices.length; i++) choice(i),
+        if (settlement && arc!.kind == 'haremHarmony') ...[
+          OutlinedButton(
+            key: const ValueKey('chain-stop'),
+            onPressed:
+                enabled(-1) && !widget.busy && !submitting
+                    ? () => setState(() {
+                      selected = -1;
+                      assigneeId = '';
+                    })
+                    : null,
+            child: Text(
+              '${selected == -1 ? '✓ ' : ''}Dừng chuỗi và quyết toán',
+            ),
+          ),
+          if (!enabled(-1))
+            Text(
+              blockedReason(-1)!,
+              style: const TextStyle(fontSize: 12, color: terracotta),
+            ),
+          if (selected == -1)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Text(
+                '1 hành động · Quyết toán: ${chainSettlementRewardText(s, arc!)}',
+                key: const ValueKey('chain-stop-details'),
+              ),
+            ),
+          const SizedBox(height: 12),
+        ],
+        Text(
+          settlement
+              ? 'Quá hạn: dừng chuỗi và quyết toán theo số bước đã hoàn thành; không thu thêm chi phí hay hoàn thành bước đang chờ.'
+              : petition.isStory
+              ? 'Quá hạn: áp dụng lựa chọn cuối cùng và quyết định diễn biến bản tấu sau.${petition.storyKind == 'major' ? ' Tổn thất có thể làm chỉ số về 0 và kết thúc triều đại.' : ''}'
+              : 'Quá hạn: áp dụng lựa chọn cuối cùng.${['Khủng hoảng', 'Âm mưu'].contains(e.category) ? ' Bỏ mặc bản tấu này còn làm mất uy quyền và Ổn định triều đình.' : ''}',
+          key: const ValueKey('petition-expiry-warning'),
+          style: const TextStyle(fontSize: 12, color: terracotta),
+        ),
+      ],
+    );
+    final confirmation = FilledButton(
+      key: const ValueKey('confirm-petition'),
+      onPressed:
+          selected == null || !enabled(selected!) || widget.busy || submitting
+              ? null
+              : () async {
+                setState(() => submitting = true);
+                try {
+                  await widget.onConfirm(selected!, assigneeId);
+                } finally {
+                  if (mounted) setState(() => submitting = false);
+                }
+              },
+      child: const Text('Xác nhận ngự phê'),
+    );
+    final later = TextButton(
+      onPressed: submitting ? null : widget.onReadLater,
+      child: const Text('Đọc sau'),
+    );
+    if (widget.inDialog) {
+      return ImperialAlertDialog(
+        title: Text(
+          e.title,
+          style: const TextStyle(fontFamily: 'Lora', fontSize: 24),
+        ),
+        content: SizedBox(
+          width: 600,
+          child: SingleChildScrollView(child: content),
+        ),
+        actions: [later, confirmation],
+      );
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        content,
+        const SizedBox(height: 18),
+        OverflowBar(
+          alignment: MainAxisAlignment.end,
+          spacing: 12,
+          overflowSpacing: 8,
+          children: [later, confirmation],
+        ),
+      ],
+    );
+  }
+}

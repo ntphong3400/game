@@ -1,0 +1,247 @@
+{
+  "_status": "SIZING_RECOMMENDATION",
+  "_meta": {
+    "created": "2026-10-31",
+    "skill_version": "2.3.0",
+    "guideline_version": "1.5 (Draft for Review) — local snapshot",
+    "input_source": "pasted",
+    "dna_status": "absent",
+    "store_vs_ticket": "not applicable — no DNA store",
+    "env": {
+      "store_root": null,
+      "schema_version": null,
+      "collections_absent": [
+        "features",
+        "findings",
+        "surfaces",
+        "services",
+        "edges",
+        "intakes"
+      ],
+      "tiering": "unavailable",
+      "factors_unknown_due_to_env": [
+        "functional_scope",
+        "data_ux_ui",
+        "technical_complexity",
+        "integrations",
+        "testing_regression"
+      ],
+      "probe": "_env.json"
+    },
+    "intake_artifacts_reused": [],
+    "note": "Provisional planning estimate requested by user; no confirmed Story Points"
+  },
+  "ticket": {
+    "key": null,
+    "summary": "Native Android/iOS delivery for Vạn Tuế",
+    "type": "Epic candidate",
+    "status_at_sizing": "exploratory",
+    "ac_count": 5,
+    "spec_source": "pasted request; proposed acceptance criteria in report"
+  },
+  "readiness": {
+    "result": "Needs Split",
+    "reason": "Simulator prototype, durable mobile gameplay, and store release are separate deliverables"
+  },
+  "placement": {
+    "action": "MIXED",
+    "targets": [],
+    "secondary_targets_not_in_ac": [],
+    "depends_on_not_touched": [],
+    "platform_fit": "ADAPT",
+    "source": "own-derivation; source inspection only"
+  },
+  "footprint": {
+    "ac_count": 5,
+    "rules": null,
+    "rules_basis": "touched-by-story; uncounted without DNA",
+    "evidence_files": null,
+    "neighbor_count_raw": null,
+    "neighbors_strong": null,
+    "neighbors_medium": null,
+    "neighbors_weak": null,
+    "_tiering": "unavailable",
+    "neighbors": [],
+    "neighbors_excluded_as_targets": [],
+    "counted_graph_understates": null,
+    "projected": false
+  },
+  "factors": {
+    "functional_scope": {
+      "rating": "Unknown",
+      "evidence": "DNA gap: features, findings"
+    },
+    "data_ux_ui": {
+      "rating": "Unknown",
+      "evidence": "DNA gap: surfaces, findings"
+    },
+    "technical_complexity": {
+      "rating": "Unknown",
+      "evidence": "DNA gap: services, findings"
+    },
+    "integrations": {
+      "rating": "Unknown",
+      "evidence": "DNA gap: edges, intakes"
+    },
+    "testing_regression": {
+      "rating": "Unknown",
+      "evidence": "DNA gap: findings, features"
+    },
+    "uncertainty": {
+      "rating": "High",
+      "evidence": "AC-01–05 proposed; native build, storage adapter and signing not validated"
+    }
+  },
+  "dominant_drivers": [
+    "technical_complexity",
+    "testing_regression"
+  ],
+  "dominant_drivers_note": "Storage durability and native device behavior require validation",
+  "reference_comparison": {
+    "basis": "house-ladder",
+    "basis_note": "Offline suite-level ladder from reference-stories.md",
+    "house_anchor": {
+      "key": "ODAI-26",
+      "points": 5,
+      "signature": "Small surface governing downstream behavior",
+      "anchor_footprint": {
+        "ac": 5,
+        "rules": 3,
+        "rules_basis": "on-covering-feature",
+        "evidence_files": 1,
+        "raw": 0,
+        "strong": 0,
+        "medium": 0,
+        "weak": 0
+      },
+      "compared_on": "Driver signature only; target tier counts unavailable",
+      "relation": "larger",
+      "domain_distance": "far — IAM reference"
+    },
+    "anchors_ruled_out": [],
+    "tiebreak": null,
+    "local_refinement": null,
+    "rationale": "Durable storage resembles a governing change; full dual-platform delivery adds independently testable outcomes"
+  },
+  "recommendation": {
+    "points": null,
+    "allowed_scale": [
+      1,
+      2,
+      3,
+      5,
+      8
+    ],
+    "provisional_range": null,
+    "confidence": "Low",
+    "confidence_reason": "No DNA, native build or verified device regression evidence",
+    "ai_assistance_note": "No size reduction for expected AI assistance"
+  },
+  "split": {
+    "required": true,
+    "basis": "Separately testable user outcomes",
+    "slices": [
+      {
+        "name": "Native simulator prototype",
+        "ac": [
+          "AC-01"
+        ],
+        "indicative_points": null
+      },
+      {
+        "name": "Durable offline gameplay",
+        "ac": [
+          "AC-02",
+          "AC-03"
+        ],
+        "indicative_points": null
+      },
+      {
+        "name": "Mobile usability and release performance",
+        "ac": [
+          "AC-04"
+        ],
+        "indicative_points": null
+      },
+      {
+        "name": "Installable internal release",
+        "ac": [
+          "AC-05"
+        ],
+        "indicative_points": null
+      },
+      {
+        "name": "Store submission",
+        "ac": [],
+        "indicative_points": null
+      }
+    ]
+  },
+  "assumptions": [
+    "Flutter native compilation with shared gameplay and UI",
+    "Offline single-player with current feature set",
+    "Fresh mobile save; no automatic Web-save transfer",
+    "Existing artwork and store accounts available",
+    "No major SDK/toolchain migration"
+  ],
+  "questions": [
+    {
+      "n": 1,
+      "to": "BA",
+      "question": "Confirm simulator-only, internal install, or public store delivery before commitment",
+      "changes": "Functional scope and delivery endpoint",
+      "example": "Internal Android APK plus iOS TestFlight build"
+    },
+    {
+      "n": 2,
+      "to": "BA",
+      "question": "Is Web-save transfer required?",
+      "changes": "Data scope and separate migration slice",
+      "example": "Fresh mobile saves are acceptable"
+    },
+    {
+      "n": 3,
+      "to": "TL",
+      "question": "Verify storage transaction rollback and native dependency compatibility in a prototype",
+      "changes": "Technical uncertainty and effort interval",
+      "example": "Android and iOS reopen the same save after process termination"
+    }
+  ],
+  "notes_summary": [
+    "No final Story Points",
+    "Person-day estimate is separate from points",
+    "No implementation performed"
+  ],
+  "cross_checks": {
+    "triage_estimate_range": null,
+    "dna_size_of_target": null,
+    "delivered_diff": null,
+    "planning_effort_person_days": {
+      "native_prototype": [
+        2,
+        4
+      ],
+      "internal_beta_cumulative": [
+        6,
+        11
+      ],
+      "store_submission_cumulative": [
+        8,
+        15
+      ],
+      "store_submission_with_contingency": [
+        10,
+        19
+      ]
+    },
+    "not_included": "External review waits; new online or monetization features"
+  },
+  "self_check": {
+    "outcome_ac_dod_clear": false,
+    "impacts_understood": false,
+    "testing_deps_uncertainty_included": true,
+    "reference_used": true,
+    "ai_did_not_reduce_size": true,
+    "fits_one_sprint_or_split": true
+  }
+}

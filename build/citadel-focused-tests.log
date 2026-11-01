@@ -1,0 +1,44 @@
+00:00 +0: loading /Users/phongnguyen/king/test/citadel_hub_test.dart
+00:00 +0: /Users/phongnguyen/king/test/game_engine_test.dart: a failed action does not mutate state or advance random
+00:00 +1: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +2: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +3: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +4: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +5: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +6: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +7: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +8: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +9: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +10: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +11: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +12: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +13: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +14: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +15: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +16: /Users/phongnguyen/king/test/citadel_hub_test.dart: citadel buildings and shortcuts navigate without changing state at Size(1440.0, 900.0)
+00:00 +17: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:00 +18: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:00 +19: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:01 +20: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:01 +21: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:01 +22: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:01 +23: /Users/phongnguyen/king/test/citadel_hub_test.dart: existing weekly save opens in citadel and returns from treasury
+00:01 +24: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(1440.0, 1000.0)
+00:01 +25: /Users/phongnguyen/king/test/citadel_hub_test.dart: end season keeps the existing expiry confirmation and does not spend actions when cancelled
+00:01 +26: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:01 +27: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:01 +28: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:02 +29: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+00:02 +30: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(390.0, 844.0)
+00:03 +31: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0)
+00:03 +32: /Users/phongnguyen/king/test/game_ui_test.dart: national work shows fit, chance, reward and risk before committing
+00:03 +33: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(1440.0, 1000.0)
+00:04 +34: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)
+00:05 +35: /Users/phongnguyen/king/test/game_ui_test.dart: complete a run, show score and recover ending from storage
+00:05 +36: /Users/phongnguyen/king/test/game_ui_test.dart: old rules scores remain viewable separately from current scores
+00:05 +37: /Users/phongnguyen/king/test/game_ui_test.dart: critical court warning leads to a saved collapse ending on mobile
+00:05 +38: /Users/phongnguyen/king/test/game_ui_test.dart: authority warning leads to a saved puppet ending on mobile
+00:05 +39: /Users/phongnguyen/king/test/game_ui_test.dart: all five zero-stat warnings fit on mobile while recovery remains possible
+00:05 +40: /Users/phongnguyen/king/test/game_ui_test.dart: long assassination explanation fits mobile before the time summary
+00:05 +41: /Users/phongnguyen/king/test/game_ui_test.dart: seasonal recommendation accepts the named tú nữ without palace admission
+00:05 +42: All tests passed!

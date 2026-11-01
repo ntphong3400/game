@@ -1,0 +1,28 @@
+00:00 +0: loading /Users/phongnguyen/king/test/court_personnel_missions_test.dart
+00:00 +0: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: each office grade has the exact 1–8 disruption regardless of personal influence
+00:00 +1: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: authority comparisons are strictly greater and junior offices need no authority
+00:00 +2: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: replacement, transfer, swap and backfill cannot bypass outgoing office authority
+00:00 +3: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: a permitted transfer counts both vacated seats once and empty appointment requires no authority
+00:00 +4: /Users/phongnguyen/king/test/court_personnel_ui_test.dart: nominate personnel preview and confirmed action at Size(1440.0, 900.0)
+00:00 +5: /Users/phongnguyen/king/test/court_personnel_ui_test.dart: nominate personnel preview and confirmed action at Size(1440.0, 900.0)
+00:00 +6: /Users/phongnguyen/king/test/court_personnel_ui_test.dart: nominate personnel preview and confirmed action at Size(1440.0, 900.0)
+00:00 +7: /Users/phongnguyen/king/test/court_personnel_ui_test.dart: nominate personnel preview and confirmed action at Size(1440.0, 900.0)
+00:00 +8: /Users/phongnguyen/king/test/court_personnel_ui_test.dart: nominate personnel preview and confirmed action at Size(1440.0, 900.0)
+00:00 +9: /Users/phongnguyen/king/test/court_personnel_ui_test.dart: nominate personnel preview and confirmed action at Size(1440.0, 900.0)
+00:00 +10: /Users/phongnguyen/king/test/court_personnel_ui_test.dart: nominate personnel preview and confirmed action at Size(1440.0, 900.0)
+00:00 +11: /Users/phongnguyen/king/test/court_personnel_ui_test.dart: nominate personnel preview and confirmed action at Size(1440.0, 900.0)
+00:00 +12: /Users/phongnguyen/king/test/court_personnel_ui_test.dart: nominate personnel preview and confirmed action at Size(1440.0, 900.0)
+00:00 +13: /Users/phongnguyen/king/test/court_personnel_ui_test.dart: nominate personnel preview and confirmed action at Size(1440.0, 900.0)
+00:00 +14: /Users/phongnguyen/king/test/court_personnel_ui_test.dart: nominate personnel preview and confirmed action at Size(1440.0, 900.0)
+00:00 +15: /Users/phongnguyen/king/test/court_personnel_ui_test.dart: nominate personnel preview and confirmed action at Size(1440.0, 900.0)
+00:01 +16: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:01 +17: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:02 +18: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:03 +19: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: seasonal generation reaches all six kinds, binds real targets and limits discovery to one a year
+00:03 +20: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: seasonal generation reaches all six kinds, binds real targets and limits discovery to one a year
+00:03 +21: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: seasonal generation reaches all six kinds, binds real targets and limits discovery to one a year
+00:03 +22: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(390.0, 844.0)
+00:03 +23: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(390.0, 844.0)
+00:03 +24: /Users/phongnguyen/king/test/court_personnel_ui_test.dart: authority personnel preview and confirmed action at Size(390.0, 844.0)
+00:04 +25: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(320.0, 568.0)
+00:04 +26: All tests passed!

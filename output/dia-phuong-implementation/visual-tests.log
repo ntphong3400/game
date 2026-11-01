@@ -1,0 +1,7 @@
+00:00 +0: loading /Users/phongnguyen/king/tools/locality_visual_test.dart
+00:00 +0: render locality at Size(1440.0, 900.0)
+00:02 +1: render locality at Size(1024.0, 768.0)
+00:02 +2: render locality at Size(844.0, 390.0)
+00:03 +3: render locality at Size(390.0, 844.0)
+00:03 +4: render locality at Size(320.0, 568.0)
+00:03 +5: All tests passed!

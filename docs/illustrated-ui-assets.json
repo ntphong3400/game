@@ -1,0 +1,61 @@
+{
+  "generator": "Built-in image_gen",
+  "style": "Painted imperial court UI with carved antique gold, jade and vermilion lacquer, ivory silk parchment",
+  "assets": [
+    {
+      "kind": "icons",
+      "prompt": "Use case: stylized-concept. Production game UI sprite atlas, square 2048x2048. Create precisely 16 separate illustrated icons in a perfectly regular 4 by 4 grid of equal square cells. Genuine TRANSPARENT background, no frames or tile backgrounds. All objects centered in their cells, generous clear gap 18% around each object, same visual size. Painterly realistic royal Vietnamese / East Asian imperial court game, sumptuous sculpted antique gold with warm ivory highlights, carved details, subtle bronze shadow, tiny jade and vermilion accents. Readable bold silhouettes at 40 pixels, premium game inventory illustrations, no flat vector outlines. Order left to right top to bottom: row 1 imperial palace pavilion; imperial ceremonial throne; green mountains with golden sun; open treasure chest overflowing gold coins. Row 2 mandarin official hat with scroll; open golden lotus with pink petal tips; polished red heart held in golden dragon flourish; open ancient book with red silk bookmark. Row 3 golden imperial trophy; three court citizens busts; gold dragon imperial seal; imperial shield and crossed swords. Row 4 balanced justice scales; rice sheaf with jade leaves; tied imperial parchment scroll with red seal; gold hourglass with pale sand. No lettering, no numbers, no labels, no watermark. Do not connect neighboring sprites.",
+      "output": [
+        "assets/images/imperial/icons.webp"
+      ]
+    },
+    {
+      "kind": "frame",
+      "prompt": "Use case: stylized-concept. Asset type: one production resizable nine-slice UI panel for a premium East Asian imperial court strategy game. Wide 1536x1024 landscape, front-facing perfectly rectangular flat composition, no perspective. A lavish yet restrained hand-painted antique GOLD carved wood and dark rosewood frame enclosing a blank warm luminous ivory silk parchment center. Four ornate rounded corner brackets sculpted as curled cloud and lotus filigree, smooth scalloped outer silhouette and delicate gold highlights, truly three dimensional with warm highlights and shadows. Frame occupies only outer 80 pixels, corner flourishes confined to outer 140px; center 80 percent is very pale ivory blank paper with subtle fine silk fibers, extremely low contrast, no marks or pictures. Border on all four sides is straight except softened curved ornamental corners, horizontal and vertical rails uniform so the central spans can stretch. Object almost fills image with transparent 10px margin exterior, no props. No text, symbols, icons or writing. Illustration painting like lavish historical game UI, not SVG, not geometrical vector lines.",
+      "output": [
+        "assets/images/imperial/panel.webp",
+        "assets/images/imperial/parchment.webp"
+      ]
+    },
+    {
+      "kind": "button",
+      "prompt": "Use case: stylized-concept. Production UI sprite atlas 1536x1024, 3 equally tall horizontal rows. Exactly three separate long horizontal imperial game button plaques, each centered in its own row with transparent 30px outer margins and generous vertical clear space. Each plaque front-facing, same geometry and width, ornate scalloped rounded silhouette, beveled sculpted antique gold rim and delicate curled cloud filigree at left and right corners, inner gold hairline, soft highlights and dark gold relief shadow. Row 1 deep emerald jade lacquer interior. Row 2 deep oxblood red lacquer interior. Row 3 pale ivory silk parchment interior. Centers completely blank with quiet subtle material grain so live UI text can be overlaid. Details confined near ends and borders, middle horizontal rails uniform for nine-slice stretch. Elegant mature royal East Asian historical illustration, hand-painted premium game asset, no vectors, no letters, no icons, no watermark. Genuine transparent background outside plaques.",
+      "output": [
+        "assets/images/imperial/jade.webp",
+        "assets/images/imperial/crimson.webp",
+        "assets/images/imperial/ivory.webp",
+        "assets/images/imperial/jade-texture.webp"
+      ]
+    },
+    {
+      "kind": "frame-alpha-refinement",
+      "prompt": "Remove ONLY the brown/gold gradient backdrop outside the ornate gold silhouette, replacing all exterior and gaps between objects with actual alpha transparency. Preserve artwork, layout, shapes, colors, highlights, filigree and interior materials.",
+      "output": [
+        "assets/images/imperial/panel.webp"
+      ]
+    }
+  ],
+  "iconOrder": [
+    "citadel",
+    "court",
+    "kingdom",
+    "treasury",
+    "people",
+    "harem",
+    "health",
+    "journal",
+    "scores",
+    "citizens",
+    "authority",
+    "army",
+    "stability",
+    "grain",
+    "scroll",
+    "time"
+  ],
+  "processing": "Atlas cell sampling at runtime. Nine-slice raster panels preserve corner shapes; plaque rows and center textures extracted with cwebp. WebP quality 85–90. Original alpha preserved.",
+  "validation": {
+    "targetedUITests": 74,
+    "gameLogicModelsDataController": "SHA-1 verified unchanged"
+  }
+}

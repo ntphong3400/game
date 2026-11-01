@@ -1,0 +1,10 @@
+Computing fixes in lib...
+Applying fixes...
+
+game/presentation/game_app.dart
+  sort_child_properties_last - 1 fix
+
+game/presentation/widgets/court_roster_panel.dart
+  sort_child_properties_last - 1 fix
+
+2 fixes made in 2 files.

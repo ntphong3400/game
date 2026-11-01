@@ -1,0 +1,3746 @@
+diff --git a/README.md b/README.md
+--- a/README.md
++++ b/README.md
+@@ -1,8 +1,10 @@
+-**Vạn Tuế — MVP v0.21.1.** Game mô phỏng trị vì theo mùa, giao diện tiếng Việt, Flutter Web. Toàn bộ luật chơi chạy trên FE; tiến trình và scoreboard lưu trong IndexedDB của trình duyệt.
++**Vạn Tuế — MVP v0.22.0.** Game mô phỏng trị vì theo mùa, giao diện tiếng Việt, Flutter Web. Toàn bộ luật chơi chạy trên FE; tiến trình và scoreboard lưu trong IndexedDB của trình duyệt.
++
++**Chiến tranh và hòa ước ở bản 0.22.0.** Ba nước lân cận có ưu thế khởi đầu 10/10/0; chỉ một cuộc chiến nhưng nhiều nhiệm vụ cùng lúc. Chọn quân 80/100/125% địch; công thành bắt buộc 200/250/300%. Giao chủ tướng và phó tướng, xem xác suất và tổn thất trước khi xuất quân; thiện cảm thấp có thể khiến chỉ huy tự ý rút lui. Quân và tướng đang bận không được dùng trùng. Thắng vẫn tổn thất, giảm 50–75% so với cơ sở; thua có thể mất 100% đạo quân. Hòa ước nhận hoặc trả 5.000/10.000/17.000 lượng vàng mỗi năm trong 2/3/3 năm; kỳ đầu sau bốn mùa. Kinh thành thất thủ mới gây mất nước do cuộc chiến. Xem [luật chiến tranh và kiểm tra](docs/warfare.md).
+ 
+ **Ngân khố bằng vàng ở bản 0.21.1.** Lượt mới khởi đầu **50.000 lượng vàng**. Quy đổi 1 đơn vị tiền cũ thành 100 lượng vàng cho thuế, thu nhập, giá công việc, tấu chương, vay nợ, cống nạp và ngưỡng kinh tế. Mua lương cơ bản: 4.500 lượng vàng nhận 200.000 tạ; dân số và lương thực giữ nguyên đơn vị. Bản lưu dân số từ 0.21.0 được quy đổi số dư, nợ, sổ thu chi và nghĩa vụ đúng một lần; không đặt lại số dư về mức khởi đầu. Bản lưu trước mô hình dân số giữ hợp đồng cũ. Xem [quy đổi và kiểm tra](docs/gold-currency.md).
+ 
+-**Dân cư và quân đội ở bản 0.21.0.** Lượt theo mùa mới có 1.000.000 dân số lao động, gồm 50.000 quân; tuyển quân và giải ngũ bảo toàn tổng số người. Quân lực được tính từ quân số, huấn luyện, quân khí, sĩ khí, hậu cần và Đại tướng/Phó tướng/Đô đốc. Lương thực đổi sang tạ, khởi đầu 4.000.000 tạ; thu/chi làm tròn lên số nguyên. Có chiêu dân, tiếp nhận tị nạn, hồi hương, phòng dịch, hạ tuổi lao động với thời hạn 4 mùa và tuyển khẩn cấp có triều thần, cùng hai tab thông tin Dân cư & Lao động và Quân sự. Ngân khố có ưu tiên kinh tế 80/20, quân đội 20/80 và cân bằng 50/50, hiệu lực mùa sau. Tổn thất 1–20% / 20–50% / 50–70% tính trên quân đi nhiệm vụ. Bản lưu cũ giữ bộ luật và đơn vị cũ; bắt đầu lượt mới để dùng mô hình mới. Xem [công thức, hành động và kiểm tra](docs/population-military.md).
++**Dân cư và quân đội ở bản 0.21.0.** Lượt theo mùa mới có 1.000.000 dân số lao động, gồm 50.000 quân; tuyển quân và giải ngũ bảo toàn tổng số người. Quân lực được tính từ quân số, huấn luyện, quân khí, sĩ khí, hậu cần và Đại tướng/Phó tướng/Đô đốc. Lương thực đổi sang tạ, khởi đầu 4.000.000 tạ; thu/chi làm tròn lên số nguyên. Có chiêu dân, tiếp nhận tị nạn, hồi hương, phòng dịch, hạ tuổi lao động với thời hạn 4 mùa và tuyển khẩn cấp có triều thần, cùng hai tab thông tin Dân cư & Lao động và Quân sự. Ngân khố có ưu tiên kinh tế 80/20, quân đội 20/80 và cân bằng 50/50, hiệu lực mùa sau. Khung tổn thất cố định của bản 0.21 được thay bằng công thức chỉ huy và chênh lệch quân số ở bản 0.22. Bản lưu cũ giữ bộ luật và đơn vị cũ; bắt đầu lượt mới để dùng mô hình mới. Xem [công thức, hành động và kiểm tra](docs/population-military.md).
+ 
+ **Phát triển lâu dài.** Kinh tế, nông nghiệp và công trình đê có cấp 1–5; quan cần đúng chuyên môn, năng lực tối thiểu 60/70/80/90 cho cấp 2/3/4/5, vốn và 1–4 mùa thi công. Có xác suất thành công, thất bại mất vốn và giữ nguyên cấp. Kinh tế tăng thuế nền hằng năm, nông nghiệp tăng sản lượng nền, cấp đê giảm hao mòn. Tình trạng đê Xuân/Hạ/Thu đóng góp 20/50/30% hệ số thu hoạch; các mốc đê 0/30/60/80/95 cho 30/60/100/110/120% sản lượng. Xem [quy tắc, bảng chi phí và bản lưu](docs/development-economy.md).
+ 
+diff --git a/docs/population-military.md b/docs/population-military.md
+--- a/docs/population-military.md
++++ b/docs/population-military.md
+@@ -1,6 +1,8 @@
+ # Dân cư, quân số và sức mạnh quân lực
+ 
+-Luật `mvp-0.21.1`, nội dung 19, schema 2. Chỉ lượt theo mùa **tạo mới** dùng mô hình này. Bản lưu cũ không tự đổi điểm quân lực thành quân số hoặc đổi thóc thành tạ; tiếp tục giữ dữ liệu, tiến trình và nhóm thành tích của lượt đó.
++Từ bản 0.22, cơ chế điều quân và thương vong mới được mô tả tại [chiến tranh và hòa ước](warfare.md); khung thương vong cố định bên dưới chỉ còn áp dụng cho nhiệm vụ lịch sử đã chốt.
++
++Mô hình gốc `mvp-0.21.1`, nội dung 19, schema 2. Chỉ lượt theo mùa **tạo mới** dùng mô hình này. Bản lưu cũ không tự đổi điểm quân lực thành quân số hoặc đổi thóc thành tạ; tiếp tục giữ dữ liệu, tiến trình và nhóm thành tích của lượt đó.
+ 
+ Đơn vị ngân khố: lượng vàng, quy đổi 1 tiền cũ = 100 lượng vàng. [Chi tiết quy đổi bản lưu](gold-currency.md).
+ 
+diff --git a/docs/warfare.md b/docs/warfare.md
+--- /dev/null
++++ b/docs/warfare.md
+@@ -0,0 +1,108 @@
++# Chiến tranh, điều quân và hòa ước — 0.22.0
++
++Ba nước dùng tên tạm **Hàn Kỳ** (Bắc), **Xích Lĩnh** (Tây), **Bích Trạch** (Nam). Tên nằm trong `WarfareState`; chưa có tên nào được người chơi chọn chính thức. Ưu thế khởi đầu lần lượt **10, 10, 0**; quan hệ ngoại giao riêng, khởi đầu 0. Không chiếm và sáp nhập quốc gia.
++
++## Ngoại giao và chiến tranh
++
++- Trạng thái: hòa bình, căng thẳng, chiến tranh, hòa ước.
++- Chỉ một đối thủ đang chiến tranh; có thể có nhiều mặt trận/nhiệm vụ cùng lúc, tối đa bốn nhiệm vụ mở/đang đánh do hệ thống tự sinh. Nhiệm vụ riêng từ tấu chương có thể bổ sung.
++- Tuyên chiến tốn một hành động, quan hệ −20. Giao hảo tốn 1.000 lượng vàng và một hành động, quan hệ +12.
++- Các hiệu ứng chiến tranh cũ được gắn với một nước còn có thể giao chiến; hòa ước và bảo hộ hòa bình ngăn tự mở chiến tranh với nước đó.
++- Ưu thế giới hạn −100…100. Nhiệm vụ thành công cộng, thất bại/trì hoãn quá hạn/bỏ mục tiêu trừ điểm. Quân số địch tăng chậm theo thời gian (tối đa hai lần quân số nền).
++- Các nhiệm vụ: trinh sát (+6), hộ tống lương (+8), giải vây (+12), tập kích quân nhu (+12), giữ ải (+15), hội chiến/công thành/thủy chiến (+20), bảo vệ kinh thành (+25). Thất bại trừ cùng mức.
++- Trinh sát và tập kích thành công làm suy yếu hiệu quả đối phương; hộ tống lương tác động hậu cần.
++- Ưu thế ≤−70 mở quân báo bảo vệ kinh thành, hạn nhận một mùa; có thể cầu hòa. Bỏ mặc, bỏ mục tiêu, rút bỏ phòng thủ hoặc thua trận kinh thành gây mất nước. Thua trận ngoài biên giới, hết quân dự bị hay mất toàn bộ một đạo quân không tự động làm mất nước. Nếu thắng phòng thủ cuối, ưu thế phục hồi ít nhất −40.
++
++## Nhận và triển khai nhiệm vụ
++
++Quân báo → chọn đối sách → chọn quân → chọn chủ/phó tướng → xem dự tính → xác nhận → triển khai → quân báo kết quả.
++
++- Nhiệm vụ thường: **80%, 100%, 125%** quân địch.
++- Công thành: **200%, 250%, 300%**; không nhận mức dưới 200%.
++- Quân = `ceil(quân địch × tỷ lệ / 10) × 10`.
++- Không đủ quân thì khóa mức lựa chọn; không tự đổi số lượng.
++- Chủ tướng bắt buộc; phó tướng tùy chọn, khác chủ tướng. Người trưởng thành, còn hoạt động, không thuộc hậu cung và không đang bận mới được giao. Đô đốc có lợi thế chuyên môn khi thủy chiến.
++- Quân rảnh = tổng quân − toàn bộ quân đang làm nhiệm vụ. Cả hai chỉ huy đều bị giữ chỗ cho đến khi quân trở về. Quân ở nhà xuống dưới 20% được cảnh báo, nhưng vẫn có thể điều động hết.
++- Nhiệm vụ nhỏ một mùa; hội chiến, công thành, giữ kinh thành hai mùa. Đếm cả mùa xuất quân: nhiệm vụ hai mùa xuất ở mùa 1 trở về cuối mùa 2.
++- Các nhiệm vụ dài có yêu cầu tiếp tế giữa chừng: 1.000 lượng vàng, lương như một đợt xuất quân, một hành động. Tiếp tế hoặc rút quân; bỏ mặc làm nhiệm vụ thất bại.
++- Các tấu chương quân sự trước đây điều một số quân cố định nay mở nhiệm vụ tại tab Quân sự; chưa trừ quân, vàng hoặc hành động cho tới khi xác nhận xuất quân. Mục tiêu đại biến cố chỉ được ghi nhận theo kết quả đạo quân, không tự hoàn thành lúc nhận quân báo.
++
++## Chi phí và hậu cần
++
++Vàng xuất quân = `ceil((8 + quân/1000) × 100)` cho nhiệm vụ nhỏ, hoặc `ceil((15 + quân/1000) × 100)` cho nhiệm vụ dài.
++
++Lương xuất quân = `ceil(quân × 30 × 2 / 100 × 1,1)` tạ. Phần khẩu phần thường lệ đã cấp = `ceil(quân × 30 × 1,5 / 100)` tạ, khấu trừ vào nhu cầu cuối mùa. Tiếp tế cũng ghi phần khẩu phần đã cấp trong mùa nhận tiếp tế. Quân vẫn nằm trong quân số phục vụ để tính quân phí; không trừ khẩu phần đã trả trước lần thứ hai.
++
++Phí đã chi không hoàn khi thua, tự rút hoặc cầu hòa.
++
++## Xác suất chiến đấu và thiện cảm
++
++Dùng cùng dữ liệu công khai cho xem trước và thực thi. Không lấy trung thành/đặc tính chưa khám phá để âm thầm thay đổi xác suất đã hiển thị.
++
++- Hiệu quả một chỉ huy = `clamp(năng lực × độ phù hợp − mệt/5, 0, 100)`. Phù hợp bằng 1 nếu chuyên Quân sự, hoặc đô đốc trong thủy chiến; còn lại 0,75.
++- Chỉ huy và thiện cảm phối hợp dùng **70% chủ tướng + 30% phó tướng**. Nếu không có phó tướng thì dùng 100% người chỉ huy.
++- Sẵn sàng dùng mô hình dân số hiện tại: 30% huấn luyện + 25% quân khí + 20% sĩ khí + 25% hậu cần.
++- Sức ta = quân × sẵn sàng/100 × `(0,8 + 0,004 × chỉ huy)` × địa hình × đối sách.
++- Sức địch = quân địch × chất lượng địch/100. Chất lượng ban đầu 65.
++- Địa hình: giữ ải/kinh thành ×1,35; công thành chia `(1,5 + độ kiên cố/100)`; còn lại ×1. Kiên cố ban đầu 65.
++- Đối sách: thận trọng sức chiến đấu ×0,95, thương vong cơ sở ×0,8; chủ động ×1,10 và ×1,2; theo kế hoạch ×1.
++- Xác suất nếu giao chiến = `clamp(round(50 + 45 × (sức ta − sức địch)/(sức ta + sức địch)), 5, 95)`.
++
++| Thiện cảm phối hợp | Nguy cơ tự ý bỏ nhiệm vụ |
++|---|---:|
++| 80–100 | 0% |
++| 60–79 | 3% |
++| 40–59 | 10% |
++| 20–39 | 25% |
++| Dưới 20 | 40% |
++
++Xác suất cuối = `(1 − nguy cơ bỏ nhiệm vụ/100) × xác suất nếu giao chiến`. Bước đầu xét rút lui, bước sau xét giao chiến. Vì thế năng lực cao vẫn có thể thua do bất mãn.
++
++## Thương vong
++
++`R = quân tham chiến / quân địch`.
++
++`B = clamp(50/R + (50 − chỉ huy) × 0,4, 1, 100)`; công thành nhân thêm 1,3 trước giới hạn. Áp dụng hệ số đối sách rồi giới hạn lại 1…100.
++
++- **Thua khi giao chiến:** chịu B%.
++- **Thắng:** giảm B ngẫu nhiên 50–75%, tức còn B × 25–50%.
++- **Tướng tự ý rút:** chịu B × 10–25% ngẫu nhiên; nhiệm vụ vẫn thua.
++- Số quân mất = làm tròn lên đến người nguyên, giới hạn bằng quân tham chiến.
++- Trước khi trả quân, bỏ giữ chỗ đạo quân đó rồi trừ cùng số người khỏi tổng quân và dân số; quân của các nhiệm vụ khác không bị trừ theo. Tử vong dân số thường lệ vẫn có thể làm giảm quân tại nhà ngoài tổn thất trận đánh.
++- Quân sống sót vẫn là quân nhân, không tự chuyển thành lao động dân sự.
++- Tải lại, sao chép hoặc gửi lại receipt không bốc kết quả/thương vong lần nữa. Nguyên nhân gián đoạn do chỉ huy rời chức được báo riêng.
++
++Ví dụ 10.000 đấu 10.000, chỉ huy 75: B=40%. Thua mất 4.000; thắng được giảm 60% thì mất 1.600. Thua có thể mất 100%; thắng vẫn có thương vong, tối đa 50% với mức giảm tối thiểu 50%.
++
++## Hòa đàm và triều cống
++
++| Gói | Vàng/năm | Số năm/kỳ | Ưu thế để đòi cống |
++|---|---:|---:|---:|
++| Nhẹ | 5.000 | 2 | ≥30 |
++| Vừa | 10.000 | 3 | ≥70 |
++| Nặng | 17.000 | 3 | ≥90 |
++
++Đòi cống: phí sứ đoàn 1.000 vàng và một hành động; cơ hội `clamp(60 + 2 × (ưu thế − ngưỡng), 5, 95)%`. Chưa đạt ngưỡng không được yêu cầu. Từ chối không hoàn phí.
++
++Cầu hòa: phí 2.000 vàng và một hành động; chấp nhận nghĩa vụ tối thiểu Nhẹ nếu ưu thế >−30, Vừa nếu −70<ưu thế≤−30, Nặng nếu ưu thế≤−70. Đình chiến không cống kéo dài bốn mùa, xác suất chấp nhận 95% khi hai bên trong khoảng −29…29, còn lại 70%.
++
++- Kỳ đầu **sau bốn mùa kể từ ký**, rồi mỗi bốn mùa; không nhận ngay khi ký. Không biến thành thu/chi mỗi mùa.
++- Thu/chi xuất hiện trong dự toán đúng kỳ và sổ ngân khố khi thanh toán. Khoản phải trả được xử lý sau chi thường lệ.
++- Khi thiếu, thanh toán được bao nhiêu ghi bấy nhiêu; phần còn lại vào **nợ cống riêng**, không đồng thời cộng vào nợ thường lệ.
++- Hạn trả bù một mùa, có thể gia hạn một lần. Người nộp có thể trả bù hoặc khước từ. Quá hạn/khước từ phá hòa ước, quan hệ −25, có tối hậu thư trước nguy cơ tái chiến từ mùa sau. Một cuộc chiến khác đang diễn ra vẫn ngăn mở thêm cuộc chiến.
++- Đối phương có thể chậm cống nếu quan hệ <−50 (20% tại kỳ đến hạn). Có thể miễn, gia hạn hoặc gây sức ép (phí 500 vàng, một hành động, 70% thu khoản thiếu).
++- Hết số kỳ thì hòa ước hết hiệu lực, không phát sinh kỳ mới; khoản còn thiếu vẫn giữ lại. Bảo hộ hòa bình thêm bốn mùa. Hết bảo hộ không tự động tuyên chiến.
++- Ký hòa ước mới vẫn bảo lưu nợ cống cũ thành khoản có thể trả/đòi riêng; không xóa nợ vì thay điều khoản.
++- Quân đang đánh khi ký hòa ước rút về theo lịch, không nhận thêm thương vong giao chiến sau hòa ước, không trả quân hai lần. Phí đã ứng không hoàn.
++
++## Bản lưu và giao diện
++
++Ván mới và bản lưu dùng dân số/vàng được gắn mô hình quốc gia; bản lưu vàng chưa có trường chiến tranh được bổ sung một lần. Giữ số dư, quân số, các đạo quân và kết quả lịch sử đã chốt. Bản lưu trước mô hình dân số hoặc fixture giữ đơn vị cũ tiếp tục cơ chế cũ. Thành tích giữ `scoreRules` cũ.
++
++Tab **Quân sự** chứa tổng quân/đang bận/rảnh, ba nước, hòa đàm, hòa ước, nhiệm vụ, yêu cầu tiếp tế và quân báo. Hộp xuất quân hiển thị tỷ lệ quân, hai chỉ huy, thiện cảm, xác suất cuối, thương vong theo từng nhánh, vàng/lương và quân còn ở nhà. Không cần tab mới.
++
++Các hệ số cân bằng và tên quốc gia ở trên là giá trị mặc định được dùng để triển khai các phần trước đó mới có đề xuất.
++
++## Kiểm tra
++
++`test/warfare_test.dart`: mô hình, nâng bản lưu, nhiều nhiệm vụ, giữ quân/tướng, công thành, xác suất/thiện cảm, thương vong, hồi quân, đại biến cố, mất nước, kỳ cống, nợ, hết hạn, receipt. `test/warfare_ui_test.dart`: chọn quân và tướng, giá khớp thực chi, hủy không ghi dữ liệu, công thành và cầu hòa trên desktop/điện thoại nhỏ.
+diff --git a/lib/game/data/content.dart b/lib/game/data/content.dart
+--- a/lib/game/data/content.dart
++++ b/lib/game/data/content.dart
+@@ -1432,10 +1432,12 @@
+ /// Shared by commands, confirmation dialogs and expiry forecasts.
+ EventDefinition eventForState(GameState s, String id) {
+   final story = storyEventForState(s, id);
+-  if (story != null) return currencyEvent(s, populationEvent(s, story));
++  if (story != null) {
++    return currencyEvent(s, warEvent(s, populationEvent(s, story)));
++  }
+   final e = eventById(id);
+   if (!s.seasonal || e.condition.startsWith('population')) {
+-    return currencyEvent(s, populationEvent(s, e));
++    return currencyEvent(s, warEvent(s, populationEvent(s, e)));
+   }
+   final seasonal = EventDefinition(
+     e.id,
+@@ -1449,7 +1451,7 @@
+     family: e.family,
+     trigger: e.trigger,
+   );
+-  return currencyEvent(s, populationEvent(s, seasonal));
++  return currencyEvent(s, warEvent(s, populationEvent(s, seasonal)));
+ }
+ 
+ const urgentEventIds = [
+@@ -1469,7 +1471,11 @@
+     e.family.isEmpty ? e.category : e.family;
+ 
+ int petitionPoints(GameState s, EventChoice c) =>
+-    s.seasonal && c.points == 0 ? 1 : c.points;
++    c.effects.containsKey('warMission')
++        ? 0
++        : s.seasonal && c.points == 0
++        ? 1
++        : c.points;
+ 
+ String petitionText(Petition petition, GameState state) {
+   final candidate =
+diff --git a/lib/game/data/expanded_events.dart b/lib/game/data/expanded_events.dart
+--- a/lib/game/data/expanded_events.dart
++++ b/lib/game/data/expanded_events.dart
+@@ -478,6 +478,9 @@
+         : effects.entries
+             .map((e) {
+               final key = e.key;
++              if (key == 'warMission') {
++                return 'Mở nhiệm vụ quân sự để chọn quân và tướng';
++              }
+               final value = key == 'plotReduce' ? -e.value : e.value;
+               final label =
+                   key.startsWith('faction:')
+diff --git a/lib/game/data/population_content.dart b/lib/game/data/population_content.dart
+--- a/lib/game/data/population_content.dart
++++ b/lib/game/data/population_content.dart
+@@ -287,3 +287,40 @@
+ }
+ 
+ int mathMax(int a, int b) => a > b ? a : b;
++
++/// Military petitions now open a selectable campaign task. No fee or fixed
++/// contingent is committed until the player confirms its own army and leaders.
++EventDefinition warEvent(GameState s, EventDefinition e) {
++  if (s.warfare == null || !e.choices.any((c) => c.troops > 0)) return e;
++  return EventDefinition(
++    e.id,
++    e.title,
++    'Quân báo yêu cầu ứng phó. Nhận nhiệm vụ để chọn đối sách, số quân và chỉ huy tại Quân sự. Chi phí chỉ thu khi xác nhận xuất quân.',
++    e.category,
++    [
++      for (final c in e.choices)
++        if (c.troops == 0)
++          c
++        else
++          EventChoice(
++            'Nhận nhiệm vụ: ${c.label}',
++            'Mở nhiệm vụ với ${whole(c.troops)} quân địch; chọn 80/100/125% quân, chủ tướng và phó tướng tại Quân sự. Thắng vẫn có thương vong.',
++            {'warMission': c.troops},
++            points: 0,
++            combat: c.combat,
++            naval: c.naval,
++            laterEffects: {
++              for (final key in {...c.effects, ...c.laterEffects}.keys)
++                key: (c.effects[key] ?? 0) + (c.laterEffects[key] ?? 0),
++            },
++            laterFailureEffects: c.laterFailureEffects,
++            nativeResources: true,
++          ),
++    ],
++    condition: e.condition,
++    cooldown: e.cooldown,
++    minWeek: e.minWeek,
++    family: e.family,
++    trigger: e.trigger,
++  );
++}
+diff --git a/lib/game/logic/finance_rules.dart b/lib/game/logic/finance_rules.dart
+--- a/lib/game/logic/finance_rules.dart
++++ b/lib/game/logic/finance_rules.dart
+@@ -4,11 +4,18 @@
+ import 'harem_rules.dart';
+ import 'population_rules.dart';
+ import 'currency_rules.dart';
++import 'warfare_rules.dart';
+ import 'palace_rules.dart';
+ import 'development_rules.dart';
+ 
+ class BudgetItem {
+-  const BudgetItem(this.title, this.detail, this.amount);
++  const BudgetItem(
++    this.title,
++    this.detail,
++    this.amount, {
++    this.separateArrears = false,
++  });
++  final bool separateArrears;
+   final String title, detail;
+   final int amount;
+ }
+@@ -36,6 +43,12 @@
+     '${s.lastTaxYear == 0 ? 'Chưa thu thuế vụ Thu lần nào.' : 'Đã thu năm ${s.lastTaxYear}: mức ${taxLabels[s.lastTaxRate]}, ${s.lastTaxRevenue} ${moneyUnit(s)}.'}';
+ 
+ List<BudgetItem> budgetIncome(GameState s) => [
++  for (final item in tributeReceipts(s))
++    BudgetItem(
++      'Triều cống từ ${item.country.name}',
++      'Hòa ước: kỳ ${item.country.treaty!.paidInstallments + 1}/${item.country.treaty!.installments}.',
++      item.amount,
++    ),
+   BudgetItem(
+     'Thu cơ bản của vương quốc',
+     s.population == null
+@@ -91,6 +104,13 @@
+   final consorts = s.court.where((c) => c.available && c.inHarem).length;
+   final saving = s.seasonal ? palaceUpkeepSaving(s) : 0;
+   return {
++    for (final item in tributePayments(s))
++      'tribute:${item.country.id}': BudgetItem(
++        'Triều cống ${item.country.name}',
++        'Nghĩa vụ hằng năm, thiếu ghi riêng trong hòa ước.',
++        item.amount,
++        separateArrears: true,
++      ),
+     'army': BudgetItem(
+       'Duy trì quân đội',
+       s.population == null
+@@ -137,6 +157,7 @@
+     (o) => o.amount > 0 && o.nextWeek <= s.week,
+   ))
+     'obligation:${o.id}',
++  for (final item in tributePayments(s)) 'tribute:${item.country.id}',
+ ];
+ 
+ int debtPayment(int debt, int balance, {int scale = 1}) =>
+@@ -155,7 +176,7 @@
+       final paid = math.min(cash, e.amount);
+       payable.add(paid);
+       cash -= paid;
+-      debt += e.amount - paid;
++      if (!e.separateArrears) debt += e.amount - paid;
+     }
+     repayment = debtPayment(debt, cash, scale: moneyScale(s));
+     closingBalance = cash - repayment;
+diff --git a/lib/game/logic/game_engine.dart b/lib/game/logic/game_engine.dart
+--- a/lib/game/logic/game_engine.dart
++++ b/lib/game/logic/game_engine.dart
+@@ -14,6 +14,8 @@
+ import 'health_rules.dart';
+ import 'chain_settlement_rules.dart';
+ import 'population_rules.dart';
++import 'warfare_rules.dart';
++import 'dart:convert';
+ import '../data/reign_content.dart';
+ import '../data/story_petitions.dart';
+ part 'reign_engine.dart';
+@@ -22,6 +24,7 @@
+ part 'story_engine.dart';
+ part 'development_engine.dart';
+ part 'population_engine.dart';
++part 'warfare_engine.dart';
+ 
+ /// No Flutter, storage, network or wall-clock dependencies. All gameplay random
+ /// consumes the persisted LCG (31-bit arithmetic is exact on Dart VM and JS).
+@@ -53,7 +56,10 @@
+       s.population = PopulationState();
+       s.grain = initialFood;
+       s.goldStandard = goldEnabled;
+-      if (goldEnabled) s.treasury = 50000;
++      if (goldEnabled) {
++        s.treasury = 50000;
++        s.warfare = WarfareState();
++      }
+     }
+     s.points = s.actionsPerTurn;
+     _financeWeek(s);
+@@ -120,9 +126,12 @@
+     // A terminal state cannot be revived by issuing one more command.
+     _finishIfCritical(s);
+     if (!s.ended) {
++      _warSync(s);
+       prepareStoryPetitions(s);
+       revealSeasonPetitions(s);
+       switch (command.type) {
++        case 'war':
++          _warCommand(s, command);
+         case 'action':
+           _action(s, command.target, command.option);
+         case 'petition':
+@@ -192,6 +201,7 @@
+           throw const GameRuleException('Hành động không hợp lệ.');
+       }
+     }
++    _warSync(s);
+     _clamp(s);
+     _finishIfCritical(s);
+     if (s.ended) _closeFinanceWeek(s);
+@@ -1165,6 +1175,10 @@
+       throw const GameRuleException('Lựa chọn không hợp lệ.');
+     }
+     final choice = e.choices[index];
++    if (s.warfare != null && choice.effects.containsKey('warMission')) {
++      _warPetition(s, p, e, choice);
++      return;
++    }
+     if (s.population != null &&
+         choice.troops > s.population!.availableSoldiers) {
+       throw GameRuleException('Cần ${whole(choice.troops)} quân rảnh.');
+@@ -1352,6 +1366,15 @@
+         case 'work':
+           s.workThisWeek += value;
+         case 'peace':
++          if (s.warfare?.active != null) {
++            final n = s.warfare!.active!;
++            _warSignTreaty(
++              s,
++              n,
++              n.advantage < -29 ? 'medium' : 'light',
++              receiving: false,
++            );
++          }
+           s.war = 0;
+           s.siege = 0;
+         case 'taxNormal':
+@@ -1484,6 +1507,7 @@
+     if (!s.ended) _politics(s);
+     if (!s.ended) _military(s);
+     if (!s.ended && s.population != null) _populationSeason(s);
++    if (!s.ended) _warSeason(s);
+     _clamp(s);
+     _finishIfCritical(s);
+     if (!s.ended &&
+@@ -1567,6 +1591,7 @@
+   }
+ 
+   void _economy(GameState s) {
++    _warPrepareBudget(s);
+     if (s.population != null) _populationLaborSample(s);
+     if (s.seasonal) {
+       _settleLeveeSeason(s);
+@@ -1602,9 +1627,11 @@
+         'gold',
+       );
+     }
++    s.lastExpense = 0;
+     final costs = budgetExpenses(s);
+     var spent = 0;
+     for (final key in budgetPaymentOrder(s)) {
++      if (key.startsWith('tribute:')) continue;
+       final item = costs[key]!;
+       final required = item.amount;
+       final paid = _charge(
+@@ -1640,6 +1667,8 @@
+         }
+       }
+     }
++    _warSettleTribute(s);
++    spent += s.lastExpense;
+     final payment = debtPayment(s.debt, s.treasury, scale: moneyScale(s));
+     if (payment > 0) {
+       final beforeDebt = s.debt;
+@@ -2297,6 +2326,7 @@
+   }
+ 
+   void _military(GameState s) {
++    if (s.warfare != null) return;
+     if (s.war <= 0 || s.ended) return;
+     final general =
+         s.court.where((c) => c.available && c.role == 'Đại tướng').firstOrNull;
+@@ -2657,7 +2687,8 @@
+       );
+     } else if (s.population == null
+         ? s.army <= 0
+-        : s.population!.soldiers <= 0 || s.population!.population <= 0) {
++        : (s.warfare == null && s.population!.soldiers <= 0) ||
++            s.population!.population <= 0) {
+       _finish(
+         s,
+         s.war > 0
+diff --git a/lib/game/logic/personnel_rules.dart b/lib/game/logic/personnel_rules.dart
+--- a/lib/game/logic/personnel_rules.dart
++++ b/lib/game/logic/personnel_rules.dart
+@@ -220,7 +220,10 @@
+     (base * specialtyFit(c.specialty, specialty) / 100).round().clamp(1, 100);
+ 
+ bool officerBusy(GameState s, String id) =>
+-    (s.population?.deployments.any((d) => d.officerId == id) ?? false) ||
++    (s.population?.deployments.any(
++          (d) => (d.officerId == id || d.deputyId == id),
++        ) ??
++        false) ||
+     (s.population?.orders.any((o) => o.officerId == id) ?? false) ||
+     s.projects.any((p) => p.officerId == id) ||
+     s.palaceWorks.any((p) => p.personId == id) ||
+diff --git a/lib/game/logic/population_engine.dart b/lib/game/logic/population_engine.dart
+--- a/lib/game/logic/population_engine.dart
++++ b/lib/game/logic/population_engine.dart
+@@ -343,8 +343,21 @@
+       p.deployments.remove(d);
+       final leader =
+           s.court.where((c) => c.id == d.officerId && c.available).firstOrNull;
+-      final success = d.succeeded && (d.officerId.isEmpty || leader != null);
++      final deputyPresent =
++          d.deputyId.isEmpty ||
++          s.court.any((c) => c.id == d.deputyId && c.available);
++      final success =
++          d.succeeded &&
++          (d.officerId.isEmpty || leader != null) &&
++          deputyPresent;
+       _losePopulation(s, d.losses, 'Tử trận: ${d.title}', soldiersOnly: true);
++      if (d.missionId.isNotEmpty && s.warfare != null) {
++        _warDeploymentResult(s, d, leader != null && deputyPresent);
++        final mission =
++            s.warfare!.missions.where((m) => m.id == d.missionId).firstOrNull;
++        p.morale += mission?.status == 'success' ? 3 : -6;
++        continue;
++      }
+       _apply(
+         s,
+         success ? d.effects : d.failureEffects,
+diff --git a/lib/game/logic/reign_engine.dart b/lib/game/logic/reign_engine.dart
+--- a/lib/game/logic/reign_engine.dart
++++ b/lib/game/logic/reign_engine.dart
+@@ -68,6 +68,20 @@
+   }
+ 
+   void _emergency(GameState s, String kind, [String officerId = '']) {
++    if (s.warfare?.active != null && kind == 'peace') {
++      final n = s.warfare!.active!;
++      final tier =
++          n.advantage <= -70
++              ? 'heavy'
++              : n.advantage <= -30
++              ? 'medium'
++              : 'light';
++      _spend(s, money(s, 20), title: 'Cầu hòa với ${n.name}');
++      _warSignTreaty(s, n, tier, receiving: false);
++      s.workThisWeek++;
++      s.affairsThisWeek++;
++      return;
++    }
+     if (s.population != null && ['levy', 'early_labor'].contains(kind)) {
+       _populationEmergency(s, kind, officerId);
+       return;
+@@ -199,6 +213,14 @@
+     final m = s.major;
+     if (m == null) return;
+     if (s.population?.deployments.any((d) => d.majorId == m.id) ?? false) {
++      return;
++    }
++    if (s.warfare?.missions.any(
++          (w) =>
++              w.majorId == m.id &&
++              ['open', 'deployed', 'returning'].contains(w.status),
++        ) ??
++        false) {
+       return;
+     }
+     final definition = majorDefinition(m.kind);
+diff --git a/lib/game/logic/reign_rules.dart b/lib/game/logic/reign_rules.dart
+--- a/lib/game/logic/reign_rules.dart
++++ b/lib/game/logic/reign_rules.dart
+@@ -249,6 +249,17 @@
+   'early_labor': 'Hạ tuổi lao động',
+ };
+ String emergencyHint(GameState s, String kind) {
++  if (s.warfare?.active != null && kind == 'peace') {
++    final n = s.warfare!.active!;
++    final amount =
++        n.advantage <= -70
++            ? 17000
++            : n.advantage <= -30
++            ? 10000
++            : 5000;
++    final years = amount == 5000 ? 2 : 3;
++    return 'Chi 2.000 lượng vàng, 1 hành động để cầu hòa với ${n.name}; nộp $amount lượng vàng/năm × $years năm. Kỳ đầu sau 4 mùa. Quân đang xuất chinh trở về theo lịch.';
++  }
+   if (s.goldStandard && kind == 'borrow') {
+     return 'Nhận 12.000 lượng vàng, 1 hành động. Từ mùa sau trả 5.000 lượng vàng/mùa × 3 mùa (tổng 15.000 lượng vàng). Thế gia +5, uy quyền −2; một khoản vay mỗi lúc.';
+   }
+diff --git a/lib/game/logic/story_engine.dart b/lib/game/logic/story_engine.dart
+--- a/lib/game/logic/story_engine.dart
++++ b/lib/game/logic/story_engine.dart
+@@ -213,6 +213,10 @@
+       throw const GameRuleException('Lựa chọn không hợp lệ.');
+     }
+     final c = e.choices[index];
++    if (!expired && s.warfare != null && c.effects.containsKey('warMission')) {
++      _warPetition(s, p, e, c);
++      return;
++    }
+     final deployment = s.population != null && c.troops > 0 && !expired;
+     if (deployment && c.troops > s.population!.availableSoldiers) {
+       throw GameRuleException('Cần ${whole(c.troops)} quân rảnh.');
+diff --git a/lib/game/logic/warfare_engine.dart b/lib/game/logic/warfare_engine.dart
+--- /dev/null
++++ b/lib/game/logic/warfare_engine.dart
+@@ -0,0 +1,827 @@
++part of 'game_engine.dart';
++
++extension WarfareEngine on GameEngine {
++  NeighborState _warCountry(GameState s, String id) {
++    final n = s.warfare?.neighbors.where((n) => n.id == id).firstOrNull;
++    if (n == null) throw const GameRuleException('Không có quốc gia này.');
++    return n;
++  }
++
++  void _warBegin(GameState s, NeighborState n) {
++    if (s.warfare!.active != null && s.warfare!.active != n) {
++      throw const GameRuleException(
++        'Chỉ tham chiến với một nước tại một thời điểm.',
++      );
++    }
++    if (n.status == 'treaty' || n.cooldownUntil > s.week) {
++      throw const GameRuleException(
++        'Đang có hòa ước hoặc thời gian bảo hộ hòa bình.',
++      );
++    }
++    if (n.status == 'war') return;
++    n.status = 'war';
++    n.warStarted = s.week;
++    n.nextMission = s.week + 1;
++    n.relation = (n.relation - 20).clamp(-100, 100);
++    n.capitalWarned = false;
++    s.war = math.max(1, s.war);
++    s.siege = 0;
++    s.note(
++      'Chiến tranh với ${n.name}',
++      'Ưu thế ban đầu ${n.advantage}. Chọn nhiệm vụ, quân và tướng tại Quân sự. Chiến thắng dẫn tới hòa ước triều cống, không sáp nhập quốc gia.',
++      'danger',
++    );
++    _warOpenMission(s, n, 'defend', 5000);
++    _warOpenMission(s, n, 'scout', 1500);
++  }
++
++  void _warSync(GameState s) {
++    final w = s.warfare;
++    if (w == null) return;
++    if (w.active != null) {
++      s.war = math.max(1, s.war);
++      return;
++    }
++    if (s.war > 0) {
++      final candidates =
++          w.neighbors
++              .where((n) => n.status != 'treaty' && n.cooldownUntil <= s.week)
++              .toList()
++            ..sort((a, b) => a.relation.compareTo(b.relation));
++      if (candidates.isNotEmpty) {
++        _warBegin(s, candidates.first);
++      } else {
++        s.war = 0;
++      }
++    }
++  }
++
++  WarMission _warOpenMission(
++    GameState s,
++    NeighborState n,
++    String kind,
++    int enemy, {
++    String? title,
++  }) {
++    final w = s.warfare!;
++    final m = WarMission(
++      id: 'war-${++w.sequence}',
++      countryId: n.id,
++      kind: kind,
++      title: title ?? warMissionNames[kind]!,
++      enemyTroops: enemy,
++      opened: s.week,
++      deadline: s.week + (kind == 'capital' ? 1 : 2),
++      naval: kind == 'naval',
++    );
++    w.missions.add(m);
++    s.note(
++      'Quân tình: ${m.title}',
++      '${n.name}: ${whole(enemy)} quân địch. Hạn nhận cuối ${s.date(m.deadline)}. ${kind == 'capital' ? 'Kinh thành lâm nguy: cầu hòa hoặc tổ chức phòng thủ; bỏ mặc sẽ mất nước.' : 'Xem Quân sự để chọn đối sách và điều quân.'}',
++      kind == 'capital' ? 'danger' : 'warning',
++    );
++    return m;
++  }
++
++  void _warCommand(GameState s, GameCommand command) {
++    if (s.warfare == null || s.population == null) {
++      throw const GameRuleException('Lượt này giữ cơ chế chiến tranh cũ.');
++    }
++    Map<String, dynamic> data;
++    try {
++      data = Map<String, dynamic>.from(jsonDecode(command.option));
++    } catch (_) {
++      throw const GameRuleException('Lệnh chiến tranh không hợp lệ.');
++    }
++    final action = data['action'];
++    if (['deploy', 'decline', 'intervene', 'withdraw'].contains(action)) {
++      final m =
++          s.warfare!.missions.where((m) => m.id == command.target).firstOrNull;
++      if (m == null) throw const GameRuleException('Nhiệm vụ không tồn tại.');
++      if (action == 'deploy') {
++        final ratio = (data['ratio'] as num?)?.toDouble() ?? 0;
++        final leader =
++            s.court.where((c) => c.id == command.assigneeId).firstOrNull;
++        final deputyId = data['deputy'] as String? ?? '';
++        final deputy = s.court.where((c) => c.id == deputyId).firstOrNull;
++        if (deputyId.isNotEmpty && deputy == null) {
++          throw const GameRuleException('Phó tướng không còn trong triều.');
++        }
++        final tactic = data['tactic'] as String? ?? 'balanced';
++        if (!warTactics.containsKey(tactic)) {
++          throw const GameRuleException('Đối sách không hợp lệ.');
++        }
++        final blocked = warDeployBlocked(s, m, ratio, leader, deputy);
++        if (blocked != null) throw GameRuleException(blocked);
++        final troops = warTroops(m, ratio);
++        final quote = WarPreview(s, m, troops, leader!, deputy, tactic: tactic);
++        _spend(
++          s,
++          quote.cost,
++          grain: quote.food,
++          title: 'Xuất quân: ${m.title}',
++          detail:
++              '${whole(troops)} quân; ${leader.name}; cơ hội thắng ${quote.winChance.toStringAsFixed(1)}%.',
++        );
++        final retreat = _next(s, 100) < quote.withdrawal;
++        final won = !retreat && _next(s, 100) < quote.tacticalChance;
++        final reduction =
++            retreat
++                ? 10 + _next(s, 16)
++                : won
++                ? 50 + _next(s, 26)
++                : 0;
++        final losses = battleLosses(
++          troops,
++          quote.base,
++          won: won,
++          retreated: retreat,
++          reduction: reduction,
++        );
++        m.status = 'deployed';
++        m.troops = troops;
++        m.officerId = leader.id;
++        m.deputyId = deputyId;
++        m.tactic = tactic;
++        m.due = s.week + m.duration - 1;
++        _assignOfficer(s, leader);
++        if (deputy != null) _assignOfficer(s, deputy);
++        s.population!.foodCredit += warFoodCredit(troops);
++        s.population!.deployments.add(
++          ArmyDeployment(
++            id: m.id,
++            title: m.title,
++            troops: troops,
++            losses: losses,
++            due: m.due,
++            officerId: leader.id,
++            deputyId: deputyId,
++            chance: quote.winChance.round(),
++            succeeded: won,
++            countryId: m.countryId,
++            missionId: m.id,
++            retreated: retreat,
++            baseCasualty: quote.base,
++            reduction: reduction,
++          ),
++        );
++        s.workThisWeek++;
++        s.affairsThisWeek++;
++        _respond(s, 'border');
++        s.note(
++          'Điều quân: ${m.title}',
++          '${whole(troops)} quân, chủ tướng ${leader.name}${deputy == null ? '' : ', phó tướng ${deputy.name}'}. Cơ hội thắng ${quote.winChance.toStringAsFixed(1)}%; nguy cơ bỏ nhiệm vụ ${quote.withdrawal}%. Trở về cuối ${s.date(m.due)}. Còn ${whole(s.population!.availableSoldiers)} quân có thể điều động.',
++        );
++      } else if (action == 'decline') {
++        if (m.status != 'open') {
++          throw const GameRuleException('Nhiệm vụ đã đóng.');
++        }
++        _spend(s, 0, title: 'Rút bỏ mục tiêu: ${m.title}');
++        _warFailedMission(s, m, 'Chủ động bỏ mục tiêu');
++        s.workThisWeek++;
++        s.affairsThisWeek++;
++      } else if (action == 'intervene') {
++        if (!m.intervention || m.status != 'deployed') {
++          throw const GameRuleException('Không có yêu cầu tiếp tế đang chờ.');
++        }
++        _spend(
++          s,
++          money(s, 10),
++          grain: warMissionFood(m.troops),
++          title: 'Tiếp tế: ${m.title}',
++        );
++        s.population!.foodCredit += warFoodCredit(m.troops);
++        m.intervention = false;
++        m.relief = 1;
++        s.workThisWeek++;
++        s.affairsThisWeek++;
++      } else {
++        if (m.status != 'deployed') {
++          throw const GameRuleException('Đạo quân không còn làm nhiệm vụ.');
++        }
++        _spend(s, 0, title: 'Lệnh rút quân: ${m.title}');
++        m.status = 'returning';
++        m.intervention = false;
++        _warRecall(s, m, combatRetreat: true);
++        final n = _warCountry(s, m.countryId);
++        n.advantage = (n.advantage - m.advantageValue).clamp(-100, 100);
++        if (m.kind == 'capital') {
++          _finish(
++            s,
++            'Chủ động rút bỏ lực lượng bảo vệ kinh thành; quốc gia thất thủ trước quân ${n.name}.',
++            kind: 'invasion',
++          );
++        }
++        s.authority -= 2;
++        s.workThisWeek++;
++        s.affairsThisWeek++;
++        s.note(
++          'Rút quân',
++          'Bỏ mục tiêu ${m.title}, kinh phí không hoàn. Quân sống sót trở về cuối ${s.date(m.due)}.',
++          'warning',
++        );
++      }
++      return;
++    }
++    final n = _warCountry(s, command.target);
++    if (action == 'declare') {
++      if (s.warfare!.active != null ||
++          n.status == 'treaty' ||
++          n.cooldownUntil > s.week) {
++        throw const GameRuleException('Chưa thể mở cuộc chiến này.');
++      }
++      _spend(s, 0, title: 'Tuyên chiến với ${n.name}');
++      s.workThisWeek++;
++      s.affairsThisWeek++;
++      _warBegin(s, n);
++    } else if (action == 'oldPay') {
++      if (n.oldPayable <= 0) {
++        throw const GameRuleException('Không có nợ cống từ hòa ước cũ.');
++      }
++      _spend(s, n.oldPayable, title: 'Trả nợ hòa ước cũ ${n.name}');
++      n.oldPayable = 0;
++      s.workThisWeek++;
++      s.affairsThisWeek++;
++    } else if (action == 'oldCollect') {
++      if (n.oldReceivable <= 0) {
++        throw const GameRuleException('Không có khoản cống cũ để đòi.');
++      }
++      _spend(s, money(s, 5), title: 'Đòi cống hòa ước cũ ${n.name}');
++      if (_next(s, 100) < 70) {
++        _postMoney(
++          s,
++          n.oldReceivable,
++          title: 'Thu cống hòa ước cũ ${n.name}',
++          detail: 'Thu khoản còn thiếu được bảo lưu.',
++          category: 'tribute',
++        );
++        n.oldReceivable = 0;
++      }
++      s.workThisWeek++;
++      s.affairsThisWeek++;
++    } else if (action == 'envoy') {
++      if (n.status == 'war') {
++        throw const GameRuleException('Hãy dùng hòa đàm khi đang chiến tranh.');
++      }
++      _spend(s, money(s, 10), title: 'Giao hảo với ${n.name}');
++      n.relation = (n.relation + 12).clamp(-100, 100);
++      s.workThisWeek++;
++      s.affairsThisWeek++;
++    } else if (action == 'negotiate') {
++      if (n.status != 'war') {
++        throw const GameRuleException('Không có chiến tranh để hòa đàm.');
++      }
++      final tier = data['tier'] as String? ?? '';
++      final surrender = data['surrender'] == true;
++      if (!tributeNames.containsKey(tier)) {
++        throw const GameRuleException('Điều khoản không hợp lệ.');
++      }
++      if (surrender && tier == 'armistice') {
++        throw const GameRuleException('Cầu hòa phải có điều khoản triều cống.');
++      }
++      final required =
++          n.advantage <= -70
++              ? 'heavy'
++              : n.advantage <= -30
++              ? 'medium'
++              : 'light';
++      if (surrender && tributeGold(tier) < tributeGold(required)) {
++        throw const GameRuleException(
++          'Đối phương yêu cầu mức cống cao hơn ở tình thế hiện tại.',
++        );
++      }
++      final chance = surrender ? 100 : treatyDemandChance(n, tier);
++      if (chance == 0) {
++        throw const GameRuleException(
++          'Ưu thế chưa đủ để yêu cầu điều khoản này.',
++        );
++      }
++      _spend(s, money(s, surrender ? 20 : 10), title: 'Hòa đàm với ${n.name}');
++      s.workThisWeek++;
++      s.affairsThisWeek++;
++      if (_next(s, 100) < chance) {
++        _warSignTreaty(s, n, tier, receiving: !surrender);
++      } else {
++        n.relation = (n.relation - 3).clamp(-100, 100);
++        s.note(
++          'Hòa đàm chưa thành',
++          '${n.name} từ chối điều khoản ${tributeNames[tier]}; chiến tranh tiếp diễn. Phí sứ đoàn không hoàn lại.',
++          'warning',
++        );
++      }
++    } else if ([
++      'pay',
++      'extend',
++      'refuse',
++      'forgive',
++      'pressure',
++    ].contains(action)) {
++      final t = n.treaty;
++      if (t == null || t.arrears <= 0) {
++        throw const GameRuleException('Không có khoản cống còn thiếu.');
++      }
++      if (action == 'pay') {
++        if (t.receiving) {
++          throw const GameRuleException('Đối phương đang nợ cống.');
++        }
++        _spend(s, t.arrears, title: 'Trả bù triều cống ${n.name}');
++        t.arrears = 0;
++        t.graceUntil = 0;
++      } else if (action == 'extend') {
++        if (t.broken || t.extensions >= 1) {
++          throw const GameRuleException(
++            'Chỉ gia hạn một lần trước khi hòa ước bị phá.',
++          );
++        }
++        _spend(s, 0, title: 'Gia hạn triều cống ${n.name}');
++        t.extensions++;
++        t.graceUntil = s.week + 1;
++        n.relation = (n.relation - (t.receiving ? 0 : 5)).clamp(-100, 100);
++      } else if (action == 'forgive') {
++        if (!t.receiving) {
++          throw const GameRuleException(
++            'Chỉ miễn khoản cống đối phương đang nợ.',
++          );
++        }
++        _spend(s, 0, title: 'Miễn khoản cống còn thiếu ${n.name}');
++        t.arrears = 0;
++        n.relation = (n.relation + 10).clamp(-100, 100);
++      } else if (action == 'pressure') {
++        if (!t.receiving) {
++          throw const GameRuleException('Chỉ gây sức ép đòi cống đối phương.');
++        }
++        _spend(s, money(s, 5), title: 'Đòi cống ${n.name}');
++        if (_next(s, 100) < 70) {
++          _postMoney(
++            s,
++            t.arrears,
++            title: 'Thu cống còn thiếu ${n.name}',
++            detail: 'Thu đúng một lần khoản còn thiếu.',
++            category: 'tribute',
++          );
++          t.arrears = 0;
++        } else {
++          n.relation = (n.relation - 15).clamp(-100, 100);
++          s.note(
++            'Đòi cống chưa thành',
++            '${n.name} chưa chịu trả khoản còn thiếu.',
++            'warning',
++          );
++        }
++      } else {
++        if (t.receiving) {
++          throw const GameRuleException(
++            'Không thể khước từ khoản cống được nhận.',
++          );
++        }
++        _spend(s, 0, title: 'Khước từ triều cống ${n.name}');
++        _warBreakTreaty(s, n);
++      }
++      s.workThisWeek++;
++      s.affairsThisWeek++;
++      _warTreatyExpiry(s, n);
++    } else {
++      throw const GameRuleException('Lệnh chiến tranh không hợp lệ.');
++    }
++  }
++
++  void _warRecall(GameState s, WarMission m, {bool combatRetreat = false}) {
++    final index = s.population!.deployments.indexWhere(
++      (d) => d.missionId == m.id,
++    );
++    if (index < 0) return;
++    final d = s.population!.deployments[index];
++    final j = d.toJson();
++    j['losses'] =
++        combatRetreat
++            ? battleLosses(
++              d.troops,
++              d.baseCasualty,
++              won: false,
++              retreated: true,
++              reduction: 10 + _next(s, 16),
++            )
++            : 0;
++    j['succeeded'] = false;
++    j['retreated'] = combatRetreat;
++    s.population!.deployments[index] = ArmyDeployment.fromJson(j);
++  }
++
++  void _warSignTreaty(
++    GameState s,
++    NeighborState n,
++    String tier, {
++    required bool receiving,
++  }) {
++    final previous = n.treaty;
++    if (previous != null && previous.arrears > 0) {
++      if (previous.receiving) {
++        n.oldReceivable += previous.arrears;
++      } else {
++        n.oldPayable += previous.arrears;
++      }
++    }
++    n.status = 'treaty';
++    n.capitalWarned = false;
++    n.treaty = TributeTreaty(
++      tier: tier,
++      receiving: receiving,
++      annualGold: tributeGold(tier),
++      signed: s.week,
++      installments: tributeYears(tier),
++    );
++    for (final m in s.warfare!.missions.where(
++      (m) => m.countryId == n.id && ['open', 'deployed'].contains(m.status),
++    )) {
++      if (m.status == 'deployed') {
++        m.status = 'returning';
++        m.intervention = false;
++        _warRecall(s, m);
++      } else {
++        m.status = 'cancelled';
++        _warMajorResult(s, m, false);
++      }
++    }
++    s.war = 0;
++    s.siege = 0;
++    _respond(s, 'border');
++    s.authority +=
++        receiving && tier != 'armistice'
++            ? 4
++            : tier == 'armistice'
++            ? 0
++            : -3;
++    s.note(
++      'Hòa ước với ${n.name}',
++      tier == 'armistice'
++          ? 'Đình chiến trong 4 mùa, không triều cống.'
++          : '${receiving ? 'Nhận' : 'Nộp'} ${whole(tributeGold(tier))} lượng vàng/năm × ${tributeYears(tier)} năm. Kỳ đầu cuối ${s.date(s.week + 4)}. Không thay đổi lãnh thổ.',
++      receiving ? 'gold' : 'warning',
++    );
++  }
++
++  void _warBreakTreaty(GameState s, NeighborState n) {
++    n.treaty!.broken = true;
++    n.status = 'tension';
++    n.relation = (n.relation - 25).clamp(-100, 100);
++    n.cooldownUntil = s.week + 1;
++    s.note(
++      'Hòa ước bị phá: ${n.name}',
++      'Khoản cống còn thiếu vẫn tồn tại. Đối phương gửi tối hậu thư; nguy cơ tái chiến từ mùa sau.',
++      'danger',
++    );
++  }
++
++  void _warTreatyExpiry(GameState s, NeighborState n) {
++    final t = n.treaty;
++    if (t == null || t.broken || n.status != 'treaty') return;
++    if (t.tier == 'armistice'
++        ? s.week >= t.signed + 4
++        : t.paidInstallments >= t.installments) {
++      n.status = 'peace';
++      n.cooldownUntil = s.week + 4;
++      s.note(
++        'Hết hòa ước: ${n.name}',
++        'Đã hết thời hạn hòa ước. Không phát sinh kỳ cống mới; khoản còn thiếu ${whole(t.arrears)} lượng vàng vẫn được bảo lưu. Bảo hộ hòa bình thêm 4 mùa, đến ${s.date(n.cooldownUntil)}.',
++      );
++    }
++  }
++
++  void _warPrepareBudget(GameState s) {
++    for (final n in s.warfare?.neighbors ?? <NeighborState>[]) {
++      if (tributeDue(s, n) && n.treaty!.receiving) {
++        n.treaty!.incomingWithheld = n.relation < -50 && _next(s, 100) < 20;
++      }
++    }
++  }
++
++  void _warSettleTribute(GameState s) {
++    for (final n in s.warfare?.neighbors ?? <NeighborState>[]) {
++      if (!tributeDue(s, n)) continue;
++      final t = n.treaty!;
++      var received = t.receiving ? (t.incomingWithheld ? 0 : t.annualGold) : 0;
++      if (!t.receiving) {
++        // Annual tribute uses a separate arrears balance: ordinary debt must
++        // never collect this amount again behind the diplomacy screen.
++        received = math.min(s.treasury, t.annualGold);
++        _postMoney(
++          s,
++          -received,
++          title: 'Triều cống ${n.name}',
++          detail:
++              'Kỳ ${t.paidInstallments + 1}/${t.installments}; thiếu được ghi riêng trong hòa ước.',
++          category: 'tribute',
++          requiredAmount: t.annualGold,
++        );
++        s.lastExpense += received;
++      }
++      t.paidInstallments++;
++      final missing = t.annualGold - received;
++      if (missing > 0) {
++        t.arrears += missing;
++        t.graceUntil = s.week + 1;
++        s.note(
++          'Thiếu triều cống: ${n.name}',
++          '${t.receiving ? 'Đối phương' : 'Quốc gia'} còn thiếu ${whole(t.arrears)} lượng vàng. Hạn trả bù cuối ${s.date(t.graceUntil)}; xử lý tại Quân sự.',
++          'warning',
++        );
++      }
++      t.incomingWithheld = false;
++      _warTreatyExpiry(s, n);
++    }
++  }
++
++  void _warMajorResult(GameState s, WarMission m, bool won) {
++    if (m.majorId.isEmpty || s.major?.id != m.majorId) return;
++    final major = s.major!;
++    final goal =
++        major.objectives.where((o) => o.key == m.objectiveKey).firstOrNull;
++    if (goal != null) {
++      goal.done = won;
++      goal.delivered = won ? 100 : 50;
++      goal.officerId = '';
++      goal.finishWeek = 0;
++    }
++    if (major.stage >= major.objectives.length) _resolveMajor(s);
++  }
++
++  void _warFailedMission(GameState s, WarMission m, String reason) {
++    final n = _warCountry(s, m.countryId);
++    m.status = 'failed';
++    n.advantage = (n.advantage - m.advantageValue).clamp(-100, 100);
++    s.authority -= 2;
++    if (m.kind == 'supply') s.population!.logistics -= 8;
++    _warMajorResult(s, m, false);
++    s.note(
++      'Thất bại: ${m.title}',
++      '$reason. Ưu thế −${m.advantageValue}, còn ${n.advantage}.',
++      'danger',
++    );
++    if (m.kind == 'capital' && n.status == 'war') {
++      _finish(
++        s,
++        'Không giữ được kinh thành trong chiến tranh với ${n.name}. Quốc gia mất quyền tự chủ.',
++        kind: 'invasion',
++      );
++    }
++  }
++
++  void _warDeploymentResult(GameState s, ArmyDeployment d, bool leaderPresent) {
++    final w = s.warfare!;
++    final m = w.missions.where((m) => m.id == d.missionId).firstOrNull;
++    if (m == null) return;
++    final n = _warCountry(s, m.countryId);
++    final recalled = m.status == 'returning';
++    final missingSupply = m.intervention && m.relief != 1;
++    final success =
++        d.succeeded &&
++        leaderPresent &&
++        !recalled &&
++        (!m.intervention || m.relief == 1);
++    final result =
++        recalled
++            ? 'recalled'
++            : !leaderPresent
++            ? 'interrupted'
++            : d.retreated
++            ? 'retreated'
++            : success
++            ? 'success'
++            : 'failure';
++    m.status =
++        success
++            ? 'success'
++            : recalled
++            ? 'returned'
++            : 'failed';
++    m.intervention = false;
++    if (!recalled && n.status == 'war') {
++      n.advantage = (n.advantage +
++              (success ? m.advantageValue : -m.advantageValue))
++          .clamp(-100, 100);
++      if (success && m.kind == 'scout') {
++        n.enemyQuality = math.max(35, n.enemyQuality - 3);
++      }
++      if (success && m.kind == 'raid') {
++        n.enemyQuality = math.max(35, n.enemyQuality - 5);
++      }
++      if (m.kind == 'supply') s.population!.logistics += success ? 8 : -8;
++      s.authority += success ? 2 : -2;
++      if (success) {
++        for (final c in s.court.where(
++          (c) => c.id == d.officerId || c.id == d.deputyId,
++        )) {
++          _merit(s, c);
++        }
++      }
++    }
++    if (!recalled) {
++      _apply(
++        s,
++        {
++          for (final e
++              in (success ? m.successEffects : m.failureEffects).entries)
++            if (!['war', 'peace', 'warMission'].contains(e.key)) e.key: e.value,
++        },
++        title: m.title,
++        category: 'outcome',
++      );
++    }
++    _warMajorResult(s, m, success);
++    final reason =
++        recalled
++            ? 'Đã rút về theo lệnh/hòa ước'
++            : !leaderPresent
++            ? 'Chỉ huy không còn đủ điều kiện; nhiệm vụ gián đoạn'
++            : d.retreated
++            ? 'Thất bại do chủ tướng tự ý rút quân'
++            : missingSupply
++            ? 'Thất bại do không được tiếp tế'
++            : success
++            ? 'Chiến thắng'
++            : 'Thất bại khi giao chiến';
++    final detail =
++        '$reason. ${whole(d.troops)} quân tham chiến; tổn thất ${whole(d.losses)}, ${whole(d.troops - d.losses)} trở về. Ưu thế ${n.advantage}.';
++    w.reports.insert(0, {
++      'week': s.week,
++      'missionId': m.id,
++      'countryId': n.id,
++      'title': m.title,
++      'result': result,
++      'troops': d.troops,
++      'losses': d.losses,
++      'returned': d.troops - d.losses,
++      'chance': d.chance,
++      'baseCasualty': d.baseCasualty,
++      'reduction': d.reduction,
++      'detail': detail,
++    });
++    s.note('Quân báo: ${m.title}', detail, success ? 'gold' : 'warning');
++    if (m.kind == 'capital' && n.status == 'war' && !recalled) {
++      if (!success) {
++        _finish(
++          s,
++          'Kinh thành thất thủ trước quân ${n.name}. Quốc gia mất nước sau trận phòng thủ cuối cùng.',
++          kind: 'invasion',
++        );
++      } else {
++        n.advantage = math.max(-40, n.advantage);
++        n.capitalWarned = false;
++      }
++    }
++  }
++
++  void _warSeason(GameState s) {
++    final w = s.warfare;
++    if (w == null || s.ended) return;
++    _warSync(s);
++    for (final n in w.neighbors) {
++      final t = n.treaty;
++      if (['treaty', 'peace'].contains(n.status) &&
++          t != null &&
++          !t.broken &&
++          t.arrears > 0 &&
++          t.graceUntil <= s.week) {
++        if (!t.receiving) {
++          _warBreakTreaty(s, n);
++        } else if (t.graceUntil > 0) {
++          n.relation = (n.relation - 10).clamp(-100, 100);
++          t.graceUntil = 0;
++          s.note(
++            'Đối phương chậm cống',
++            '${n.name} quá hạn trả bù; có thể gia hạn, miễn khoản thiếu hoặc gây sức ép.',
++            'warning',
++          );
++        }
++      }
++      _warTreatyExpiry(s, n);
++    }
++    for (final m
++        in w.missions
++            .where((m) => m.status == 'open' && m.deadline <= s.week)
++            .toList()) {
++      _warFailedMission(s, m, 'Quá hạn không điều quân');
++      if (s.ended) return;
++    }
++    for (final m in w.missions.where(
++      (m) =>
++          m.status == 'deployed' &&
++          m.duration == 2 &&
++          m.opened <= s.week &&
++          m.due > s.week &&
++          !m.intervention &&
++          m.relief == 0,
++    )) {
++      m.intervention = true;
++      s.note(
++        'Xin tiếp tế: ${m.title}',
++        'Đường tiếp tế gặp khó khăn. Cấp ${moneyText(s, money(s, 10))}, ${whole(warMissionFood(m.troops))} tạ hoặc rút quân. Bỏ mặc làm nhiệm vụ thất bại; quân vẫn trở về theo lịch.',
++        'warning',
++      );
++    }
++    final n = w.active;
++    if (n != null) {
++      s.war = (1 + math.max(0, -n.advantage) ~/ 25).clamp(1, 8);
++      if (n.advantage <= -70 && !n.capitalWarned) {
++        n.capitalWarned = true;
++        _warOpenMission(
++          s,
++          n,
++          'capital',
++          roundTroops(math.max(5000, s.population!.soldiers * .35)),
++        );
++      } else if (s.week >= n.nextMission &&
++          w.missions
++                  .where(
++                    (m) =>
++                        m.countryId == n.id &&
++                        ['open', 'deployed'].contains(m.status),
++                  )
++                  .length <
++              4) {
++        const kinds = [
++          'supply',
++          'relieve',
++          'raid',
++          'battle',
++          'siege',
++          'naval',
++          'defend',
++        ];
++        final kind = kinds[_next(s, kinds.length)];
++        final base = ['battle', 'siege', 'naval'].contains(kind) ? 10000 : 5000;
++        _warOpenMission(
++          s,
++          n,
++          kind,
++          roundTroops(base * (1 + s.completedWeeks / 80).clamp(1, 2)),
++        );
++        n.nextMission = s.week + 1;
++      }
++    } else {
++      s.war = 0;
++      final threatened =
++          w.neighbors
++              .where(
++                (n) =>
++                    n.status != 'treaty' &&
++                    n.cooldownUntil <= s.week &&
++                    (n.treaty?.broken == true || n.relation <= -60),
++              )
++              .firstOrNull;
++      if (threatened != null) _warBegin(s, threatened);
++    }
++  }
++
++  void _warPetition(GameState s, Petition p, EventDefinition e, EventChoice c) {
++    _warSync(s);
++    var n = s.warfare!.active;
++    if (n == null) {
++      final candidates =
++          s.warfare!.neighbors
++              .where((n) => n.status != 'treaty' && n.cooldownUntil <= s.week)
++              .toList();
++      if (candidates.isEmpty) {
++        throw const GameRuleException(
++          'Các biên giới đang có hòa ước; chưa thể mở mặt trận.',
++        );
++      }
++      n = candidates.first;
++      _warBegin(s, n);
++    }
++    final m = _warOpenMission(
++      s,
++      n,
++      c.naval
++          ? 'naval'
++          : c.combat == 'large'
++          ? 'battle'
++          : 'defend',
++      c.effects['warMission']!,
++      title: e.title,
++    );
++    m.successEffects = Map.of(c.laterEffects);
++    m.failureEffects = Map.of(c.laterFailureEffects);
++    if (p.storyKind == 'major' && s.major?.id == p.storyId) {
++      final major = s.major!;
++      m.majorId = major.id;
++      m.objectiveKey = major.objectives[major.stage].key;
++      major.decisions = [...major.decisions, e.choices.indexOf(c)];
++      major.decisionLabels = [
++        ...major.decisionLabels,
++        'Nhận quân báo: ${e.title}',
++      ];
++      major.stage++;
++      major.dueWeek = s.week + 1;
++      major.deadline = math.max(
++        major.deadline,
++        s.week + major.objectives.length - major.stage + 3,
++      );
++    }
++    s.petitions.remove(p);
++    s.note(
++      'Chờ điều quân',
++      '${e.title}: chọn số quân và tướng tại Quân sự. Chỉ thu kinh phí và hành động khi xác nhận xuất quân.',
++    );
++  }
++}
+diff --git a/lib/game/logic/warfare_rules.dart b/lib/game/logic/warfare_rules.dart
+--- /dev/null
++++ b/lib/game/logic/warfare_rules.dart
+@@ -0,0 +1,259 @@
++import 'dart:math' as math;
++import '../models/game_state.dart';
++import 'currency_rules.dart';
++import 'population_rules.dart';
++import 'personnel_rules.dart' show officerBusy;
++
++const warMissionNames = {
++  'scout': 'Trinh sát biên giới',
++  'supply': 'Hộ tống quân lương',
++  'relieve': 'Giải vây đồn biên giới',
++  'defend': 'Giữ cửa ải',
++  'raid': 'Tập kích kho quân nhu',
++  'battle': 'Hội chiến',
++  'siege': 'Công thành',
++  'capital': 'Bảo vệ kinh thành',
++  'naval': 'Thủy chiến',
++};
++const warTactics = {
++  'defend': 'Thận trọng phòng thủ',
++  'balanced': 'Đánh theo kế hoạch',
++  'attack': 'Chủ động tiến công',
++};
++const tributeNames = {
++  'light': 'Nhẹ',
++  'medium': 'Vừa',
++  'heavy': 'Nặng',
++  'armistice': 'Đình chiến',
++};
++int tributeGold(String tier) => switch (tier) {
++  'light' => 5000,
++  'medium' => 10000,
++  'heavy' => 17000,
++  _ => 0,
++};
++int tributeYears(String tier) =>
++    tier == 'light'
++        ? 2
++        : tier == 'armistice'
++        ? 1
++        : 3;
++String neighborStatus(NeighborState n) => switch (n.status) {
++  'war' => 'Chiến tranh',
++  'treaty' => 'Hòa ước',
++  'tension' => 'Căng thẳng',
++  _ => 'Hòa bình',
++};
++List<double> warTroopRatios(WarMission m) =>
++    m.kind == 'siege' ? [2, 2.5, 3] : [.8, 1, 1.25];
++int warTroops(WarMission m, double ratio) => roundTroops(m.enemyTroops * ratio);
++int warMissionCost(GameState s, WarMission m, int troops) =>
++    money(s, (m.duration == 2 ? 15 : 8) + troops / 1000);
++int warMissionFood(int troops) => foodAmount(troops * 30 * 2 / 100 * 1.1);
++int warFoodCredit(int troops) => foodAmount(troops * 30 * 1.5 / 100);
++
++String? warOfficerBlocked(GameState s, Courtier c) {
++  if (!c.available || c.isConsort || c.age < 18) {
++    return 'Cần triều thần trưởng thành, còn hoạt động.';
++  }
++  if (officerBusy(s, c.id)) return 'Đang làm nhiệm vụ hoặc học tập khác.';
++  return null;
++}
++
++List<Courtier> warOfficers(GameState s, {bool naval = false}) =>
++    s.court.where((c) => warOfficerBlocked(s, c) == null).toList()
++      ..sort((a, b) {
++        final role = naval ? 'Đô đốc' : 'Đại tướng';
++        return ((b.role == role ? 100 : 0) + b.ability).compareTo(
++          (a.role == role ? 100 : 0) + a.ability,
++        );
++      });
++double warOfficerAbility(Courtier c, {bool naval = false}) =>
++    (c.ability *
++                (c.specialty == 'Quân sự' || (naval && c.role == 'Đô đốc')
++                    ? 1
++                    : .75) -
++            c.strain / 5)
++        .clamp(0, 100)
++        .toDouble();
++double warCommand(Courtier leader, Courtier? deputy, {bool naval = false}) =>
++    deputy == null
++        ? warOfficerAbility(leader, naval: naval)
++        : .7 * warOfficerAbility(leader, naval: naval) +
++            .3 * warOfficerAbility(deputy, naval: naval);
++double warAffection(Courtier leader, Courtier? deputy) =>
++    deputy == null
++        ? leader.affection.toDouble()
++        : .7 * leader.affection + .3 * deputy.affection;
++int withdrawalChance(double affection) =>
++    affection >= 80
++        ? 0
++        : affection >= 60
++        ? 3
++        : affection >= 40
++        ? 10
++        : affection >= 20
++        ? 25
++        : 40;
++double battleCasualtyBase({
++  required int troops,
++  required int enemy,
++  required double command,
++  bool siege = false,
++}) =>
++    ((50 * enemy / math.max(1, troops) + (50 - command) * .4) *
++            (siege ? 1.3 : 1))
++        .clamp(1, 100)
++        .toDouble();
++int battleLosses(
++  int troops,
++  double base, {
++  required bool won,
++  required bool retreated,
++  required int reduction,
++}) {
++  final factor =
++      retreated
++          ? reduction / 100
++          : won
++          ? (100 - reduction) / 100
++          : 1.0;
++  return (troops * base / 100 * factor).ceil().clamp(0, troops);
++}
++
++class WarPreview {
++  WarPreview(
++    GameState s,
++    WarMission m,
++    this.troops,
++    Courtier leader,
++    Courtier? deputy, {
++    String tactic = 'balanced',
++  }) {
++    command = warCommand(leader, deputy, naval: m.naval);
++    affection = warAffection(leader, deputy);
++    withdrawal = withdrawalChance(affection);
++    final n = s.warfare!.neighbors.firstWhere((n) => n.id == m.countryId);
++    final terrain =
++        m.kind == 'siege'
++            ? 1 / (1.5 + n.fortification / 100)
++            : ['defend', 'capital'].contains(m.kind)
++            ? 1.35
++            : 1.0;
++    final tacticFactor =
++        tactic == 'attack'
++            ? 1.10
++            : tactic == 'defend'
++            ? .95
++            : 1.0;
++    final ours =
++        troops *
++        s.population!.readiness /
++        100 *
++        (.8 + .004 * command) *
++        terrain *
++        tacticFactor;
++    final theirs = m.enemyTroops * n.enemyQuality / 100;
++    tacticalChance = (50 + 45 * (ours - theirs) / math.max(1, ours + theirs))
++        .round()
++        .clamp(5, 95);
++    // Public final chance and execution use precisely the same two-stage roll.
++    winChance = (100 - withdrawal) * tacticalChance / 100;
++    final casualtyTactic =
++        tactic == 'attack'
++            ? 1.2
++            : tactic == 'defend'
++            ? .8
++            : 1.0;
++    base =
++        (battleCasualtyBase(
++                  troops: troops,
++                  enemy: m.enemyTroops,
++                  command: command,
++                  siege: m.kind == 'siege',
++                ) *
++                casualtyTactic)
++            .clamp(1, 100)
++            .toDouble();
++    cost = warMissionCost(s, m, troops);
++    food = warMissionFood(troops);
++  }
++  final int troops;
++  late final double command, affection, winChance, base;
++  late final int withdrawal, tacticalChance, cost, food;
++  int get winLossMin =>
++      battleLosses(troops, base, won: true, retreated: false, reduction: 75);
++  int get winLossMax =>
++      battleLosses(troops, base, won: true, retreated: false, reduction: 50);
++  int get defeatLoss =>
++      battleLosses(troops, base, won: false, retreated: false, reduction: 0);
++  int get retreatLossMin =>
++      battleLosses(troops, base, won: false, retreated: true, reduction: 10);
++  int get retreatLossMax =>
++      battleLosses(troops, base, won: false, retreated: true, reduction: 25);
++}
++
++String? warDeployBlocked(
++  GameState s,
++  WarMission m,
++  double ratio,
++  Courtier? leader,
++  Courtier? deputy,
++) {
++  if (s.warfare?.active?.id != m.countryId ||
++      m.status != 'open' ||
++      s.week > m.deadline) {
++    return 'Nhiệm vụ đã đóng hoặc chiến tranh đã kết thúc.';
++  }
++  if (!warTroopRatios(m).contains(ratio)) {
++    return 'Mức quân điều động không hợp lệ.';
++  }
++  final troops = warTroops(m, ratio);
++  if (troops > s.population!.availableSoldiers) {
++    return 'Thiếu ${whole(troops - s.population!.availableSoldiers)} quân có thể điều động.';
++  }
++  if (leader == null) return 'Hãy chọn chủ tướng.';
++  final blocked = warOfficerBlocked(s, leader);
++  if (blocked != null) return blocked;
++  if (deputy != null) {
++    if (leader.id == deputy.id) return 'Chủ tướng và phó tướng phải khác nhau.';
++    final reason = warOfficerBlocked(s, deputy);
++    if (reason != null) return reason;
++  }
++  if (s.points < 1) return 'Cần 1 hành động.';
++  if (s.treasury < warMissionCost(s, m, troops)) return 'Ngân khố không đủ.';
++  if (s.grain < warMissionFood(troops)) return 'Kho lương không đủ.';
++  return null;
++}
++
++bool tributeDue(GameState s, NeighborState n) {
++  final t = n.treaty;
++  return n.status == 'treaty' &&
++      t != null &&
++      !t.broken &&
++      t.annualGold > 0 &&
++      t.paidInstallments < t.installments &&
++      t.nextDue <= s.week;
++}
++
++List<({NeighborState country, int amount})> tributeReceipts(GameState s) => [
++  for (final n in s.warfare?.neighbors ?? <NeighborState>[])
++    if (tributeDue(s, n) && n.treaty!.receiving && !n.treaty!.incomingWithheld)
++      (country: n, amount: n.treaty!.annualGold),
++];
++List<({NeighborState country, int amount})> tributePayments(GameState s) => [
++  for (final n in s.warfare?.neighbors ?? <NeighborState>[])
++    if (tributeDue(s, n) && !n.treaty!.receiving)
++      (country: n, amount: n.treaty!.annualGold),
++];
++int treatyDemandChance(NeighborState n, String tier) {
++  if (tier == 'armistice') return n.advantage.abs() < 30 ? 95 : 70;
++  final needed =
++      tier == 'light'
++          ? 30
++          : tier == 'medium'
++          ? 70
++          : 90;
++  if (n.advantage < needed) return 0;
++  return (60 + (n.advantage - needed) * 2).clamp(5, 95);
++}
+diff --git a/lib/game/models/game_state.dart b/lib/game/models/game_state.dart
+--- a/lib/game/models/game_state.dart
++++ b/lib/game/models/game_state.dart
+@@ -1,5 +1,7 @@
+ import 'dart:convert';
+ import 'population.dart';
++import 'warfare.dart';
++export 'warfare.dart';
+ import 'currency_migration.dart';
+ export 'population.dart';
+ import 'portraits.dart';
+@@ -24,7 +26,7 @@
+ export 'outcome_report.dart';
+ 
+ const schemaVersion = 2;
+-const rulesVersion = 'mvp-0.21.1';
++const rulesVersion = 'mvp-0.22.0';
+ const contentVersion = 19;
+ 
+ String specialtyForRole(String role) => switch (role) {
+@@ -433,6 +435,7 @@
+   int seed, rng;
+   int revision = 0, completedWeeks = 0, points = 3, overtime = 0;
+   PopulationState? population;
++  WarfareState? warfare;
+   bool goldStandard = false;
+   int treasury = 520, people = 65, authority = 62, army = 60;
+   int health = 88, stability = 64, grain = 100, levee = 65;
+@@ -609,6 +612,7 @@
+           'mvp-0.19.0',
+           'mvp-0.20.0',
+           'mvp-0.21.0',
++          'mvp-0.21.1',
+           rulesVersion,
+         ].contains(j['rulesVersion']) ||
+         ![
+@@ -742,6 +746,18 @@
+     s.debt = number(j, 'debt');
+     s.war = number(j, 'war');
+     s.siege = number(j, 'siege');
++    s.warfare =
++        j['warfare'] != null
++            ? WarfareState.fromJson(object(j['warfare']))
++            : !j.containsKey('warfare') && s.goldStandard
++            ? WarfareState()
++            : null;
++    if (s.warfare != null && !j.containsKey('warfare') && s.war > 0) {
++      final n = s.warfare!.neighbors.first;
++      n.status = 'war';
++      n.warStarted = s.week;
++      n.advantage = (-s.siege * 20).clamp(-100, 100);
++    }
+     s.tribute = number(j, 'tribute');
+     s.priority = j['priority'] ?? 'army';
+     s.hostileFaction = j['hostileFaction'] ?? '';
+@@ -866,6 +882,7 @@
+     'authority': authority,
+     'army': army,
+     'population': population?.toJson(),
++    'warfare': warfare?.toJson(),
+     'goldStandard': goldStandard,
+     'health': health,
+     'stability': stability,
+diff --git a/lib/game/models/population.dart b/lib/game/models/population.dart
+--- a/lib/game/models/population.dart
++++ b/lib/game/models/population.dart
+@@ -162,6 +162,12 @@
+     required this.officerId,
+     required this.chance,
+     required this.succeeded,
++    this.countryId = '',
++    this.missionId = '',
++    this.deputyId = '',
++    this.retreated = false,
++    this.baseCasualty = 0,
++    this.reduction = 0,
+     this.foodCredit = 0,
+     this.majorId = '',
+     this.objectiveKey = '',
+@@ -170,6 +176,10 @@
+   });
+   final String id, title, officerId;
+   final String majorId, objectiveKey;
++  final String countryId, missionId, deputyId;
++  final bool retreated;
++  final double baseCasualty;
++  final int reduction;
+   final int troops, losses;
+   final int due, chance;
+   final bool succeeded;
+@@ -184,6 +194,12 @@
+     officerId: j['officerId'],
+     chance: j['chance'],
+     succeeded: j['succeeded'] == true,
++    countryId: j['countryId'] ?? '',
++    missionId: j['missionId'] ?? '',
++    deputyId: j['deputyId'] ?? '',
++    retreated: j['retreated'] == true,
++    baseCasualty: (j['baseCasualty'] as num?)?.toDouble() ?? 0,
++    reduction: j['reduction'] ?? 0,
+     foodCredit: j['foodCredit'] ?? 0,
+     majorId: j['majorId'] ?? '',
+     objectiveKey: j['objectiveKey'] ?? '',
+@@ -199,6 +215,12 @@
+     'officerId': officerId,
+     'chance': chance,
+     'succeeded': succeeded,
++    'countryId': countryId,
++    'missionId': missionId,
++    'deputyId': deputyId,
++    'retreated': retreated,
++    'baseCasualty': baseCasualty,
++    'reduction': reduction,
+     'foodCredit': foodCredit,
+     'majorId': majorId,
+     'objectiveKey': objectiveKey,
+diff --git a/lib/game/models/warfare.dart b/lib/game/models/warfare.dart
+--- /dev/null
++++ b/lib/game/models/warfare.dart
+@@ -0,0 +1,213 @@
++/// Persisted diplomacy and campaigns. Troop reservations live in PopulationState.
++class WarfareState {
++  List<NeighborState> neighbors = [
++    NeighborState('north', 'Hàn Kỳ', 'Phía Bắc', advantage: 10),
++    NeighborState('west', 'Xích Lĩnh', 'Phía Tây', advantage: 10),
++    NeighborState('south', 'Bích Trạch', 'Phía Nam'),
++  ];
++  List<WarMission> missions = [];
++  List<Map<String, dynamic>> reports = [];
++  int sequence = 0;
++  NeighborState? get active =>
++      neighbors.where((n) => n.status == 'war').firstOrNull;
++  WarfareState();
++  factory WarfareState.fromJson(Map<String, dynamic> j) {
++    final w = WarfareState();
++    w.neighbors =
++        (j['neighbors'] as List)
++            .map((n) => NeighborState.fromJson(Map<String, dynamic>.from(n)))
++            .toList();
++    w.missions =
++        (j['missions'] as List? ?? [])
++            .map((m) => WarMission.fromJson(Map<String, dynamic>.from(m)))
++            .toList();
++    w.reports =
++        (j['reports'] as List? ?? [])
++            .map((r) => Map<String, dynamic>.from(r))
++            .toList();
++    w.sequence = j['sequence'] ?? 0;
++    return w;
++  }
++  Map<String, dynamic> toJson() => {
++    'neighbors': neighbors.map((n) => n.toJson()).toList(),
++    'missions': missions.map((m) => m.toJson()).toList(),
++    'reports': reports,
++    'sequence': sequence,
++  };
++}
++
++class NeighborState {
++  NeighborState(this.id, this.name, this.direction, {this.advantage = 0});
++  final String id, name, direction;
++  int relation = 0, advantage;
++  String status = 'peace';
++  int cooldownUntil = 0, warStarted = 0, nextMission = 0;
++  int enemyQuality = 65, fortification = 65;
++  bool capitalWarned = false;
++  int oldPayable = 0, oldReceivable = 0;
++  TributeTreaty? treaty;
++  factory NeighborState.fromJson(Map<String, dynamic> j) {
++    final n = NeighborState(
++      j['id'],
++      j['name'],
++      j['direction'],
++      advantage: j['advantage'] ?? 0,
++    );
++    n.oldPayable = j['oldPayable'] ?? 0;
++    n.oldReceivable = j['oldReceivable'] ?? 0;
++    n.relation = j['relation'] ?? 0;
++    n.status = j['status'] ?? 'peace';
++    n.cooldownUntil = j['cooldownUntil'] ?? 0;
++    n.warStarted = j['warStarted'] ?? 0;
++    n.nextMission = j['nextMission'] ?? 0;
++    n.enemyQuality = j['enemyQuality'] ?? 65;
++    n.fortification = j['fortification'] ?? 65;
++    n.capitalWarned = j['capitalWarned'] == true;
++    if (j['treaty'] != null) {
++      n.treaty = TributeTreaty.fromJson(Map<String, dynamic>.from(j['treaty']));
++    }
++    return n;
++  }
++  Map<String, dynamic> toJson() => {
++    'id': id,
++    'name': name,
++    'direction': direction,
++    'oldPayable': oldPayable,
++    'oldReceivable': oldReceivable,
++    'relation': relation,
++    'advantage': advantage,
++    'status': status,
++    'cooldownUntil': cooldownUntil,
++    'warStarted': warStarted,
++    'nextMission': nextMission,
++    'enemyQuality': enemyQuality,
++    'fortification': fortification,
++    'capitalWarned': capitalWarned,
++    'treaty': treaty?.toJson(),
++  };
++}
++
++class TributeTreaty {
++  TributeTreaty({
++    required this.tier,
++    required this.receiving,
++    required this.annualGold,
++    required this.signed,
++    required this.installments,
++  });
++  final String tier;
++  final bool receiving;
++  final int annualGold, signed, installments;
++  int paidInstallments = 0, arrears = 0, graceUntil = 0, extensions = 0;
++  bool broken = false, incomingWithheld = false;
++  int get nextDue => signed + (paidInstallments + 1) * 4;
++  bool get completed => paidInstallments >= installments && arrears == 0;
++  factory TributeTreaty.fromJson(Map<String, dynamic> j) {
++    final t = TributeTreaty(
++      tier: j['tier'],
++      receiving: j['receiving'],
++      annualGold: j['annualGold'],
++      signed: j['signed'],
++      installments: j['installments'],
++    );
++    t.paidInstallments = j['paidInstallments'] ?? 0;
++    t.arrears = j['arrears'] ?? 0;
++    t.graceUntil = j['graceUntil'] ?? 0;
++    t.extensions = j['extensions'] ?? 0;
++    t.broken = j['broken'] == true;
++    t.incomingWithheld = j['incomingWithheld'] == true;
++    return t;
++  }
++  Map<String, dynamic> toJson() => {
++    'tier': tier,
++    'receiving': receiving,
++    'annualGold': annualGold,
++    'signed': signed,
++    'installments': installments,
++    'paidInstallments': paidInstallments,
++    'arrears': arrears,
++    'graceUntil': graceUntil,
++    'extensions': extensions,
++    'broken': broken,
++    'incomingWithheld': incomingWithheld,
++  };
++}
++
++class WarMission {
++  WarMission({
++    required this.id,
++    required this.countryId,
++    required this.kind,
++    required this.title,
++    required this.enemyTroops,
++    required this.opened,
++    required this.deadline,
++    this.naval = false,
++  });
++  final String id, countryId, kind, title;
++  final int enemyTroops, opened, deadline;
++  final bool naval;
++  String status = 'open', officerId = '', deputyId = '', tactic = 'balanced';
++  int troops = 0, due = 0, relief = 0;
++  bool intervention = false;
++  String majorId = '', objectiveKey = '';
++  Map<String, int> successEffects = {}, failureEffects = {};
++  int get duration => ['siege', 'battle', 'capital'].contains(kind) ? 2 : 1;
++  int get advantageValue => switch (kind) {
++    'scout' => 6,
++    'supply' => 8,
++    'raid' => 12,
++    'relieve' => 12,
++    'defend' => 15,
++    'siege' => 20,
++    'capital' => 25,
++    _ => 20,
++  };
++  factory WarMission.fromJson(Map<String, dynamic> j) {
++    final m = WarMission(
++      id: j['id'],
++      countryId: j['countryId'],
++      kind: j['kind'],
++      title: j['title'],
++      enemyTroops: j['enemyTroops'],
++      opened: j['opened'],
++      deadline: j['deadline'],
++      naval: j['naval'] == true,
++    );
++    m.status = j['status'] ?? 'open';
++    m.officerId = j['officerId'] ?? '';
++    m.deputyId = j['deputyId'] ?? '';
++    m.tactic = j['tactic'] ?? 'balanced';
++    m.troops = j['troops'] ?? 0;
++    m.due = j['due'] ?? 0;
++    m.relief = j['relief'] ?? 0;
++    m.intervention = j['intervention'] == true;
++    m.majorId = j['majorId'] ?? '';
++    m.objectiveKey = j['objectiveKey'] ?? '';
++    m.successEffects = Map<String, int>.from(j['successEffects'] ?? {});
++    m.failureEffects = Map<String, int>.from(j['failureEffects'] ?? {});
++    return m;
++  }
++  Map<String, dynamic> toJson() => {
++    'id': id,
++    'countryId': countryId,
++    'kind': kind,
++    'title': title,
++    'enemyTroops': enemyTroops,
++    'opened': opened,
++    'deadline': deadline,
++    'naval': naval,
++    'status': status,
++    'officerId': officerId,
++    'deputyId': deputyId,
++    'tactic': tactic,
++    'troops': troops,
++    'due': due,
++    'relief': relief,
++    'intervention': intervention,
++    'majorId': majorId,
++    'objectiveKey': objectiveKey,
++    'successEffects': successEffects,
++    'failureEffects': failureEffects,
++  };
++}
+diff --git a/lib/game/presentation/game_app.dart b/lib/game/presentation/game_app.dart
+--- a/lib/game/presentation/game_app.dart
++++ b/lib/game/presentation/game_app.dart
+@@ -821,7 +821,11 @@
+     'kingdom' => _kingdom(),
+     'treasury' => _treasury(),
+     'population' => PopulationPanel(state: s),
+-    'military' => PopulationPanel(state: s, military: true),
++    'military' => PopulationPanel(
++      state: s,
++      military: true,
++      controller: widget.controller,
++    ),
+     'people' => _people(false),
+     'harem' => _people(true),
+     'health' => _health(),
+diff --git a/lib/game/presentation/widgets/finance_panel.dart b/lib/game/presentation/widgets/finance_panel.dart
+--- a/lib/game/presentation/widgets/finance_panel.dart
++++ b/lib/game/presentation/widgets/finance_panel.dart
+@@ -319,7 +319,9 @@
+           Padding(
+             padding: const EdgeInsets.only(top: 8),
+             child: Text(
+-              'Thiếu ${forecast.shortfall} ${moneyUnit(s)} chi thường lệ sẽ thành nợ và gây mất chỉ số ở khoản chưa trả đủ.',
++              s.warfare == null
++                  ? 'Thiếu ${forecast.shortfall} ${moneyUnit(s)} chi thường lệ sẽ thành nợ và gây mất chỉ số ở khoản chưa trả đủ.'
++                  : 'Thiếu ${forecast.shortfall} ${moneyUnit(s)} ở các khoản đến hạn. Chi thường lệ thiếu ghi vào nợ chi trả; triều cống thiếu ghi riêng trong hòa ước tại Quân sự.',
+               key: const ValueKey('finance-shortfall'),
+               style: const TextStyle(fontSize: 11, color: terracotta),
+             ),
+diff --git a/lib/game/presentation/widgets/population_panel.dart b/lib/game/presentation/widgets/population_panel.dart
+--- a/lib/game/presentation/widgets/population_panel.dart
++++ b/lib/game/presentation/widgets/population_panel.dart
+@@ -2,6 +2,8 @@
+ import '../../models/game_state.dart';
+ import '../../logic/population_rules.dart';
+ import 'imperial_theme.dart';
++import '../../../app/game_controller.dart';
++import 'warfare_panel.dart';
+ 
+ /// Read-only information panels. Commands remain in Quốc sự and Ngân khố.
+ class PopulationPanel extends StatelessWidget {
+@@ -9,9 +11,11 @@
+     super.key,
+     required this.state,
+     this.military = false,
++    this.controller,
+   });
+   final GameState state;
+   final bool military;
++  final GameController? controller;
+ 
+   @override
+   Widget build(BuildContext context) {
+@@ -100,6 +104,8 @@
+         row('Tổng quân số', '${whole(p.soldiers)} người'),
+         row('Quân có thể điều động', '${whole(p.availableSoldiers)} người'),
+         row('Quân đang làm nhiệm vụ', '${whole(p.busySoldiers)} người'),
++        if (s.warfare != null && controller != null)
++          WarfarePanel(state: s, controller: controller!),
+         section('Chất lượng và trang bị'),
+         row('Huấn luyện', '${p.training.toStringAsFixed(1)}/100'),
+         row('Quân khí', '${p.equipmentPercent.toStringAsFixed(1)}/100'),
+@@ -137,7 +143,7 @@
+             '${whole(d.troops)} quân · trả quân cuối ${s.date(d.due)}',
+           ),
+         const Text(
+-          'Tổn thất chỉ tính trên quân tham chiến: nhỏ 1–20%, lớn 20–50%, thất bại nặng 50–70%.',
++          'Tổn thất tính trên quân tham chiến, theo chỉ huy và chênh lệch quân số. Khi thắng giảm 50–75% thương vong cơ sở; tướng thiện cảm thấp có thể tự ý rút quân.',
+         ),
+       ],
+       section('Sản xuất và kho lương'),
+diff --git a/lib/game/presentation/widgets/warfare_panel.dart b/lib/game/presentation/widgets/warfare_panel.dart
+--- /dev/null
++++ b/lib/game/presentation/widgets/warfare_panel.dart
+@@ -0,0 +1,618 @@
++import 'dart:convert';
++import 'package:flutter/material.dart';
++import '../../../app/game_controller.dart';
++import '../../models/game_state.dart';
++import '../../logic/warfare_rules.dart';
++import '../../logic/population_rules.dart';
++import '../../logic/currency_rules.dart';
++import 'imperial_theme.dart';
++
++class WarfarePanel extends StatelessWidget {
++  const WarfarePanel({
++    super.key,
++    required this.state,
++    required this.controller,
++  });
++  final GameState state;
++  final GameController controller;
++  Future<bool> send(
++    String target,
++    Map<String, dynamic> data, {
++    String leader = '',
++  }) => controller.act(
++    'war',
++    target: target,
++    option: jsonEncode(data),
++    assigneeId: leader,
++  );
++
++  Future<void> confirm(
++    BuildContext context,
++    String title,
++    String detail,
++    String target,
++    Map<String, dynamic> data,
++  ) async {
++    final ok = await showDialog<bool>(
++      context: context,
++      builder:
++          (ctx) => AlertDialog(
++            title: Text(title),
++            content: SingleChildScrollView(child: Text(detail)),
++            actions: [
++              TextButton(
++                onPressed: () => Navigator.pop(ctx, false),
++                child: const Text('Để sau'),
++              ),
++              FilledButton(
++                onPressed: () => Navigator.pop(ctx, true),
++                child: const Text('Xác nhận'),
++              ),
++            ],
++          ),
++    );
++    if (ok == true) {
++      final success = await send(target, data);
++      if (!success && context.mounted) {
++        ScaffoldMessenger.of(context).showSnackBar(
++          SnackBar(content: Text(controller.error ?? 'Chưa thực hiện được.')),
++        );
++      }
++    }
++  }
++
++  Future<void> deploy(BuildContext context, WarMission mission) async {
++    double ratio = warTroopRatios(mission).first;
++    String leaderId = '', deputyId = '', tactic = 'balanced';
++    String? error;
++    await showDialog<void>(
++      context: context,
++      builder:
++          (ctx) => StatefulBuilder(
++            builder: (ctx, update) {
++              final s = controller.state!;
++              final leaders = warOfficers(s, naval: mission.naval);
++              final leader = leaders.where((c) => c.id == leaderId).firstOrNull;
++              final deputy = leaders.where((c) => c.id == deputyId).firstOrNull;
++              final troops = warTroops(mission, ratio);
++              final quote =
++                  leader == null
++                      ? null
++                      : WarPreview(
++                        s,
++                        mission,
++                        troops,
++                        leader,
++                        deputy,
++                        tactic: tactic,
++                      );
++              final blocked = warDeployBlocked(
++                s,
++                mission,
++                ratio,
++                leader,
++                deputy,
++              );
++              return AlertDialog(
++                title: Text(mission.title),
++                content: SizedBox(
++                  width: 560,
++                  child: SingleChildScrollView(
++                    child: Column(
++                      crossAxisAlignment: CrossAxisAlignment.stretch,
++                      mainAxisSize: MainAxisSize.min,
++                      children: [
++                        Text(
++                          'Quân địch: ${whole(mission.enemyTroops)} · quân có thể điều động: ${whole(s.population!.availableSoldiers)}',
++                        ),
++                        if (mission.kind == 'siege')
++                          const Text(
++                            'Công thành bắt buộc ít nhất 200% quân địch.',
++                          ),
++                        const SizedBox(height: 12),
++                        Wrap(
++                          spacing: 8,
++                          runSpacing: 8,
++                          children: [
++                            for (final value in warTroopRatios(mission))
++                              ChoiceChip(
++                                key: ValueKey('war-ratio-$value'),
++                                label: Text(
++                                  '${(value * 100).round()}% · ${whole(warTroops(mission, value))} quân',
++                                ),
++                                selected: ratio == value,
++                                onSelected:
++                                    warTroops(mission, value) <=
++                                            s.population!.availableSoldiers
++                                        ? (_) => update(() {
++                                          ratio = value;
++                                          error = null;
++                                        })
++                                        : null,
++                              ),
++                          ],
++                        ),
++                        for (final value in warTroopRatios(mission))
++                          if (warTroops(mission, value) >
++                              s.population!.availableSoldiers)
++                            Text(
++                              '${(value * 100).round()}%: thiếu ${whole(warTroops(mission, value) - s.population!.availableSoldiers)} quân',
++                              style: const TextStyle(color: terracotta),
++                            ),
++                        const SizedBox(height: 16),
++                        DropdownButtonFormField<String>(
++                          key: const ValueKey('war-leader'),
++                          value:
++                              leaders.any((c) => c.id == leaderId)
++                                  ? leaderId
++                                  : '',
++                          isExpanded: true,
++                          decoration: InputDecoration(
++                            labelText:
++                                mission.naval
++                                    ? 'Chủ tướng / đô đốc'
++                                    : 'Chủ tướng',
++                          ),
++                          items: [
++                            const DropdownMenuItem(
++                              value: '',
++                              child: Text('Chọn chỉ huy'),
++                            ),
++                            for (final c in leaders)
++                              DropdownMenuItem(
++                                value: c.id,
++                                child: Text(
++                                  '${c.name} · năng lực ${c.ability} · thiện cảm ${c.affection}',
++                                  overflow: TextOverflow.ellipsis,
++                                ),
++                              ),
++                          ],
++                          onChanged:
++                              (value) => update(() {
++                                leaderId = value!;
++                                if (deputyId == leaderId) deputyId = '';
++                                error = null;
++                              }),
++                        ),
++                        const SizedBox(height: 12),
++                        DropdownButtonFormField<String>(
++                          key: ValueKey('war-deputy-$leaderId'),
++                          value:
++                              leaders.any(
++                                    (c) => c.id == deputyId && c.id != leaderId,
++                                  )
++                                  ? deputyId
++                                  : '',
++                          isExpanded: true,
++                          decoration: const InputDecoration(
++                            labelText: 'Phó tướng (tùy chọn)',
++                          ),
++                          items: [
++                            const DropdownMenuItem(
++                              value: '',
++                              child: Text('Không giao phó tướng'),
++                            ),
++                            for (final c in leaders.where(
++                              (c) => c.id != leaderId,
++                            ))
++                              DropdownMenuItem(
++                                value: c.id,
++                                child: Text(
++                                  '${c.name} · năng lực ${c.ability} · thiện cảm ${c.affection}',
++                                  overflow: TextOverflow.ellipsis,
++                                ),
++                              ),
++                          ],
++                          onChanged:
++                              (value) => update(() {
++                                deputyId = value!;
++                                error = null;
++                              }),
++                        ),
++                        const SizedBox(height: 12),
++                        DropdownButtonFormField<String>(
++                          value: tactic,
++                          isExpanded: true,
++                          decoration: const InputDecoration(
++                            labelText: 'Đối sách',
++                          ),
++                          items: [
++                            for (final e in warTactics.entries)
++                              DropdownMenuItem(
++                                value: e.key,
++                                child: Text(e.value),
++                              ),
++                          ],
++                          onChanged:
++                              (v) => update(() {
++                                tactic = v!;
++                              }),
++                        ),
++                        const SizedBox(height: 16),
++                        const Text(
++                          'Thận trọng: sức tiến công ×0,95, thương vong cơ sở ×0,8. Chủ động: sức tiến công ×1,10, thương vong cơ sở ×1,2.',
++                        ),
++                        if (quote == null)
++                          const Text(
++                            'Chọn số quân và tướng để dự tính cơ hội thắng.',
++                          )
++                        else ...[
++                          Text(
++                            'Cơ hội thắng: ${quote.winChance.toStringAsFixed(1)}%',
++                            key: const ValueKey('war-win-chance'),
++                            style: const TextStyle(
++                              fontSize: 18,
++                              fontWeight: FontWeight.bold,
++                            ),
++                          ),
++                          Text(
++                            'Giao chiến: ${quote.tacticalChance}% · nguy cơ tự ý rút quân: ${quote.withdrawal}%',
++                          ),
++                          Text(
++                            'Chỉ huy ${quote.command.toStringAsFixed(1)}/100 · thiện cảm phối hợp ${quote.affection.toStringAsFixed(1)}/100',
++                          ),
++                          Text(
++                            'Nếu thắng: mất ${whole(quote.winLossMin)}–${whole(quote.winLossMax)} quân. Nếu thua: ${whole(quote.defeatLoss)} quân.',
++                          ),
++                          Text(
++                            'Nếu tự ý rút lui: mất ${whole(quote.retreatLossMin)}–${whole(quote.retreatLossMax)} quân; nhiệm vụ thất bại.',
++                          ),
++                          Text(
++                            'Chi ${moneyText(s, quote.cost)}, ${whole(quote.food)} tạ, 1 hành động. Hoàn tất cuối ${s.date(s.week + mission.duration - 1)}.',
++                          ),
++                          Text(
++                            'Đã cấp trước ${whole(warFoodCredit(troops))} tạ khẩu phần thường lệ; không thu trùng khi khép mùa.',
++                          ),
++                          if (mission.duration == 2)
++                            const Text(
++                              'Nhiệm vụ dài có yêu cầu tiếp tế giữa chừng. Theo dõi Quân sự trước khi khép mùa.',
++                            ),
++                          Text(
++                            'Còn ${whole(s.population!.availableSoldiers - troops)} quân có thể điều động.',
++                          ),
++                          if (s.population!.availableSoldiers - troops <
++                              s.population!.soldiers * .2)
++                            const Text(
++                              'Lực lượng ở nhà xuống thấp, có thể không đủ xử lý tập kích hoặc cứu viện.',
++                              style: TextStyle(color: terracotta),
++                            ),
++                        ],
++                        if (blocked != null)
++                          Text(
++                            blocked,
++                            style: const TextStyle(color: terracotta),
++                          ),
++                        if (error != null)
++                          Text(
++                            error!,
++                            style: const TextStyle(color: terracotta),
++                          ),
++                      ],
++                    ),
++                  ),
++                ),
++                actions: [
++                  TextButton(
++                    onPressed: () => Navigator.pop(ctx),
++                    child: const Text('Để sau'),
++                  ),
++                  FilledButton(
++                    key: const ValueKey('war-confirm-deploy'),
++                    onPressed:
++                        blocked == null && !controller.busy
++                            ? () async {
++                              final ok = await send(mission.id, {
++                                'action': 'deploy',
++                                'ratio': ratio,
++                                'deputy': deputyId,
++                                'tactic': tactic,
++                              }, leader: leaderId);
++                              if (!ctx.mounted) return;
++                              if (ok) {
++                                Navigator.pop(ctx);
++                              } else {
++                                update(() {
++                                  error = controller.error;
++                                });
++                              }
++                            }
++                            : null,
++                    child: const Text('Xác nhận xuất quân'),
++                  ),
++                ],
++              );
++            },
++          ),
++    );
++  }
++
++  @override
++  Widget build(BuildContext context) {
++    final s = state, w = s.warfare;
++    if (w == null) return const SizedBox.shrink();
++    Widget section(String text) => Padding(
++      padding: const EdgeInsets.only(top: 22, bottom: 8),
++      child: Text(
++        text,
++        style: const TextStyle(fontSize: 18, fontFamily: 'Lora'),
++      ),
++    );
++    Widget action(
++      String label,
++      String target,
++      Map<String, dynamic> data, {
++      String? detail,
++      bool enabled = true,
++      Key? key,
++    }) => OutlinedButton(
++      key: key,
++      onPressed:
++          enabled && !controller.busy
++              ? () => confirm(context, label, detail ?? label, target, data)
++              : null,
++      child: Text(label),
++    );
++    return Column(
++      crossAxisAlignment: CrossAxisAlignment.stretch,
++      children: [
++        section('Chiến tranh và ngoại giao'),
++        const Text(
++          'Ba nước lân cận; chỉ một cuộc chiến cùng lúc. Thắng để ký hòa ước triều cống, không sáp nhập lãnh thổ.',
++        ),
++        for (final n in w.neighbors)
++          Card(
++            child: Padding(
++              padding: const EdgeInsets.all(12),
++              child: Column(
++                crossAxisAlignment: CrossAxisAlignment.stretch,
++                children: [
++                  Text(
++                    '${n.name} · ${n.direction}',
++                    style: const TextStyle(fontWeight: FontWeight.bold),
++                  ),
++                  Text(
++                    '${neighborStatus(n)} · quan hệ ${n.relation} · ưu thế ${n.advantage}',
++                  ),
++                  if (n.cooldownUntil > s.week)
++                    Text('Bảo hộ hòa bình đến ${s.date(n.cooldownUntil)}'),
++                  if (n.status != 'war' && n.status != 'treaty')
++                    Wrap(
++                      spacing: 8,
++                      runSpacing: 6,
++                      children: [
++                        action(
++                          'Tuyên chiến',
++                          n.id,
++                          {'action': 'declare'},
++                          key: ValueKey('war-declare-${n.id}'),
++                          enabled:
++                              w.active == null && n.cooldownUntil <= s.week,
++                          detail:
++                              'Mở chiến tranh với ${n.name}, 1 hành động. Có thể xuất quân trên nhiều nhiệm vụ; quân và tướng đang bận không được dùng trùng.',
++                        ),
++                        action(
++                          'Giao hảo',
++                          n.id,
++                          {'action': 'envoy'},
++                          detail:
++                              'Chi ${moneyText(s, money(s, 10))}, 1 hành động; quan hệ +12.',
++                        ),
++                      ],
++                    ),
++                  if (n.status == 'war') ...[
++                    const Text(
++                      'Hòa đàm: mỗi sứ đoàn tốn 1 hành động. Yêu cầu đối phương cống: phí 1.000 lượng vàng; cầu hòa: phí 2.000 lượng vàng.',
++                    ),
++                    Wrap(
++                      spacing: 8,
++                      runSpacing: 6,
++                      children: [
++                        action(
++                          'Đình chiến (${treatyDemandChance(n, 'armistice')}%)',
++                          n.id,
++                          {'action': 'negotiate', 'tier': 'armistice'},
++                          detail:
++                              'Đình chiến 4 mùa, không bên nào triều cống. Đối phương có thể từ chối.',
++                        ),
++                        for (final tier in ['light', 'medium', 'heavy'])
++                          action(
++                            'Đòi cống ${tributeNames[tier]} (${treatyDemandChance(n, tier)}%)',
++                            n.id,
++                            {'action': 'negotiate', 'tier': tier},
++                            enabled: treatyDemandChance(n, tier) > 0,
++                            detail:
++                                'Yêu cầu nhận ${whole(tributeGold(tier))} lượng vàng/năm × ${tributeYears(tier)} năm. Kỳ đầu sau 4 mùa. Không được hoàn phí nếu bị từ chối.',
++                          ),
++                        action(
++                          'Cầu hòa, nộp triều cống',
++                          n.id,
++                          {
++                            'action': 'negotiate',
++                            'tier':
++                                n.advantage <= -70
++                                    ? 'heavy'
++                                    : n.advantage <= -30
++                                    ? 'medium'
++                                    : 'light',
++                            'surrender': true,
++                          },
++                          detail:
++                              'Nộp ${whole(n.advantage <= -70
++                                  ? 17000
++                                  : n.advantage <= -30
++                                  ? 10000
++                                  : 5000)} lượng vàng/năm; thời hạn ${n.advantage < -29 ? 3 : 2} năm. Kỳ đầu sau 4 mùa. Quân sống sót trở về theo lịch.',
++                        ),
++                      ],
++                    ),
++                  ],
++                  if (n.oldPayable > 0)
++                    action(
++                      'Trả nợ hòa ước cũ: ${whole(n.oldPayable)} lượng vàng',
++                      n.id,
++                      {'action': 'oldPay'},
++                    ),
++                  if (n.oldReceivable > 0)
++                    action(
++                      'Đòi cống cũ: ${whole(n.oldReceivable)} lượng vàng',
++                      n.id,
++                      {'action': 'oldCollect'},
++                      detail:
++                          'Chi 500 lượng vàng, 1 hành động; 70% cơ hội thu khoản cống cũ.',
++                    ),
++                  if (n.treaty != null) ...[
++                    Text(
++                      '${n.treaty!.broken
++                          ? 'Hòa ước đã bị phá'
++                          : n.treaty!.completed || n.status == 'peace'
++                          ? 'Hòa ước đã hết hiệu lực'
++                          : 'Hòa ước ${tributeNames[n.treaty!.tier]}'}: ${n.treaty!.receiving ? 'nhận' : 'nộp'} ${whole(n.treaty!.annualGold)} lượng vàng/năm.',
++                    ),
++                    if (n.treaty!.tier != 'armistice')
++                      Text(
++                        'Đã xử lý ${n.treaty!.paidInstallments}/${n.treaty!.installments} kỳ${n.treaty!.paidInstallments < n.treaty!.installments && !n.treaty!.broken ? '; kỳ tiếp theo cuối ${s.date(n.treaty!.nextDue)}' : ''}.',
++                      ),
++                    if (n.treaty!.arrears > 0) ...[
++                      Text(
++                        'Cống còn thiếu: ${whole(n.treaty!.arrears)} lượng vàng${n.treaty!.graceUntil > 0 ? '; hạn cuối ${s.date(n.treaty!.graceUntil)}' : ''}.',
++                        style: const TextStyle(color: terracotta),
++                      ),
++                      Wrap(
++                        spacing: 8,
++                        runSpacing: 6,
++                        children: [
++                          if (!n.treaty!.receiving)
++                            action(
++                              'Trả bù',
++                              n.id,
++                              {'action': 'pay'},
++                              detail:
++                                  'Trả ${whole(n.treaty!.arrears)} lượng vàng còn thiếu, 1 hành động.',
++                            ),
++                          if (!n.treaty!.broken && n.treaty!.extensions < 1)
++                            action('Gia hạn một mùa', n.id, {
++                              'action': 'extend',
++                            }),
++                          if (n.treaty!.receiving)
++                            action('Miễn khoản thiếu', n.id, {
++                              'action': 'forgive',
++                            }),
++                          if (n.treaty!.receiving)
++                            action(
++                              'Gây sức ép đòi cống',
++                              n.id,
++                              {'action': 'pressure'},
++                              detail:
++                                  'Chi 500 lượng vàng, 1 hành động; 70% cơ hội thu khoản còn thiếu.',
++                            ),
++                          if (!n.treaty!.receiving && !n.treaty!.broken)
++                            action(
++                              'Khước từ trả cống',
++                              n.id,
++                              {'action': 'refuse'},
++                              detail:
++                                  'Phá hòa ước, quan hệ −25; nguy cơ tái chiến từ mùa sau. Khoản còn thiếu vẫn tồn tại.',
++                            ),
++                        ],
++                      ),
++                    ],
++                  ],
++                ],
++              ),
++            ),
++          ),
++        section('Nhiệm vụ chiến tranh'),
++        if (!w.missions.any(
++          (m) => ['open', 'deployed', 'returning'].contains(m.status),
++        ))
++          const Text('Chưa có nhiệm vụ chiến tranh đang mở.'),
++        for (final m in w.missions.where(
++          (m) => ['open', 'deployed', 'returning'].contains(m.status),
++        ))
++          Card(
++            child: Padding(
++              padding: const EdgeInsets.all(12),
++              child: Column(
++                crossAxisAlignment: CrossAxisAlignment.stretch,
++                children: [
++                  Text(
++                    m.title,
++                    style: const TextStyle(fontWeight: FontWeight.bold),
++                  ),
++                  Text(
++                    '${w.neighbors.firstWhere((n) => n.id == m.countryId).name} · ${whole(m.enemyTroops)} quân địch',
++                  ),
++                  if (m.status == 'open') ...[
++                    Text(
++                      'Hạn nhận: cuối ${s.date(m.deadline)} · thời gian ${m.duration} mùa. ${m.kind == 'capital' ? 'Bỏ mặc hoặc phòng thủ thất bại: mất nước.' : 'Bỏ qua: ưu thế −${m.advantageValue}.'}',
++                    ),
++                    Wrap(
++                      spacing: 8,
++                      runSpacing: 6,
++                      children: [
++                        FilledButton(
++                          key: ValueKey('war-open-${m.id}'),
++                          onPressed:
++                              !controller.busy
++                                  ? () => deploy(context, m)
++                                  : null,
++                          child: const Text('Chọn quân và tướng'),
++                        ),
++                        action(
++                          'Bỏ mục tiêu',
++                          m.id,
++                          {'action': 'decline'},
++                          detail:
++                              m.kind == 'capital'
++                                  ? 'Bỏ bảo vệ kinh thành sẽ mất nước. Có thể cầu hòa để giữ quốc gia.'
++                                  : 'Chấp nhận thất bại nhiệm vụ; ưu thế −${m.advantageValue}.',
++                        ),
++                      ],
++                    ),
++                  ] else ...[
++                    Text(
++                      '${whole(m.troops)} quân · ${m.status == 'returning' ? 'đang rút về' : 'đang làm nhiệm vụ'} · về cuối ${s.date(m.due)}',
++                    ),
++                    Text(
++                      'Chủ tướng: ${s.court.where((c) => c.id == m.officerId).firstOrNull?.name ?? 'Không còn trong triều'}${m.deputyId.isEmpty ? '' : ' · phó tướng: ${s.court.where((c) => c.id == m.deputyId).firstOrNull?.name ?? 'Không còn trong triều'}'}',
++                    ),
++                    if (m.intervention) ...[
++                      const Text(
++                        'Đường tiếp tế gặp khó khăn. Cần tiếp tế hoặc rút quân; bỏ mặc khiến nhiệm vụ thất bại.',
++                        style: TextStyle(color: terracotta),
++                      ),
++                      action(
++                        'Cấp tiếp tế',
++                        m.id,
++                        {'action': 'intervene'},
++                        detail:
++                            'Chi 1.000 lượng vàng, ${whole(warMissionFood(m.troops))} tạ, 1 hành động.',
++                      ),
++                    ],
++                    if (m.status == 'deployed')
++                      action(
++                        'Rút quân',
++                        m.id,
++                        {'action': 'withdraw'},
++                        detail:
++                            'Bỏ mục tiêu, mất ưu thế và chịu tổn thất khi rút lui. Kinh phí không hoàn; quân trở về theo lịch.',
++                      ),
++                  ],
++                ],
++              ),
++            ),
++          ),
++        if (w.reports.isNotEmpty) ...[
++          section('Quân báo gần nhất'),
++          for (final report in w.reports.take(8))
++            Padding(
++              padding: const EdgeInsets.symmetric(vertical: 6),
++              child: Text(
++                '${s.date(report['week'] as int)} · ${report['title']}\n${report['detail']}',
++              ),
++            ),
++        ],
++      ],
++    );
++  }
++}
+diff --git a/pubspec.yaml b/pubspec.yaml
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+@@ -1,7 +1,7 @@
+ name: van_tue
+ description: "Vạn Tuế — mô phỏng trị vì theo mùa, xử lý FE và lưu local."
+ publish_to: 'none'
+-version: 0.21.1
++version: 0.22.0
+ 
+ environment:
+   sdk: ^3.7.2
+diff --git a/test/warfare_test.dart b/test/warfare_test.dart
+--- /dev/null
++++ b/test/warfare_test.dart
+@@ -0,0 +1,835 @@
++import 'dart:convert';
++import 'package:flutter_test/flutter_test.dart';
++import 'package:van_tue/game/logic/game_engine.dart';
++import 'package:van_tue/game/logic/warfare_rules.dart';
++import 'package:van_tue/game/logic/finance_rules.dart';
++import 'package:van_tue/game/logic/personnel_rules.dart';
++import 'package:van_tue/game/models/game_state.dart';
++import 'package:van_tue/game/data/game_store.dart';
++import 'package:van_tue/game/data/content.dart';
++import 'package:van_tue/game/data/reign_content.dart';
++import 'package:van_tue/game/logic/game_gateway.dart';
++
++final engine = GameEngine();
++GameState fresh([int seed = 42]) {
++  final s = engine.start('war-$seed', 'An', seed);
++  s.petitions.clear();
++  s.nextMajorWeek = s.nextChainWeek = 100000;
++  s.factions.updateAll((k, v) => 70);
++  for (final c in s.court) {
++    c.affection = 90;
++    c.loyalty = c.integrity = 100;
++    c.strain = 0;
++  }
++  return s;
++}
++
++GameCommand cmd(
++  GameState s,
++  String target,
++  Map<String, dynamic> data, {
++  String leader = '',
++}) => GameCommand(
++  id: 'w-${s.revision}',
++  runId: s.runId,
++  expectedRevision: s.revision,
++  type: 'war',
++  target: target,
++  option: jsonEncode(data),
++  assigneeId: leader,
++);
++GameState order(
++  GameState s,
++  String target,
++  Map<String, dynamic> data, {
++  String leader = '',
++}) => engine.execute(s, cmd(s, target, data, leader: leader));
++GameState close(GameState s) {
++  s.petitions.clear();
++  s.workThisWeek = s.affairsThisWeek = 1;
++  s.health = s.authority = s.stability = s.people = 90;
++  return engine.execute(
++    s,
++    GameCommand(
++      id: 'end-${s.revision}',
++      runId: s.runId,
++      expectedRevision: s.revision,
++      type: 'endWeek',
++    ),
++  );
++}
++
++GameState war() => order(fresh(), 'north', {'action': 'declare'});
++WarMission addMission(GameState s, String kind, {int enemy = 5000}) {
++  final w = s.warfare!;
++  final m = WarMission(
++    id: 'custom-${++w.sequence}',
++    countryId: 'north',
++    kind: kind,
++    title: warMissionNames[kind]!,
++    enemyTroops: enemy,
++    opened: s.week,
++    deadline: s.week + 3,
++  );
++  w.missions.add(m);
++  return m;
++}
++
++void reconcile(GameState s) {
++  for (final f in s.financialWeeks) {
++    expect(f.closingBalance, f.openingBalance + f.income - f.expense);
++    expect(f.closingDebt, f.openingDebt + f.newDebt - f.debtReduction);
++  }
++}
++
++void main() {
++  test(
++    'three neighbors start at 10,10,0 and survive roundtrip; legacy stays legacy',
++    () {
++      final s = fresh();
++      expect(s.warfare!.neighbors.map((n) => n.advantage), [10, 10, 0]);
++      expect(s.copy().warfare!.neighbors.map((n) => n.advantage), [10, 10, 0]);
++      expect(
++        GameEngine(populationEnabled: false).start('old', 'An', 1).warfare,
++        isNull,
++      );
++      final old =
++          s.toJson()
++            ..remove('warfare')
++            ..['rulesVersion'] = 'mvp-0.21.1';
++      expect(GameState.fromJson(old).warfare!.neighbors, hasLength(3));
++      expect(GameState.fromJson(old).treasury, 50000);
++    },
++  );
++  test(
++    'one war has many missions, but cannot declare against another neighbor',
++    () {
++      final s = war();
++      expect(s.warfare!.active!.advantage, 10);
++      expect(s.warfare!.missions, hasLength(2));
++      expect(
++        () => order(s, 'west', {'action': 'declare'}),
++        throwsA(isA<GameRuleException>()),
++      );
++    },
++  );
++  test('normal and siege ratios round up to tens and enforce minimum 200%', () {
++    final s = war();
++    final m = addMission(s, 'siege');
++    final c = warOfficers(s).first;
++    expect(warTroopRatios(m), [2, 2.5, 3]);
++    expect(warTroops(m, 2), 10000);
++    expect(warDeployBlocked(s, m, 1.25, c, null), isNotNull);
++    expect(
++      () => order(s, m.id, {'action': 'deploy', 'ratio': 1.25}, leader: c.id),
++      throwsA(isA<GameRuleException>()),
++    );
++    final odd = addMission(s, 'defend', enemy: 2323);
++    expect(warTroops(odd, .8), 1860);
++  });
++  test(
++    'affection changes final odds independently from capability and includes deputy',
++    () {
++      final s = war();
++      final m = s.warfare!.missions.first;
++      final c = warOfficers(s).first;
++      c.ability = 90;
++      c.affection = 90;
++      final high = WarPreview(s, m, 5000, c, null);
++      c.affection = 0;
++      final low = WarPreview(s, m, 5000, c, null);
++      expect(low.tacticalChance, high.tacticalChance);
++      expect(low.withdrawal, 40);
++      expect(low.winChance, closeTo(high.winChance * .6, .00001));
++      final deputy = warOfficers(s).firstWhere((d) => d.id != c.id);
++      deputy.affection = 100;
++      expect(warAffection(c, deputy), 30);
++    },
++  );
++  test(
++    'fortification, defense, force size and naval commander affect battle preview',
++    () {
++      final s = war();
++      final c = warOfficers(s).first;
++      final defense = addMission(s, 'defend');
++      final field = addMission(s, 'battle');
++      final siege = addMission(s, 'siege');
++      expect(
++        WarPreview(s, defense, 5000, c, null).tacticalChance,
++        greaterThan(WarPreview(s, field, 5000, c, null).tacticalChance),
++      );
++      expect(
++        WarPreview(s, field, 6250, c, null).tacticalChance,
++        greaterThan(WarPreview(s, field, 4000, c, null).tacticalChance),
++      );
++      final weak = WarPreview(s, siege, 10000, c, null).tacticalChance;
++      s.warfare!.active!.fortification = 100;
++      expect(
++        WarPreview(s, siege, 10000, c, null).tacticalChance,
++        lessThanOrEqualTo(weak),
++      );
++      c.role = 'Đô đốc';
++      c.specialty = 'Ngoại giao';
++      expect(
++        warOfficerAbility(c, naval: true),
++        greaterThan(warOfficerAbility(c)),
++      );
++    },
++  );
++  test(
++    'new casualty formulas permit 100% defeat, reduce victories 50-75%, and retain losses',
++    () {
++      expect(battleCasualtyBase(troops: 10000, enemy: 10000, command: 75), 40);
++      expect(
++        battleLosses(10000, 40, won: false, retreated: false, reduction: 0),
++        4000,
++      );
++      expect(
++        battleLosses(10000, 40, won: true, retreated: false, reduction: 60),
++        1600,
++      );
++      expect(
++        battleLosses(10000, 40, won: false, retreated: true, reduction: 10),
++        400,
++      );
++      expect(
++        battleLosses(10000, 100, won: false, retreated: false, reduction: 0),
++        10000,
++      );
++      expect(
++        battleLosses(10000, 100, won: true, retreated: false, reduction: 50),
++        5000,
++      );
++      expect(
++        battleLosses(123, 1, won: true, retreated: false, reduction: 75),
++        1,
++      );
++    },
++  );
++  test(
++    'reserves troops and both officers, charges exact quote, cannot reuse or overcommit',
++    () {
++      var s = war();
++      final m = s.warfare!.missions.first;
++      final officers = warOfficers(s);
++      final leader = officers[0], deputy = officers[1];
++      final quote = WarPreview(s, m, 6250, leader, deputy);
++      final before = s.treasury;
++      s = order(s, m.id, {
++        'action': 'deploy',
++        'ratio': 1.25,
++        'deputy': deputy.id,
++      }, leader: leader.id);
++      expect(s.population!.soldiers, 50000);
++      expect(s.population!.availableSoldiers, 43750);
++      expect(s.treasury, before - quote.cost);
++      expect(s.population!.foodCredit, warFoodCredit(6250));
++      expect(officerBusy(s, leader.id), true);
++      expect(officerBusy(s, deputy.id), true);
++      final m2 = s.warfare!.missions[1];
++      expect(
++        () => order(s, m2.id, {
++          'action': 'deploy',
++          'ratio': 1,
++        }, leader: deputy.id),
++        throwsA(isA<GameRuleException>()),
++      );
++      final huge = addMission(s, 'battle', enemy: 100000);
++      expect(
++        warDeployBlocked(s, huge, .8, warOfficers(s).first, null),
++        contains('Thiếu'),
++      );
++      reconcile(s);
++    },
++  );
++  test(
++    'simultaneous deployments only lose their own soldiers and settle once after reload',
++    () {
++      var s = war();
++      for (final id in s.warfare!.missions.take(2).map((m) => m.id).toList()) {
++        final c = warOfficers(s).first;
++        s = order(s, id, {'action': 'deploy', 'ratio': 1}, leader: c.id);
++      }
++      final saved = jsonEncode(s.toJson());
++      expect(jsonEncode(s.copy().toJson()), saved);
++      final losses = s.population!.deployments.fold<int>(
++        0,
++        (n, d) => n + d.losses,
++      );
++      var baseline = s.copy();
++      baseline.population!.deployments = [
++        for (final d in baseline.population!.deployments)
++          ArmyDeployment.fromJson(d.toJson()..['losses'] = 0),
++      ];
++      baseline = close(baseline);
++      s = close(s.copy());
++      expect(s.population!.deployments, isEmpty);
++      expect(s.population!.soldiers, baseline.population!.soldiers - losses);
++      expect(s.warfare!.reports, hasLength(2));
++      s = close(s);
++      expect(s.warfare!.reports, hasLength(2));
++      expect(
++        s.population!.changes.keys.where((k) => k.startsWith('Tử trận')),
++        isEmpty,
++      );
++    },
++  );
++  test(
++    'low-affection commander can withdraw with low casualties and lose the objective',
++    () {
++      GameState? deployed;
++      for (var seed = 1; seed < 100; seed++) {
++        var s = order(fresh(seed), 'north', {'action': 'declare'});
++        final m = s.warfare!.missions.first;
++        final c = warOfficers(s).first;
++        c.affection = 0;
++        c.ability = 100;
++        s = order(s, m.id, {'action': 'deploy', 'ratio': 1}, leader: c.id);
++        if (s.population!.deployments.single.retreated) {
++          deployed = s;
++          break;
++        }
++      }
++      expect(deployed, isNotNull);
++      final d = deployed!.population!.deployments.single;
++      expect(d.succeeded, false);
++      expect(d.reduction, inInclusiveRange(10, 25));
++      expect(
++        d.losses,
++        lessThanOrEqualTo((d.troops * d.baseCasualty / 100 * .25).ceil()),
++      );
++      final result = close(deployed);
++      expect(result.warfare!.reports.first['result'], 'retreated');
++      expect(
++        result.warfare!.reports.first['detail'],
++        contains('tự ý rút quân'),
++      );
++    },
++  );
++  test(
++    'multi-season army stays unavailable and supply intervention has a real cost',
++    () {
++      var s = war();
++      final m = addMission(s, 'siege');
++      final leader = warOfficers(s).first;
++      s = order(s, m.id, {'action': 'deploy', 'ratio': 2}, leader: leader.id);
++      s = close(s);
++      expect(s.population!.busySoldiers, 10000);
++      expect(officerBusy(s, leader.id), true);
++      final active = s.warfare!.missions.firstWhere((x) => x.id == m.id);
++      expect(active.intervention, true);
++      final before = s.treasury;
++      s = order(s, m.id, {'action': 'intervene'});
++      expect(s.treasury, before - 1000);
++      expect(
++        () => order(s, m.id, {'action': 'intervene'}),
++        throwsA(isA<GameRuleException>()),
++      );
++      s = close(s);
++      expect(s.population!.busySoldiers, 0);
++      expect(officerBusy(s, leader.id), false);
++      expect(
++        s.warfare!.reports.where((r) => r['missionId'] == m.id),
++        hasLength(1),
++      );
++      reconcile(s);
++    },
++  );
++  test(
++    'peace recalls armies without duplicate combat and preserves return schedule',
++    () {
++      var s = war();
++      final m = addMission(s, 'siege');
++      final c = warOfficers(s).first;
++      s = order(s, m.id, {'action': 'deploy', 'ratio': 2}, leader: c.id);
++      final due = s.population!.deployments.single.due;
++      s = order(s, 'north', {
++        'action': 'negotiate',
++        'tier': 'light',
++        'surrender': true,
++      });
++      expect(s.war, 0);
++      expect(s.population!.busySoldiers, 10000);
++      expect(s.population!.deployments.single.losses, 0);
++      expect(s.population!.deployments.single.due, due);
++      s = close(s);
++      expect(s.population!.busySoldiers, 10000);
++      s = close(s);
++      expect(s.population!.busySoldiers, 0);
++      expect(s.warfare!.reports.first['losses'], 0);
++      expect(
++        s.population!.changes.keys.where((k) => k.startsWith('Tử trận')),
++        isEmpty,
++      );
++      expect(s.warfare!.reports.first['result'], 'recalled');
++    },
++  );
++  test(
++    'receiving tribute first settles after four seasons and repeats annually, never each season',
++    () {
++      var s = fresh();
++      final n = s.warfare!.neighbors.first;
++      n.status = 'treaty';
++      n.treaty = TributeTreaty(
++        tier: 'light',
++        receiving: true,
++        annualGold: 5000,
++        signed: s.week,
++        installments: 2,
++      );
++      for (var i = 0; i < 4; i++) {
++        s = close(s);
++      }
++      expect(s.warfare!.neighbors.first.treaty!.paidInstallments, 0);
++      expect(tributeReceipts(s).single.amount, 5000);
++      final projection = BudgetProjection(s);
++      s = close(s);
++      expect(s.warfare!.neighbors.first.treaty!.paidInstallments, 1);
++      expect(
++        s.financialWeeks.last.entries
++            .where((e) => e.title == 'Triều cống từ Hàn Kỳ')
++            .single
++            .amount,
++        5000,
++      );
++      expect(s.financialWeeks.last.closingBalance, projection.closingBalance);
++      s = close(s);
++      expect(s.warfare!.neighbors.first.treaty!.paidInstallments, 1);
++      reconcile(s);
++    },
++  );
++  test('outgoing tribute uses gold tiers and occurs only in due budget', () {
++    var s = war();
++    s.warfare!.active!.advantage = -80;
++    expect(
++      () => order(s, 'north', {
++        'action': 'negotiate',
++        'tier': 'light',
++        'surrender': true,
++      }),
++      throwsA(isA<GameRuleException>()),
++    );
++    s = order(s, 'north', {
++      'action': 'negotiate',
++      'tier': 'heavy',
++      'surrender': true,
++    });
++    final t = s.warfare!.neighbors.first.treaty!;
++    expect(t.annualGold, 17000);
++    expect(t.installments, 3);
++    expect(t.nextDue, t.signed + 4);
++    s.completedWeeks = t.nextDue - 1;
++    final projection = BudgetProjection(s);
++    s = close(s);
++    final week = s.financialWeeks.last;
++    expect(
++      week.entries.where((e) => e.category == 'tribute').single.amount,
++      -17000,
++    );
++    expect(week.closingBalance, projection.closingBalance);
++    reconcile(s);
++  });
++  test(
++    'unpaid tribute is recorded once, can extend or repay, not duplicated into ordinary debt',
++    () {
++      var s = fresh();
++      final n = s.warfare!.neighbors.first;
++      n.status = 'treaty';
++      n.treaty = TributeTreaty(
++        tier: 'heavy',
++        receiving: false,
++        annualGold: 17000,
++        signed: s.week - 4,
++        installments: 3,
++      );
++      s.treasury = 0;
++      s.financialWeeks.clear();
++      s = close(s);
++      final t = s.warfare!.neighbors.first.treaty!;
++      expect(t.arrears, greaterThan(0));
++      expect(s.debt, lessThan(t.arrears));
++      final missing = t.arrears;
++      final paid = t.annualGold - missing;
++      expect(
++        s.financialWeeks.first.entries
++            .where((e) => e.category == 'tribute')
++            .single
++            .amount,
++        -paid,
++      );
++      s = order(s, 'north', {'action': 'extend'});
++      expect(s.warfare!.neighbors.first.treaty!.graceUntil, s.week + 1);
++      s.treasury = 50000;
++      s.financialWeeks.clear();
++      s = order(s, 'north', {'action': 'pay'});
++      expect(s.treasury, 50000 - missing);
++      expect(s.warfare!.neighbors.first.treaty!.arrears, 0);
++      expect(
++        () => order(s, 'north', {'action': 'pay'}),
++        throwsA(isA<GameRuleException>()),
++      );
++      reconcile(s);
++    },
++  );
++  test(
++    'missing a tribute grace period breaks treaty and warns before restarting war',
++    () {
++      var s = fresh();
++      final n = s.warfare!.neighbors.first;
++      n.status = 'treaty';
++      n.treaty =
++          TributeTreaty(
++              tier: 'light',
++              receiving: false,
++              annualGold: 5000,
++              signed: s.week,
++              installments: 2,
++            )
++            ..arrears = 3000
++            ..graceUntil = s.week;
++      s = close(s);
++      expect(s.warfare!.neighbors.first.treaty!.broken, true);
++      expect(s.warfare!.active, isNull);
++      s = close(s);
++      expect(s.warfare!.active!.id, 'north');
++      expect(s.warfare!.active!.treaty!.arrears, 3000);
++    },
++  );
++  test(
++    'completed treaty ends income and protects peace for four more seasons',
++    () {
++      var s = fresh();
++      final n = s.warfare!.neighbors.first;
++      n.status = 'treaty';
++      n.treaty = TributeTreaty(
++        tier: 'light',
++        receiving: true,
++        annualGold: 5000,
++        signed: s.week - 8,
++        installments: 2,
++      )..paidInstallments = 1;
++      final settled = s.week;
++      s = close(s);
++      final done = s.warfare!.neighbors.first;
++      expect(done.status, 'peace');
++      expect(done.cooldownUntil, settled + 4);
++      expect(tributeReceipts(s), isEmpty);
++      expect(
++        () => order(s, 'north', {'action': 'declare'}),
++        throwsA(isA<GameRuleException>()),
++      );
++    },
++  );
++  test(
++    'capital threat is explicit and loss only follows ignoring or losing the final defense',
++    () {
++      var s = war();
++      s.warfare!.missions.clear();
++      s.warfare!.active!.advantage = -75;
++      s = close(s);
++      expect(s.ended, false);
++      final capital = s.warfare!.missions.firstWhere(
++        (m) => m.kind == 'capital',
++      );
++      expect(capital.deadline, greaterThanOrEqualTo(s.week));
++      s = order(s, capital.id, {'action': 'decline'});
++      expect(s.ended, true);
++      expect(s.endKind, 'invasion');
++    },
++  );
++  test(
++    'all troops may be busy without immediate defeat and insufficient selections are blocked',
++    () {
++      var s = war();
++      s.warfare!.missions.clear();
++      final m = addMission(s, 'battle', enemy: 50000);
++      final c = warOfficers(s).first;
++      s.treasury = 100000;
++      s.financialWeeks.clear();
++      s = order(s, m.id, {'action': 'deploy', 'ratio': 1}, leader: c.id);
++      expect(s.population!.availableSoldiers, 0);
++      expect(s.ended, false);
++      final second = addMission(s, 'defend');
++      expect(
++        warDeployBlocked(s, second, .8, warOfficers(s).first, null),
++        contains('Thiếu'),
++      );
++    },
++  );
++  test(
++    'military petition opens a selectable mission without charging fixed troops or fees',
++    () {
++      var s = fresh();
++      final e = eventForState(s, 'population_border_skirmish');
++      expect(e.choices.first.troops, 0);
++      expect(e.choices.first.effects['warMission'], 3000);
++      s.petitions.add(
++        Petition(
++          id: 'source',
++          definitionId: e.id,
++          openedWeek: s.week,
++          deadline: s.week,
++        ),
++      );
++      final before = s.treasury;
++      final points = s.points;
++      s = engine.execute(
++        s,
++        GameCommand(
++          id: 'source-open',
++          runId: s.runId,
++          expectedRevision: s.revision,
++          type: 'petition',
++          target: 'source',
++          option: '0',
++        ),
++      );
++      expect(s.treasury, before);
++      expect(s.points, points);
++      expect(s.population!.deployments, isEmpty);
++      expect(s.warfare!.missions.any((m) => m.title == e.title), true);
++    },
++  );
++  test(
++    'gateway retry cannot duplicate an army, payment, or change a frozen result',
++    () async {
++      final store = MemoryGameStore();
++      final gate = LocalGameGateway(store);
++      var a = await gate.start(
++        name: 'An',
++        runId: 'war-retry',
++        seed: 42,
++        previousRunId: null,
++        previousRevision: null,
++      );
++      a = await gate.dispatch(cmd(a.active!, 'north', {'action': 'declare'}));
++      final s = a.active!;
++      final m = s.warfare!.missions.first;
++      final c = warOfficers(s).first;
++      final command = cmd(s, m.id, {
++        'action': 'deploy',
++        'ratio': 1,
++      }, leader: c.id);
++      a = await gate.dispatch(command);
++      final snapshot = jsonEncode(a.active!.toJson());
++      a = await gate.dispatch(command);
++      expect(jsonEncode(a.active!.toJson()), snapshot);
++      expect(a.active!.population!.deployments, hasLength(1));
++    },
++  );
++  test(
++    'victory has nonzero casualties with a saved 50-75 percent reduction',
++    () {
++      ArmyDeployment? victory;
++      for (var seed = 1; seed < 50; seed++) {
++        var s = order(fresh(seed), 'north', {'action': 'declare'});
++        final m = s.warfare!.missions.first;
++        final c = warOfficers(s).first;
++        s = order(s, m.id, {'action': 'deploy', 'ratio': 1.25}, leader: c.id);
++        final d = s.population!.deployments.single;
++        if (d.succeeded) {
++          victory = d;
++          break;
++        }
++      }
++      expect(victory, isNotNull);
++      final d = victory!;
++      expect(d.losses, greaterThan(0));
++      expect(d.reduction, inInclusiveRange(50, 75));
++      expect(
++        d.losses,
++        battleLosses(
++          d.troops,
++          d.baseCasualty,
++          won: true,
++          retreated: false,
++          reduction: d.reduction,
++        ),
++      );
++    },
++  );
++  test(
++    'postures trade success odds against casualties instead of a dominant attack option',
++    () {
++      final s = war();
++      final m = s.warfare!.missions.first;
++      final c = warOfficers(s).first;
++      final cautious = WarPreview(s, m, 5000, c, null, tactic: 'defend');
++      final aggressive = WarPreview(s, m, 5000, c, null, tactic: 'attack');
++      expect(aggressive.tacticalChance, greaterThan(cautious.tacticalChance));
++      expect(aggressive.defeatLoss, greaterThan(cautious.defeatLoss));
++    },
++  );
++  test(
++    'broken treaty debt survives replacement peace and can be paid once',
++    () {
++      var s = war();
++      final n = s.warfare!.active!;
++      n.treaty =
++          TributeTreaty(
++              tier: 'heavy',
++              receiving: false,
++              annualGold: 17000,
++              signed: 1,
++              installments: 3,
++            )
++            ..arrears = 3000
++            ..broken = true;
++      s = order(s, 'north', {
++        'action': 'negotiate',
++        'tier': 'light',
++        'surrender': true,
++      });
++      expect(s.warfare!.neighbors.first.oldPayable, 3000);
++      final before = s.treasury;
++      s = order(s, 'north', {'action': 'oldPay'});
++      expect(s.treasury, before - 3000);
++      expect(s.warfare!.neighbors.first.oldPayable, 0);
++      expect(
++        () => order(s, 'north', {'action': 'oldPay'}),
++        throwsA(isA<GameRuleException>()),
++      );
++    },
++  );
++  test(
++    'an annihilated field army opens a capital warning and still permits surrender',
++    () {
++      var s = war();
++      s.warfare!.missions.clear();
++      s.warfare!.active!.advantage = -60;
++      final m = addMission(s, 'defend', enemy: 50000);
++      final c = warOfficers(s).first;
++      s.treasury = 100000;
++      s.financialWeeks.clear();
++      s = order(s, m.id, {'action': 'deploy', 'ratio': 1}, leader: c.id);
++      final d = s.population!.deployments.single;
++      s.population!.deployments = [
++        ArmyDeployment.fromJson(
++          d.toJson()
++            ..['losses'] = 50000
++            ..['succeeded'] = false
++            ..['retreated'] = false,
++        ),
++      ];
++      s = close(s);
++      expect(s.population!.soldiers, 0);
++      expect(s.ended, false);
++      expect(
++        s.warfare!.missions.any(
++          (m) => m.kind == 'capital' && m.status == 'open',
++        ),
++        true,
++      );
++      s = order(s, 'north', {
++        'action': 'negotiate',
++        'tier': 'heavy',
++        'surrender': true,
++      });
++      expect(s.ended, false);
++      expect(s.war, 0);
++    },
++  );
++  test(
++    'military major waits for its selectable army mission and records its actual outcome',
++    () {
++      var s = fresh();
++      final definition = majorDefinition('invasion');
++      s.major = MajorMission(
++        id: 'military-story',
++        kind: definition.id,
++        openedWeek: 1,
++        deadline: 8,
++        severity: 1,
++        preparedness: 0,
++        petitionDriven: true,
++        dueWeek: 1,
++        objectives: [
++          for (final goal in definition.objectives)
++            MissionObjective(key: goal.key),
++        ],
++      );
++      final stage = definition.objectives.indexWhere(
++        (g) => g.specialty == 'Quân sự',
++      );
++      s.major!.stage = stage;
++      engine.prepareStoryPetitions(s);
++      final p = s.petitions.firstWhere((p) => p.storyId == 'military-story');
++      final e = eventForState(s, p.definitionId);
++      final index = e.choices.indexWhere(
++        (c) => c.effects.containsKey('warMission'),
++      );
++      expect(index, greaterThanOrEqualTo(0));
++      s = engine.execute(
++        s,
++        GameCommand(
++          id: 'major-open',
++          runId: s.runId,
++          expectedRevision: s.revision,
++          type: 'petition',
++          target: p.id,
++          option: '$index',
++        ),
++      );
++      final mission = s.warfare!.missions.firstWhere(
++        (m) => m.majorId == 'military-story',
++      );
++      expect(s.major!.objectives[stage].done, false);
++      final c = warOfficers(s).first;
++      s = order(s, mission.id, {
++        'action': 'deploy',
++        'ratio': 1.25,
++      }, leader: c.id);
++      for (var turn = 0; turn < mission.duration; turn++) {
++        for (final m in s.warfare!.missions.where(
++          (m) => m.majorId.isEmpty && m.status == 'open',
++        )) {
++          m.status = 'cancelled';
++        }
++        final current = s.warfare!.missions.firstWhere(
++          (m) => m.id == mission.id,
++        );
++        if (current.intervention) {
++          s = order(s, mission.id, {'action': 'intervene'});
++        }
++        s = close(s);
++      }
++      expect(
++        s.warfare!.reports.where((r) => r['missionId'] == mission.id),
++        hasLength(1),
++      );
++      final report = s.warfare!.reports.firstWhere(
++        (r) => r['missionId'] == mission.id,
++      );
++      final major =
++          s.major ?? s.majorHistory.firstWhere((m) => m.id == 'military-story');
++      expect(major.objectives[stage].done, report['result'] == 'success');
++    },
++  );
++
++  test(
++    'last annual term expires on schedule even when counterpart still owes tribute',
++    () {
++      var s = fresh();
++      final n = s.warfare!.neighbors.first;
++      n.status = 'treaty';
++      n.treaty =
++          TributeTreaty(
++              tier: 'light',
++              receiving: true,
++              annualGold: 5000,
++              signed: s.week - 8,
++              installments: 2,
++            )
++            ..paidInstallments = 2
++            ..arrears = 1200
++            ..graceUntil = s.week + 1;
++      s = close(s);
++      final ended = s.warfare!.neighbors.first;
++      expect(ended.status, 'peace');
++      expect(ended.treaty!.arrears, 1200);
++      expect(tributeReceipts(s), isEmpty);
++      s = order(s, 'north', {'action': 'forgive'});
++      expect(s.warfare!.neighbors.first.treaty!.arrears, 0);
++    },
++  );
++}
+diff --git a/test/warfare_ui_test.dart b/test/warfare_ui_test.dart
+--- /dev/null
++++ b/test/warfare_ui_test.dart
+@@ -0,0 +1,215 @@
++import 'dart:convert';
++import 'dart:io';
++import 'dart:ui' as ui;
++import 'package:flutter/rendering.dart';
++import 'package:flutter/services.dart';
++import 'package:flutter/material.dart';
++import 'package:flutter_test/flutter_test.dart';
++import 'package:van_tue/app/game_controller.dart';
++import 'package:van_tue/game/data/game_store.dart';
++import 'package:van_tue/game/logic/game_gateway.dart';
++import 'package:van_tue/game/logic/warfare_rules.dart';
++import 'package:van_tue/game/models/game_state.dart';
++import 'package:van_tue/game/presentation/game_app.dart';
++
++Future<(GameController, MemoryGameStore)> setup(
++  WidgetTester tester,
++  Size size, {
++  bool siege = false,
++}) async {
++  tester.view.physicalSize = size;
++  tester.view.devicePixelRatio = 1;
++  addTearDown(tester.view.resetPhysicalSize);
++  addTearDown(tester.view.resetDevicePixelRatio);
++  if (const bool.fromEnvironment('WAR_PREVIEWS')) {
++    await (FontLoader('MaterialIcons')
++      ..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf'))).load();
++    await (FontLoader('Lora')
++      ..addFont(rootBundle.load('assets/fonts/Lora.ttf'))).load();
++    await (FontLoader('BeVietnam')..addFont(
++      rootBundle.load('assets/fonts/BeVietnamPro-Regular.ttf'),
++    )).load();
++  }
++  final store = MemoryGameStore();
++  final gate = LocalGameGateway(store);
++  await gate.start(
++    name: 'An',
++    runId: 'war-ui',
++    seed: 42,
++    previousRunId: null,
++    previousRevision: null,
++  );
++  await store.update((a) {
++    final s = a.active!;
++    s.war = 1;
++    final n = s.warfare!.neighbors.first;
++    n.status = 'war';
++    s.warfare!.missions.add(
++      WarMission(
++        id: 'ui-mission',
++        countryId: n.id,
++        kind: siege ? 'siege' : 'defend',
++        title: siege ? 'Công thành' : 'Giữ cửa ải',
++        enemyTroops: 5000,
++        opened: s.week,
++        deadline: s.week + 2,
++      ),
++    );
++    final c = s.court.firstWhere((c) => c.role == 'Đại tướng');
++    c.ability = 90;
++    c.affection = 5;
++    c.strain = 0;
++  });
++  final controller = GameController(gate);
++  await controller.load();
++  addTearDown(controller.dispose);
++  await tester.pumpWidget(
++    RepaintBoundary(
++      key: const ValueKey('war-canvas'),
++      child: GameApp(controller: controller, initialRoute: 'military'),
++    ),
++  );
++  await tester.pumpAndSettle();
++  return (controller, store);
++}
++
++void main() {
++  for (final size in [
++    const Size(1440, 900),
++    const Size(390, 844),
++    const Size(320, 568),
++  ]) {
++    testWidgets(
++      'army preview includes affection and pays exact deployment at $size',
++      (tester) async {
++        final (controller, store) = await setup(tester, size);
++        final before = jsonEncode(controller.state!.toJson());
++        final open = find.byKey(const ValueKey('war-open-ui-mission'));
++        await tester.ensureVisible(open);
++        await tester.tap(open);
++        await tester.pumpAndSettle();
++        expect(
++          find.text('Chọn số quân và tướng để dự tính cơ hội thắng.'),
++          findsOneWidget,
++        );
++        expect(
++          tester
++              .widget<FilledButton>(
++                find.byKey(const ValueKey('war-confirm-deploy')),
++              )
++              .onPressed,
++          isNull,
++        );
++        final ratio = find.byKey(const ValueKey('war-ratio-1.25'));
++        await tester.ensureVisible(ratio);
++        await tester.tap(ratio);
++        await tester.pumpAndSettle();
++        final picker = find.byKey(const ValueKey('war-leader'));
++        await tester.ensureVisible(picker);
++        await tester.tap(picker);
++        await tester.pumpAndSettle();
++        final general = controller.state!.court.firstWhere(
++          (c) => c.role == 'Đại tướng',
++        );
++        await tester.tap(find.textContaining(general.name).last);
++        await tester.pumpAndSettle();
++        final s = controller.state!;
++        final quote = WarPreview(
++          s,
++          s.warfare!.missions.single,
++          6250,
++          general,
++          null,
++        );
++        expect(
++          find.text('Cơ hội thắng: ${quote.winChance.toStringAsFixed(1)}%'),
++          findsOneWidget,
++        );
++        expect(
++          find.textContaining('nguy cơ tự ý rút quân: 40%'),
++          findsOneWidget,
++        );
++        expect(jsonEncode(controller.state!.toJson()), before);
++        if (const bool.fromEnvironment('WAR_PREVIEWS')) {
++          final context = tester.element(find.byType(GameApp));
++          await tester.runAsync(() async {
++            for (final asset in ['icons', 'jade', 'jade-texture', 'panel']) {
++              final path = 'assets/images/imperial/$asset.webp';
++              await precacheImage(AssetImage(path), context);
++            }
++          });
++          await tester.pumpAndSettle();
++          final boundary = tester.renderObject<RenderRepaintBoundary>(
++            find.byKey(const ValueKey('war-canvas')),
++          );
++          await tester.runAsync(() async {
++            final image = await boundary.toImage();
++            final bytes = await image.toByteData(
++              format: ui.ImageByteFormat.png,
++            );
++            await File(
++              'docs/warfare-preview-${size.width.toInt()}.png',
++            ).writeAsBytes(bytes!.buffer.asUint8List());
++            image.dispose();
++          });
++        }
++        final confirm = find.byKey(const ValueKey('war-confirm-deploy'));
++        await tester.ensureVisible(confirm);
++        await tester.tap(confirm);
++        await tester.pumpAndSettle();
++        expect(tester.takeException(), isNull);
++        expect(controller.state!.population!.busySoldiers, 6250);
++        expect(controller.state!.treasury, 50000 - quote.cost);
++        expect(controller.state!.population!.availableSoldiers, 43750);
++        expect(
++          (await LocalGameGateway(store).load())
++              .active!
++              .population!
++              .deployments,
++          hasLength(1),
++        );
++      },
++    );
++  }
++  testWidgets(
++    'siege picker only offers 200,250,300 and cancel has no side effect',
++    (tester) async {
++      final (controller, _) = await setup(
++        tester,
++        const Size(390, 844),
++        siege: true,
++      );
++      final before = jsonEncode(controller.state!.toJson());
++      final open = find.byKey(const ValueKey('war-open-ui-mission'));
++      await tester.ensureVisible(open);
++      await tester.tap(open);
++      await tester.pumpAndSettle();
++      expect(find.byKey(const ValueKey('war-ratio-2.0')), findsOneWidget);
++      expect(find.byKey(const ValueKey('war-ratio-2.5')), findsOneWidget);
++      expect(find.byKey(const ValueKey('war-ratio-3.0')), findsOneWidget);
++      expect(find.byKey(const ValueKey('war-ratio-1.25')), findsNothing);
++      await tester.tap(find.text('Để sau').last);
++      await tester.pumpAndSettle();
++      expect(tester.takeException(), isNull);
++      expect(jsonEncode(controller.state!.toJson()), before);
++    },
++  );
++  testWidgets(
++    'peace confirmation displays yearly tribute and commits a timed treaty',
++    (tester) async {
++      final (controller, _) = await setup(tester, const Size(390, 844));
++      final peace = find.text('Cầu hòa, nộp triều cống');
++      await tester.ensureVisible(peace);
++      await tester.tap(peace);
++      await tester.pumpAndSettle();
++      expect(find.textContaining('5.000 lượng vàng/năm'), findsWidgets);
++      await tester.tap(find.text('Xác nhận'));
++      await tester.pumpAndSettle();
++      expect(tester.takeException(), isNull);
++      final s = controller.state!;
++      expect(s.warfare!.neighbors.first.treaty!.annualGold, 5000);
++      expect(s.warfare!.neighbors.first.treaty!.nextDue, s.week + 4);
++      expect(s.war, 0);
++    },
++  );
++}
