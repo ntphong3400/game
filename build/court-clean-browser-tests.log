@@ -1,0 +1,4 @@
+00:00 +0: loading /Users/phongnguyen/king/test/outcome_read_store_test.dart
+00:00 +0: report acknowledgements survive reopening and remain separate per run
+00:00 +1: concurrent acknowledgements merge rather than dropping read reports
+00:00 +2: All tests passed!

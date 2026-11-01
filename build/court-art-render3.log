@@ -1,0 +1,89 @@
+00:00 +0: loading /Users/phongnguyen/king/tools/court_visual_test.dart
+00:00 +0: render memorial desk at Size(1672.0, 940.0)
+capture reading
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<Unable to load asset: "assets/images/character-portraits.webp".
+          The asset does not exist or has empty data.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.capture (file:///Users/phongnguyen/king/tools/court_visual_test.dart:97:9)
+<asynchronous suspension>
+#5      main.<anonymous closure> (file:///Users/phongnguyen/king/tools/court_visual_test.dart:101:7)
+<asynchronous suspension>
+#6      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#7      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/tools/court_visual_test.dart line 97
+The test description was:
+  render memorial desk at Size(1672.0, 940.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +0 -1: render memorial desk at Size(1672.0, 940.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render memorial desk at Size(1672.0, 940.0)
+  
+00:02 +0 -1: render memorial desk at Size(1280.0, 720.0)
+capture reading
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<Unable to load asset: "assets/images/character-portraits.webp".
+          The asset does not exist or has empty data.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.capture (file:///Users/phongnguyen/king/tools/court_visual_test.dart:97:9)
+<asynchronous suspension>
+#5      main.<anonymous closure> (file:///Users/phongnguyen/king/tools/court_visual_test.dart:101:7)
+<asynchronous suspension>
+#6      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#7      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/tools/court_visual_test.dart line 97
+The test description was:
+  render memorial desk at Size(1280.0, 720.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +0 -2: render memorial desk at Size(1280.0, 720.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render memorial desk at Size(1280.0, 720.0)
+  
+00:03 +0 -2: render memorial desk at Size(390.0, 844.0)
+capture reading
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<Unable to load asset: "assets/images/character-portraits.webp".
+          The asset does not exist or has empty data.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.capture (file:///Users/phongnguyen/king/tools/court_visual_test.dart:97:9)
+<asynchronous suspension>
+#5      main.<anonymous closure> (file:///Users/phongnguyen/king/tools/court_visual_test.dart:101:7)
+<asynchronous suspension>
+#6      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#7      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/tools/court_visual_test.dart line 97
+The test description was:
+  render memorial desk at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:05 +0 -3: render memorial desk at Size(390.0, 844.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render memorial desk at Size(390.0, 844.0)
+  
+00:05 +0 -3: Some tests failed.

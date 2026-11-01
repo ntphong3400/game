@@ -1,0 +1,1108 @@
+{
+  "method": "built-in image_gen",
+  "identities": 91,
+  "agePortraits": 273,
+  "assetBytes": 11483488,
+  "ageThresholds": [
+    35,
+    55
+  ],
+  "assetSize": [
+    1536,
+    512
+  ],
+  "assets": [
+    {
+      "id": "emperor",
+      "group": "emperor",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "0cc37c1300f6bc7b89e14cafc0607e9b07c6911d33d49ad1fcf1dbdbd80e529d",
+      "asset": "assets/images/portraits/emperor.webp",
+      "bytes": 188628,
+      "sha256": "6217c0e9a74698f570dd118ca8668767854e28682683b43f42c66d90c89b2e11"
+    },
+    {
+      "id": "official-001",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "ead9316663acd02b0983b51029e9c4610765226a8d793f05a96c6ffa06225cba",
+      "asset": "assets/images/portraits/official-001.webp",
+      "bytes": 153804,
+      "sha256": "6047646af843c9c087361d13e3b79eff7583c797ccf396592c552f2bff74a99a"
+    },
+    {
+      "id": "official-002",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "ced9a2b8878a310f91dd4af08978ccda3bd3f9ad00ec56390373f62597403059",
+      "asset": "assets/images/portraits/official-002.webp",
+      "bytes": 116788,
+      "sha256": "aa02bbed08a253775d324e8db47fcca9bbdd0d2e4fb510db24174acf0a4ee167"
+    },
+    {
+      "id": "official-003",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "a1ee66dbec160e7a3e7c970885d46eaa98cca6a72ee849c69c283ee75fe8e94a",
+      "asset": "assets/images/portraits/official-003.webp",
+      "bytes": 111094,
+      "sha256": "f0d9151ace002c52ee3a4ec280a656b65d43a6c75f74f82dac46ca0c7b6a3f28"
+    },
+    {
+      "id": "official-004",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "9ef7eab1e96a07ba8193a7008429ec867423cb5996a9af684df0644f23cf037e",
+      "asset": "assets/images/portraits/official-004.webp",
+      "bytes": 144732,
+      "sha256": "bd09b7df31a99392ca12efb725e6da7f0daf2c39304e1cf4d64de842578ed0da"
+    },
+    {
+      "id": "official-005",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "921e6f2678b30dde354978e30593a7808f0eab509fa5105f1f8e38e3928ae597",
+      "asset": "assets/images/portraits/official-005.webp",
+      "bytes": 120174,
+      "sha256": "89e86475551c0c07bd6f864237c4a710119206072628ae6bf83bbc23b4053bab"
+    },
+    {
+      "id": "official-006",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "d4f7323bdec8fe7945f584bf5a3e133b877fda8dd2c95ac822d28dad9e65d0bc",
+      "asset": "assets/images/portraits/official-006.webp",
+      "bytes": 113140,
+      "sha256": "ba6ca5740875dadc4d9117c9304e391d70e6ad810405ea0abd36d45dde04a7a3"
+    },
+    {
+      "id": "official-007",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "cb3b3a4227ef098cf4cae19988cc9de3608af2d9478a9888cee59ad5a3302186",
+      "asset": "assets/images/portraits/official-007.webp",
+      "bytes": 130450,
+      "sha256": "f3de97ed4ee43e4e761d2864ed7b05db38172fc61639a183e09f96a4c4ef618f"
+    },
+    {
+      "id": "official-008",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "47b32c91ad5f745640c5414852a4e2d297e5882c651a50d0df1582cb27f973fa",
+      "asset": "assets/images/portraits/official-008.webp",
+      "bytes": 133318,
+      "sha256": "dcccf0908720aee7671e56eef1c4eda3d222819899f362dc3a97be519888d665"
+    },
+    {
+      "id": "official-009",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "80ae5f5c9374862e3e7fd8c01849cb071e87aae383de49dea4806f38dab2c793",
+      "asset": "assets/images/portraits/official-009.webp",
+      "bytes": 115586,
+      "sha256": "e96573e640a492059f3089b0758f5f5aca78e534d67f95f84789c7914314003d"
+    },
+    {
+      "id": "official-010",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "7b7180198d1ae51535c1cac2cbf47b76438b9c3a3694750f7135f5849da68f66",
+      "asset": "assets/images/portraits/official-010.webp",
+      "bytes": 120026,
+      "sha256": "892504210a134fa675b482d946622b42b39698e54086a9e55087ac188c6440cc"
+    },
+    {
+      "id": "official-011",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "3b961bd99333adb1422ef20488a304629262b4f8ef1f910411099340ffe6b1df",
+      "asset": "assets/images/portraits/official-011.webp",
+      "bytes": 124218,
+      "sha256": "d840ad3b70e1f0d2198db3b1757e4ffb090d49d5d4c4bf99b5198b5890d3ebf3"
+    },
+    {
+      "id": "official-012",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "3eea61f0342d99e5a9e65652acacd2372a158b075d70ce0009952f921d59194d",
+      "asset": "assets/images/portraits/official-012.webp",
+      "bytes": 129826,
+      "sha256": "8adbb2f2fb33f97c484a6699b8abf091be3d94ca4279a2391b2c3e6bba2526c5"
+    },
+    {
+      "id": "official-013",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "79510cc61283f161eeeee3c89b14d09555470c015b82d690bd3b9a440df26a64",
+      "asset": "assets/images/portraits/official-013.webp",
+      "bytes": 130378,
+      "sha256": "23fd582ceaf2dd5503e7e99668ef6065921a069408dece70b05597825e1e1ad4"
+    },
+    {
+      "id": "official-014",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "57fe470efc90a9593ef2a4b42416bbf76a2320be57e554ab114a089696ea508f",
+      "asset": "assets/images/portraits/official-014.webp",
+      "bytes": 123942,
+      "sha256": "dd45352305408cd5cb8e500adb849bee5e82d3fc5bb34f29c50227dc663e9790"
+    },
+    {
+      "id": "official-015",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "6a93c0b06c045ee10773470bc0c5981cc1ef6c65cbb5a79e42cc9f219082925d",
+      "asset": "assets/images/portraits/official-015.webp",
+      "bytes": 141864,
+      "sha256": "b20aa601ab1baf14d8f93c9f3a3e56225707e512e38b1a3fa17a6cc3eeba1358"
+    },
+    {
+      "id": "official-016",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "58a30284e869cc5a75ffc3e00776cec4f2c707f6ad9154471f11f558dd76bf79",
+      "asset": "assets/images/portraits/official-016.webp",
+      "bytes": 114656,
+      "sha256": "a68e42f307f85ee23e074d8dd281f055b21d1d2c6f56808d837f577cef9928a8"
+    },
+    {
+      "id": "official-017",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "164303b3240adaf2021a0b99ced0ee1a3b1d723853035e01aa7bf93648fee0d0",
+      "asset": "assets/images/portraits/official-017.webp",
+      "bytes": 117916,
+      "sha256": "033d8eb3c21c65ed1a25f5022d9cd17817b38c6da1c6dcdab995b13686e9e976"
+    },
+    {
+      "id": "official-018",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "43f6c1cf16f1cd449fab04e80e7c6219861f60cf504df6ddd4bc7d3304a23cfa",
+      "asset": "assets/images/portraits/official-018.webp",
+      "bytes": 124964,
+      "sha256": "49016802727c7ccf0ae468a9a42c5dba7b698aeef95b4a37787dd88b4657f921"
+    },
+    {
+      "id": "official-019",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "7acfab413cebf824187358615e5b10b58686c7a2a52d73953fb51891d6ca1448",
+      "asset": "assets/images/portraits/official-019.webp",
+      "bytes": 128112,
+      "sha256": "ead089bd27f9a6e65abe8206d99c2314ed555e5b811b357c34a68b84fb491173"
+    },
+    {
+      "id": "official-020",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "1e1a9c5b881628ad2b4fc367adc8541f543c0617a3005b9e8ec0ffcba648c350",
+      "asset": "assets/images/portraits/official-020.webp",
+      "bytes": 120066,
+      "sha256": "b0d71dbeefa4f4d2e3fc265e2eb96d01cdcc30e74c727e9b3be8b92819af796c"
+    },
+    {
+      "id": "official-021",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "e00506696cf945960256f0fb80624007ae87ef6bfad29b9512c7b029009f41c2",
+      "asset": "assets/images/portraits/official-021.webp",
+      "bytes": 118860,
+      "sha256": "394ee5221e5d0ab0f2b39d75bf2a6b26e135c8ed086dedc4b0666352b22bff51"
+    },
+    {
+      "id": "official-022",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "e3fa41f143dad12060e41dcaa9877a62e18d8beff9901c24975257f14ad6981d",
+      "asset": "assets/images/portraits/official-022.webp",
+      "bytes": 111998,
+      "sha256": "57c823f0b9857fff20137954acad8a4ab9cd5fcd847686aed9d9ac8d1039c7e6"
+    },
+    {
+      "id": "official-023",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "d62d01aed498974cbc1edd7b03c7602dde834978337f1e9ec899cdeec68f7269",
+      "asset": "assets/images/portraits/official-023.webp",
+      "bytes": 125534,
+      "sha256": "d9e5c14a686cbab62864779c1247a37a8ad6af00116171e248f726cb5bbf1e3b"
+    },
+    {
+      "id": "official-024",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "f8325fc4495ec15a10533ad779cbded1430b80a42d2bc9a8d17e9b6fe1662daf",
+      "asset": "assets/images/portraits/official-024.webp",
+      "bytes": 139436,
+      "sha256": "c0ac589cd9594afa1a851314ffce7305ad6e3d01b7dbbba45114ebc95f3345c7"
+    },
+    {
+      "id": "official-025",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "dcf32e3517a2c1b7fc57bb79aa5b2174233c9661c7dcff992985764dc692828f",
+      "asset": "assets/images/portraits/official-025.webp",
+      "bytes": 123510,
+      "sha256": "d3604e27fd1b717fb78dfd19e9f7c81952fd93f6726e2c1c0279882a42049090"
+    },
+    {
+      "id": "official-026",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "bc8c59c19cb389f37d955f9cf41529875288a8f28f62a9c07ceba3322f5adebc",
+      "asset": "assets/images/portraits/official-026.webp",
+      "bytes": 114374,
+      "sha256": "7f13598c8a74a457ee9b6fb5d70bea097cf77bd47bb9607894d9a1e24d2f5062"
+    },
+    {
+      "id": "official-027",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "4b769a682fd1ae88bb2df490efa600341531b368304d42adfa8014fc6980f90d",
+      "asset": "assets/images/portraits/official-027.webp",
+      "bytes": 128072,
+      "sha256": "8f99594af64c375d5d47a99129ab09689305316cb0d91c5a944b078a63e60c9d"
+    },
+    {
+      "id": "official-028",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "dd67487642878442c4df6319f324c1a15e377067e6369168935df19e8b64829f",
+      "asset": "assets/images/portraits/official-028.webp",
+      "bytes": 116076,
+      "sha256": "71af803f01d7a77eafce6ea62cd384f6fa6a6c163ab9e674eb0a23b2d10359cd"
+    },
+    {
+      "id": "official-029",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "9dccc23e485b17b62e0df234ffe05f012ed073d3a880878583a755030763781f",
+      "asset": "assets/images/portraits/official-029.webp",
+      "bytes": 108618,
+      "sha256": "0bd7b4e38328407ea23e90e186791e6f60d4d9b30674645041a6c28b125a8a79"
+    },
+    {
+      "id": "official-030",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "6a36135623d26956ea89c0e7d1c32da9733cccf286524fafdf974a9502e52cc6",
+      "asset": "assets/images/portraits/official-030.webp",
+      "bytes": 101176,
+      "sha256": "b20b11bd9ea3456f54acb48225ff7f0624946877380f88a65f16796f83d1f1ec"
+    },
+    {
+      "id": "official-031",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "f66a7d5257bd3a3a148a0c87284c3dd7115e59ac03b5399f619c6854b83acac4",
+      "asset": "assets/images/portraits/official-031.webp",
+      "bytes": 109384,
+      "sha256": "c56616044838ba5c758dbdc049e36106442d2d72ccdf20a1901168352582e74e"
+    },
+    {
+      "id": "official-032",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "7c5a1a5c711b35187cc25efcb7660edd8dc85f3543578d5a4a9fb841f49a3e2e",
+      "asset": "assets/images/portraits/official-032.webp",
+      "bytes": 108046,
+      "sha256": "af48672094f5250ca7d80358916b45c15230735ab22e6fa9e5b6938221f01d18"
+    },
+    {
+      "id": "official-033",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "d35358ca2af666089460a11985812e2adaffc49b0aa0c252e37d2432697b9d3f",
+      "asset": "assets/images/portraits/official-033.webp",
+      "bytes": 124006,
+      "sha256": "9f6a3f1d8e200f0f49d932fa378e3fb8b5d0064c368777716acfc8e28227f8c9"
+    },
+    {
+      "id": "official-034",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "8413cbd86b7fef118a7d2e29d37d724f5f66a05e7756ff287388cbf6d76fdb75",
+      "asset": "assets/images/portraits/official-034.webp",
+      "bytes": 116354,
+      "sha256": "63340d04908d7c4a1063a51a80827b8f967f314fead26da4886ee411c70535be"
+    },
+    {
+      "id": "official-035",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "e7ab3886e978e95f9d6337c7a1551d12ac3e4de0d8c16c5190576eb6bf92aa00",
+      "asset": "assets/images/portraits/official-035.webp",
+      "bytes": 120878,
+      "sha256": "72279e38f988bd4cdbb545066fb1ccbe5648ab91f161ad4454fba2952dbb060c"
+    },
+    {
+      "id": "official-036",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "0cc65b289d4096998dcb76a621b56a86c815a67060fe9be85e5dc6f8502dad88",
+      "asset": "assets/images/portraits/official-036.webp",
+      "bytes": 101414,
+      "sha256": "4fb8294e4fd30c18931c16724410bda25afcb28de3196ad2f41fe6ec33c2fc66"
+    },
+    {
+      "id": "official-037",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "abc8d9a11dce0bb26c5355cdfaf91b34f6a0ff5fe9d3f05da943bfe8c5f790e1",
+      "asset": "assets/images/portraits/official-037.webp",
+      "bytes": 107196,
+      "sha256": "f01da0c71f874c710d2ec412f983cd58cb2d6634f9774eab596d173f30696f7e"
+    },
+    {
+      "id": "official-038",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "4a170e6ef2367cc77ff77dbbaff60daca43c618dd6a44ea617629aecd17a3b46",
+      "asset": "assets/images/portraits/official-038.webp",
+      "bytes": 126456,
+      "sha256": "ba377d5ef621c2ebb7ec25f53563e1bdb7db55c5684e7a109ba83bf2395dda36"
+    },
+    {
+      "id": "official-039",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "3602c00ddfd40187dec4a375a4f4ac6fef3dd62b41df7bbd1524c7e076e26cac",
+      "asset": "assets/images/portraits/official-039.webp",
+      "bytes": 125882,
+      "sha256": "6eeb52d14425d43797538c56e6316d0e08629cb2572bc8f5b4aa83a52c59c0e5"
+    },
+    {
+      "id": "official-040",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "c4f04d2171bfcddd90c7a6316213a0986199ade8a6a6cd2112340b16ebc86431",
+      "asset": "assets/images/portraits/official-040.webp",
+      "bytes": 103540,
+      "sha256": "529ea26326a9dc28a65cc86e531ebfbe5db542c27bb795ad069369b6c9ddd643"
+    },
+    {
+      "id": "official-041",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "f4329665abd6f7978a8c36ae3f2a98e575f624756b41527437aa183fa0b4974d",
+      "asset": "assets/images/portraits/official-041.webp",
+      "bytes": 102002,
+      "sha256": "c1834fe878985b2372bc31b279790c8bcbf91f8ce196bc900d3e830418b41634"
+    },
+    {
+      "id": "official-042",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "3d26be12f4bdb5fe6f351cbf414bdba30235d74107430c35ac21aa34c74f1999",
+      "asset": "assets/images/portraits/official-042.webp",
+      "bytes": 102044,
+      "sha256": "58da88a70706adcd376a125b16af6d39e78042bf2ba8c5f5845f6d5661891c41"
+    },
+    {
+      "id": "official-043",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "af5e0b4bd57bbf9551289fd58d9da85d4a60219255ffc9740302b79deeb0f18d",
+      "asset": "assets/images/portraits/official-043.webp",
+      "bytes": 125182,
+      "sha256": "c0e42e66e45359f0c6c977f9373e73911711bbd0335d7cfdbbc3efc11dcaba12"
+    },
+    {
+      "id": "official-044",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "522e6c7a576d8b44e672cabfb69e159b8c9106dc76eed91c14e5889d9baccf7c",
+      "asset": "assets/images/portraits/official-044.webp",
+      "bytes": 125486,
+      "sha256": "612f732703a2e6937b77fe538e500af309fe2b3136b30125ed76466ff18ee584"
+    },
+    {
+      "id": "official-045",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "227a22fecff1b48ac1bd1b6fd409511d40a599e59dbe455ff3dd8b743bf1e9d1",
+      "asset": "assets/images/portraits/official-045.webp",
+      "bytes": 131896,
+      "sha256": "d1eb1f1936386691a1f8d57cb19436de82da9798e8ad7aa0c4af96a376324e22"
+    },
+    {
+      "id": "official-046",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "119b73b2da0e366aea5306ed2964148bd39e4b0bae1cabb08c1aa22c2181a880",
+      "asset": "assets/images/portraits/official-046.webp",
+      "bytes": 106208,
+      "sha256": "7016d311f768d447ae6521fffc2eb9742d22b79e7bf8a57ac56e4b0d413fa0c2"
+    },
+    {
+      "id": "official-047",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "58c2ac16ad7538f707157d281ecf80ea07f8306938e930ff290a38ad46656e9e",
+      "asset": "assets/images/portraits/official-047.webp",
+      "bytes": 125270,
+      "sha256": "4f0529367c08449ee506608434a1dcd7ef18cbeabe0b009516d611dbb32cc434"
+    },
+    {
+      "id": "official-048",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "69d2808f3fa58754211822ca7e5e448aee12a58959094a9e32edbb7e8a77238c",
+      "asset": "assets/images/portraits/official-048.webp",
+      "bytes": 118620,
+      "sha256": "352e325c8862bc909f535e9ce8d31d295914b03e41c843117f1668744aa2464b"
+    },
+    {
+      "id": "official-049",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "f0363d835806dbde5bb8169cd672252200ba32b5697a7012ee2bbaf9dbd11ffe",
+      "asset": "assets/images/portraits/official-049.webp",
+      "bytes": 114102,
+      "sha256": "7ae3ed737577af7b4e27ec70cf4388198614dd4314b1d7a6e5e9dec5434de7b7"
+    },
+    {
+      "id": "official-050",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "5d0b452b73521591358f7be4537b56517d8735b0e3eb6a8073285a1b030d2231",
+      "asset": "assets/images/portraits/official-050.webp",
+      "bytes": 110636,
+      "sha256": "27465e83ef5c6596fc2cd49e30695e2d260c65b33aaa8c0c6c38ed6919b0dad5"
+    },
+    {
+      "id": "official-051",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "8414977f438f5697e0cd850894451bff63209e97654dc1f74b7851bcca488403",
+      "asset": "assets/images/portraits/official-051.webp",
+      "bytes": 114890,
+      "sha256": "57a52905249b26f9e4a5e42ff4551c3b633f5f88c384af26b5ca0cd6328f58c3"
+    },
+    {
+      "id": "official-052",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "c31e9296e1a54614c1c7571600d70c76d19adeaa337aa474204dbe19913e8a7c",
+      "asset": "assets/images/portraits/official-052.webp",
+      "bytes": 110358,
+      "sha256": "6306560c37059ef70e897c30bff70b184fb3d71b0e61c5ab11fe71285c502246"
+    },
+    {
+      "id": "official-053",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "cd34b8549b4e5a1f7ddd0016f3288a44627a96bc4b7cfb7ef955fc822144c02d",
+      "asset": "assets/images/portraits/official-053.webp",
+      "bytes": 111812,
+      "sha256": "0445654528e5c6665f51073fefa21ba031621f7947577687a83c62e6c832708c"
+    },
+    {
+      "id": "official-054",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "72a8e99829cfe024c1fb076095ecdeac891dea782d2d61057c509da067a39184",
+      "asset": "assets/images/portraits/official-054.webp",
+      "bytes": 119800,
+      "sha256": "ed96dbef569ce1d4a9964b112b24adabb2b547208b1c1427f420942bb1243ae7"
+    },
+    {
+      "id": "official-055",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "8b09b921e19445ffab49b4a51a14f4de7cdbc2ea37fa0b3b62910e6178f74d65",
+      "asset": "assets/images/portraits/official-055.webp",
+      "bytes": 114562,
+      "sha256": "a0a0cf3e194f41ebd6545b0e4dc13b1b5d236736e377e29137a50a5970765303"
+    },
+    {
+      "id": "official-056",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "e93dd759024a9019e104b6dbfff7c549eefb016c2e211febb95a385f3464313f",
+      "asset": "assets/images/portraits/official-056.webp",
+      "bytes": 100072,
+      "sha256": "e7807c8cf7bf89da1996b201076965c4451fc4ccf692fbc5dcdb58c7e180d1eb"
+    },
+    {
+      "id": "official-057",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "00f398eba405480a4b445a42570d7852bb22d630adf3cbbfcf723e097e3aafb0",
+      "asset": "assets/images/portraits/official-057.webp",
+      "bytes": 114502,
+      "sha256": "2aad8a7007ef33ae3884cb7272f412acdb7fbb31ad8e93c76bb5a83fea267666"
+    },
+    {
+      "id": "official-058",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "a548f2a731ec4a5038a2a1ec9c28221225c827059bf5d882dd8e707893ac135f",
+      "asset": "assets/images/portraits/official-058.webp",
+      "bytes": 115998,
+      "sha256": "4b3fdef2f825df32e3e7e6354faf5253fd10f5a0114e3efc5b3941fc831a9925"
+    },
+    {
+      "id": "official-059",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "d9b30b5c2f7ad1460d135409b7cc13db537a99a8c3028d2b267d2a1f01db12dc",
+      "asset": "assets/images/portraits/official-059.webp",
+      "bytes": 130180,
+      "sha256": "4571143ef3d62348428fd6d9a04b8d119e1e0f41733ca192fbf6121fcf373faa"
+    },
+    {
+      "id": "official-060",
+      "group": "official",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "ad0d45d72b22528369ef62a5636ac27f9b3192a612da08e2bb77bcbd45a1beb8",
+      "asset": "assets/images/portraits/official-060.webp",
+      "bytes": 113828,
+      "sha256": "711ea091e521885e744fa9e86a5dbe3242e8b2f6c6cb491837ecfab0940a06a3"
+    },
+    {
+      "id": "harem-001",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "476a10a09d1b3ef26dceb86207297df4aeefecd77b3f78d3b8e400ab2d49a24a",
+      "asset": "assets/images/portraits/harem-001.webp",
+      "bytes": 142138,
+      "sha256": "50f01f0e2805a96d216a0bdeebcadc8f216ccab3124ecafbe8ba578a816450c4"
+    },
+    {
+      "id": "harem-002",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "a49662e36204a41199050d2f7e9eb3316ff219f6e53c8d0efe5043a36fe8ccb0",
+      "asset": "assets/images/portraits/harem-002.webp",
+      "bytes": 152358,
+      "sha256": "20be248e370d66b9aa3793fc5491853de5a955b1eaf10b37b49b084b9e14e3d1"
+    },
+    {
+      "id": "harem-003",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "42d851a5e81349b396d0071d58d29b6ffc6abf2edbae2299cc6a52f3a81ddd31",
+      "asset": "assets/images/portraits/harem-003.webp",
+      "bytes": 124502,
+      "sha256": "99fc2d04a543f4edfa22791bd5e6be4f60c7d125148b7bca3a6c04ee92f14fb1"
+    },
+    {
+      "id": "harem-004",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "d38e63278db0b9484aa4d95310677861af840327eb6d3253b66873530130c465",
+      "asset": "assets/images/portraits/harem-004.webp",
+      "bytes": 137100,
+      "sha256": "f63537460031ac871c4f60043e76ef8d1ec422024bd6f48ebffa1633f1ab9647"
+    },
+    {
+      "id": "harem-005",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "135d5dbab13f429aa1a9f9aa5710e1a3134e36f02264cb3f13a91e9f2e8dc8a8",
+      "asset": "assets/images/portraits/harem-005.webp",
+      "bytes": 145158,
+      "sha256": "1a9c7cbd9a9ba2163075bd0b33a0a53f2f6fd3aa7ae4fc3ec30dd3c2fc2cdd5d"
+    },
+    {
+      "id": "harem-006",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "e7ecd5e775342776a6310d7345d3597ff4950603da73afcc8716c8129b9002ef",
+      "asset": "assets/images/portraits/harem-006.webp",
+      "bytes": 155276,
+      "sha256": "93cadca74df2bb9a7c3a6a78161d4ce8e636fae6f1fa0a1f9097d97316bb9cb0"
+    },
+    {
+      "id": "harem-007",
+      "group": "harem",
+      "sourceSize": [
+        2164,
+        727
+      ],
+      "sourceSha256": "5fe9c6aeb524f14a93a23eae5bd30f569b5174a2029032adbb2d2735795d6346",
+      "asset": "assets/images/portraits/harem-007.webp",
+      "bytes": 129522,
+      "sha256": "7995d52e2f9cf069d5374505699d0b5b331a7cbdddd4c32bcebe44f16c327197"
+    },
+    {
+      "id": "harem-008",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "6cd0c7423bcc2d384439c904b2a2a71f9125bea102168e4a142b421c87538157",
+      "asset": "assets/images/portraits/harem-008.webp",
+      "bytes": 110184,
+      "sha256": "965d0bdb85ff504b01045adbd07d7c362091eee9308f5d3a0b2b50c4b03c7fe7"
+    },
+    {
+      "id": "harem-009",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "d46be791d16e0a1843c96e7fab12f097211aa60be62f64f5b214b8f384481e77",
+      "asset": "assets/images/portraits/harem-009.webp",
+      "bytes": 113052,
+      "sha256": "b12c80395a2c00bd9c4dc6aec1b70b4edc77e2f20396ad1dd0ae3bd8be35edc3"
+    },
+    {
+      "id": "harem-010",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "08bcea3332cf43eba678f7ca4c381d5c7037f6ec36eb621f154a3f8319029ad3",
+      "asset": "assets/images/portraits/harem-010.webp",
+      "bytes": 143860,
+      "sha256": "9948fec9e87a3360e88eb49fbd37d2cb69d2c6497b078fe135543b18f1a5823f"
+    },
+    {
+      "id": "harem-011",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "85d6fc55e1c25173941e4038c561eed16252f1cff5d3ac187988b0ab34940b07",
+      "asset": "assets/images/portraits/harem-011.webp",
+      "bytes": 136050,
+      "sha256": "342cc2cb6ee740dbc8b718940a99df0935ecd08192286b89668d11f81dfdfb33"
+    },
+    {
+      "id": "harem-012",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "419a128484b40bc2b008a17db1f7d11cd0b98a1c3a6757b14823823f8b887db9",
+      "asset": "assets/images/portraits/harem-012.webp",
+      "bytes": 159964,
+      "sha256": "51a6c38e2e70eb60b7c1a09b9aada0be5f04199171002c03eb67d2e94f9f9374"
+    },
+    {
+      "id": "harem-013",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "8a31242078237fd934afcaec18e5b2a56c76c31b5b05859734629b50e529f930",
+      "asset": "assets/images/portraits/harem-013.webp",
+      "bytes": 132822,
+      "sha256": "4cafbfa1246ac01c53434311fe83322534f250a3d5b720ad66d097ae396f9b31"
+    },
+    {
+      "id": "harem-014",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "15de5887aa61ec9a5f2c3d8e75b504457e96e9382676820255a3029dba947277",
+      "asset": "assets/images/portraits/harem-014.webp",
+      "bytes": 150022,
+      "sha256": "0012aa5c4386747e5a4835e5c98b53c5803478ef3373599f768a4ee9cf57ea17"
+    },
+    {
+      "id": "harem-015",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "7799bb1a5698f02c43e55d4111787554a993179d8493f63c6de9f63d71910a77",
+      "asset": "assets/images/portraits/harem-015.webp",
+      "bytes": 143464,
+      "sha256": "f3a7aa5801b72eb6324c8469262005620beaa5ab6519a6f31583e5b59489c8ee"
+    },
+    {
+      "id": "harem-016",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "2ae33899e04bada8d936e436ee82123f3af745e77fc14d2591eb0f7541e2f0ed",
+      "asset": "assets/images/portraits/harem-016.webp",
+      "bytes": 145606,
+      "sha256": "8c04b290a58c7544cf6e3a929746b53e5c6b0b028c230a8a7c10a4f775dee026"
+    },
+    {
+      "id": "harem-017",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "dc7096f912bd22adf49a2c237f27e948b23cd8589f7e8694f4aa5bf86b334d15",
+      "asset": "assets/images/portraits/harem-017.webp",
+      "bytes": 156982,
+      "sha256": "86e6e2c13177869e6f22a7f3e6d2add7637ca92ca52905be1aee844bcf0a1038"
+    },
+    {
+      "id": "harem-018",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "573e415c32c297923b36cee7e5b3328027cb464d71b9d2a176a26707582a7038",
+      "asset": "assets/images/portraits/harem-018.webp",
+      "bytes": 121472,
+      "sha256": "b19fe35e3fc9283cc5d7e5e13d65f545d3b4e80dd45274143b2b9e230c11316b"
+    },
+    {
+      "id": "harem-019",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "b6d044ae0570a44e9c63d43f9b84c3025c9c30d3aff6e08586937e4cdae69a91",
+      "asset": "assets/images/portraits/harem-019.webp",
+      "bytes": 124514,
+      "sha256": "7097d70471df978f958b4a368cac1ab61e77eda1679f692a0172187d3e5f2a0d"
+    },
+    {
+      "id": "harem-020",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "ab4daff94385a99271a187e786ce53cc5c0599a8cc2cf7308e2524b52f6b5e60",
+      "asset": "assets/images/portraits/harem-020.webp",
+      "bytes": 140060,
+      "sha256": "87d1e979f5be330601f725729d2757c1281bc262ca8fd98d6926863feb914c8e"
+    },
+    {
+      "id": "harem-021",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "7e1b8bff61bd2142222fef2e1111d3f7d3b08cf01f34030361210621d403f509",
+      "asset": "assets/images/portraits/harem-021.webp",
+      "bytes": 137548,
+      "sha256": "14fb76d7652baff71c50693f63f6e0e5b5373bc1e97de5e2b7b6479291a817c6"
+    },
+    {
+      "id": "harem-022",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "5765d732fdc1d76a4b1290f34a801dc0f4fa5ce4743f0ecf503bda5c196afd03",
+      "asset": "assets/images/portraits/harem-022.webp",
+      "bytes": 129668,
+      "sha256": "53bd94bd40bc96bcdbd9df033e46d2c9119709c146bde1d1fd8cf15ad89ac7cf"
+    },
+    {
+      "id": "harem-023",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "233b25d8ad6305d191fd200462f79a1015f6fb557ef8a757069684e81e44d9dd",
+      "asset": "assets/images/portraits/harem-023.webp",
+      "bytes": 123314,
+      "sha256": "b7a31349224a7fd0e20ecd6f125cbc73c19afa9ce3e038441fba6bfec95452d7"
+    },
+    {
+      "id": "harem-024",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "37bd26f055b30f2a6c67a23849caff0049d62077d37558e8ba3a1c064f2807e5",
+      "asset": "assets/images/portraits/harem-024.webp",
+      "bytes": 131814,
+      "sha256": "5506e3f417da28162e673dfef8254289b15869d5f2f924cba06715f2017371c0"
+    },
+    {
+      "id": "harem-025",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "e7bdc3e2aa27986d27335637616d1cdae0ff7afe40556c45b5f8f79950fed3c0",
+      "asset": "assets/images/portraits/harem-025.webp",
+      "bytes": 152546,
+      "sha256": "0493d2f9d630865d36f16d99d6fcfe9dea91237d0d050c80547d48e7d74791df"
+    },
+    {
+      "id": "harem-026",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "e09d327cc18b71a6d7fd91c359a2ccb810c0f07dac2104f5564aa40614571900",
+      "asset": "assets/images/portraits/harem-026.webp",
+      "bytes": 147154,
+      "sha256": "1054867f507005f2d6f4ebaa14f69263549562aebf4c75f0f90d5d4d8638d1c2"
+    },
+    {
+      "id": "harem-027",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "dea865aa19ef562755bfd06d3faf6dc05db625b2ea786d67706091378b6adbd2",
+      "asset": "assets/images/portraits/harem-027.webp",
+      "bytes": 180032,
+      "sha256": "04aedceec1339992a79eb54e99e99ad3a6bbddc27b03ab5850bceddce858e7d6"
+    },
+    {
+      "id": "harem-028",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "fb51069015d2fe9ccb694ee9c7306d1284f654a6523cead176037db9a814cc24",
+      "asset": "assets/images/portraits/harem-028.webp",
+      "bytes": 101008,
+      "sha256": "6c7844e59cf4da6b6f5a438e06c23350b0010c378bfbc94577afe4a2c00377ba"
+    },
+    {
+      "id": "harem-029",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "53cb22a6fccb204605c4b0a42276891919caf8d9bc4999e77dbe6b8cffbecca2",
+      "asset": "assets/images/portraits/harem-029.webp",
+      "bytes": 125194,
+      "sha256": "be809b8b52de3b9f4612de33807b04766ff82fdd8b578b17c217efe3244bd3d0"
+    },
+    {
+      "id": "harem-030",
+      "group": "harem",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "91bb1585c18ad61f2f01d469ea23e5892f06d44d03e7a7e428d2c434761d7b31",
+      "asset": "assets/images/portraits/harem-030.webp",
+      "bytes": 149164,
+      "sha256": "8d69b0a1ec1405aff800cd05d77d66671b99e54044f7f3ce50188168e0e3bda0"
+    }
+  ]
+}

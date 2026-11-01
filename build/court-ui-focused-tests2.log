@@ -1,0 +1,329 @@
+00:00 +0: loading /Users/phongnguyen/king/test/petition_confirmation_test.dart
+00:00 +0: /Users/phongnguyen/king/test/petition_confirmation_test.dart: petition selection can change or cancel and only explicit confirmation commits at Size(1440.0, 1000.0)
+00:01 +1: /Users/phongnguyen/king/test/petition_confirmation_test.dart: petition selection can change or cancel and only explicit confirmation commits at Size(1440.0, 1000.0)
+00:01 +2: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:01 +3: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:01 +3: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain fund previews and commits once at Size(1440.0, 1000.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _DescendantWidgetFinder:<Found 2 widgets with text containing Đã hoàn thành descending
+from widgets with key [<'petition-desk'>]: [
+            Text("Chuỗi: Bến chợ Đông Hà · Bản tấu 1/4.\nThương nhân xin mở lại bến bỏ hoang. Cần
+khảo sát và xác định quyền sử dụng.\n\nĐã hoàn thành 0/4 · đã cấp 0 tiền · tổng chi phí quy đổi
+0.\nDừng hiện tại nhận: Không có phần thưởng.\nDự kiến hoàn thành 4/4: ngân khố +550\nQuyết toán
+trên vốn đã thực hiện: 1/4 = 0%, 2/4 = 50%, 3/4 = 100%, 4/4 = 250%.\nChi phí trả ngay. Chỉ nhận phần
+thưởng khi dừng hoặc hoàn thành chuỗi; quá hạn sẽ dừng và quyết toán.", inherit: true, size: 14.0,
+height: 1.7x, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+            Text("Bến chợ Đông Hà\nĐã hoàn thành 0/4 · đã cấp 0 tiền · tổng chi phí quy đổi 0.\nDừng
+hiện tại nhận: Không có phần thưởng.\nDự kiến hoàn thành 4/4: ngân khố +550\nQuyết toán trên vốn đã
+thực hiện: 1/4 = 0%, 2/4 = 50%, 3/4 = 100%, 4/4 = 250%.\nChi phí trả ngay. Chỉ nhận phần thưởng khi
+dừng hoặc hoàn thành chuỗi; quá hạn sẽ dừng và quyết toán.\nCó bản tấu đang chờ ngự phê.", inherit:
+true, size: 12.0, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+          ]>
+   Which: is too many
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart:70:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart line 70
+The test description was:
+  chain fund previews and commits once at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +3 -1: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:01 +3 -1: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain fund previews and commits once at Size(1440.0, 1000.0) [E]
+  Test failed. See exception logs above.
+  The test description was: chain fund previews and commits once at Size(1440.0, 1000.0)
+  
+00:01 +4 -1: /Users/phongnguyen/king/test/petition_economy_ui_test.dart: economic choices preview net profit, failure and settlement at Size(1440.0, 1000.0)
+00:01 +5 -1: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:01 +6 -1: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:01 +7 -1: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +7 -1: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain settle previews and commits once at Size(1440.0, 1000.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _DescendantWidgetFinder:<Found 2 widgets with text containing Đã hoàn thành descending
+from widgets with key [<'petition-desk'>]: [
+            Text("Chuỗi: Bến chợ Đông Hà · Bản tấu 4/4.\nHoàn tất kiểm định và mở giao dịch. Toàn bộ
+khoản thu chỉ nhập kho khi khép chuỗi.\n\nĐã hoàn thành 3/4 · đã cấp 150 tiền · tổng chi phí quy đổi
+150.\nDừng hiện tại nhận: ngân khố +150\nDự kiến hoàn thành 4/4: ngân khố +550\nQuyết toán trên vốn
+đã thực hiện: 1/4 = 0%, 2/4 = 50%, 3/4 = 100%, 4/4 = 250%.\nChi phí trả ngay. Chỉ nhận phần thưởng
+khi dừng hoặc hoàn thành chuỗi; quá hạn sẽ dừng và quyết toán.", inherit: true, size: 14.0, height:
+1.7x, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+            Text("Bến chợ Đông Hà\nĐã hoàn thành 3/4 · đã cấp 150 tiền · tổng chi phí quy đổi
+150.\nDừng hiện tại nhận: ngân khố +150\nDự kiến hoàn thành 4/4: ngân khố +550\nQuyết toán trên vốn
+đã thực hiện: 1/4 = 0%, 2/4 = 50%, 3/4 = 100%, 4/4 = 250%.\nChi phí trả ngay. Chỉ nhận phần thưởng
+khi dừng hoặc hoàn thành chuỗi; quá hạn sẽ dừng và quyết toán.\nCó bản tấu đang chờ ngự phê.",
+inherit: true, size: 12.0, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+          ]>
+   Which: is too many
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart:70:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart line 70
+The test description was:
+  chain settle previews and commits once at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +7 -2: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +7 -2: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain settle previews and commits once at Size(1440.0, 1000.0) [E]
+  Test failed. See exception logs above.
+  The test description was: chain settle previews and commits once at Size(1440.0, 1000.0)
+  
+00:02 +8 -2: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +9 -2: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +10 -2: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +11 -2: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +12 -2: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +13 -2: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +13 -2: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain political previews and commits once at Size(1440.0, 1000.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _DescendantWidgetFinder:<Found 2 widgets with text containing Đã hoàn thành descending
+from widgets with key [<'petition-desk'>]: [
+            Text("Chuỗi: Chung một mái Phượng điện · Bản tấu 1/4.\nNguyễn Ngọc Lan (phe Văn thần) và
+Đặng Thanh Mai (phe Hoàng tộc) cùng xin chủ trì việc nội cung. Hai người thuộc hai phe khác nhau;
+quyết định lần này sẽ định cách phối hợp.\n\nĐã hoàn thành 0/4 · đã cấp 0 tiền · tổng chi phí quy
+đổi 0.\nDừng hiện tại nhận: Không có phần thưởng.\nDự kiến hoàn thành 4/4: Ổn định triều đình +5 ·
+Nguyễn Ngọc Lan: năng lực +5, thiện cảm +10, bất mãn −15 · Đặng Thanh Mai: năng lực +5, thiện cảm
++10, bất mãn −15\nThưởng theo tiến độ: 1/4 = 0%, 2/4 = 20%, 3/4 = 40%, 4/4 = 100%; ứng viên và giảm
+chiến tranh chỉ mở ở 4/4.\nChi phí trả ngay. Chỉ nhận phần thưởng khi dừng hoặc hoàn thành chuỗi;
+quá hạn sẽ dừng và quyết toán.", inherit: true, size: 14.0, height: 1.7x, dependencies:
+[DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+            Text("Chung một mái Phượng điện\nĐã hoàn thành 0/4 · đã cấp 0 tiền · tổng chi phí quy
+đổi 0.\nDừng hiện tại nhận: Không có phần thưởng.\nDự kiến hoàn thành 4/4: Ổn định triều đình +5 ·
+Nguyễn Ngọc Lan: năng lực +5, thiện cảm +10, bất mãn −15 · Đặng Thanh Mai: năng lực +5, thiện cảm
++10, bất mãn −15\nThưởng theo tiến độ: 1/4 = 0%, 2/4 = 20%, 3/4 = 40%, 4/4 = 100%; ứng viên và giảm
+chiến tranh chỉ mở ở 4/4.\nChi phí trả ngay. Chỉ nhận phần thưởng khi dừng hoặc hoàn thành chuỗi;
+quá hạn sẽ dừng và quyết toán.\nCó bản tấu đang chờ ngự phê.", inherit: true, size: 12.0,
+dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+          ]>
+   Which: is too many
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart:70:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart line 70
+The test description was:
+  chain political previews and commits once at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +13 -3: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +13 -3: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain political previews and commits once at Size(1440.0, 1000.0) [E]
+  Test failed. See exception logs above.
+  The test description was: chain political previews and commits once at Size(1440.0, 1000.0)
+  
+00:02 +14 -3: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +15 -3: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +16 -3: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +17 -3: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +17 -3: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain stop previews and commits once at Size(1440.0, 1000.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _DescendantWidgetFinder:<Found 2 widgets with text containing Đã hoàn thành descending
+from widgets with key [<'petition-desk'>]: [
+            Text("Chuỗi: Chung một mái Phượng điện · Bản tấu 3/4.\nMột sai sót làm hai bên đùn đẩy
+trách nhiệm. Vua cần quyết định cách xử lý để phần việc được hoàn tất.\n\nĐã hoàn thành 2/4 · đã cấp
+50 tiền · tổng chi phí quy đổi 50.\nDừng hiện tại nhận: Ổn định triều đình +1 · Nguyễn Ngọc Lan:
+năng lực +1, thiện cảm +2, bất mãn −3 · Đặng Thanh Mai: năng lực +1, thiện cảm +2, bất mãn −3\nDự
+kiến hoàn thành 4/4: Ổn định triều đình +5 · Nguyễn Ngọc Lan: năng lực +5, thiện cảm +10, bất mãn
+−15 · Đặng Thanh Mai: năng lực +5, thiện cảm +10, bất mãn −15\nThưởng theo tiến độ: 1/4 = 0%, 2/4 =
+20%, 3/4 = 40%, 4/4 = 100%; ứng viên và giảm chiến tranh chỉ mở ở 4/4.\nChi phí trả ngay. Chỉ nhận
+phần thưởng khi dừng hoặc hoàn thành chuỗi; quá hạn sẽ dừng và quyết toán.", inherit: true, size:
+14.0, height: 1.7x, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+            Text("Chung một mái Phượng điện\nĐã hoàn thành 2/4 · đã cấp 50 tiền · tổng chi phí quy
+đổi 50.\nDừng hiện tại nhận: Ổn định triều đình +1 · Nguyễn Ngọc Lan: năng lực +1, thiện cảm +2, bất
+mãn −3 · Đặng Thanh Mai: năng lực +1, thiện cảm +2, bất mãn −3\nDự kiến hoàn thành 4/4: Ổn định
+triều đình +5 · Nguyễn Ngọc Lan: năng lực +5, thiện cảm +10, bất mãn −15 · Đặng Thanh Mai: năng lực
++5, thiện cảm +10, bất mãn −15\nThưởng theo tiến độ: 1/4 = 0%, 2/4 = 20%, 3/4 = 40%, 4/4 = 100%; ứng
+viên và giảm chiến tranh chỉ mở ở 4/4.\nChi phí trả ngay. Chỉ nhận phần thưởng khi dừng hoặc hoàn
+thành chuỗi; quá hạn sẽ dừng và quyết toán.\nCó bản tấu đang chờ ngự phê.", inherit: true, size:
+12.0, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+          ]>
+   Which: is too many
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart:70:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart line 70
+The test description was:
+  chain stop previews and commits once at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +17 -4: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +17 -4: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain stop previews and commits once at Size(1440.0, 1000.0) [E]
+  Test failed. See exception logs above.
+  The test description was: chain stop previews and commits once at Size(1440.0, 1000.0)
+  
+00:02 +18 -4: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:03 +19 -4: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(1440.0, 1000.0)
+00:03 +19 -4: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain blocked previews and commits once at Size(1440.0, 1000.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _DescendantWidgetFinder:<Found 2 widgets with text containing Đã hoàn thành descending
+from widgets with key [<'petition-desk'>]: [
+            Text("Chuỗi: Bến chợ Đông Hà · Bản tấu 1/4.\nThương nhân xin mở lại bến bỏ hoang. Cần
+khảo sát và xác định quyền sử dụng.\n\nĐã hoàn thành 0/4 · đã cấp 0 tiền · tổng chi phí quy đổi
+0.\nDừng hiện tại nhận: Không có phần thưởng.\nDự kiến hoàn thành 4/4: ngân khố +550\nQuyết toán
+trên vốn đã thực hiện: 1/4 = 0%, 2/4 = 50%, 3/4 = 100%, 4/4 = 250%.\nChi phí trả ngay. Chỉ nhận phần
+thưởng khi dừng hoặc hoàn thành chuỗi; quá hạn sẽ dừng và quyết toán.", inherit: true, size: 14.0,
+height: 1.7x, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+            Text("Bến chợ Đông Hà\nĐã hoàn thành 0/4 · đã cấp 0 tiền · tổng chi phí quy đổi 0.\nDừng
+hiện tại nhận: Không có phần thưởng.\nDự kiến hoàn thành 4/4: ngân khố +550\nQuyết toán trên vốn đã
+thực hiện: 1/4 = 0%, 2/4 = 50%, 3/4 = 100%, 4/4 = 250%.\nChi phí trả ngay. Chỉ nhận phần thưởng khi
+dừng hoặc hoàn thành chuỗi; quá hạn sẽ dừng và quyết toán.\nCó bản tấu đang chờ ngự phê.", inherit:
+true, size: 12.0, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+          ]>
+   Which: is too many
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart:70:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart line 70
+The test description was:
+  chain blocked previews and commits once at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +19 -5: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(1440.0, 1000.0)
+00:03 +19 -5: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain blocked previews and commits once at Size(1440.0, 1000.0) [E]
+  Test failed. See exception logs above.
+  The test description was: chain blocked previews and commits once at Size(1440.0, 1000.0)
+  
+00:03 +20 -5: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(1440.0, 1000.0)
+00:03 +21 -5: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(1440.0, 1000.0)
+00:03 +22 -5: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(1440.0, 1000.0)
+00:03 +23 -5: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(1440.0, 1000.0)
+00:03 +24 -5: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(1440.0, 1000.0)
+00:03 +25 -5: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain fund previews and commits once at Size(390.0, 844.0)
+00:03 +26 -5: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain fund previews and commits once at Size(390.0, 844.0)
+00:03 +27 -5: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain fund previews and commits once at Size(390.0, 844.0)
+00:03 +28 -5: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain fund previews and commits once at Size(390.0, 844.0)
+00:03 +29 -5: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:03 +30 -5: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:03 +31 -5: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:03 +32 -5: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:03 +33 -5: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:03 +34 -5: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:03 +35 -5: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:03 +36 -5: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:04 +37 -5: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:04 +38 -5: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:04 +39 -5: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:04 +40 -5: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:04 +41 -5: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:04 +42 -5: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain stop previews and commits once at Size(390.0, 844.0)
+00:04 +43 -5: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain stop previews and commits once at Size(390.0, 844.0)
+00:04 +44 -5: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(390.0, 844.0)
+00:04 +45 -5: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(390.0, 844.0)
+00:04 +46 -5: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(390.0, 844.0)
+00:04 +47 -5: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(390.0, 844.0)
+00:04 +48 -5: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(390.0, 844.0)
+00:04 +49 -5: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(390.0, 844.0)
+00:04 +50 -5: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(390.0, 844.0)
+00:04 +51 -5: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(390.0, 844.0)
+00:04 +52 -5: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(390.0, 844.0)
+00:04 +53 -5: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+00:04 +54 -5: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+00:04 +55 -5: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+00:04 +56 -5: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+00:04 +57 -5: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+00:05 +58 -5: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+00:05 +59 -5: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+00:05 +60 -5: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: inline desk selection and assignee preview are local until explicit confirmation
+00:05 +61 -5: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(390.0, 844.0)
+00:05 +62 -5: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: portrait, compare list and profile action preserve known qualities for harem=false
+00:05 +63 -5: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0)
+00:05 +64 -5: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: portrait, compare list and profile action preserve known qualities for harem=true
+00:06 +65 -5: /Users/phongnguyen/king/test/game_ui_test.dart: national work shows fit, chance, reward and risk before committing
+00:06 +66 -5: /Users/phongnguyen/king/test/game_ui_test.dart: national work shows fit, chance, reward and risk before committing
+00:06 +67 -5: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: treasury panes scroll while HUD, resources and season control stay fixed
+00:06 +68 -5: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(1440.0, 1000.0)
+00:06 +69 -5: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(1440.0, 1000.0)
+00:06 +70 -5: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(1440.0, 1000.0)
+00:07 +71 -5: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(1440.0, 1000.0)
+00:07 +72 -5: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: palace management opens separately and returns without mutations at Size(844.0, 390.0)
+00:07 +73 -5: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)
+00:07 +74 -5: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)
+00:07 +75 -5: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)
+00:07 +76 -5: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)
+00:07 +77 -5: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)
+00:07 +78 -5: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)
+00:07 +79 -5: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)
+00:07 +80 -5: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)
+00:07 +81 -5: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)
+00:07 +82 -5: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)
+00:07 +83 -5: /Users/phongnguyen/king/test/game_ui_test.dart: complete a run, show score and recover ending from storage
+00:07 +84 -5: /Users/phongnguyen/king/test/game_ui_test.dart: old rules scores remain viewable separately from current scores
+00:08 +85 -5: /Users/phongnguyen/king/test/game_ui_test.dart: critical court warning leads to a saved collapse ending on mobile
+00:08 +86 -5: /Users/phongnguyen/king/test/game_ui_test.dart: authority warning leads to a saved puppet ending on mobile
+00:08 +87 -5: /Users/phongnguyen/king/test/game_ui_test.dart: all five zero-stat warnings fit on mobile while recovery remains possible
+00:08 +88 -5: /Users/phongnguyen/king/test/game_ui_test.dart: long assassination explanation fits mobile before the time summary
+00:08 +89 -5: /Users/phongnguyen/king/test/game_ui_test.dart: seasonal recommendation accepts the named tú nữ without palace admission
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _DescendantWidgetFinder:<Found 0 widgets with text containing Tạ Nhã Anh descending from
+widgets with type "AlertDialog": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:800:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 800
+The test description was:
+  seasonal recommendation accepts the named tú nữ without palace admission
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:08 +89 -6: /Users/phongnguyen/king/test/game_ui_test.dart: seasonal recommendation accepts the named tú nữ without palace admission [E]
+  Test failed. See exception logs above.
+  The test description was: seasonal recommendation accepts the named tú nữ without palace admission
+  
+00:08 +89 -6: Some tests failed.

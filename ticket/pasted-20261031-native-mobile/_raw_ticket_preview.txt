@@ -1,0 +1,9 @@
+Key: none (pasted-20261031-native-mobile)
+Type: Epic candidate
+Status: exploratory
+Summary: Estimate native Android/iOS delivery for Vạn Tuế
+
+=== Description ===
+Hãy estimate thử giúp tôi, để có bản Android/iOS native thì cần làm bao nhiêu việc?
+
+=== Comments (0) ===

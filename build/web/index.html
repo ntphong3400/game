@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Lên ngôi ở tuổi mười tám. Điều hành giang sơn theo tuần và giữ ngai vàng lâu nhất có thể.">
+  <meta name="theme-color" content="#3E5947">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Vạn Tuế">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="crest.svg"/>
+
+  <title>Vạn Tuế — Một đời đế vương</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    html, body { margin: 0; background: #F5F2EA; }
+    #loading { position: fixed; inset: 0; display: grid; place-content: center;
+      text-align: center; color: #3E5947; font: 16px Georgia, serif; letter-spacing: 4px; }
+    #loading img { margin: 0 auto 22px; }
+    #loading small { margin-top: 12px; font: 11px sans-serif; letter-spacing: 1px; color: #788076; }
+  </style>
+</head>
+<body>
+  <div id="loading"><img src="crest.svg" width="56" height="56" alt="">VẠN TUẾ<small>Đang mở bản đồ Giang Sơn…</small></div>
+  <script>window.addEventListener('flutter-first-frame', () => document.getElementById('loading')?.remove());</script>
+  <script>
+    // Preserve bookmarks made before routing switched from /#/... to paths.
+    if (window.location.hash.startsWith('#/')) {
+      const target = new URL(window.location.hash.slice(2), document.baseURI);
+      if (target.origin === window.location.origin &&
+          target.pathname.startsWith(new URL(document.baseURI).pathname)) {
+        window.history.replaceState(null, '', target.pathname + target.search);
+      }
+    }
+    // An already-installed worker must not keep showing the previous ruleset
+    // after the updated release activates. First installation needs no reload.
+    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) { refreshing = true; window.location.reload(); }
+      });
+    }
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

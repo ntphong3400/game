@@ -1,0 +1,14 @@
+00:00 +0: loading /Users/phongnguyen/king/test/court_rank_actions_ui_test.dart
+00:00 +0: /Users/phongnguyen/king/test/court_rank_actions_ui_test.dart: occupied office locks appointment and meeting retirement confirms at Size(1440.0, 900.0)
+00:02 +1: /Users/phongnguyen/king/test/court_rank_actions_ui_test.dart: occupied office locks appointment and meeting retirement confirms at Size(1440.0, 900.0)
+00:02 +2: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:02 +3: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(1440.0, 900.0)
+00:03 +4: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(1440.0, 900.0)
+00:03 +5: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(1440.0, 900.0)
+00:03 +6: /Users/phongnguyen/king/test/court_rank_actions_ui_test.dart: occupied office locks appointment and meeting retirement confirms at Size(320.0, 568.0)
+00:04 +7: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(320.0, 568.0)
+00:04 +8: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(1024.0, 768.0)
+00:05 +9: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(390.0, 844.0)
+00:06 +10: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(320.0, 568.0)
+00:07 +11: /Users/phongnguyen/king/test/court_ui_test.dart: harem cards show current numbers and capped passive summaries
+00:08 +12: All tests passed!

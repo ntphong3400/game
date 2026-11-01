@@ -1,0 +1,67 @@
+00:00 +0: loading /Users/phongnguyen/king/test/court_system_test.dart
+00:00 +0: /Users/phongnguyen/king/test/court_system_test.dart: new reign has 46 offices, six royal ranks and paired senior/junior doctors and spies
+00:00 +1: /Users/phongnguyen/king/test/court_system_test.dart: skip promotion consumes cumulative merit/fees and cumulative relationship changes
+00:00 +2: /Users/phongnguyen/king/test/court_system_test.dart: Cuu to That is 1800 and promotions have no cooldown
+00:00 +3: /Users/phongnguyen/king/test/court_system_test.dart: failed promotions preserve every field and top ranks require ability and major achievements
+00:00 +4: /Users/phongnguyen/king/test/court_system_test.dart: appointment is grade-gated; dismissal preserves identity and source vacancy can be refilled
+00:00 +5: /Users/phongnguyen/king/test/court_system_test.dart: swap revalidates both grades and charges two actions without duplicate people
+00:00 +6: /Users/phongnguyen/king/test/court_system_test.dart: passives belong to office and require grade, public ability and affection
+00:00 +7: /Users/phongnguyen/king/test/court_system_test.dart: season settlement stacks general and deputy once, persists and caps actual gains
+00:00 +8: /Users/phongnguyen/king/test/court_system_test.dart: new appointments wait until next season, tax bonus counts at most four seasons
+00:00 +9: /Users/phongnguyen/king/test/court_system_test.dart: senior doctor is selected by office, not the ordering of character list
+00:00 +10: /Users/phongnguyen/king/test/court_system_test.dart: historical save retains its old roster and disabled court system
+00:00 +11: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +12: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +13: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +14: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +15: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +16: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +17: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +18: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +19: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +20: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +21: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +22: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +23: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +24: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +25: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +26: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +27: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +28: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +29: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +30: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +31: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:00 +32: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:01 +33: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:01 +34: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:01 +35: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:01 +36: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:01 +37: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:01 +38: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:01 +39: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:01 +40: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:01 +41: /Users/phongnguyen/king/test/harem_ui_test.dart: harem portraits, full-body meeting and capital return at Size(1024.0, 768.0) seasonal=true
+00:01 +42: /Users/phongnguyen/king/test/character_reward_ui_test.dart: reward picker commits chosen tier 40 at Size(1440.0, 900.0)
+00:02 +43: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official doctor has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:02 +44: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official doctor has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:02 +45: /Users/phongnguyen/king/test/character_reward_ui_test.dart: reward picker commits chosen tier 80 at Size(1440.0, 900.0)
+00:02 +46: /Users/phongnguyen/king/test/character_reward_ui_test.dart: reward picker commits chosen tier 80 at Size(1440.0, 900.0)
+00:02 +47: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official replacement has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:02 +48: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official replacement has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:02 +49: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official replacement has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:02 +50: /Users/phongnguyen/king/test/harem_ui_test.dart: harem portraits, full-body meeting and capital return at Size(1440.0, 1000.0) seasonal=false
+00:03 +51: /Users/phongnguyen/king/test/harem_ui_test.dart: harem portraits, full-body meeting and capital return at Size(1440.0, 1000.0) seasonal=false
+00:03 +52: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(390.0, 844.0)
+00:03 +53: /Users/phongnguyen/king/test/character_reward_ui_test.dart: reward picker commits chosen tier 80 at Size(320.0, 568.0)
+00:03 +54: /Users/phongnguyen/king/test/harem_ui_test.dart: harem portraits, full-body meeting and capital return at Size(1024.0, 768.0) seasonal=false
+00:03 +55: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official doctor has full-body details, confirmed actions and return at Size(390.0, 844.0)
+00:03 +56: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official doctor has full-body details, confirmed actions and return at Size(390.0, 844.0)
+00:03 +57: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official doctor has full-body details, confirmed actions and return at Size(390.0, 844.0)
+00:03 +58: /Users/phongnguyen/king/test/character_reward_ui_test.dart: official profile uses the reward picker and commits its selection
+00:03 +59: /Users/phongnguyen/king/test/character_reward_ui_test.dart: official profile uses the reward picker and commits its selection
+00:03 +60: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official replacement has full-body details, confirmed actions and return at Size(390.0, 844.0)
+00:03 +61: /Users/phongnguyen/king/test/harem_ui_test.dart: harem portraits, full-body meeting and capital return at Size(320.0, 568.0) seasonal=false
+00:04 +62: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(320.0, 568.0)
+00:04 +63: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official doctor has full-body details, confirmed actions and return at Size(320.0, 568.0)
+00:04 +64: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official replacement has full-body details, confirmed actions and return at Size(320.0, 568.0)
+00:04 +65: All tests passed!

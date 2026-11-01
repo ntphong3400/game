@@ -1,0 +1,13 @@
+{
+  "id": "official-007",
+  "source": "output/meeting-generation/source/official-007-v2.png",
+  "generation": "/Users/phongnguyen/.codex/generated_images/01a19524-1d34-76c1-a50d-de3335333557/exec-de74c612-ac11-48a2-becd-07b2ba45d320.png",
+  "asset": "assets/images/meetings/official-007-fullbody-v2.webp",
+  "sourceSize": [
+    1024,
+    1536
+  ],
+  "bytes": 272084,
+  "sourceSha256": "948df979aa7d8caf8dc2b11573fd44252e63d0e42e849e18db66de75a7bd2c78",
+  "sha256": "d3cdc5d82a730ff63a5a2a98a5cb6f104fad4e2314e4ba7847bdab64563a4188"
+}

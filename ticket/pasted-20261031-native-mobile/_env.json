@@ -1,0 +1,69 @@
+{
+  "_status": "ENV_PROBE",
+  "root": "/Users/phongnguyen/king",
+  "store": null,
+  "suite": {},
+  "capabilities": {
+    "fetch_ticket.py": null,
+    "prepack_intake.py": null,
+    "context_footprint.py": null,
+    "sizing_references": null,
+    "jira_config": null,
+    "factors": {
+      "functional_scope": {
+        "evidenced": false,
+        "missing": [
+          "features",
+          "findings"
+        ],
+        "rule": "rate Unknown and name the gap"
+      },
+      "data_ux_ui": {
+        "evidenced": false,
+        "missing": [
+          "surfaces",
+          "findings"
+        ],
+        "rule": "rate Unknown and name the gap"
+      },
+      "technical_complexity": {
+        "evidenced": false,
+        "missing": [
+          "services",
+          "findings"
+        ],
+        "rule": "rate Unknown and name the gap"
+      },
+      "integrations": {
+        "evidenced": false,
+        "missing": [
+          "edges",
+          "intakes"
+        ],
+        "rule": "rate Unknown and name the gap"
+      },
+      "testing_regression": {
+        "evidenced": false,
+        "missing": [
+          "findings",
+          "features"
+        ],
+        "rule": "rate Unknown and name the gap"
+      },
+      "uncertainty": {
+        "evidenced": true,
+        "missing": [],
+        "rule": "rate on store evidence"
+      }
+    }
+  },
+  "gaps": [
+    "no _dna_store found anywhere under the workspace root",
+    "tps-project-dna's context_footprint.py not found — footprint (rules, evidence files, tiered neighbours) cannot be counted; rate Testing & regression Unknown"
+  ],
+  "notes": [
+    "fetch_ticket.py not installed (tps-quantification-intake) — fetch a ticket by hand or paste it",
+    "prepack_intake.py not installed (tps-quantification-intake) — skip the keyword prepack; place the ticket with store greps"
+  ],
+  "ready": false
+}

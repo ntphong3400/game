@@ -1,0 +1,13 @@
+{
+  "id": "official-026",
+  "source": "output/meeting-generation/source/official-026-v3.png",
+  "generation": "/Users/phongnguyen/.codex/generated_images/01a19524-1d34-76c1-a50d-de3335333557/exec-ada28861-e5ed-42e4-a3bc-d6cbf787c3c0.png",
+  "asset": "assets/images/meetings/official-026-fullbody-v3.webp",
+  "sourceSize": [
+    1024,
+    1536
+  ],
+  "bytes": 238892,
+  "sourceSha256": "1b2045b3d3d062f0faacfd5f14ca060b1ceda96ae9286e7a6621d5ce7f1484ee",
+  "sha256": "4e8b1dc6212d18d75f228cdabce28e89607f492cc6909c178b1dff2ea7f68a56"
+}

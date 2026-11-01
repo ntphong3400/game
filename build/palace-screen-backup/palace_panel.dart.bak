@@ -1,0 +1,502 @@
+import 'package:flutter/material.dart';
+import '../../data/content.dart' show factionOpponents;
+import '../../logic/palace_rules.dart';
+import '../../logic/harem_rules.dart';
+import '../../models/game_state.dart';
+
+typedef PalaceAssign = Future<bool> Function(String personId, String option);
+
+class PalacePanel extends StatelessWidget {
+  const PalacePanel({
+    super.key,
+    required this.state,
+    required this.onAssign,
+    this.busy = false,
+  });
+  final GameState state;
+  final PalaceAssign onAssign;
+  final bool busy;
+
+  @override
+  Widget build(BuildContext context) {
+    final residents = state.court.where(palaceResident).toList();
+    final free =
+        residents.where((c) => palaceWorkFor(state, c.id) == null).length;
+    final duties = state.palaceWorks.where((w) => w.kind != 'study').length;
+    final effects =
+        state.palaceEffects
+            .where(
+              (e) =>
+                  e.endsTurn >= state.week &&
+                  (!['herbs', 'procurement'].contains(e.kind) || e.uses > 0),
+            )
+            .toList();
+    final recent =
+        state.outcomes.reversed
+            .where(
+              (r) =>
+                  r.title.startsWith('Theo học trong cung:') ||
+                  palaceDuties.any((d) => r.title.startsWith('${d.title}:')),
+            )
+            .take(3)
+            .toList();
+    return Card(
+      key: const ValueKey('palace-panel'),
+      margin: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.all(18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Cung vụ & học tập',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 6),
+            Text(
+              '$duties/2 cung vụ đang chạy · $free/${residents.length} người đang rảnh',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            const SizedBox(height: 14),
+            Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              children: [
+                FilledButton.icon(
+                  key: const ValueKey('open-palace-duties'),
+                  onPressed:
+                      busy
+                          ? null
+                          : () => choosePalaceDuty(context, state, onAssign),
+                  icon: const Icon(Icons.assignment_outlined, size: 18),
+                  label: const Text('Giao cung vụ'),
+                ),
+                OutlinedButton.icon(
+                  key: const ValueKey('open-palace-study'),
+                  onPressed:
+                      busy
+                          ? null
+                          : () => choosePalaceStudy(context, state, onAssign),
+                  icon: const Icon(Icons.auto_stories_outlined, size: 18),
+                  label: const Text('Theo học trong cung'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'Mỗi lần giao việc hoặc cho theo học tốn 1 hành động. '
+              'Trả kinh phí một lần; tiến độ tự chạy khi khép mùa.',
+              style: TextStyle(fontSize: 11),
+            ),
+            if (residents.isEmpty)
+              const Padding(
+                padding: EdgeInsets.only(top: 8),
+                child: Text(
+                  'Chưa có người trong cung. Hãy tuyển một nhân vật ở danh sách bên dưới.',
+                ),
+              ),
+            const SizedBox(height: 10),
+            const Text(
+              'Đóng góp dự kiến cuối mùa',
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+            ),
+            Text(
+              HaremBenefits(state).summary,
+              key: const ValueKey('harem-passive-summary'),
+              style: const TextStyle(fontSize: 12),
+            ),
+            ExpansionTile(
+              tilePadding: EdgeInsets.zero,
+              title: const Text(
+                'Điều kiện đóng góp',
+                style: TextStyle(fontSize: 11),
+              ),
+              children: const [
+                Text(
+                  'Đã nhập cung · thiện cảm >70 · năng lực >60. Thiện cảm >95: đóng góp chỉ số tăng lên +2. '
+                  'Hoàng hậu năng lực >90 có thêm một đóng góp khác. Giới hạn toàn hậu cung: +3 mỗi chỉ số/mùa và +20 tiền/mùa. '
+                  'Gia sản +10 chỉ có ở một số phi tần/hoàng hậu xuất thân Thế gia/Hoàng tộc, chưa trừ chi sinh hoạt.',
+                  style: TextStyle(fontSize: 11),
+                ),
+              ],
+            ),
+            if (state.palaceWorks.isNotEmpty) ...[
+              const Divider(height: 28),
+              const Text(
+                'Đang thực hiện',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              for (final work in state.palaceWorks)
+                Padding(
+                  key: ValueKey('palace-active-${work.personId}'),
+                  padding: const EdgeInsets.only(top: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${state.court.where((c) => c.id == work.personId).firstOrNull?.name ?? 'Người phụ trách'} · ${palaceWorkTitle(work.kind)}',
+                      ),
+                      const SizedBox(height: 6),
+                      LinearProgressIndicator(
+                        value: work.progress / work.duration,
+                        minHeight: 4,
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        '${work.progress}/${work.duration} mùa · hoàn tất cuối ${state.date(work.dueTurn)}'
+                        '${work.faction.isEmpty ? '' : ' · ${work.faction}'}',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+            if (effects.isNotEmpty)
+              ExpansionTile(
+                tilePadding: EdgeInsets.zero,
+                title: Text(
+                  'Lợi ích đang có hiệu lực (${effects.length})',
+                  style: const TextStyle(fontSize: 12),
+                ),
+                children: [
+                  for (final e in effects)
+                    ListTile(
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(
+                        palaceEffectDescription(e),
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                      subtitle: Text(
+                        '${state.date(e.startsTurn)} – hết ${state.date(e.endsTurn)}',
+                      ),
+                    ),
+                ],
+              ),
+            if (recent.isNotEmpty)
+              ExpansionTile(
+                tilePadding: EdgeInsets.zero,
+                title: const Text(
+                  'Kết quả gần đây',
+                  style: TextStyle(fontSize: 12),
+                ),
+                children: [
+                  for (final r in recent)
+                    ListTile(
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(
+                        r.title,
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                      subtitle: Text(
+                        '${state.date(r.week)} · ${r.statusLabel}\n${gameStatText(r.detail)}',
+                      ),
+                    ),
+                ],
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+String _costText(GameState s, PalaceDuty d) =>
+    '${palaceDutyCost(s, d)} tiền${palaceDutyCost(s, d) < d.cost ? ' (gốc ${d.cost})' : ''}'
+    '${d.grain > 0 ? ' · ${d.grain} thóc' : ''} · 1 hành động · ${d.duration} mùa';
+
+Future<Courtier?> _choosePerson(
+  BuildContext context,
+  GameState s, {
+  PalaceDuty? duty,
+}) async {
+  final residents =
+      s.court.where(palaceResident).toList()..sort((a, b) {
+        final aFree = palacePersonUnavailable(s, a, duty: duty) == null;
+        final bFree = palacePersonUnavailable(s, b, duty: duty) == null;
+        if (aFree != bFree) return aFree ? -1 : 1;
+        return b.ability.compareTo(a.ability);
+      });
+  return showDialog<Courtier>(
+    context: context,
+    builder:
+        (context) => SimpleDialog(
+          title: Text(
+            duty == null ? 'Chọn người theo học' : 'Chọn người phụ trách',
+          ),
+          children: [
+            if (residents.isEmpty)
+              const Padding(
+                padding: EdgeInsets.all(24),
+                child: Text('Chưa có nhân vật trưởng thành đã nhập cung.'),
+              ),
+            for (final c in residents)
+              ListTile(
+                key: ValueKey('palace-person-${c.id}'),
+                enabled: palacePersonUnavailable(s, c, duty: duty) == null,
+                title: Text('${c.name}${c.queen ? ' · Hoàng hậu' : ''}'),
+                subtitle: Text(
+                  'Năng lực ${c.ability} · thiện cảm ${c.affection} · bất mãn ${c.discontent}\n'
+                  '${palacePersonUnavailable(s, c, duty: duty) ?? (duty == null ? '+${studyExperience(c)} kinh nghiệm' : 'Ước tính thành công ${palaceSuccessChance(s, c, duty, preview: true)}% · +${dutyExperience(duty, c)} kinh nghiệm nếu làm tốt')}',
+                ),
+                onTap:
+                    palacePersonUnavailable(s, c, duty: duty) == null
+                        ? () => Navigator.pop(context, c)
+                        : null,
+              ),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Đóng'),
+            ),
+          ],
+        ),
+  );
+}
+
+Future<void> choosePalaceStudy(
+  BuildContext context,
+  GameState s,
+  PalaceAssign assign, {
+  Courtier? person,
+}) async {
+  final c = person ?? await _choosePerson(context, s);
+  if (c == null || !context.mounted) return;
+  final reason = palacePersonUnavailable(s, c);
+  final affordable =
+      s.points >= 1 && s.treasury >= 20 && reason == null && !s.ended;
+  final confirmed = await showDialog<bool>(
+    context: context,
+    builder:
+        (context) => AlertDialog(
+          title: const Text('Theo học trong cung'),
+          content: SizedBox(
+            width: 440,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('${c.name} · năng lực ${c.ability}/100'),
+                  const SizedBox(height: 12),
+                  const Text('20 tiền · 1 hành động · 2 mùa'),
+                  Text('Hoàn tất cuối ${s.date(s.week + 1)}.'),
+                  const SizedBox(height: 12),
+                  Text(
+                    'Bảo đảm +${studyExperience(c)} kinh nghiệm. Hiện có '
+                    '${c.palaceExperience}/${palaceExperienceNeeded(c.ability)} kinh nghiệm để tăng điểm tiếp theo.',
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Dưới 60: cần 10 kinh nghiệm/điểm; 60–79: 20; 80–89: 40; 90–99: 60. '
+                    'Khóa học cho 20 kinh nghiệm khi năng lực dưới 80, từ 80 cho 10. '
+                    'Không thể nhận cung vụ hoặc theo khóa khác trong thời gian học. '
+                    'Không thu thêm học phí mỗi mùa.',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  if (!affordable)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12),
+                      child: Text(
+                        reason ?? 'Cần đủ 20 tiền và 1 hành động để bắt đầu.',
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Hủy'),
+            ),
+            FilledButton(
+              key: const ValueKey('confirm-palace-study'),
+              onPressed: affordable ? () => Navigator.pop(context, true) : null,
+              child: const Text('Theo học · 1 hành động'),
+            ),
+          ],
+        ),
+  );
+  if (confirmed == true) await assign(c.id, 'study');
+}
+
+Future<void> choosePalaceDuty(
+  BuildContext context,
+  GameState s,
+  PalaceAssign assign, {
+  Courtier? person,
+}) async {
+  final duty = await showDialog<PalaceDuty>(
+    context: context,
+    builder:
+        (context) => AlertDialog(
+          title: const Text('Chọn cung vụ'),
+          content: SizedBox(
+            width: 560,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '12 cung vụ · tối đa 2 việc cùng lúc\nNgân khố ${s.treasury} · thóc ${s.grain} · còn ${s.points} hành động',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  for (final group in palaceDuties.map((d) => d.group).toSet())
+                    ExpansionTile(
+                      key: ValueKey('palace-group-$group'),
+                      tilePadding: EdgeInsets.zero,
+                      title: Text(group),
+                      subtitle: Text(
+                        '${palaceDuties.where((d) => d.group == group).length} cung vụ',
+                      ),
+                      children: [
+                        for (final d in palaceDuties.where(
+                          (d) => d.group == group,
+                        ))
+                          ListTile(
+                            key: ValueKey('palace-duty-${d.id}'),
+                            contentPadding: EdgeInsets.zero,
+                            enabled: palaceDutyUnavailable(s, d) == null,
+                            title: Text(
+                              d.title,
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            subtitle: Text(
+                              '${_costText(s, d)}\nNăng lực từ ${d.minAbility} · ${d.benefit}'
+                              '${palaceDutyUnavailable(s, d) == null ? '' : '\n${palaceDutyUnavailable(s, d)}'}',
+                            ),
+                            trailing: const Icon(Icons.chevron_right, size: 18),
+                            onTap:
+                                palaceDutyUnavailable(s, d) == null
+                                    ? () => Navigator.pop(context, d)
+                                    : null,
+                          ),
+                      ],
+                    ),
+                ],
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Đóng'),
+            ),
+          ],
+        ),
+  );
+  if (duty == null || !context.mounted) return;
+  final c = person ?? await _choosePerson(context, s, duty: duty);
+  if (c == null || !context.mounted) return;
+  String? faction;
+  if (duty.id == 'kinship') {
+    faction = await showDialog<String>(
+      context: context,
+      builder:
+          (context) => SimpleDialog(
+            title: const Text('Chọn gia quyến tiếp đón'),
+            children: [
+              for (final f in factionOpponents.keys)
+                SimpleDialogOption(
+                  onPressed: () => Navigator.pop(context, f),
+                  child: Text('$f · thái độ hiện tại ${s.factions[f]}'),
+                ),
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Hủy'),
+              ),
+            ],
+          ),
+    );
+    if (faction == null || !context.mounted) return;
+  }
+  final reason =
+      palacePersonUnavailable(s, c, duty: duty) ??
+      palaceDutyUnavailable(s, duty);
+  final cost = palaceDutyCost(s, duty);
+  final affordable =
+      reason == null &&
+      s.points >= 1 &&
+      s.treasury >= cost &&
+      s.grain >= duty.grain &&
+      !s.ended;
+  final confirmed = await showDialog<bool>(
+    context: context,
+    builder:
+        (context) => AlertDialog(
+          title: Text(duty.title),
+          content: SizedBox(
+            width: 480,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${c.name} · năng lực ${c.ability}/100${faction == null ? '' : '\nGia quyến: $faction'}',
+                  ),
+                  const SizedBox(height: 10),
+                  Text(duty.description),
+                  const SizedBox(height: 10),
+                  Text(
+                    _costText(s, duty),
+                    style: const TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                  Text('Hoàn tất cuối ${s.date(s.week + duty.duration - 1)}.'),
+                  const SizedBox(height: 12),
+                  Text(duty.benefit),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Ước tính thành công ${palaceSuccessChance(s, c, duty, preview: true)}% theo thông tin đã biết. '
+                    'Tính cách chưa rõ có thể đổi kết quả; liêm chính thấp có thể làm thất thoát, chỉ nhận một phần lợi ích.',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  Text(
+                    'Làm tốt: +${dutyExperience(duty, c)} kinh nghiệm. ${duty.risk}',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  if (c.ability >= 80 && duty.minAbility < 60)
+                    const Text(
+                      'Từ năng lực 80, việc đơn giản không còn cho kinh nghiệm.',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Không thể theo học hoặc nhận việc khác khi đang phụ trách. '
+                    'Lợi ích có thời hạn bắt đầu từ mùa sau khi hoàn tất; làm lại chỉ thay thế hiệu lực cùng loại. '
+                    'Không thu phí duy trì riêng.',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  if (!affordable)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12),
+                      child: Text(
+                        reason ?? 'Chưa đủ tiền, thóc hoặc 1 hành động.',
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Hủy'),
+            ),
+            FilledButton(
+              key: const ValueKey('confirm-palace-duty'),
+              onPressed: affordable ? () => Navigator.pop(context, true) : null,
+              child: const Text('Giao việc · 1 hành động'),
+            ),
+          ],
+        ),
+  );
+  if (confirmed == true) {
+    await assign(c.id, '${duty.id}${faction == null ? '' : ':$faction'}');
+  }
+}

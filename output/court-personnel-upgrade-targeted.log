@@ -1,0 +1,51 @@
+00:00 +0: loading /Users/phongnguyen/king/test/court_personnel_missions_test.dart
+00:00 +0: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: each office grade has the exact 1–8 disruption regardless of personal influence
+00:00 +1: /Users/phongnguyen/king/test/court_system_test.dart: opposing office effects cancel before bounds, regardless of office ordering
+00:00 +2: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: authority comparisons are strictly greater and junior offices need no authority
+00:00 +3: /Users/phongnguyen/king/test/court_system_test.dart: dismissal leaves a persistent vacancy and preserves the former official
+00:00 +4: /Users/phongnguyen/king/test/court_system_test.dart: dismissal leaves a persistent vacancy and preserves the former official
+00:00 +5: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: a permitted transfer counts both vacated seats once and empty appointment requires no authority
+00:00 +6: /Users/phongnguyen/king/test/court_system_test.dart: an occupied unqualified office has zero contribution, not a vacancy penalty
+00:00 +7: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: nomination spends the ordinary appointment cost and rewards only after a full qualified season
+00:00 +8: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: nomination spends the ordinary appointment cost and rewards only after a full qualified season
+00:00 +9: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: nomination spends the ordinary appointment cost and rewards only after a full qualified season
+00:00 +10: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: nomination spends the ordinary appointment cost and rewards only after a full qualified season
+00:00 +11: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: nomination spends the ordinary appointment cost and rewards only after a full qualified season
+00:00 +12: /Users/phongnguyen/king/test/court_system_test.dart: new court converts military petition choices to land operations
+00:00 +13: /Users/phongnguyen/king/test/court_system_test.dart: new court converts military petition choices to land operations
+00:00 +14: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: leaving and returning cannot farm nomination merit
+00:00 +15: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: leaving and returning cannot farm nomination merit
+00:00 +16: /Users/phongnguyen/king/test/court_system_test.dart: multi-result petition awards once after final result and survives reload
+00:00 +17: /Users/phongnguyen/king/test/court_system_test.dart: multi-result petition awards once after final result and survives reload
+00:00 +18: /Users/phongnguyen/king/test/court_system_test.dart: multi-result petition awards once after final result and survives reload
+00:00 +19: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: regular and exceptional promotion share merit and fees but only a patronage petition waives ability
+00:00 +20: /Users/phongnguyen/king/test/court_system_test.dart: completed long work grants weighted uncapped merit, not repeating on reload
+00:00 +21: /Users/phongnguyen/king/test/court_system_test.dart: completed long work grants weighted uncapped merit, not repeating on reload
+00:00 +22: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: assessment preserves the candidate and never silently appoints or retires
+00:00 +23: /Users/phongnguyen/king/test/court_system_test.dart: new reign has 46 offices, six royal ranks and paired senior/junior doctors and spies
+00:00 +24: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: training occupies the incumbent, settles after a full season and does not promise passive activation
+00:00 +25: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: training occupies the incumbent, settles after a full season and does not promise passive activation
+00:00 +26: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: training occupies the incumbent, settles after a full season and does not promise passive activation
+00:00 +26 -1: /Users/phongnguyen/king/test/court_system_test.dart: failed promotions preserve every field and top ranks require ability and major achievements
+00:00 +27 -1: /Users/phongnguyen/king/test/court_system_test.dart: appointment is grade-gated; dismissal preserves identity and source vacancy can be refilled
+00:00 +27 -1: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: training occupies the incumbent, settles after a full season and does not promise passive activation [E]
+  Expected: <46>
+    Actual: <45>
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 474:18  expect
+  test/court_personnel_missions_test.dart 403:7       main.<fn>
+  
+00:00 +28 -1: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: stale and expired petitions close without executing personnel actions
+00:00 +29 -1: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: stale and expired petitions close without executing personnel actions
+00:00 +30 -1: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: stale and expired petitions close without executing personnel actions
+00:00 +31 -1: /Users/phongnguyen/king/test/court_system_test.dart: season settlement stacks general and deputy once, persists and caps actual gains
+00:00 +32 -1: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: seasonal generation reaches all six kinds, binds real targets and limits discovery to one a year
+00:00 +33 -1: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: seasonal generation reaches all six kinds, binds real targets and limits discovery to one a year
+00:00 +34 -1: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: seasonal generation reaches all six kinds, binds real targets and limits discovery to one a year
+00:00 +35 -1: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: seasonal generation reaches all six kinds, binds real targets and limits discovery to one a year
+00:02 +36 -1: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: seasonal generation reaches all six kinds, binds real targets and limits discovery to one a year
+00:03 +37 -1: /Users/phongnguyen/king/test/court_personnel_missions_test.dart: seasonal generation reaches all six kinds, binds real targets and limits discovery to one a year
+00:03 +38 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(320.0, 568.0)
+00:03 +39 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(320.0, 568.0)
+00:04 +40 -1: Some tests failed.

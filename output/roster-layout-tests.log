@@ -1,0 +1,19 @@
+00:00 +0: loading /Users/phongnguyen/king/test/equal_height_grid_test.dart
+00:00 +0: /Users/phongnguyen/king/test/equal_height_grid_test.dart: all rows follow the tallest card and shrink when it changes
+00:00 +1: /Users/phongnguyen/king/test/harem_ui_test.dart: harem portraits, full-body meeting and capital return at Size(1440.0, 1000.0) seasonal=true
+00:01 +2: /Users/phongnguyen/king/test/court_ui_test.dart: promotion from separate profile previews and commits Cuu to That exactly once
+00:01 +3: /Users/phongnguyen/king/test/court_ui_test.dart: promotion from separate profile previews and commits Cuu to That exactly once
+00:01 +4: /Users/phongnguyen/king/test/harem_ui_test.dart: harem portraits, full-body meeting and capital return at Size(844.0, 390.0) seasonal=true
+00:01 +5: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(1440.0, 900.0)
+00:02 +6: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(1440.0, 900.0)
+00:02 +7: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(1440.0, 900.0)
+00:02 +8: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(1440.0, 900.0)
+00:03 +9: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(1440.0, 900.0)
+00:03 +10: /Users/phongnguyen/king/test/harem_ui_test.dart: harem portraits, full-body meeting and capital return at Size(844.0, 390.0) seasonal=false
+00:03 +11: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(1024.0, 768.0)
+00:03 +12: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(1024.0, 768.0)
+00:03 +13: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(1024.0, 768.0)
+00:03 +14: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(390.0, 844.0)
+00:04 +15: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(320.0, 568.0)
+00:05 +16: /Users/phongnguyen/king/test/court_ui_test.dart: harem cards show current numbers and capped passive summaries
+00:05 +17: All tests passed!

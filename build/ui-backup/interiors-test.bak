@@ -1,0 +1,189 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:van_tue/app/game_controller.dart';
+import 'package:van_tue/game/data/game_store.dart';
+import 'package:van_tue/game/logic/game_gateway.dart';
+import 'package:van_tue/game/models/game_state.dart';
+import 'package:van_tue/game/presentation/game_app.dart';
+import 'package:van_tue/game/presentation/widgets/petition_decision.dart';
+
+void viewport(WidgetTester tester, Size size) {
+  tester.view.physicalSize = size;
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.resetPhysicalSize);
+  addTearDown(tester.view.resetDevicePixelRatio);
+}
+
+Future<GameController> makeController({
+  Future<void> Function(MemoryGameStore)? prepare,
+}) async {
+  final store = MemoryGameStore();
+  final gateway = LocalGameGateway(store);
+  await gateway.start(
+    name: 'Thiên Hòa',
+    runId: 'interiors',
+    seed: 42,
+    previousRunId: null,
+    previousRevision: null,
+  );
+  if (prepare != null) await prepare(store);
+  final controller = GameController(gateway);
+  await controller.load();
+  return controller;
+}
+
+void main() {
+  for (final size in [
+    const Size(1440, 900),
+    const Size(844, 390),
+    const Size(390, 844),
+    const Size(320, 568),
+  ]) {
+    for (final route in ['court', 'treasury', 'people', 'harem', 'health']) {
+      testWidgets(
+        '$route interior renders without overflow or game mutation at $size',
+        (tester) async {
+          viewport(tester, size);
+          final controller = await makeController();
+          final before = controller.state!.toJson();
+          await tester.pumpWidget(
+            GameApp(controller: controller, initialRoute: route),
+          );
+          await tester.pumpAndSettle();
+          expect(find.byKey(ValueKey('scene-header-$route')), findsOneWidget);
+          expect(controller.state!.toJson(), before);
+          expect(tester.takeException(), isNull);
+        },
+      );
+    }
+  }
+
+  testWidgets(
+    'inline desk selection and assignee preview are local until explicit confirmation',
+    (tester) async {
+      viewport(tester, const Size(1600, 1100));
+      final controller = await makeController(
+        prepare: (store) async {
+          await store.update((archive) {
+            archive.active!.petitions = [
+              Petition(
+                id: 'desk-test',
+                definitionId: 'finance_02',
+                openedWeek: 1,
+                deadline: 2,
+              ),
+            ];
+          });
+        },
+      );
+      final before = controller.state!.toJson();
+      await tester.pumpWidget(
+        GameApp(controller: controller, initialRoute: 'court'),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('read-petition-desk-test')));
+      await tester.pumpAndSettle();
+      expect(find.byType(PetitionDecision), findsOneWidget);
+      expect(find.byType(AlertDialog), findsNothing);
+      await tester.tap(find.byKey(const ValueKey('petition-choice-0')));
+      await tester.pumpAndSettle();
+      final assignee = find.byKey(const ValueKey('petition-assignee'));
+      await tester.ensureVisible(assignee);
+      await tester.tap(assignee);
+      await tester.pumpAndSettle();
+      final person = find.byKey(const ValueKey('petition-person-treasurer'));
+      await tester.ensureVisible(person);
+      await tester.tap(person);
+      await tester.pumpAndSettle();
+      expect(controller.state!.toJson(), before);
+      expect((await controller.gateway.load()).active!.toJson(), before);
+      final confirm = find.byKey(const ValueKey('confirm-petition'));
+      await tester.ensureVisible(confirm);
+      await tester.tap(confirm);
+      await tester.pumpAndSettle();
+      expect(controller.state!.revision, (before['revision'] as int) + 1);
+      expect(controller.state!.petitions, isEmpty);
+      expect(
+        controller.state!.pending.single.assignment!.assigneeId,
+        'treasurer',
+      );
+      expect(find.byKey(const ValueKey('approval-seal')), findsOneWidget);
+      expect(
+        (await controller.gateway.load()).active!.toJson(),
+        controller.state!.toJson(),
+      );
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  for (final harem in [false, true]) {
+    testWidgets(
+      'portrait, compare list and profile action preserve known qualities for harem=$harem',
+      (tester) async {
+        viewport(tester, const Size(1440, 1000));
+        final controller = await makeController();
+        final id = harem ? 'consort_lan' : 'treasurer';
+        final c = controller.state!.court.firstWhere((c) => c.id == id);
+        final before = controller.state!.toJson();
+        await tester.pumpWidget(
+          GameApp(
+            controller: controller,
+            initialRoute: harem ? 'harem' : 'people',
+          ),
+        );
+        await tester.pumpAndSettle();
+        await tester.enterText(
+          find.byKey(ValueKey('people-search-$harem')),
+          c.name,
+        );
+        await tester.pumpAndSettle();
+        final portrait = find.byKey(ValueKey('select-person-$id'));
+        await tester.ensureVisible(portrait);
+        await tester.tap(portrait);
+        await tester.pumpAndSettle();
+        final profile = find.byKey(ValueKey('character-profile-$harem'));
+        expect(
+          find.descendant(of: profile, matching: find.text(c.qualitiesText)),
+          findsOneWidget,
+        );
+        expect(c.investigated, false);
+        await tester.ensureVisible(find.byKey(ValueKey('roster-list-$harem')));
+        await tester.tap(find.byKey(ValueKey('roster-list-$harem')));
+        await tester.pumpAndSettle();
+        expect(find.byKey(ValueKey('list-profile-$id')), findsOneWidget);
+        expect(controller.state!.toJson(), before);
+        final talk = find.byKey(ValueKey('profile-action-$id-audience'));
+        await tester.ensureVisible(talk);
+        await tester.tap(talk);
+        await tester.pumpAndSettle();
+        expect(controller.state!.revision, (before['revision'] as int) + 1);
+        expect(controller.state!.points, (before['points'] as int) - 1);
+        expect(
+          (await controller.gateway.load()).active!.toJson(),
+          controller.state!.toJson(),
+        );
+        expect(tester.takeException(), isNull);
+      },
+    );
+  }
+
+  testWidgets('care preview does not spend resources before the action arrow', (
+    tester,
+  ) async {
+    viewport(tester, const Size(1440, 900));
+    final controller = await makeController();
+    final before = controller.state!.toJson();
+    await tester.pumpWidget(
+      GameApp(controller: controller, initialRoute: 'health'),
+    );
+    await tester.pumpAndSettle();
+    final preview = find.byKey(const ValueKey('care-preview-treat'));
+    await tester.ensureVisible(preview);
+    await tester.tap(preview);
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('care-preview-panel')), findsOneWidget);
+    expect(controller.state!.toJson(), before);
+    expect((await controller.gateway.load()).active!.toJson(), before);
+    expect(tester.takeException(), isNull);
+  });
+}

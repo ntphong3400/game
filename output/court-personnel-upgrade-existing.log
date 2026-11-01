@@ -1,0 +1,1591 @@
+00:00 +0: loading /Users/phongnguyen/king/test/court_system_test.dart
+00:00 +0: /Users/phongnguyen/king/test/court_system_test.dart: opposing office effects cancel before bounds, regardless of office ordering
+00:00 +1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +1 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +1 -1: /Users/phongnguyen/king/test/court_system_test.dart: dismissal leaves a persistent vacancy and preserves the former official [E]
+  Expected: 'Chờ bổ nhiệm'
+    Actual: 'Đã hồi hương'
+     Which: is different.
+            Expected: Chờ bổ nhi ...
+              Actual: Đã hồi hươ ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 474:18  expect
+  test/court_system_test.dart 106:7                   main.<fn>
+  
+00:00 +2 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +3 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +4 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +5 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +6 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +7 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +8 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +9 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +10 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +11 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +12 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +13 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +14 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +15 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +16 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +17 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +18 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +19 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +20 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:00 +21 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:02 +22 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:02 +23 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(1440.0, 900.0)
+00:02 +24 -1: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(1024.0, 768.0)
+00:03 +25 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(390.0, 844.0)
+00:03 +26 -1: /Users/phongnguyen/king/test/court_ui_test.dart: court cards, grade badge, filters and separate profiles at Size(390.0, 844.0)
+00:03 +26 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(320.0, 568.0)
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#d769d relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-chancellor'>]
+    ← Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ←
+    IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 132.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#38d79 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-general'>] ←
+    Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3]
+    ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 132.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#61264 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-prince'>] ←
+    Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3]
+    ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 45.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 144.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#5ab1e relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-treasurer'>]
+    ← Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ←
+    IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 108.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#54f3c relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-grand-tutor'>] ← Column ← LayoutBuilder ← Column ← Padding ←
+    _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 132.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#5c7a8 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-deputy_general'>] ← Column ← LayoutBuilder ← Column ←
+    Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 120.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#2f357 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-war-minister'>] ← Column ← LayoutBuilder ← Column ← Padding
+    ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 132.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#4ee44 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-royal_cousin'>] ← Column ← LayoutBuilder ← Column ← Padding
+    ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 45.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 156.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#31356 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-personnel'>]
+    ← Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ←
+    IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 120.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#072d8 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-campaign-general'>] ← Column ← LayoutBuilder ← Column ←
+    Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 45.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 108.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#26882 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-duke'>] ←
+    Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3]
+    ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 168.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#6a26f relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-steward'>] ←
+    Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3]
+    ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 132.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#95549 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-scholar'>] ←
+    Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3]
+    ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 180.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#70cca relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-garrison'>] ←
+    Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3]
+    ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 108.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#f21cd relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-royal_tutor'>] ← Column ← LayoutBuilder ← Column ← Padding ←
+    _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 144.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#e5fd2 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-spy'>] ←
+    Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3]
+    ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 120.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#82ab5 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-doctor'>] ←
+    Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3]
+    ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 156.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#f8e4b relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-provincial'>]
+    ← Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ←
+    IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 132.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#dee70 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-regional-highland-governor'>] ← Column ← LayoutBuilder ←
+    Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 168.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#232a2 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-regional-south-governor'>] ← Column ← LayoutBuilder ← Column
+    ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 132.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#efecf relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-works'>] ←
+    Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3]
+    ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 120.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#dee26 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-rites'>] ←
+    Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3]
+    ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 144.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#c7f04 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-border_general'>] ← Column ← LayoutBuilder ← Column ←
+    Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 45.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 120.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#f6835 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-royal_clan'>]
+    ← Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ←
+    IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 45.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 132.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#af886 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-palace-chef'>] ← Column ← LayoutBuilder ← Column ← Padding ←
+    _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 45.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 132.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#38b43 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-justice'>] ←
+    Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3]
+    ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 120.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#6ad7d relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-captain'>] ←
+    Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3]
+    ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 120.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#ab733 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-junior-royal-tutor'>] ← Column ← LayoutBuilder ← Column ←
+    Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 108.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#47280 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-palace-wardrobe'>] ← Column ← LayoutBuilder ← Column ←
+    Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 45.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 132.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#b02ad relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-governor'>] ←
+    Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3]
+    ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 120.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#ab3ef relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-regional-east-prefect'>] ← Column ← LayoutBuilder ← Column ←
+    Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 108.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#3a0bf relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-regional-north-prefect'>] ← Column ← LayoutBuilder ← Column
+    ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 144.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#e3b6b relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-regional-west-prefect'>] ← Column ← LayoutBuilder ← Column ←
+    Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 132.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#621e6 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-inspector'>]
+    ← Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ←
+    IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 45.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 120.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#8cda9 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-academician'>] ← Column ← LayoutBuilder ← Column ← Padding ←
+    _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 144.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#4f6ee relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-guard'>] ←
+    Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3]
+    ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 144.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#2fa50 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-junior-spy'>]
+    ← Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ←
+    IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 72.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#dee0e relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-junior-doctor'>] ← Column ← LayoutBuilder ← Column ← Padding
+    ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 132.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#40bf5 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-trade_officer'>] ← Column ← LayoutBuilder ← Column ← Padding
+    ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 45.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 108.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#010fb relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ← Container-[<'government-office-office-marshal'>] ←
+    Column ← LayoutBuilder ← Column ← Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3]
+    ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 144.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#52728 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-chamberlain'>] ← Column ← LayoutBuilder ← Column ← Padding ←
+    _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 156.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#3d66e relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-court-clerk'>] ← Column ← LayoutBuilder ← Column ← Padding ←
+    _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 132.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#502fb relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-squad-leader'>] ← Column ← LayoutBuilder ← Column ← Padding
+    ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 45.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 96.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#899d2 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-land_officer'>] ← Column ← LayoutBuilder ← Column ← Padding
+    ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 156.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#1fc90 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-regional-coast-land'>] ← Column ← LayoutBuilder ← Column ←
+    Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 96.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 35 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///Users/phongnguyen/king/lib/game/presentation/widgets/court_government_panel.dart:185:19
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#bcd37 relayoutBoundary=up8 OVERFLOWING:
+  creator: Row ← Column ← Padding ← DecoratedBox ←
+    Container-[<'government-office-office-regional-delta-land'>] ← Column ← LayoutBuilder ← Column ←
+    Padding ← _SingleChildViewport ← IgnorePointer-[GlobalKey#02da3] ← Semantics ← ⋯
+  parentData: offset=Offset(0.0, 24.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=230.0, 0.0<=h<=Infinity)
+  size: Size(230.0, 132.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +27 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(320.0, 568.0)
+00:04 +28 -1: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(320.0, 568.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: 'Multiple exceptions (46) were detected during the running of the current test, and at
+least one was unexpected.'
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/court_government_ui_test.dart:169:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/court_government_ui_test.dart line 169
+The test description was:
+  government shows all offices in descending seniority and supports confirmed dismissal at
+  Size(320.0, 568.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:04 +28 -2: /Users/phongnguyen/king/test/court_ui_test.dart: harem cards show current numbers and capped passive summaries
+00:04 +28 -2: /Users/phongnguyen/king/test/court_government_ui_test.dart: government shows all offices in descending seniority and supports confirmed dismissal at Size(320.0, 568.0) [E]
+  Test failed. See exception logs above.
+  The test description was: government shows all offices in descending seniority and supports confirmed dismissal at Size(320.0, 568.0)
+  
+00:04 +29 -2: Some tests failed.

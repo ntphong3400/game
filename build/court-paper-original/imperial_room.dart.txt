@@ -1,0 +1,568 @@
+import 'dart:math' as math;
+import 'package:flutter/material.dart';
+import '../../models/game_state.dart';
+import 'imperial_widgets.dart';
+import 'imperial_theme.dart';
+import 'imperial_assets.dart';
+
+/// Immersive rooms keep artwork behind native, axis-aligned interactive panels.
+class RoomStage extends StatelessWidget {
+  const RoomStage({
+    super.key,
+    required this.scene,
+    required this.title,
+    required this.child,
+    this.scenery,
+    this.controller,
+    this.focusContent = false,
+    this.compactHeaderHeight,
+    this.fitViewport = false,
+  });
+  final String scene, title;
+  final Widget child;
+  final Widget? scenery;
+  final ScrollController? controller;
+  final bool focusContent;
+  final double? compactHeaderHeight;
+  final bool fitViewport;
+
+  @override
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, bounds) {
+      final compact = bounds.maxWidth < 760;
+      final height =
+          fitViewport
+              ? bounds.maxHeight
+              : math.max(bounds.maxHeight, compact ? 720.0 : 590.0);
+      final picture = Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            'assets/images/$scene-room.webp',
+            fit: BoxFit.cover,
+            alignment: Alignment.topCenter,
+            excludeFromSemantics: true,
+          ),
+          const DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Color(0x080C221B), Color(0x4D1B1109)],
+                stops: [.1, 1],
+              ),
+            ),
+          ),
+        ],
+      );
+      final content =
+          compact && !fitViewport
+              ? Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(
+                      key: ValueKey('scene-header-$scene'),
+                      height:
+                          compactHeaderHeight ??
+                          (focusContent ? 80 : (scenery == null ? 110 : 180)),
+                      child:
+                          scenery ??
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: RoomPlaque(label: title),
+                          ),
+                    ),
+                    child,
+                  ],
+                ),
+              )
+              : SizedBox(
+                height: height,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      key: ValueKey('scene-header-$scene'),
+                      height:
+                          compact && compactHeaderHeight != null
+                              ? compactHeaderHeight!
+                              : focusContent
+                              ? 56
+                              : height * (scenery == null ? .27 : .31),
+                      child:
+                          scenery ??
+                          Padding(
+                            padding:
+                                focusContent && compact && fitViewport
+                                    ? EdgeInsets.zero
+                                    : focusContent
+                                    ? const EdgeInsets.symmetric(
+                                      horizontal: 22,
+                                      vertical: 4,
+                                    )
+                                    : const EdgeInsets.all(22),
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: RoomPlaque(label: title),
+                            ),
+                          ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(18, 0, 18, 14),
+                        child: child,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+      return Stack(
+        fit: StackFit.expand,
+        children: [
+          picture,
+          if ((compact && !fitViewport) || bounds.maxHeight < height)
+            SingleChildScrollView(controller: controller, child: content)
+          else
+            content,
+        ],
+      );
+    },
+  );
+}
+
+class ImperialWorkspace extends StatelessWidget {
+  const ImperialWorkspace({super.key, required this.child, this.padding = 16});
+  final Widget child;
+  final double padding;
+  @override
+  Widget build(BuildContext context) => DecoratedBox(
+    decoration: const BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+          color: Color(0x99000000),
+          blurRadius: 22,
+          offset: Offset(0, 8),
+        ),
+      ],
+    ),
+    child: ImperialSkin(
+      edge: 46,
+      child: Padding(padding: EdgeInsets.all(padding + 13), child: child),
+    ),
+  );
+}
+
+/// Independent scroll panes keep the shared HUD and end-turn controls visible.
+class RoomPane extends StatelessWidget {
+  const RoomPane({
+    super.key,
+    required this.child,
+    this.controller,
+    this.padding = 14,
+  });
+  final Widget child;
+  final ScrollController? controller;
+  final double padding;
+  @override
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder:
+        (context, bounds) => SingleChildScrollView(
+          controller: controller,
+          padding: EdgeInsets.all(padding),
+          child: child,
+        ),
+  );
+}
+
+class RoomPlaque extends StatelessWidget {
+  const RoomPlaque({
+    super.key,
+    required this.label,
+    this.value,
+    this.warning = false,
+  });
+  final String label;
+  final String? value;
+  final bool warning;
+  @override
+  Widget build(BuildContext context) => ImperialSkin(
+    asset: 'jade',
+    edge: 24,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            label,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: 'Lora',
+              color: imperialIvory,
+              fontSize: value == null ? 17 : 13,
+              height: 1.2,
+            ),
+          ),
+          if (value != null)
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                value!,
+                maxLines: 1,
+                style: TextStyle(
+                  fontFamily: 'Lora',
+                  fontSize: 32,
+                  height: 1.2,
+                  color: warning ? const Color(0xFFFFA88D) : imperialIvory,
+                ),
+              ),
+            ),
+        ],
+      ),
+    ),
+  );
+}
+
+class RoomRail extends StatelessWidget {
+  const RoomRail({
+    super.key,
+    required this.entries,
+    required this.active,
+    required this.onNavigate,
+  });
+  final List<(String, IconData, String)> entries;
+  final String active;
+  final ValueChanged<String> onNavigate;
+  @override
+  Widget build(BuildContext context) => Container(
+    width: 128,
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+        colors: [Color(0xFF061B17), Color(0xFF123F33), Color(0xFF061B17)],
+      ),
+      image: DecorationImage(
+        image: AssetImage('assets/images/imperial/jade-texture.webp'),
+        fit: BoxFit.cover,
+        opacity: .22,
+      ),
+      border: Border(right: BorderSide(color: imperialGold)),
+    ),
+    child: LayoutBuilder(
+      builder: (context, bounds) {
+        final itemHeight = (bounds.maxHeight / entries.length).clamp(
+          80.0,
+          86.0,
+        );
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              for (final entry in entries)
+                SizedBox(
+                  height: itemHeight,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 5,
+                      vertical: 3,
+                    ),
+                    child: Material(
+                      borderRadius: BorderRadius.circular(12),
+                      clipBehavior: Clip.antiAlias,
+                      color: Colors.transparent,
+                      child: InkWell(
+                        key: ValueKey('nav-${entry.$1}'),
+                        onTap: () => onNavigate(entry.$1),
+                        child: Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            if (active == entry.$1)
+                              const Positioned.fill(
+                                child: ImperialSkin(asset: 'jade', edge: 14),
+                              ),
+                            Center(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ImperialIcon(entry.$1, size: 38),
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    entry.$3,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontFamily: 'Lora',
+                                      fontSize: 11,
+                                      height: 1.2,
+                                      color: imperialIvory,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        );
+      },
+    ),
+  );
+}
+
+class RoomHud extends StatelessWidget {
+  const RoomHud({
+    super.key,
+    required this.state,
+    required this.desktop,
+    required this.onMenu,
+    required this.onHome,
+    required this.onNavigate,
+  });
+  final GameState state;
+  final bool desktop;
+  final VoidCallback onMenu, onHome;
+  final ValueChanged<String> onNavigate;
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+        colors: [imperialDeep, imperialJade, imperialDeep],
+      ),
+      image: DecorationImage(
+        image: AssetImage('assets/images/imperial/jade-texture.webp'),
+        fit: BoxFit.cover,
+        opacity: .22,
+      ),
+      border: Border(bottom: BorderSide(color: imperialGold, width: 1.5)),
+    ),
+    child: LayoutBuilder(
+      builder: (context, bounds) {
+        final wide = bounds.maxWidth >= 760;
+        final brand = Row(
+          children: [
+            if (!desktop)
+              IconButton(
+                tooltip: 'Mở danh mục',
+                onPressed: onMenu,
+                icon: const Icon(Icons.menu, color: imperialGold),
+              ),
+            IconButton(
+              tooltip: 'Về Hoàng thành',
+              onPressed: onHome,
+              icon: const ImperialIcon('citadel', size: 42),
+            ),
+            const Expanded(
+              child: Text(
+                'VẠN TUẾ',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontFamily: 'Lora',
+                  fontSize: 18,
+                  color: imperialIvory,
+                  letterSpacing: 1.7,
+                ),
+              ),
+            ),
+          ],
+        );
+        final stats = <(String, int, IconData, String)>[
+          ('Ngân khố', state.treasury, Icons.toll_outlined, 'treasury'),
+          ('Lòng dân', state.people, Icons.groups_outlined, 'court'),
+          (
+            'Uy quyền',
+            state.authority,
+            Icons.workspace_premium_outlined,
+            'court',
+          ),
+          ('Quân lực', state.army, Icons.shield_outlined, 'kingdom'),
+          ('Sức khỏe', state.health, Icons.favorite_border, 'health'),
+          (
+            'Ổn định triều đình',
+            state.stability,
+            Icons.balance_outlined,
+            'court',
+          ),
+        ];
+        final counters = Row(
+          children: [
+            for (final stat in stats)
+              Expanded(
+                child: Tooltip(
+                  message: stat.$1,
+                  child: InkWell(
+                    onTap: () => onNavigate(stat.$4),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 3,
+                        vertical: 3,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ImperialIcon(switch (stat.$1) {
+                            'Ngân khố' => 'treasury',
+                            'Lòng dân' => 'citizens',
+                            'Uy quyền' => 'authority',
+                            'Quân lực' => 'army',
+                            'Sức khỏe' => 'health',
+                            _ => 'stability',
+                          }, size: wide ? 32 : 26),
+                          Text(
+                            '${stat.$2}',
+                            style: TextStyle(
+                              fontFamily: 'Lora',
+                              fontSize: wide ? 19 : 16,
+                              color:
+                                  stat.$4 != 'treasury' && stat.$2 <= 20
+                                      ? const Color(0xFFFFA88D)
+                                      : imperialIvory,
+                            ),
+                          ),
+                          Text(
+                            stat.$1,
+                            maxLines: 2,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 9,
+                              color: imperialIvory,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        );
+        final date = Text(
+          '${state.seasonal ? 'Mùa ${state.season}' : 'Tuần ${state.week}'} · năm ${state.year} · ${state.age} tuổi',
+          key: const ValueKey('room-calendar'),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(fontSize: 11, color: imperialGold),
+        );
+        return wide
+            ? Row(
+              children: [
+                SizedBox(width: 180, child: brand),
+                Expanded(child: counters),
+                const SizedBox(width: 10),
+                SizedBox(width: 190, child: date),
+              ],
+            )
+            : Column(
+              children: [
+                Row(children: [Expanded(child: brand), Flexible(child: date)]),
+                counters,
+              ],
+            );
+      },
+    ),
+  );
+}
+
+class TreasuryObject extends StatelessWidget {
+  const TreasuryObject({
+    super.key,
+    required this.index,
+    this.width = 180,
+    this.height = 120,
+  });
+  final int index;
+  final double width, height;
+  @override
+  Widget build(BuildContext context) => SizedBox(
+    width: width,
+    height: height,
+    child: LayoutBuilder(
+      builder: (context, bounds) {
+        final side = math.min(bounds.maxWidth, bounds.maxHeight);
+        return Center(
+          child: SizedBox.square(
+            dimension: side,
+            child: ClipRect(
+              key: ValueKey('treasury-sprite-$index'),
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: -index * side,
+                    top: 0,
+                    width: side * 3,
+                    height: side,
+                    child: Image.asset(
+                      'assets/images/treasury-objects.webp',
+                      fit: BoxFit.fill,
+                      excludeFromSemantics: true,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    ),
+  );
+}
+
+ThemeData roomTheme(BuildContext context) => Theme.of(context).copyWith(
+  textTheme: Theme.of(
+    context,
+  ).textTheme.apply(bodyColor: ink, displayColor: ink),
+  chipTheme: Theme.of(context).chipTheme.copyWith(
+    backgroundColor: const Color(0xFFF7E7C9),
+    selectedColor: const Color(0xFF214B3D),
+    side: const BorderSide(color: Color(0xFFBD9754)),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+    labelStyle: const TextStyle(fontFamily: 'Lora', color: ink),
+    secondaryLabelStyle: const TextStyle(
+      fontFamily: 'Lora',
+      color: imperialIvory,
+    ),
+    checkmarkColor: imperialIvory,
+  ),
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+      foregroundColor: ink,
+      backgroundColor: Colors.transparent,
+      side: BorderSide.none,
+      textStyle: const TextStyle(
+        fontFamily: 'Lora',
+        fontSize: 13,
+        fontWeight: FontWeight.w600,
+      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      padding: const EdgeInsets.symmetric(horizontal: 19, vertical: 13),
+      backgroundBuilder:
+          (context, states, child) =>
+              imperialButtonLayer(context, states, child, asset: 'ivory'),
+    ),
+  ),
+  filledButtonTheme: FilledButtonThemeData(
+    style: FilledButton.styleFrom(
+      backgroundColor: Colors.transparent,
+      foregroundColor: imperialIvory,
+      disabledBackgroundColor: Colors.transparent,
+      side: BorderSide.none,
+      textStyle: const TextStyle(
+        fontFamily: 'Lora',
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      minimumSize: const Size(0, 48),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+      backgroundBuilder:
+          (context, states, child) =>
+              imperialButtonLayer(context, states, child, asset: 'crimson'),
+    ),
+  ),
+);

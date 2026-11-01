@@ -1,0 +1,58 @@
+00:00 +0: loading /Users/phongnguyen/king/test/warfare_test.dart
+00:00 +0: /Users/phongnguyen/king/test/warfare_test.dart: three neighbors start at zero advantage and random 10,10,0 relations
+00:00 +1: /Users/phongnguyen/king/test/warfare_test.dart: one war has many missions, but cannot declare against another neighbor
+00:00 +2: /Users/phongnguyen/king/test/population_test.dart: new seasonal reign starts with a million workers, 50,000 troops and tạ
+00:00 +3: /Users/phongnguyen/king/test/warfare_test.dart: different seeds vary which country starts neutral without rerolling
+00:00 +4: /Users/phongnguyen/king/test/warfare_test.dart: different seeds vary which country starts neutral without rerolling
+00:00 +5: /Users/phongnguyen/king/test/warfare_test.dart: different seeds vary which country starts neutral without rerolling
+00:00 +6: /Users/phongnguyen/king/test/population_test.dart: a normal season nets 0.35% workers and records consumption
+00:00 +7: /Users/phongnguyen/king/test/warfare_test.dart: old setup is corrected once while preserving diplomacy and deployed army
+00:00 +8: /Users/phongnguyen/king/test/warfare_test.dart: old setup is corrected once while preserving diplomacy and deployed army
+00:00 +9: /Users/phongnguyen/king/test/population_test.dart: production changes commit next season, not the current settlement
+00:00 +10: /Users/phongnguyen/king/test/warfare_test.dart: normal and siege ratios round up to tens and enforce minimum 200%
+00:00 +11: /Users/phongnguyen/king/test/population_test.dart: regular recruitment and demobilization conserve population and dilute training
+00:00 +12: /Users/phongnguyen/king/test/population_test.dart: regular recruitment and demobilization conserve population and dilute training
+00:00 +13: /Users/phongnguyen/king/test/population_test.dart: regular recruitment and demobilization conserve population and dilute training
+00:00 +14: /Users/phongnguyen/king/test/population_test.dart: regular recruitment and demobilization conserve population and dilute training
+00:00 +15: /Users/phongnguyen/king/test/warfare_test.dart: reserves troops and both officers, charges exact quote, cannot reuse or overcommit
+00:00 +16: /Users/phongnguyen/king/test/population_test.dart: early labor borrows future additions, excludes recruitment, waits four seasons
+00:00 +17: /Users/phongnguyen/king/test/warfare_test.dart: simultaneous deployments only lose their own soldiers and settle once after reload
+00:00 +18: /Users/phongnguyen/king/test/warfare_test.dart: simultaneous deployments only lose their own soldiers and settle once after reload
+00:00 +19: /Users/phongnguyen/king/test/population_test.dart: refugee petition charges food and opposing faction, arrivals do not work retroactively
+00:00 +20: /Users/phongnguyen/king/test/population_test.dart: refugee petition charges food and opposing faction, arrivals do not work retroactively
+00:00 +21: /Users/phongnguyen/king/test/warfare_test.dart: multi-season army stays unavailable and supply intervention has a real cost
+00:00 +22: /Users/phongnguyen/king/test/population_test.dart: settlers and returnees arrive only once after their advertised due dates
+00:00 +23: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +24: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +25: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +26: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +27: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +28: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +29: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +30: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +31: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +32: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +33: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +34: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +35: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +36: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +37: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +38: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +39: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +40: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +41: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +42: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +43: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +44: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +45: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:00 +46: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:01 +47: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:01 +48: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:01 +49: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:01 +50: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:01 +51: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(1440.0, 900.0)
+00:01 +52: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(390.0, 844.0)
+00:01 +53: /Users/phongnguyen/king/test/warfare_ui_test.dart: army preview includes affection and pays exact deployment at Size(320.0, 568.0)
+00:01 +54: /Users/phongnguyen/king/test/warfare_ui_test.dart: siege picker only offers 200,250,300 and cancel has no side effect
+00:02 +55: /Users/phongnguyen/king/test/warfare_ui_test.dart: peace confirmation displays yearly tribute and commits a timed treaty
+00:02 +56: All tests passed!

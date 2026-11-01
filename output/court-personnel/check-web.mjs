@@ -1,0 +1,21 @@
+import fs from 'node:fs/promises';
+const targets=await (await fetch('http://127.0.0.1:9238/json')).json();
+const socket=new WebSocket(targets.find(t=>t.type==='page').webSocketDebuggerUrl);
+await new Promise(r=>socket.addEventListener('open',r,{once:true}));
+let id=0;const pending=new Map(),errors=[],failed=[];
+socket.addEventListener('message',e=>{const m=JSON.parse(e.data);if(m.id){const task=pending.get(m.id);if(task){pending.delete(m.id);m.error?task.reject(m.error):task.resolve(m.result);}}
+  if(m.method==='Runtime.exceptionThrown')errors.push(m.params.exceptionDetails);
+  if(m.method==='Network.responseReceived'&&m.params.response.status>=400)failed.push({url:m.params.response.url,status:m.params.response.status});});
+const call=(method,params={})=>new Promise((resolve,reject)=>{const current=++id;pending.set(current,{resolve,reject});socket.send(JSON.stringify({id:current,method,params}));});
+await call('Page.enable');await call('Runtime.enable');await call('Network.enable');
+await call('Emulation.setDeviceMetricsOverride',{width:1440,height:900,deviceScaleFactor:1,mobile:false});
+await call('Page.navigate',{url:'http://127.0.0.1:4173/'});
+await new Promise(r=>setTimeout(r,6000));
+const document=await call('Runtime.evaluate',{expression:'({title:document.title,flutter:!!document.querySelector("flutter-view,flt-glass-pane"),body:document.body.innerText})',returnByValue:true});
+const screenshot=await call('Page.captureScreenshot',{format:'png'});
+await fs.writeFile(new URL('web-start.png',import.meta.url),Buffer.from(screenshot.data,'base64'));
+const result={document:document.result.value,errors,failed};
+await fs.writeFile(new URL('web-checks.json',import.meta.url),JSON.stringify(result,null,2));
+console.log(JSON.stringify(result));
+await call('Browser.close');socket.close();
+if(errors.length||failed.length||!result.document.flutter)process.exitCode=1;

@@ -1,0 +1,43 @@
+00:00 +0: loading /Users/phongnguyen/king/test/frontier_test.dart
+00:00 +0: /Users/phongnguyen/king/test/frontier_test.dart: initial four garrisons and three real enemy pools are safe in peace
+00:00 +1: /Users/phongnguyen/king/test/frontier_test.dart: transfer 2000 costs one action, arrives immediately and preserves population and quality
+00:00 +2: /Users/phongnguyen/king/test/frontier_test.dart: transfer 5000 costs one action, arrives immediately and preserves population and quality
+00:00 +3: /Users/phongnguyen/king/test/frontier_test.dart: transfer 10000 costs one action, arrives immediately and preserves population and quality
+00:00 +4: /Users/phongnguyen/king/test/frontier_test.dart: reverse and cross-front transfers use the same army
+00:00 +5: /Users/phongnguyen/king/test/frontier_test.dart: invalid, fractional and unavailable transfer requests are atomic
+00:00 +6: /Users/phongnguyen/king/test/frontier_test.dart: capital and source-front warnings are soft and forecast the withdrawn force
+00:00 +7: /Users/phongnguyen/king/test/frontier_test.dart: deployed soldiers cannot transfer and global reserves cannot substitute local troops
+00:00 +8: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +9: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +10: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +11: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +12: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +13: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +14: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +15: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +16: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +17: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +18: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +19: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +20: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +21: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +22: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +23: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +24: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +25: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1024.0, 768.0)
+00:00 +26: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(844.0, 390.0)
+00:00 +27: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(390.0, 844.0)
+00:01 +28: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(320.0, 568.0)
+00:01 +29: /Users/phongnguyen/king/test/citadel_hub_test.dart: capital opens all destinations and returns at Size(1440.0, 900.0)
+00:02 +30: /Users/phongnguyen/king/test/citadel_hub_test.dart: capital opens all destinations and returns at Size(1024.0, 768.0)
+00:03 +31: /Users/phongnguyen/king/test/citadel_hub_test.dart: capital opens all destinations and returns at Size(844.0, 390.0)
+00:03 +32: /Users/phongnguyen/king/test/citadel_hub_test.dart: capital opens all destinations and returns at Size(390.0, 844.0)
+00:04 +33: /Users/phongnguyen/king/test/citadel_hub_test.dart: capital opens all destinations and returns at Size(320.0, 568.0)
+00:04 +34: /Users/phongnguyen/king/test/citadel_hub_test.dart: existing seasonal save opens locality and returns to citadel
+00:04 +35: /Users/phongnguyen/king/test/citadel_hub_test.dart: existing weekly save opens locality and returns to citadel
+00:04 +36: /Users/phongnguyen/king/test/citadel_hub_test.dart: current reign opens local and border routes without spending actions
+00:05 +37: /Users/phongnguyen/king/test/citadel_hub_test.dart: end season keeps the existing expiry confirmation and does not spend actions when cancelled
+00:05 +38: /Users/phongnguyen/king/test/citadel_hub_test.dart: closing a season from citadel persists exactly one turn
+00:05 +39: /Users/phongnguyen/king/test/citadel_hub_test.dart: continue from the scoreboard returns to citadel without a command
+00:05 +40: /Users/phongnguyen/king/test/citadel_hub_test.dart: end turn and overtime are disabled while saving
+00:05 +41: All tests passed!

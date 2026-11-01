@@ -1,0 +1,118 @@
+00:00 +0: loading /Users/phongnguyen/king/test/court_system_test.dart
+00:00 +0: /Users/phongnguyen/king/test/court_system_test.dart: new reign has 46 offices, six royal ranks and paired senior/junior doctors and spies
+00:00 +1: /Users/phongnguyen/king/test/court_system_test.dart: skip promotion consumes cumulative merit/fees and cumulative relationship changes
+00:00 +2: /Users/phongnguyen/king/test/court_system_test.dart: Cuu to That is 1800 and promotions have no cooldown
+00:00 +3: /Users/phongnguyen/king/test/court_system_test.dart: failed promotions preserve every field and top ranks require ability and major achievements
+00:00 +4: /Users/phongnguyen/king/test/court_system_test.dart: appointment is grade-gated; dismissal preserves identity and source vacancy can be refilled
+00:00 +5: /Users/phongnguyen/king/test/court_system_test.dart: swap revalidates both grades and charges two actions without duplicate people
+00:00 +6: /Users/phongnguyen/king/test/court_system_test.dart: passives belong to office and require grade, public ability and affection
+00:00 +7: /Users/phongnguyen/king/test/court_system_test.dart: season settlement stacks general and deputy once, persists and caps actual gains
+00:00 +8: /Users/phongnguyen/king/test/court_system_test.dart: new appointments wait until next season, tax bonus counts at most four seasons
+00:00 +9: /Users/phongnguyen/king/test/court_system_test.dart: senior doctor is selected by office, not the ordering of character list
+00:00 +10: /Users/phongnguyen/king/test/court_system_test.dart: historical save retains its old roster and disabled court system
+00:00 +11: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:01 +12: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official doctor has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+00:01 +13: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official replacement has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: no matching candidates
+  Actual: _KeyWidgetFinder:<Found 1 widget with key [<'meeting-contributions'>]: [
+            Material-[<'meeting-contributions'>](type: canvas, color: Color(alpha: 0.0600, red:
+0.8824, green: 0.7647, blue: 0.5451, colorSpace: ColorSpace.sRGB), shape:
+RoundedRectangleBorder(BorderSide(color: Color(alpha: 0.3500, red: 0.8824, green: 0.7647, blue:
+0.5451, colorSpace: ColorSpace.sRGB)), BorderRadius.circular(10.0)), dependencies:
+[InheritedCupertinoTheme, _InheritedTheme, _LocalizationsScope-[GlobalKey#f9963]], state:
+_MaterialState#f5af8),
+          ]>
+   Which: means one was found but none were expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/official_meeting_ui_test.dart:82:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/official_meeting_ui_test.dart line 82
+The test description was:
+  official replacement has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +13 -1: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official replacement has full-body details, confirmed actions and return at Size(1440.0, 900.0) [E]
+  Test failed. See exception logs above.
+  The test description was: official replacement has full-body details, confirmed actions and return at Size(1440.0, 900.0)
+  
+00:02 +13 -1: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(390.0, 844.0)
+00:02 +14 -1: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official doctor has full-body details, confirmed actions and return at Size(390.0, 844.0)
+00:02 +15 -1: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official replacement has full-body details, confirmed actions and return at Size(390.0, 844.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: no matching candidates
+  Actual: _KeyWidgetFinder:<Found 1 widget with key [<'meeting-contributions'>]: [
+            Material-[<'meeting-contributions'>](type: canvas, color: Color(alpha: 0.0600, red:
+0.8824, green: 0.7647, blue: 0.5451, colorSpace: ColorSpace.sRGB), shape:
+RoundedRectangleBorder(BorderSide(color: Color(alpha: 0.3500, red: 0.8824, green: 0.7647, blue:
+0.5451, colorSpace: ColorSpace.sRGB)), BorderRadius.circular(10.0)), dependencies:
+[InheritedCupertinoTheme, _InheritedTheme, _LocalizationsScope-[GlobalKey#352ea]], state:
+_MaterialState#1bbec),
+          ]>
+   Which: means one was found but none were expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/official_meeting_ui_test.dart:82:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/official_meeting_ui_test.dart line 82
+The test description was:
+  official replacement has full-body details, confirmed actions and return at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +15 -2: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official replacement has full-body details, confirmed actions and return at Size(390.0, 844.0) [E]
+  Test failed. See exception logs above.
+  The test description was: official replacement has full-body details, confirmed actions and return at Size(390.0, 844.0)
+  
+00:03 +15 -2: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official general has full-body details, confirmed actions and return at Size(320.0, 568.0)
+00:03 +16 -2: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official doctor has full-body details, confirmed actions and return at Size(320.0, 568.0)
+00:03 +17 -2: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official replacement has full-body details, confirmed actions and return at Size(320.0, 568.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: no matching candidates
+  Actual: _KeyWidgetFinder:<Found 1 widget with key [<'meeting-contributions'>]: [
+            Material-[<'meeting-contributions'>](type: canvas, color: Color(alpha: 0.0600, red:
+0.8824, green: 0.7647, blue: 0.5451, colorSpace: ColorSpace.sRGB), shape:
+RoundedRectangleBorder(BorderSide(color: Color(alpha: 0.3500, red: 0.8824, green: 0.7647, blue:
+0.5451, colorSpace: ColorSpace.sRGB)), BorderRadius.circular(10.0)), dependencies:
+[InheritedCupertinoTheme, _InheritedTheme, _LocalizationsScope-[GlobalKey#6d316]], state:
+_MaterialState#1363d),
+          ]>
+   Which: means one was found but none were expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/official_meeting_ui_test.dart:82:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/official_meeting_ui_test.dart line 82
+The test description was:
+  official replacement has full-body details, confirmed actions and return at Size(320.0, 568.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +17 -3: /Users/phongnguyen/king/test/official_meeting_ui_test.dart: official replacement has full-body details, confirmed actions and return at Size(320.0, 568.0) [E]
+  Test failed. See exception logs above.
+  The test description was: official replacement has full-body details, confirmed actions and return at Size(320.0, 568.0)
+  
+00:03 +17 -3: Some tests failed.

@@ -1,0 +1,577 @@
+import 'dart:math' as math;
+import 'package:flutter/material.dart';
+import '../../models/game_state.dart';
+import 'imperial_widgets.dart';
+import 'imperial_theme.dart';
+
+/// Immersive rooms keep artwork behind native, axis-aligned interactive panels.
+class RoomStage extends StatelessWidget {
+  const RoomStage({
+    super.key,
+    required this.scene,
+    required this.title,
+    required this.child,
+    this.scenery,
+    this.controller,
+  });
+  final String scene, title;
+  final Widget child;
+  final Widget? scenery;
+  final ScrollController? controller;
+
+  @override
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, bounds) {
+      final compact = bounds.maxWidth < 760;
+      final height = math.max(bounds.maxHeight, compact ? 720.0 : 590.0);
+      final picture = Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            'assets/images/$scene-room.webp',
+            fit: BoxFit.cover,
+            alignment: Alignment.topCenter,
+            excludeFromSemantics: true,
+          ),
+          const DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Color(0x080C221B), Color(0x4D1B1109)],
+                stops: [.1, 1],
+              ),
+            ),
+          ),
+        ],
+      );
+      final content =
+          compact
+              ? Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(
+                      key: ValueKey('scene-header-$scene'),
+                      height: scenery == null ? 110 : 180,
+                      child:
+                          scenery ??
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: RoomPlaque(label: title),
+                          ),
+                    ),
+                    child,
+                  ],
+                ),
+              )
+              : SizedBox(
+                height: height,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      key: ValueKey('scene-header-$scene'),
+                      height: height * (scenery == null ? .27 : .31),
+                      child:
+                          scenery ??
+                          Padding(
+                            padding: const EdgeInsets.all(22),
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: RoomPlaque(label: title),
+                            ),
+                          ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(18, 0, 18, 14),
+                        child: child,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+      return Stack(
+        fit: StackFit.expand,
+        children: [
+          picture,
+          if (compact || bounds.maxHeight < height)
+            SingleChildScrollView(controller: controller, child: content)
+          else
+            content,
+        ],
+      );
+    },
+  );
+}
+
+class ImperialWorkspace extends StatelessWidget {
+  const ImperialWorkspace({super.key, required this.child, this.padding = 16});
+  final Widget child;
+  final double padding;
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(9),
+    decoration: BoxDecoration(
+      gradient: const LinearGradient(
+        colors: [Color(0xFF86562D), Color(0xFF2D1B11), Color(0xFF70411F)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      border: Border.all(color: imperialGold, width: 2),
+      boxShadow: const [
+        BoxShadow(
+          color: Color(0x80000000),
+          blurRadius: 18,
+          offset: Offset(0, 5),
+        ),
+      ],
+    ),
+    child: CustomPaint(
+      foregroundPainter: const ImperialOrnamentPainter(),
+      child: Container(
+        padding: EdgeInsets.all(padding),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFFF2DDB1), Color(0xFFFFF4D8), Color(0xFFF0D7A8)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: child,
+      ),
+    ),
+  );
+}
+
+class ImperialOrnamentPainter extends CustomPainter {
+  const ImperialOrnamentPainter();
+  @override
+  void paint(Canvas canvas, Size size) {
+    final border =
+        Paint()
+          ..color = const Color(0xFFB48A43)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1;
+    canvas.drawRect(Offset.zero & size, border);
+    canvas.drawRect(
+      Rect.fromLTWH(
+        4,
+        4,
+        math.max(0, size.width - 8),
+        math.max(0, size.height - 8),
+      ),
+      border..color = const Color(0xFFCAA660),
+    );
+    for (final corner in [
+      (0.0, 0.0, 1.0, 1.0),
+      (size.width, 0.0, -1.0, 1.0),
+      (0.0, size.height, 1.0, -1.0),
+      (size.width, size.height, -1.0, -1.0),
+    ]) {
+      canvas.save();
+      canvas.translate(corner.$1, corner.$2);
+      canvas.scale(corner.$3, corner.$4);
+      final path =
+          Path()
+            ..moveTo(8, 33)
+            ..lineTo(8, 8)
+            ..lineTo(33, 8)
+            ..lineTo(33, 13)
+            ..lineTo(15, 13)
+            ..lineTo(15, 24)
+            ..cubicTo(15, 32, 27, 33, 27, 24)
+            ..cubicTo(27, 17, 19, 17, 19, 23)
+            ..lineTo(23, 23);
+      canvas.drawPath(
+        path,
+        border
+          ..color = const Color(0xFFAD7B32)
+          ..strokeWidth = 1.5,
+      );
+      canvas.drawCircle(const Offset(9, 9), 3, border);
+      canvas.restore();
+    }
+  }
+
+  @override
+  bool shouldRepaint(ImperialOrnamentPainter oldDelegate) => false;
+}
+
+/// Independent scroll panes keep the shared HUD and end-turn controls visible.
+class RoomPane extends StatelessWidget {
+  const RoomPane({
+    super.key,
+    required this.child,
+    this.controller,
+    this.padding = 14,
+  });
+  final Widget child;
+  final ScrollController? controller;
+  final double padding;
+  @override
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder:
+        (context, bounds) => SingleChildScrollView(
+          controller: controller,
+          padding: EdgeInsets.all(padding),
+          child: child,
+        ),
+  );
+}
+
+class RoomPlaque extends StatelessWidget {
+  const RoomPlaque({
+    super.key,
+    required this.label,
+    this.value,
+    this.warning = false,
+  });
+  final String label;
+  final String? value;
+  final bool warning;
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 9),
+    decoration: BoxDecoration(
+      color: imperialDeep,
+      border: Border.all(color: imperialGold, width: 1.5),
+      boxShadow: const [
+        BoxShadow(
+          color: Color(0x66000000),
+          blurRadius: 8,
+          offset: Offset(0, 3),
+        ),
+      ],
+    ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          label,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontFamily: 'Lora',
+            color: imperialIvory,
+            fontSize: value == null ? 17 : 13,
+            height: 1.2,
+          ),
+        ),
+        if (value != null)
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              value!,
+              maxLines: 1,
+              style: TextStyle(
+                fontFamily: 'Lora',
+                fontSize: 32,
+                height: 1.2,
+                color: warning ? const Color(0xFFFFA88D) : imperialIvory,
+              ),
+            ),
+          ),
+      ],
+    ),
+  );
+}
+
+class RoomRail extends StatelessWidget {
+  const RoomRail({
+    super.key,
+    required this.entries,
+    required this.active,
+    required this.onNavigate,
+  });
+  final List<(String, IconData, String)> entries;
+  final String active;
+  final ValueChanged<String> onNavigate;
+  @override
+  Widget build(BuildContext context) => Container(
+    width: 112,
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+        colors: [imperialDeep, Color(0xFF08251C), imperialDeep],
+      ),
+      border: Border(right: BorderSide(color: imperialGold)),
+    ),
+    child: LayoutBuilder(
+      builder: (context, bounds) {
+        final itemHeight = (bounds.maxHeight / entries.length).clamp(
+          64.0,
+          84.0,
+        );
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              for (final entry in entries)
+                SizedBox(
+                  height: itemHeight,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 5,
+                      vertical: 3,
+                    ),
+                    child: Material(
+                      color:
+                          active == entry.$1
+                              ? imperialJade
+                              : Colors.transparent,
+                      child: InkWell(
+                        key: ValueKey('nav-${entry.$1}'),
+                        onTap: () => onNavigate(entry.$1),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color:
+                                  active == entry.$1
+                                      ? imperialGold
+                                      : Colors.transparent,
+                              width: 1.5,
+                            ),
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(entry.$2, size: 23, color: imperialGold),
+                                const SizedBox(height: 4),
+                                Text(
+                                  entry.$3,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontFamily: 'Lora',
+                                    fontSize: 11,
+                                    height: 1.2,
+                                    color: imperialIvory,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        );
+      },
+    ),
+  );
+}
+
+class RoomHud extends StatelessWidget {
+  const RoomHud({
+    super.key,
+    required this.state,
+    required this.desktop,
+    required this.onMenu,
+    required this.onHome,
+    required this.onNavigate,
+  });
+  final GameState state;
+  final bool desktop;
+  final VoidCallback onMenu, onHome;
+  final ValueChanged<String> onNavigate;
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+        colors: [imperialDeep, imperialJade, imperialDeep],
+      ),
+      border: Border(bottom: BorderSide(color: imperialGold, width: 2)),
+    ),
+    child: LayoutBuilder(
+      builder: (context, bounds) {
+        final wide = bounds.maxWidth >= 760;
+        final brand = Row(
+          children: [
+            if (!desktop)
+              IconButton(
+                tooltip: 'Mở danh mục',
+                onPressed: onMenu,
+                icon: const Icon(Icons.menu, color: imperialGold),
+              ),
+            IconButton(
+              tooltip: 'Về Hoàng thành',
+              onPressed: onHome,
+              icon: const Icon(
+                Icons.castle_outlined,
+                size: 28,
+                color: imperialGold,
+              ),
+            ),
+            const Expanded(
+              child: Text(
+                'VẠN TUẾ',
+                style: TextStyle(
+                  fontFamily: 'Lora',
+                  fontSize: 18,
+                  color: imperialIvory,
+                  letterSpacing: 1.7,
+                ),
+              ),
+            ),
+          ],
+        );
+        final stats = <(String, int, IconData, String)>[
+          ('Ngân khố', state.treasury, Icons.toll_outlined, 'treasury'),
+          ('Lòng dân', state.people, Icons.groups_outlined, 'court'),
+          (
+            'Uy quyền',
+            state.authority,
+            Icons.workspace_premium_outlined,
+            'court',
+          ),
+          ('Quân lực', state.army, Icons.shield_outlined, 'kingdom'),
+          ('Sức khỏe', state.health, Icons.favorite_border, 'health'),
+          (
+            'Ổn định triều đình',
+            state.stability,
+            Icons.balance_outlined,
+            'court',
+          ),
+        ];
+        final counters = Row(
+          children: [
+            for (final stat in stats)
+              Expanded(
+                child: Tooltip(
+                  message: stat.$1,
+                  child: InkWell(
+                    onTap: () => onNavigate(stat.$4),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 3,
+                        vertical: 3,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(stat.$3, color: imperialGold, size: 17),
+                          Text(
+                            '${stat.$2}',
+                            style: TextStyle(
+                              fontFamily: 'Lora',
+                              fontSize: wide ? 19 : 16,
+                              color:
+                                  stat.$4 != 'treasury' && stat.$2 <= 20
+                                      ? const Color(0xFFFFA88D)
+                                      : imperialIvory,
+                            ),
+                          ),
+                          Text(
+                            stat.$1,
+                            maxLines: 2,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 9,
+                              color: imperialIvory,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        );
+        final date = Text(
+          '${state.seasonal ? 'Mùa ${state.season}' : 'Tuần ${state.week}'} · năm ${state.year} · ${state.age} tuổi',
+          key: const ValueKey('room-calendar'),
+          style: const TextStyle(fontSize: 11, color: imperialGold),
+        );
+        return wide
+            ? Row(
+              children: [
+                SizedBox(width: 180, child: brand),
+                Expanded(child: counters),
+                const SizedBox(width: 10),
+                SizedBox(width: 190, child: date),
+              ],
+            )
+            : Column(
+              children: [
+                Row(children: [Expanded(child: brand), Flexible(child: date)]),
+                counters,
+              ],
+            );
+      },
+    ),
+  );
+}
+
+class TreasuryObject extends StatelessWidget {
+  const TreasuryObject({
+    super.key,
+    required this.index,
+    this.width = 180,
+    this.height = 120,
+  });
+  final int index;
+  final double width, height;
+  @override
+  Widget build(BuildContext context) => SizedBox(
+    width: width,
+    height: height,
+    child: LayoutBuilder(
+      builder: (context, bounds) {
+        final side = math.min(bounds.maxWidth, bounds.maxHeight);
+        return Center(
+          child: SizedBox.square(
+            dimension: side,
+            child: ClipRect(
+              key: ValueKey('treasury-sprite-$index'),
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: -index * side,
+                    top: 0,
+                    width: side * 3,
+                    height: side,
+                    child: Image.asset(
+                      'assets/images/treasury-objects.webp',
+                      fit: BoxFit.fill,
+                      excludeFromSemantics: true,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    ),
+  );
+}
+
+ThemeData roomTheme(BuildContext context) => Theme.of(context).copyWith(
+  textTheme: Theme.of(
+    context,
+  ).textTheme.apply(bodyColor: ink, displayColor: ink),
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+      foregroundColor: ink,
+      backgroundColor: const Color(0xFFFFF0D0),
+      side: const BorderSide(color: gold, width: 1.2),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
+    ),
+  ),
+  filledButtonTheme: FilledButtonThemeData(
+    style: FilledButton.styleFrom(
+      backgroundColor: const Color(0xFF8D271E),
+      foregroundColor: imperialIvory,
+      side: const BorderSide(color: imperialGold, width: 1.5),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
+      minimumSize: const Size(0, 46),
+    ),
+  ),
+);

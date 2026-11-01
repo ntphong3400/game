@@ -1,0 +1,222 @@
+00:00 +0: loading /Users/phongnguyen/king/tools/all_meetings_visual_test.dart
+00:00 +0: render consort_mai meeting at Size(1440.0, 900.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The value of a painting debug variable was changed by the test.
+
+When the exception was thrown, this was the stack:
+#0      debugAssertAllPaintingVarsUnset.<anonymous closure> (package:flutter/src/painting/debug.dart:203:7)
+#1      debugAssertAllPaintingVarsUnset (package:flutter/src/painting/debug.dart:206:4)
+#2      TestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1116:7)
+#3      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1588:11)
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1083:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  render consort_mai meeting at Size(1440.0, 900.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -1: render consort_mai meeting at Size(1440.0, 900.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render consort_mai meeting at Size(1440.0, 900.0)
+  
+00:01 +0 -1: render consort_mai meeting at Size(390.0, 844.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The value of a painting debug variable was changed by the test.
+
+When the exception was thrown, this was the stack:
+#0      debugAssertAllPaintingVarsUnset.<anonymous closure> (package:flutter/src/painting/debug.dart:203:7)
+#1      debugAssertAllPaintingVarsUnset (package:flutter/src/painting/debug.dart:206:4)
+#2      TestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1116:7)
+#3      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1588:11)
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1083:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  render consort_mai meeting at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -2: render consort_mai meeting at Size(390.0, 844.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render consort_mai meeting at Size(390.0, 844.0)
+  
+00:01 +0 -2: render consort_yen meeting at Size(1440.0, 900.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The value of a painting debug variable was changed by the test.
+
+When the exception was thrown, this was the stack:
+#0      debugAssertAllPaintingVarsUnset.<anonymous closure> (package:flutter/src/painting/debug.dart:203:7)
+#1      debugAssertAllPaintingVarsUnset (package:flutter/src/painting/debug.dart:206:4)
+#2      TestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1116:7)
+#3      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1588:11)
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1083:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  render consort_yen meeting at Size(1440.0, 900.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -3: render consort_yen meeting at Size(1440.0, 900.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render consort_yen meeting at Size(1440.0, 900.0)
+  
+00:01 +0 -3: render consort_yen meeting at Size(390.0, 844.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The value of a painting debug variable was changed by the test.
+
+When the exception was thrown, this was the stack:
+#0      debugAssertAllPaintingVarsUnset.<anonymous closure> (package:flutter/src/painting/debug.dart:203:7)
+#1      debugAssertAllPaintingVarsUnset (package:flutter/src/painting/debug.dart:206:4)
+#2      TestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1116:7)
+#3      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1588:11)
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1083:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  render consort_yen meeting at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -4: render consort_yen meeting at Size(390.0, 844.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render consort_yen meeting at Size(390.0, 844.0)
+  
+00:01 +0 -4: render general meeting at Size(1440.0, 900.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The value of a painting debug variable was changed by the test.
+
+When the exception was thrown, this was the stack:
+#0      debugAssertAllPaintingVarsUnset.<anonymous closure> (package:flutter/src/painting/debug.dart:203:7)
+#1      debugAssertAllPaintingVarsUnset (package:flutter/src/painting/debug.dart:206:4)
+#2      TestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1116:7)
+#3      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1588:11)
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1083:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  render general meeting at Size(1440.0, 900.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +0 -5: render general meeting at Size(1440.0, 900.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render general meeting at Size(1440.0, 900.0)
+  
+00:02 +0 -5: render general meeting at Size(390.0, 844.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The value of a painting debug variable was changed by the test.
+
+When the exception was thrown, this was the stack:
+#0      debugAssertAllPaintingVarsUnset.<anonymous closure> (package:flutter/src/painting/debug.dart:203:7)
+#1      debugAssertAllPaintingVarsUnset (package:flutter/src/painting/debug.dart:206:4)
+#2      TestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1116:7)
+#3      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1588:11)
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1083:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  render general meeting at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +0 -6: render general meeting at Size(390.0, 844.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render general meeting at Size(390.0, 844.0)
+  
+00:02 +0 -6: render doctor meeting at Size(1440.0, 900.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The value of a painting debug variable was changed by the test.
+
+When the exception was thrown, this was the stack:
+#0      debugAssertAllPaintingVarsUnset.<anonymous closure> (package:flutter/src/painting/debug.dart:203:7)
+#1      debugAssertAllPaintingVarsUnset (package:flutter/src/painting/debug.dart:206:4)
+#2      TestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1116:7)
+#3      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1588:11)
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1083:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  render doctor meeting at Size(1440.0, 900.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +0 -7: render doctor meeting at Size(1440.0, 900.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render doctor meeting at Size(1440.0, 900.0)
+  
+00:03 +0 -7: render doctor meeting at Size(390.0, 844.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The value of a painting debug variable was changed by the test.
+
+When the exception was thrown, this was the stack:
+#0      debugAssertAllPaintingVarsUnset.<anonymous closure> (package:flutter/src/painting/debug.dart:203:7)
+#1      debugAssertAllPaintingVarsUnset (package:flutter/src/painting/debug.dart:206:4)
+#2      TestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1116:7)
+#3      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1588:11)
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1083:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  render doctor meeting at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +0 -8: render doctor meeting at Size(390.0, 844.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render doctor meeting at Size(390.0, 844.0)
+  
+00:03 +0 -8: render prince meeting at Size(1440.0, 900.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The value of a painting debug variable was changed by the test.
+
+When the exception was thrown, this was the stack:
+#0      debugAssertAllPaintingVarsUnset.<anonymous closure> (package:flutter/src/painting/debug.dart:203:7)
+#1      debugAssertAllPaintingVarsUnset (package:flutter/src/painting/debug.dart:206:4)
+#2      TestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1116:7)
+#3      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1588:11)
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1083:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  render prince meeting at Size(1440.0, 900.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +0 -9: render prince meeting at Size(1440.0, 900.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render prince meeting at Size(1440.0, 900.0)
+  
+00:03 +0 -9: render prince meeting at Size(390.0, 844.0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The value of a painting debug variable was changed by the test.
+
+When the exception was thrown, this was the stack:
+#0      debugAssertAllPaintingVarsUnset.<anonymous closure> (package:flutter/src/painting/debug.dart:203:7)
+#1      debugAssertAllPaintingVarsUnset (package:flutter/src/painting/debug.dart:206:4)
+#2      TestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1116:7)
+#3      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:1588:11)
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1083:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  render prince meeting at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +0 -10: render prince meeting at Size(390.0, 844.0) [E]
+  Test failed. See exception logs above.
+  The test description was: render prince meeting at Size(390.0, 844.0)
+  
+00:03 +0 -10: Some tests failed.

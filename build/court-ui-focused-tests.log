@@ -1,0 +1,1458 @@
+00:00 +0: loading /Users/phongnguyen/king/test/petition_confirmation_test.dart                                                                                                                         00:01 +0: loading /Users/phongnguyen/king/test/petition_confirmation_test.dart                                                                                                                         00:01 +0: loading /Users/phongnguyen/king/test/game_ui_test.dart                                                                                                                                       00:01 +0: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)                                                                00:02 +0: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)                                                                00:02 +0: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: court interior renders without overflow or game mutation at Size(1440.0, 900.0)                                                
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 6.9 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/imperial_interiors_ui_test.dart:66:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/imperial_interiors_ui_test.dart line 66
+The test description was:
+  court interior renders without overflow or game mutation at Size(1440.0, 900.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +0 -1: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: court interior renders without overflow or game mutation at Size(1440.0, 900.0) [E]                                         
+  Test failed. See exception logs above.
+  The test description was: court interior renders without overflow or game mutation at Size(1440.0, 900.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart -p vm --plain-name 'court interior renders without overflow or game mutation at Size(1440.0, 900.0)'
+00:03 +0 -1: /Users/phongnguyen/king/test/petition_economy_ui_test.dart: economic choices preview net profit, failure and settlement at Size(1440.0, 1000.0)                                           
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 2.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.tap (file:///Users/phongnguyen/king/test/petition_economy_ui_test.dart:64:13)
+<asynchronous suspension>
+#5      main.<anonymous closure> (file:///Users/phongnguyen/king/test/petition_economy_ui_test.dart:67:11)
+<asynchronous suspension>
+#6      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#7      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/petition_economy_ui_test.dart line 64
+The test description was:
+  economic choices preview net profit, failure and settlement at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +0 -2: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)                                                          
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 2.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.tap (file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart:62:13)
+<asynchronous suspension>
+#5      main.<anonymous closure> (file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart:65:11)
+<asynchronous suspension>
+#6      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#7      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart line 62
+The test description was:
+  petition delegation previews and commits  at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +0 -3: /Users/phongnguyen/king/test/petition_economy_ui_test.dart: economic choices preview net profit, failure and settlement at Size(1440.0, 1000.0) [E]                                       
+  Test failed. See exception logs above.
+  The test description was: economic choices preview net profit, failure and settlement at Size(1440.0, 1000.0)
+  
+00:03 +0 -3: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0) [E]                                                      
+  Test failed. See exception logs above.
+  The test description was: petition delegation previews and commits  at Size(1440.0, 1000.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/petition_assignment_ui_test.dart -p vm --plain-name 'petition delegation previews and commits  at Size(1440.0, 1000.0)'
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/petition_economy_ui_test.dart -p vm --plain-name 'economic choices preview net profit, failure and settlement at Size(1440.0, 1000.0)'
+00:03 +0 -3: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain fund previews and commits once at Size(1440.0, 1000.0)                                                                  
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 2.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column Column:file:///Users/phongnguyen/king/lib/game/presentation/widgets/imperial_room.dart:175:14
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#805f6 relayoutBoundary=up6 OVERFLOWING:
+  creator: Column ← Padding ← CustomPaint ← ImperialSkin ← RoomPlaque ← Align ← Padding ←
+    SizedBox-[<'scene-header-court'>] ← Column ← SizedBox ← Stack ← LayoutBuilder ← ⋯
+  parentData: offset=Offset(24.0, 14.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=1220.0, 0.0<=h<=18.0)
+  size: Size(431.3, 18.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: min
+  crossAxisAlignment: center
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _DescendantWidgetFinder:<Found 0 widgets with text containing Đã hoàn thành descending
+from widgets with type "AlertDialog": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart:67:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart line 67
+The test description was:
+  chain fund previews and commits once at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +0 -4: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain fund previews and commits once at Size(1440.0, 1000.0) [E]                                                              
+  Test failed. See exception logs above.
+  The test description was: chain fund previews and commits once at Size(1440.0, 1000.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/chain_settlement_ui_test.dart -p vm --plain-name 'chain fund previews and commits once at Size(1440.0, 1000.0)'
+00:03 +0 -4: /Users/phongnguyen/king/test/petition_confirmation_test.dart: petition selection can change or cancel and only explicit confirmation commits at Size(1440.0, 1000.0)                      
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 2.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column Column:file:///Users/phongnguyen/king/lib/game/presentation/widgets/imperial_room.dart:175:14
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#e1cf2 relayoutBoundary=up6 OVERFLOWING:
+  creator: Column ← Padding ← CustomPaint ← ImperialSkin ← RoomPlaque ← Align ← Padding ←
+    SizedBox-[<'scene-header-court'>] ← Column ← SizedBox ← Stack ← LayoutBuilder ← ⋯
+  parentData: offset=Offset(24.0, 14.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=1220.0, 0.0<=h<=18.0)
+  size: Size(431.3, 18.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: min
+  crossAxisAlignment: center
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TypeWidgetFinder:<Found 0 widgets with type "AlertDialog": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/petition_confirmation_test.dart:59:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/petition_confirmation_test.dart line 59
+The test description was:
+  petition selection can change or cancel and only explicit confirmation commits at Size(1440.0,
+  1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +0 -5: /Users/phongnguyen/king/test/petition_confirmation_test.dart: petition selection can change or cancel and only explicit confirmation commits at Size(1440.0, 1000.0) [E]                  
+  Test failed. See exception logs above.
+  The test description was: petition selection can change or cancel and only explicit confirmation commits at Size(1440.0, 1000.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/petition_confirmation_test.dart -p vm --plain-name 'petition selection can change or cancel and only explicit confirmation commits at Size(1440.0, 1000.0)'
+00:03 +1 -5: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)                                                             00:03 +1 -5: /Users/phongnguyen/king/test/petition_economy_ui_test.dart: economic choices preview net profit, failure and settlement at Size(390.0, 844.0)                                             
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.tap (file:///Users/phongnguyen/king/test/petition_economy_ui_test.dart:64:13)
+<asynchronous suspension>
+#5      main.<anonymous closure> (file:///Users/phongnguyen/king/test/petition_economy_ui_test.dart:67:11)
+<asynchronous suspension>
+#6      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#7      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/petition_economy_ui_test.dart line 64
+The test description was:
+  economic choices preview net profit, failure and settlement at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +1 -6: /Users/phongnguyen/king/test/petition_economy_ui_test.dart: economic choices preview net profit, failure and settlement at Size(390.0, 844.0) [E]                                         
+  Test failed. See exception logs above.
+  The test description was: economic choices preview net profit, failure and settlement at Size(390.0, 844.0)
+  
+00:03 +1 -6: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits chancellor at Size(1440.0, 1000.0)                                                
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 2.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.tap (file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart:62:13)
+<asynchronous suspension>
+#5      main.<anonymous closure> (file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart:65:11)
+<asynchronous suspension>
+#6      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#7      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart line 62
+The test description was:
+  petition delegation previews and commits chancellor at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +1 -7: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits chancellor at Size(1440.0, 1000.0) [E]                                            
+  Test failed. See exception logs above.
+  The test description was: petition delegation previews and commits chancellor at Size(1440.0, 1000.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/petition_assignment_ui_test.dart -p vm --plain-name 'petition delegation previews and commits chancellor at Size(1440.0, 1000.0)'
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/petition_economy_ui_test.dart -p vm --plain-name 'economic choices preview net profit, failure and settlement at Size(390.0, 844.0)'
+00:03 +1 -7: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain settle previews and commits once at Size(1440.0, 1000.0)                                                                
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 2.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column Column:file:///Users/phongnguyen/king/lib/game/presentation/widgets/imperial_room.dart:175:14
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#c00b3 relayoutBoundary=up6 OVERFLOWING:
+  creator: Column ← Padding ← CustomPaint ← ImperialSkin ← RoomPlaque ← Align ← Padding ←
+    SizedBox-[<'scene-header-court'>] ← Column ← SizedBox ← Stack ← LayoutBuilder ← ⋯
+  parentData: offset=Offset(24.0, 14.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=1220.0, 0.0<=h<=18.0)
+  size: Size(431.3, 18.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: min
+  crossAxisAlignment: center
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _DescendantWidgetFinder:<Found 0 widgets with text containing Đã hoàn thành descending
+from widgets with type "AlertDialog": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart:67:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart line 67
+The test description was:
+  chain settle previews and commits once at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +1 -8: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain settle previews and commits once at Size(1440.0, 1000.0) [E]                                                            
+  Test failed. See exception logs above.
+  The test description was: chain settle previews and commits once at Size(1440.0, 1000.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/chain_settlement_ui_test.dart -p vm --plain-name 'chain settle previews and commits once at Size(1440.0, 1000.0)'
+00:03 +2 -8: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)                                                             00:03 +2 -8: /Users/phongnguyen/king/test/petition_confirmation_test.dart: petition selection can change or cancel and only explicit confirmation commits at Size(390.0, 844.0)                        
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/petition_confirmation_test.dart:90:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/petition_confirmation_test.dart line 90
+The test description was:
+  petition selection can change or cancel and only explicit confirmation commits at Size(390.0,
+  844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +2 -9: /Users/phongnguyen/king/test/petition_confirmation_test.dart: petition selection can change or cancel and only explicit confirmation commits at Size(390.0, 844.0) [E]                    
+  Test failed. See exception logs above.
+  The test description was: petition selection can change or cancel and only explicit confirmation commits at Size(390.0, 844.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/petition_confirmation_test.dart -p vm --plain-name 'petition selection can change or cancel and only explicit confirmation commits at Size(390.0, 844.0)'
+00:03 +2 -9: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)                                                             
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 2.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:89:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 89
+The test description was:
+  revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +2 -10: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0) [E]                                                        
+  Test failed. See exception logs above.
+  The test description was: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/game_ui_test.dart -p vm --plain-name 'revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)'
+00:04 +3 -10: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(1440.0, 1000.0)                                              00:04 +3 -10: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(1440.0, 1000.0)                                              
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 2.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.tap (file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart:62:13)
+<asynchronous suspension>
+#5      main.<anonymous closure> (file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart:65:11)
+<asynchronous suspension>
+#6      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#7      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart line 62
+The test description was:
+  petition delegation previews and commits consort_lan at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:04 +3 -11: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(1440.0, 1000.0) [E]                                          
+  Test failed. See exception logs above.
+  The test description was: petition delegation previews and commits consort_lan at Size(1440.0, 1000.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/petition_assignment_ui_test.dart -p vm --plain-name 'petition delegation previews and commits consort_lan at Size(1440.0, 1000.0)'
+00:04 +3 -11: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain political previews and commits once at Size(1440.0, 1000.0)                                                            
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 2.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column Column:file:///Users/phongnguyen/king/lib/game/presentation/widgets/imperial_room.dart:175:14
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#55d79 relayoutBoundary=up6 OVERFLOWING:
+  creator: Column ← Padding ← CustomPaint ← ImperialSkin ← RoomPlaque ← Align ← Padding ←
+    SizedBox-[<'scene-header-court'>] ← Column ← SizedBox ← Stack ← LayoutBuilder ← ⋯
+  parentData: offset=Offset(24.0, 14.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=1220.0, 0.0<=h<=18.0)
+  size: Size(431.3, 18.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: min
+  crossAxisAlignment: center
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _DescendantWidgetFinder:<Found 0 widgets with text containing Đã hoàn thành descending
+from widgets with type "AlertDialog": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart:67:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart line 67
+The test description was:
+  chain political previews and commits once at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:04 +3 -12: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain political previews and commits once at Size(1440.0, 1000.0) [E]                                                        
+  Test failed. See exception logs above.
+  The test description was: chain political previews and commits once at Size(1440.0, 1000.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/chain_settlement_ui_test.dart -p vm --plain-name 'chain political previews and commits once at Size(1440.0, 1000.0)'
+00:04 +4 -12: /Users/phongnguyen/king/test/petition_confirmation_test.dart: unaffordable petition choices cannot enable confirmation                                                                   00:04 +4 -12: /Users/phongnguyen/king/test/petition_confirmation_test.dart: unaffordable petition choices cannot enable confirmation                                                                   
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/petition_confirmation_test.dart:153:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/petition_confirmation_test.dart line 153
+The test description was:
+  unaffordable petition choices cannot enable confirmation
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:04 +4 -13: /Users/phongnguyen/king/test/petition_confirmation_test.dart: unaffordable petition choices cannot enable confirmation [E]                                                               
+  Test failed. See exception logs above.
+  The test description was: unaffordable petition choices cannot enable confirmation
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/petition_confirmation_test.dart -p vm --plain-name 'unaffordable petition choices cannot enable confirmation'
+00:04 +4 -13: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(1440.0, 1000.0)                                                          
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 2.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column Column:file:///Users/phongnguyen/king/lib/game/presentation/widgets/imperial_room.dart:175:14
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#d0018 relayoutBoundary=up6 OVERFLOWING:
+  creator: Column ← Padding ← CustomPaint ← ImperialSkin ← RoomPlaque ← Align ← Padding ←
+    SizedBox-[<'scene-header-court'>] ← Column ← SizedBox ← Stack ← LayoutBuilder ← ⋯
+  parentData: offset=Offset(24.0, 14.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=1220.0, 0.0<=h<=18.0)
+  size: Size(431.3, 18.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: min
+  crossAxisAlignment: center
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _DescendantWidgetFinder:<Found 0 widgets with text "Ngự sử tìm thấy hai bản sổ chi khác
+nhau trong cùng một kho." descending from widgets with type "AlertDialog": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:132:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 132
+The test description was:
+  expanded event previews risks and saves deferred result at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:04 +4 -14: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(1440.0, 1000.0) [E]                                                      
+  Test failed. See exception logs above.
+  The test description was: expanded event previews risks and saves deferred result at Size(1440.0, 1000.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/game_ui_test.dart -p vm --plain-name 'expanded event previews risks and saves deferred result at Size(1440.0, 1000.0)'
+00:04 +5 -14: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(390.0, 844.0)                                                           00:04 +6 -14: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(390.0, 844.0)                                                           00:04 +7 -14: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(390.0, 844.0)                                                           00:04 +7 -14: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(390.0, 844.0)                                                           
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.tap (file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart:62:13)
+<asynchronous suspension>
+#5      main.<anonymous closure> (file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart:65:11)
+<asynchronous suspension>
+#6      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#7      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart line 62
+The test description was:
+  petition delegation previews and commits  at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:04 +7 -15: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(390.0, 844.0) [E]                                                       
+  Test failed. See exception logs above.
+  The test description was: petition delegation previews and commits  at Size(390.0, 844.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/petition_assignment_ui_test.dart -p vm --plain-name 'petition delegation previews and commits  at Size(390.0, 844.0)'
+00:04 +7 -15: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain stop previews and commits once at Size(1440.0, 1000.0)                                                                 
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 2.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column Column:file:///Users/phongnguyen/king/lib/game/presentation/widgets/imperial_room.dart:175:14
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#18aa5 relayoutBoundary=up6 OVERFLOWING:
+  creator: Column ← Padding ← CustomPaint ← ImperialSkin ← RoomPlaque ← Align ← Padding ←
+    SizedBox-[<'scene-header-court'>] ← Column ← SizedBox ← Stack ← LayoutBuilder ← ⋯
+  parentData: offset=Offset(24.0, 14.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=1220.0, 0.0<=h<=18.0)
+  size: Size(431.3, 18.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: min
+  crossAxisAlignment: center
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _DescendantWidgetFinder:<Found 0 widgets with text containing Đã hoàn thành descending
+from widgets with type "AlertDialog": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart:67:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart line 67
+The test description was:
+  chain stop previews and commits once at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:04 +7 -16: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain stop previews and commits once at Size(1440.0, 1000.0) [E]                                                             
+  Test failed. See exception logs above.
+  The test description was: chain stop previews and commits once at Size(1440.0, 1000.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/chain_settlement_ui_test.dart -p vm --plain-name 'chain stop previews and commits once at Size(1440.0, 1000.0)'
+00:04 +8 -16: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)                                                                   00:04 +9 -16: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)                                                                   00:04 +9 -16: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits chancellor at Size(390.0, 844.0)                                                 
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.tap (file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart:62:13)
+<asynchronous suspension>
+#5      main.<anonymous closure> (file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart:65:11)
+<asynchronous suspension>
+#6      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#7      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart line 62
+The test description was:
+  petition delegation previews and commits chancellor at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:04 +9 -17: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits chancellor at Size(390.0, 844.0) [E]                                             
+  Test failed. See exception logs above.
+  The test description was: petition delegation previews and commits chancellor at Size(390.0, 844.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/petition_assignment_ui_test.dart -p vm --plain-name 'petition delegation previews and commits chancellor at Size(390.0, 844.0)'
+00:05 +9 -17: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain blocked previews and commits once at Size(1440.0, 1000.0)                                                              
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 2.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column Column:file:///Users/phongnguyen/king/lib/game/presentation/widgets/imperial_room.dart:175:14
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#e0412 relayoutBoundary=up6 OVERFLOWING:
+  creator: Column ← Padding ← CustomPaint ← ImperialSkin ← RoomPlaque ← Align ← Padding ←
+    SizedBox-[<'scene-header-court'>] ← Column ← SizedBox ← Stack ← LayoutBuilder ← ⋯
+  parentData: offset=Offset(24.0, 14.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=1220.0, 0.0<=h<=18.0)
+  size: Size(431.3, 18.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: min
+  crossAxisAlignment: center
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _DescendantWidgetFinder:<Found 0 widgets with text containing Đã hoàn thành descending
+from widgets with type "AlertDialog": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart:67:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart line 67
+The test description was:
+  chain blocked previews and commits once at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:05 +9 -18: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain blocked previews and commits once at Size(1440.0, 1000.0) [E]                                                          
+  Test failed. See exception logs above.
+  The test description was: chain blocked previews and commits once at Size(1440.0, 1000.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/chain_settlement_ui_test.dart -p vm --plain-name 'chain blocked previews and commits once at Size(1440.0, 1000.0)'
+00:05 +10 -18: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)                                                                  00:05 +10 -18: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(390.0, 844.0)                                               
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.tap (file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart:62:13)
+<asynchronous suspension>
+#5      main.<anonymous closure> (file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart:65:11)
+<asynchronous suspension>
+#6      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#7      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/petition_assignment_ui_test.dart line 62
+The test description was:
+  petition delegation previews and commits consort_lan at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:05 +10 -19: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits consort_lan at Size(390.0, 844.0) [E]                                           
+  Test failed. See exception logs above.
+  The test description was: petition delegation previews and commits consort_lan at Size(390.0, 844.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/petition_assignment_ui_test.dart -p vm --plain-name 'petition delegation previews and commits consort_lan at Size(390.0, 844.0)'
+00:05 +11 -19: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)                                                                  00:05 +12 -19: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)                                                                  00:05 +13 -19: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)                                                                  00:05 +14 -19: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)                                                                  00:05 +15 -19: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)                                                                  00:05 +16 -19: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)                                                                  00:05 +17 -19: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)                                                                  00:05 +17 -19: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain fund previews and commits once at Size(390.0, 844.0)                                                                  
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart:136:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart line 136
+The test description was:
+  chain fund previews and commits once at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:05 +17 -20: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain fund previews and commits once at Size(390.0, 844.0) [E]                                                              
+  Test failed. See exception logs above.
+  The test description was: chain fund previews and commits once at Size(390.0, 844.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/chain_settlement_ui_test.dart -p vm --plain-name 'chain fund previews and commits once at Size(390.0, 844.0)'
+00:05 +18 -20: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)                                                                  00:05 +19 -20: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)                                                                  00:05 +20 -20: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)                                                                  00:05 +20 -20: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)                                                                  
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 2.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:272:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 272
+The test description was:
+  ability help and paid choice of successor work at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:05 +20 -21: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0) [E]                                                              
+  Test failed. See exception logs above.
+  The test description was: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/game_ui_test.dart -p vm --plain-name 'ability help and paid choice of successor work at Size(1440.0, 1000.0)'
+00:05 +21 -21: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain settle previews and commits once at Size(390.0, 844.0)                                                                00:05 +22 -21: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain settle previews and commits once at Size(390.0, 844.0)                                                                00:06 +22 -21: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain settle previews and commits once at Size(390.0, 844.0)                                                                00:06 +23 -21: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain settle previews and commits once at Size(390.0, 844.0)                                                                00:06 +23 -21: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain settle previews and commits once at Size(390.0, 844.0)                                                                
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart:136:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart line 136
+The test description was:
+  chain settle previews and commits once at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:06 +23 -22: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain settle previews and commits once at Size(390.0, 844.0) [E]                                                            
+  Test failed. See exception logs above.
+  The test description was: chain settle previews and commits once at Size(390.0, 844.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/chain_settlement_ui_test.dart -p vm --plain-name 'chain settle previews and commits once at Size(390.0, 844.0)'
+00:06 +23 -22: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: court interior renders without overflow or game mutation at Size(390.0, 844.0)                                            
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/imperial_interiors_ui_test.dart:66:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/imperial_interiors_ui_test.dart line 66
+The test description was:
+  court interior renders without overflow or game mutation at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:06 +23 -23: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: court interior renders without overflow or game mutation at Size(390.0, 844.0) [E]                                        
+  Test failed. See exception logs above.
+  The test description was: court interior renders without overflow or game mutation at Size(390.0, 844.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart -p vm --plain-name 'court interior renders without overflow or game mutation at Size(390.0, 844.0)'
+00:06 +24 -23: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)                                                             00:06 +24 -23: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain political previews and commits once at Size(390.0, 844.0)                                                             
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart:136:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart line 136
+The test description was:
+  chain political previews and commits once at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:06 +24 -24: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain political previews and commits once at Size(390.0, 844.0) [E]                                                         
+  Test failed. See exception logs above.
+  The test description was: chain political previews and commits once at Size(390.0, 844.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/chain_settlement_ui_test.dart -p vm --plain-name 'chain political previews and commits once at Size(390.0, 844.0)'
+00:06 +25 -24: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)                                                             00:06 +25 -24: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)                                                             
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:89:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 89
+The test description was:
+  revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:06 +25 -25: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0) [E]                                                         
+  Test failed. See exception logs above.
+  The test description was: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/game_ui_test.dart -p vm --plain-name 'revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)'
+00:06 +26 -25: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain stop previews and commits once at Size(390.0, 844.0)                                                                  00:06 +27 -25: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain stop previews and commits once at Size(390.0, 844.0)                                                                  00:06 +28 -25: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain stop previews and commits once at Size(390.0, 844.0)                                                                  00:06 +29 -25: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain stop previews and commits once at Size(390.0, 844.0)                                                                  00:06 +29 -25: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(390.0, 844.0)                                                           
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 4.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column Column:file:///Users/phongnguyen/king/lib/game/presentation/widgets/imperial_room.dart:175:14
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#996c5 relayoutBoundary=up3 OVERFLOWING:
+  creator: Column ← Padding ← CustomPaint ← ImperialSkin ← RoomPlaque ← Align ←
+    SizedBox-[<'scene-header-court'>] ← Column ← Padding ← _SingleChildViewport ←
+    IgnorePointer-[GlobalKey#b8141] ← Semantics ← ⋯
+  parentData: offset=Offset(24.0, 14.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=318.0, 0.0<=h<=36.0)
+  size: Size(318.0, 36.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: min
+  crossAxisAlignment: center
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing Nếu thất bại: []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:140:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 140
+The test description was:
+  expanded event previews risks and saves deferred result at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:06 +29 -26: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(390.0, 844.0) [E]                                                       
+  Test failed. See exception logs above.
+  The test description was: expanded event previews risks and saves deferred result at Size(390.0, 844.0)
+  
+00:06 +30 -26: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain stop previews and commits once at Size(390.0, 844.0)                                                                  
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/game_ui_test.dart -p vm --plain-name 'expanded event previews risks and saves deferred result at Size(390.0, 844.0)'
+00:06 +30 -26: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain stop previews and commits once at Size(390.0, 844.0)                                                                  
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart:136:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart line 136
+The test description was:
+  chain stop previews and commits once at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:06 +30 -27: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain stop previews and commits once at Size(390.0, 844.0) [E]                                                              
+  Test failed. See exception logs above.
+  The test description was: chain stop previews and commits once at Size(390.0, 844.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/chain_settlement_ui_test.dart -p vm --plain-name 'chain stop previews and commits once at Size(390.0, 844.0)'
+00:06 +30 -27: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: court interior renders without overflow or game mutation at Size(320.0, 568.0)                                            
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/imperial_interiors_ui_test.dart:66:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/imperial_interiors_ui_test.dart line 66
+The test description was:
+  court interior renders without overflow or game mutation at Size(320.0, 568.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:06 +30 -28: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: court interior renders without overflow or game mutation at Size(320.0, 568.0) [E]                                        
+  Test failed. See exception logs above.
+  The test description was: court interior renders without overflow or game mutation at Size(320.0, 568.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart -p vm --plain-name 'court interior renders without overflow or game mutation at Size(320.0, 568.0)'
+00:06 +31 -28: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0)                                                                    00:07 +31 -28: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0)                                                                    00:07 +32 -28: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0)                                                                    00:07 +32 -28: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain blocked previews and commits once at Size(390.0, 844.0)                                                               
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart:136:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/chain_settlement_ui_test.dart line 136
+The test description was:
+  chain blocked previews and commits once at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:07 +32 -29: /Users/phongnguyen/king/test/chain_settlement_ui_test.dart: chain blocked previews and commits once at Size(390.0, 844.0) [E]                                                           
+  Test failed. See exception logs above.
+  The test description was: chain blocked previews and commits once at Size(390.0, 844.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/chain_settlement_ui_test.dart -p vm --plain-name 'chain blocked previews and commits once at Size(390.0, 844.0)'
+00:07 +33 -29: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0)                                                                    00:07 +34 -29: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0)                                                                    00:07 +35 -29: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0)                                                                    00:07 +36 -29: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0)                                                                    00:07 +37 -29: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0)                                                                    00:07 +37 -29: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0)                                                                    
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:272:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 272
+The test description was:
+  ability help and paid choice of successor work at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:07 +37 -30: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0) [E]                                                                
+  Test failed. See exception logs above.
+  The test description was: ability help and paid choice of successor work at Size(390.0, 844.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/game_ui_test.dart -p vm --plain-name 'ability help and paid choice of successor work at Size(390.0, 844.0)'
+00:07 +37 -30: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: inline desk selection and assignee preview are local until explicit confirmation                                          
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 2.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/imperial_interiors_ui_test.dart:126:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/imperial_interiors_ui_test.dart line 126
+The test description was:
+  inline desk selection and assignee preview are local until explicit confirmation
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:07 +37 -31: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: inline desk selection and assignee preview are local until explicit confirmation [E]                                      
+  Test failed. See exception logs above.
+  The test description was: inline desk selection and assignee preview are local until explicit confirmation
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart -p vm --plain-name 'inline desk selection and assignee preview are local until explicit confirmation'
+00:08 +37 -31: /Users/phongnguyen/king/test/game_ui_test.dart: national work shows fit, chance, reward and risk before committing                                                                      
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:334:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 334
+The test description was:
+  national work shows fit, chance, reward and risk before committing
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:08 +37 -32: /Users/phongnguyen/king/test/game_ui_test.dart: national work shows fit, chance, reward and risk before committing [E]                                                                  
+  Test failed. See exception logs above.
+  The test description was: national work shows fit, chance, reward and risk before committing
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/game_ui_test.dart -p vm --plain-name 'national work shows fit, chance, reward and risk before committing'
+00:08 +38 -32: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(1440.0, 1000.0)                                                                             00:08 +38 -32: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(1440.0, 1000.0)                                                                             
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 2.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:367:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 367
+The test description was:
+  all screens render without overflow at Size(1440.0, 1000.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:08 +38 -33: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(1440.0, 1000.0) [E]                                                                         
+  Test failed. See exception logs above.
+  The test description was: all screens render without overflow at Size(1440.0, 1000.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/game_ui_test.dart -p vm --plain-name 'all screens render without overflow at Size(1440.0, 1000.0)'
+00:08 +39 -33: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)                                                                               00:08 +40 -33: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)                                                                               00:08 +40 -33: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)                                                                               
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:367:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 367
+The test description was:
+  all screens render without overflow at Size(390.0, 844.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:08 +40 -34: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0) [E]                                                                           
+  Test failed. See exception logs above.
+  The test description was: all screens render without overflow at Size(390.0, 844.0)
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/game_ui_test.dart -p vm --plain-name 'all screens render without overflow at Size(390.0, 844.0)'
+00:08 +41 -34: /Users/phongnguyen/king/test/game_ui_test.dart: complete a run, show score and recover ending from storage                                                                              00:08 +41 -34: /Users/phongnguyen/king/test/game_ui_test.dart: complete a run, show score and recover ending from storage                                                                              
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 2.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:501:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 501
+The test description was:
+  complete a run, show score and recover ending from storage
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:08 +41 -35: /Users/phongnguyen/king/test/game_ui_test.dart: complete a run, show score and recover ending from storage [E]                                                                          
+  Test failed. See exception logs above.
+  The test description was: complete a run, show score and recover ending from storage
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/game_ui_test.dart -p vm --plain-name 'complete a run, show score and recover ending from storage'
+00:08 +41 -35: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: all five workspaces have upright rectangular reading surfaces                                                             
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 6.9 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/imperial_interiors_ui_test.dart:271:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/imperial_interiors_ui_test.dart line 271
+The test description was:
+  all five workspaces have upright rectangular reading surfaces
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:08 +41 -36: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: all five workspaces have upright rectangular reading surfaces [E]                                                         
+  Test failed. See exception logs above.
+  The test description was: all five workspaces have upright rectangular reading surfaces
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart -p vm --plain-name 'all five workspaces have upright rectangular reading surfaces'
+00:08 +41 -36: /Users/phongnguyen/king/test/game_ui_test.dart: old rules scores remain viewable separately from current scores                                                                         
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:551:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 551
+The test description was:
+  old rules scores remain viewable separately from current scores
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:08 +41 -37: /Users/phongnguyen/king/test/game_ui_test.dart: old rules scores remain viewable separately from current scores [E]                                                                     
+  Test failed. See exception logs above.
+  The test description was: old rules scores remain viewable separately from current scores
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/game_ui_test.dart -p vm --plain-name 'old rules scores remain viewable separately from current scores'
+00:09 +42 -37: /Users/phongnguyen/king/test/game_ui_test.dart: critical court warning leads to a saved collapse ending on mobile                                                                       00:09 +42 -37: /Users/phongnguyen/king/test/game_ui_test.dart: critical court warning leads to a saved collapse ending on mobile                                                                       
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:586:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 586
+The test description was:
+  critical court warning leads to a saved collapse ending on mobile
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:09 +42 -38: /Users/phongnguyen/king/test/game_ui_test.dart: critical court warning leads to a saved collapse ending on mobile [E]                                                                   
+  Test failed. See exception logs above.
+  The test description was: critical court warning leads to a saved collapse ending on mobile
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/game_ui_test.dart -p vm --plain-name 'critical court warning leads to a saved collapse ending on mobile'
+00:09 +42 -38: /Users/phongnguyen/king/test/game_ui_test.dart: authority warning leads to a saved puppet ending on mobile                                                                              
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:649:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 649
+The test description was:
+  authority warning leads to a saved puppet ending on mobile
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:09 +42 -39: /Users/phongnguyen/king/test/game_ui_test.dart: authority warning leads to a saved puppet ending on mobile [E]                                                                          
+  Test failed. See exception logs above.
+  The test description was: authority warning leads to a saved puppet ending on mobile
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/game_ui_test.dart -p vm --plain-name 'authority warning leads to a saved puppet ending on mobile'
+00:09 +43 -39: /Users/phongnguyen/king/test/game_ui_test.dart: all five zero-stat warnings fit on mobile while recovery remains possible                                                               00:09 +43 -39: /Users/phongnguyen/king/test/game_ui_test.dart: all five zero-stat warnings fit on mobile while recovery remains possible                                                               
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 4.0 pixels on the bottom.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:692:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 692
+The test description was:
+  all five zero-stat warnings fit on mobile while recovery remains possible
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:09 +43 -40: /Users/phongnguyen/king/test/game_ui_test.dart: all five zero-stat warnings fit on mobile while recovery remains possible [E]                                                           
+  Test failed. See exception logs above.
+  The test description was: all five zero-stat warnings fit on mobile while recovery remains possible
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/game_ui_test.dart -p vm --plain-name 'all five zero-stat warnings fit on mobile while recovery remains possible'
+00:09 +44 -40: /Users/phongnguyen/king/test/game_ui_test.dart: long assassination explanation fits mobile before the time summary                                                                      00:09 +45 -40: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: palace management opens separately and returns without mutations at Size(390.0, 844.0)                                    00:09 +46 -40: /Users/phongnguyen/king/test/game_ui_test.dart: seasonal recommendation accepts the named tú nữ without palace admission                                                                00:09 +46 -40: /Users/phongnguyen/king/test/game_ui_test.dart: seasonal recommendation accepts the named tú nữ without palace admission                                                                
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 2.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column Column:file:///Users/phongnguyen/king/lib/game/presentation/widgets/imperial_room.dart:175:14
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#d02e1 relayoutBoundary=up6 OVERFLOWING:
+  creator: Column ← Padding ← CustomPaint ← ImperialSkin ← RoomPlaque ← Align ← Padding ←
+    SizedBox-[<'scene-header-court'>] ← Column ← SizedBox ← Stack ← LayoutBuilder ← ⋯
+  parentData: offset=Offset(24.0, 14.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=1220.0, 0.0<=h<=18.0)
+  size: Size(431.3, 18.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: min
+  crossAxisAlignment: center
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _DescendantWidgetFinder:<Found 0 widgets with text containing Tạ Nhã Anh descending from
+widgets with type "AlertDialog": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/phongnguyen/king/test/game_ui_test.dart:793:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:193:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1064:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/phongnguyen/king/test/game_ui_test.dart line 793
+The test description was:
+  seasonal recommendation accepts the named tú nữ without palace admission
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:09 +46 -41: /Users/phongnguyen/king/test/game_ui_test.dart: seasonal recommendation accepts the named tú nữ without palace admission [E]                                                            
+  Test failed. See exception logs above.
+  The test description was: seasonal recommendation accepts the named tú nữ without palace admission
+  
+
+To run this test again: /Users/phongnguyen/development/flutter/bin/cache/dart-sdk/bin/dart test /Users/phongnguyen/king/test/game_ui_test.dart -p vm --plain-name 'seasonal recommendation accepts the named tú nữ without palace admission'
+00:09 +47 -41: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: palace management opens separately and returns without mutations at Size(320.0, 568.0)                                    00:09 +47 -41: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: score room opens without an active reign at Size(1440.0, 900.0)                                                           00:09 +48 -41: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: score room opens without an active reign at Size(1440.0, 900.0)                                                           00:09 +48 -41: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: score room opens without an active reign at Size(390.0, 844.0)                                                            00:09 +49 -41: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: score room opens without an active reign at Size(390.0, 844.0)                                                            00:09 +49 -41: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: score room opens without an active reign at Size(320.0, 568.0)                                                            00:09 +50 -41: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: score room opens without an active reign at Size(320.0, 568.0)                                                            00:09 +50 -41: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: score room remains available after a reign ends at Size(1440.0, 900.0)                                                    00:09 +51 -41: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: score room remains available after a reign ends at Size(1440.0, 900.0)                                                    00:09 +51 -41: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: score room remains available after a reign ends at Size(390.0, 844.0)                                                     00:09 +52 -41: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: score room remains available after a reign ends at Size(390.0, 844.0)                                                     00:09 +52 -41: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: chronicle selection changes the reading page without saving a command                                                     00:09 +53 -41: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: chronicle selection changes the reading page without saving a command                                                     00:09 +53 -41: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: new score room preserves personal bests, shared ranks and rule filters                                                    00:09 +54 -41: /Users/phongnguyen/king/test/imperial_interiors_ui_test.dart: new score room preserves personal bests, shared ranks and rule filters                                                    00:09 +54 -41: Some tests failed.                                                                                                                                                                      

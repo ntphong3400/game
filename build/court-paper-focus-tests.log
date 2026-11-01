@@ -1,0 +1,8 @@
+00:00 +0: loading /Users/phongnguyen/king/test/court_focus_ui_test.dart
+00:00 +0: court reading, expansion and switching do not save at Size(1440.0, 900.0)
+00:01 +1: court reading, expansion and switching do not save at Size(1280.0, 720.0)
+00:01 +2: court reading, expansion and switching do not save at Size(844.0, 390.0)
+00:01 +3: court reading, expansion and switching do not save at Size(760.0, 600.0)
+00:02 +4: court reading, expansion and switching do not save at Size(390.0, 844.0)
+00:02 +5: court reading, expansion and switching do not save at Size(320.0, 568.0)
+00:02 +6: All tests passed!

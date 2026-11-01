@@ -1,0 +1,12 @@
+{
+    "name": "Vạn Tuế — Một đời đế vương",
+    "short_name": "Vạn Tuế",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#F5F2EA",
+    "theme_color": "#3E5947",
+    "description": "Mô phỏng trị vì theo tuần, lưu tiến trình trên thiết bị.",
+    "orientation": "any",
+    "prefer_related_applications": false,
+    "icons": [{"src": "crest.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]
+}

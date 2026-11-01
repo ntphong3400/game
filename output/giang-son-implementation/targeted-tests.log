@@ -1,0 +1,30 @@
+00:00 +0: loading /Users/phongnguyen/king/test/citadel_hub_test.dart
+00:00 +0: /Users/phongnguyen/king/test/citadel_hub_test.dart: Giang Sơn landmarks and palace navigate without changing state at Size(1440.0, 900.0)
+00:00 +1: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:01 +2: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:01 +3: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:01 +4: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:01 +5: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:02 +6: /Users/phongnguyen/king/test/citadel_hub_test.dart: existing seasonal save opens in citadel and returns from treasury
+00:02 +7: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(1440.0, 1000.0)
+00:02 +8: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(1440.0, 1000.0)
+00:02 +9: /Users/phongnguyen/king/test/citadel_hub_test.dart: current reign opens capital and border routes without spending actions
+00:02 +10: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:02 +11: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:02 +12: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:02 +13: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:02 +14: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(1440.0, 1000.0)
+00:02 +15: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(390.0, 844.0)
+00:03 +16: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(390.0, 844.0)
+00:03 +17: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0)
+00:04 +18: /Users/phongnguyen/king/test/game_ui_test.dart: national work shows fit, chance, reward and risk before committing
+00:04 +19: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(1440.0, 1000.0)
+00:05 +20: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)
+00:05 +21: /Users/phongnguyen/king/test/game_ui_test.dart: complete a run, show score and recover ending from storage
+00:05 +22: /Users/phongnguyen/king/test/game_ui_test.dart: old rules scores remain viewable separately from current scores
+00:05 +23: /Users/phongnguyen/king/test/game_ui_test.dart: critical court warning leads to a saved collapse ending on mobile
+00:05 +24: /Users/phongnguyen/king/test/game_ui_test.dart: authority warning leads to a saved puppet ending on mobile
+00:05 +25: /Users/phongnguyen/king/test/game_ui_test.dart: all five zero-stat warnings fit on mobile while recovery remains possible
+00:05 +26: /Users/phongnguyen/king/test/game_ui_test.dart: long assassination explanation fits mobile before the time summary
+00:05 +27: /Users/phongnguyen/king/test/game_ui_test.dart: seasonal recommendation accepts the named tú nữ without palace admission
+00:06 +28: All tests passed!

@@ -1,0 +1,77 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter test --platform chrome --reporter expanded
+
+## exception
+
+_TypeError: Null check operator used on a null value
+
+```
+#0      currentPackageConfig (package:flutter_tools/src/dart/package_map.dart:16:56)
+#1      FlutterWebPlatform.start (package:flutter_tools/src/test/flutter_web_platform.dart:189:49)
+<asynchronous suspension>
+#2      Loader.loadFile.<anonymous closure> (package:test_core/src/runner/loader.dart:217:19)
+<asynchronous suspension>
+#3      new LoadSuite.<anonymous closure>.<anonymous closure> (package:test_core/src/runner/load_suite.dart:96:19)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[!] Flutter (Channel stable, 3.29.3, on macOS 26.6.2 25G83 darwin-arm64, locale en-VN) [860ms]
+    • Flutter version 3.29.3 on channel stable at /Users/phongnguyen/development/flutter
+    ! The flutter binary is not on your path. Consider adding /Users/phongnguyen/development/flutter/bin to your path.
+    ! The dart binary is not on your path. Consider adding /Users/phongnguyen/development/flutter/bin to your path.
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision ea121f8859 (1 year, 6 months ago), 2025-04-11 19:10:07 +0000
+    • Engine revision cf56914b32
+    • Dart version 3.7.2
+    • DevTools version 2.42.3
+    • If those were intentional, you can disregard the above warnings; however it is recommended to use "git" directly to perform update checks and upgrades.
+
+[!] Android toolchain - develop for Android devices (Android SDK version 36.0.0) [148ms]
+    • Android SDK at /Users/phongnguyen/Library/Android/sdk
+    ✗ cmdline-tools component is missing
+      Run `path/to/sdkmanager --install "cmdline-tools;latest"`
+      See https://developer.android.com/studio/command-line for more details.
+    ✗ Android license status unknown.
+      Run `flutter doctor --android-licenses` to accept the SDK licenses.
+      See https://flutter.dev/to/macos-android-setup for more details.
+
+[!] Xcode - develop for iOS and macOS [3.6s]
+    ✗ Xcode installation is incomplete; a full installation is necessary for iOS and macOS development.
+      Download at: https://developer.apple.com/xcode/
+      Or install Xcode via the App Store.
+      Once installed, run:
+        sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+        sudo xcodebuild -runFirstLaunch
+    • CocoaPods version 1.16.2
+
+[✓] Chrome - develop for the web [41ms]
+    • Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+
+[✓] Android Studio (version 2025.1) [41ms]
+    • Android Studio at /Applications/Android Studio.app/Contents
+    • Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    • Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    • Java version OpenJDK Runtime Environment (build 21.0.7+-13880790-b1038.58)
+
+[✓] VS Code (version 1.143.1) [39ms]
+    • VS Code at /Applications/Visual Studio Code.app/Contents
+    • Flutter extension version 3.144.0
+
+[✓] Connected device (2 available) [167ms]
+    • macOS (desktop) • macos  • darwin-arm64   • macOS 26.6.2 25G83 darwin-arm64
+    • Chrome (web)    • chrome • web-javascript • Google Chrome 155.0.8059.86
+
+[✓] Network resources [1,157ms]
+    • All expected network resources are available.
+
+! Doctor found issues in 3 categories.
+```

@@ -1,0 +1,94 @@
+{
+  "generator": "built-in image_gen.imagegen",
+  "purpose": "Decorative paintings for the approved Quốc sự mockup. All UI, numbers, labels and buttons are Flutter widgets.",
+  "reference_images": [
+    "docs/kingdom-watercolor-mockup.png",
+    "docs/court-watercolor-1672-reading.png"
+  ],
+  "source_atlas": "output/imagegen/kingdom-paintings-atlas.png",
+  "source_size": [
+    1536,
+    1024
+  ],
+  "prompt": "Create a production GAME ART ATLAS, precisely 2 columns by 4 rows, eight equally sized rectangular illustration tiles, overall canvas ratio 3:2 landscape, ideally 1536x1024 or larger. Each tile is a wide 3:1 horizontal watercolor vignette. This is ARTWORK ONLY, no UI, no text, no borders, no cards, no icons, no numbers, no margins or gutters. References supply art style only: delicate historical Vietnamese ink and watercolor paintings on warm pale ivory paper (#F8EED5), desaturated forest greens, antique ochres, soft brown ink, subtle painterly detail. Each painting fades gently into ivory paper at all four edges, especially lower edge. The individual tiles meet at the EXACT canvas midline vertically and row quarter-lines horizontally; leave subject compositions clear of those boundaries.\nTile ordering, left-to-right then top-to-bottom:\nrow1 left: GOVERN imperial audience hall interior, mandarins in traditional robes at a council, ornate wooden beams and distant empty throne, warm light.\nrow1 right: RELIEF rural granary, benevolent officials distributing rice sacks to villagers near bamboo and thatched huts.\nrow2 left: MEDIATE peaceful scholarly meeting, three mandarins talking around a table in an open pavilion garden, bamboo and mist.\nrow2 right: TRAIN historical Vietnamese soldiers training in ordered ranks with spears, banners, distant fortress and mountains.\nrow3 left: FARM farmers reclaiming and planting terraced rice fields, buffalo, irrigation channel, thatched huts and mountains.\nrow3 right: SECURITY palace guards at an ornate palace gate and quiet courtyard, alert watchmen with lantern and spears, no violence.\nrow4 left: DIPLOMACY emissaries in formal robes arriving at a frontier pavilion with scrolls, distant mountains and a peaceful river.\nrow4 right: spare ornamental quiet landscape of bamboo, mountains and mist (no text).\nBeautiful coherent watercolor paintings, same scale and color palette across all eight tiles. Keep figures small and faces not detailed, landscape storytelling. All text and UI will be added separately in code, so strictly no lettering or frames.",
+  "packaging": "cwebp -q 90 -crop x y 768 256; no runtime atlas decoding needed",
+  "assets": [
+    {
+      "action": "govern",
+      "path": "assets/images/kingdom/govern.webp",
+      "crop": [
+        0,
+        0,
+        768,
+        256
+      ],
+      "bytes": 77564
+    },
+    {
+      "action": "relief",
+      "path": "assets/images/kingdom/relief.webp",
+      "crop": [
+        768,
+        0,
+        768,
+        256
+      ],
+      "bytes": 89610
+    },
+    {
+      "action": "mediate",
+      "path": "assets/images/kingdom/mediate.webp",
+      "crop": [
+        0,
+        256,
+        768,
+        256
+      ],
+      "bytes": 87702
+    },
+    {
+      "action": "train",
+      "path": "assets/images/kingdom/train.webp",
+      "crop": [
+        768,
+        256,
+        768,
+        256
+      ],
+      "bytes": 76464
+    },
+    {
+      "action": "farm",
+      "path": "assets/images/kingdom/farm.webp",
+      "crop": [
+        0,
+        512,
+        768,
+        256
+      ],
+      "bytes": 86540
+    },
+    {
+      "action": "security",
+      "path": "assets/images/kingdom/security.webp",
+      "crop": [
+        768,
+        512,
+        768,
+        256
+      ],
+      "bytes": 80076
+    },
+    {
+      "action": "diplomacy",
+      "path": "assets/images/kingdom/diplomacy.webp",
+      "crop": [
+        0,
+        768,
+        768,
+        256
+      ],
+      "bytes": 75418
+    }
+  ]
+}

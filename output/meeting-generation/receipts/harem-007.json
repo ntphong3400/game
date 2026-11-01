@@ -1,0 +1,13 @@
+{
+  "id": "harem-007",
+  "source": "output/meeting-generation/source/harem-007-v2.png",
+  "generation": "/Users/phongnguyen/.codex/generated_images/01a19524-1d34-76c1-a50d-de3335333557/exec-d7772746-bea9-42c2-8f7c-495817ab5d2c.png",
+  "asset": "assets/images/meetings/harem-007-fullbody-v2.webp",
+  "sourceSize": [
+    1024,
+    1536
+  ],
+  "bytes": 298040,
+  "sourceSha256": "a45b724ef0e89f89eef20e36f148aebe484797741dd04abd0d78168c65a34407",
+  "sha256": "5cee8aa4b767fb03876d550b88150a53beb3df8fd115e9000916f5e21eb8b50a"
+}

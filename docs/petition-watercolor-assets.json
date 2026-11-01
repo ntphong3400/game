@@ -1,0 +1,30 @@
+{
+  "generator": "Built-in image_gen.imagegen",
+  "purpose": "Approved memorial desk visual implementation",
+  "prompt": "Use case illustration-story. Create a production asset atlas for an imperial Vietnamese strategy game's watercolor memorial headers. ONE square image divided into FOUR equal-height horizontal illustration strips, stacked vertically, each strip a wide panorama 4:1. Precisely four rows with boundaries at 25%,50%,75%; no gutters, no borders, no text, no lettering, no UI, no frames. Each painting has its own quiet warm light ivory paper background color #F8EFD9 with soft organic fade to plain ivory along ALL edges, delicate rice-paper texture. Consistent exquisite Vietnamese traditional ink and watercolor landscape, muted jade foliage, ochre roofs, desaturated blue-grey mountains, sepia detail, airy not dark, art fills the middle of each strip. Row 1: flooded rice paddies becoming fish ponds, tiny farmers in conical hats fishing and working, thatched village, bamboo, far mountains, graceful reeds in foreground. Row 2: great river with earthen dikes, villagers reinforcing embankment, stone bridge, village beside water, birds, distant mountains. Row 3: bustling river trading harbor with Vietnamese wooden sailboats, small market houses, merchants silhouettes, bundles and clay jars, far pagoda. Row 4: imperial palace garden and courtyard, tiered golden roofs, scholar officials as tiny silhouettes, lotus pond and pine branches. High quality detailed game illustration, hand painted, NO photography, NO modern objects. The four strips are separate distinct subject illustrations, NOT one vertically connected scene.",
+  "source_atlas": "output/court-watercolor/watercolor-atlas.png",
+  "approved_mockup": "output/court-watercolor/approved-mockup.png",
+  "packaging": "Four equal-height crops exported to WebP quality 90. Native Flutter controls and text are not baked into the art.",
+  "assets": [
+    {
+      "path": "assets/images/petitions/agriculture.webp",
+      "bytes": 156892,
+      "sha256": "363cad4f2256831757b8f84ec18069487afb219d45f2e4553fd77ba2633ada2e"
+    },
+    {
+      "path": "assets/images/petitions/river.webp",
+      "bytes": 143994,
+      "sha256": "4315bc0cf99cd479c1dc9b2627fb8e4eeb648247c65c3386ed1bfa1e9d7b8e04"
+    },
+    {
+      "path": "assets/images/petitions/trade.webp",
+      "bytes": 145128,
+      "sha256": "83d3167f1ce539f3e5f846cc30c52a3fee3eef00520262bfbc2e6236fbc95cfe"
+    },
+    {
+      "path": "assets/images/petitions/palace.webp",
+      "bytes": 162836,
+      "sha256": "6df443a00b265def157240f63502eb7f1bc418f4cdf6cb49d77321dfcccb9c99"
+    }
+  ]
+}

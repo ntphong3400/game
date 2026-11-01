@@ -1,0 +1,531 @@
+Waiting for another flutter command to release the startup lock...
+00:00 +0: loading /Users/phongnguyen/king/test/autumn_tax_ui_test.dart
+00:00 +0: /Users/phongnguyen/king/test/seasonal_balance_test.dart: rest and paid recreation apply distinct recovery only at season close
+00:00 +1: /Users/phongnguyen/king/test/seasonal_balance_test.dart: rest and paid recreation apply distinct recovery only at season close
+00:00 +2: /Users/phongnguyen/king/test/seasonal_balance_test.dart: rest and paid recreation apply distinct recovery only at season close
+00:00 +3: /Users/phongnguyen/king/test/seasonal_balance_test.dart: rest and paid recreation apply distinct recovery only at season close
+00:00 +4: /Users/phongnguyen/king/test/seasonal_balance_test.dart: rest and paid recreation apply distinct recovery only at season close
+00:00 +5: /Users/phongnguyen/king/test/seasonal_balance_test.dart: rest and paid recreation apply distinct recovery only at season close
+00:00 +6: /Users/phongnguyen/king/test/seasonal_balance_test.dart: rest and paid recreation apply distinct recovery only at season close
+00:00 +7: /Users/phongnguyen/king/test/seasonal_balance_test.dart: rest and paid recreation apply distinct recovery only at season close
+00:00 +8: /Users/phongnguyen/king/test/seasonal_balance_test.dart: rest and paid recreation apply distinct recovery only at season close
+00:00 +9: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +10: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +11: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +12: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +13: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +14: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +15: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +16: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +17: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +18: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +19: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +20: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +21: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +22: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +23: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +24: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +25: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +26: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +27: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +28: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +29: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +30: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +31: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +32: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +33: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +34: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +35: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +36: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +37: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +38: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +39: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +40: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +41: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +42: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +43: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +44: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +45: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +46: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +47: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +48: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +49: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +50: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +51: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +52: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +53: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +54: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +55: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +56: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +57: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +58: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +59: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +60: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +61: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +62: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +63: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +64: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +65: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +66: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +67: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +68: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +69: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +70: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +71: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +72: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +73: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +74: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +75: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +76: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +77: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +78: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +79: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +80: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +81: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +82: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +83: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +84: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +85: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +86: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +87: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +88: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +89: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +90: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +91: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +92: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +93: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +94: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +95: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:00 +96: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +97: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +98: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +99: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +100: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +101: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +102: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +103: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +104: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +105: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +106: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +107: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +108: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +109: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +110: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(1440.0, 1000.0)
+00:01 +111: /Users/phongnguyen/king/test/personnel_test.dart: high ability and matching specialty improve actual success frequency and reward
+00:01 +112: /Users/phongnguyen/king/test/seasonal_ui_test.dart: scoreboard opens without an active reign
+00:01 +113: /Users/phongnguyen/king/test/seasonal_ui_test.dart: scoreboard opens without an active reign
+00:01 +114: /Users/phongnguyen/king/test/seasonal_ui_test.dart: scoreboard opens without an active reign
+00:01 +115: /Users/phongnguyen/king/test/seasonal_ui_test.dart: scoreboard opens without an active reign
+00:01 +116: /Users/phongnguyen/king/test/seasonal_ui_test.dart: scoreboard opens without an active reign
+00:01 +117: /Users/phongnguyen/king/test/seasonal_ui_test.dart: scoreboard opens without an active reign
+00:01 +118: /Users/phongnguyen/king/test/seasonal_ui_test.dart: scoreboard opens without an active reign
+00:01 +119: /Users/phongnguyen/king/test/seasonal_ui_test.dart: scoreboard opens without an active reign
+00:01 +120: /Users/phongnguyen/king/test/seasonal_ui_test.dart: scoreboard opens without an active reign
+00:01 +121: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(390.0, 844.0)
+00:01 +122: /Users/phongnguyen/king/test/autumn_tax_ui_test.dart: tax selection stays pending until autumn and UI separates annual tax from seasonal cash at Size(390.0, 844.0)
+00:01 +123: /Users/phongnguyen/king/test/story_petition_ui_test.dart: chain is read, cancelled and confirmed through ordinary petitions at Size(1440.0, 1000.0)
+00:01 +124: /Users/phongnguyen/king/test/story_petition_ui_test.dart: chain is read, cancelled and confirmed through ordinary petitions at Size(1440.0, 1000.0)
+00:01 +125: /Users/phongnguyen/king/test/story_petition_ui_test.dart: chain is read, cancelled and confirmed through ordinary petitions at Size(1440.0, 1000.0)
+00:01 +126: /Users/phongnguyen/king/test/story_petition_ui_test.dart: chain is read, cancelled and confirmed through ordinary petitions at Size(1440.0, 1000.0)
+00:01 +127: /Users/phongnguyen/king/test/story_petition_ui_test.dart: chain is read, cancelled and confirmed through ordinary petitions at Size(1440.0, 1000.0)
+00:01 +128: /Users/phongnguyen/king/test/story_petition_ui_test.dart: chain is read, cancelled and confirmed through ordinary petitions at Size(1440.0, 1000.0)
+00:02 +129: /Users/phongnguyen/king/test/story_petition_ui_test.dart: chain is read, cancelled and confirmed through ordinary petitions at Size(1440.0, 1000.0)
+00:02 +130: /Users/phongnguyen/king/test/story_petition_ui_test.dart: chain is read, cancelled and confirmed through ordinary petitions at Size(1440.0, 1000.0)
+00:02 +131: /Users/phongnguyen/king/test/story_petition_ui_test.dart: chain is read, cancelled and confirmed through ordinary petitions at Size(1440.0, 1000.0)
+00:02 +132: /Users/phongnguyen/king/test/court_politics_ui_test.dart: all profiles show discontent but only senior roles and queens show ambition at Size(1440.0, 1000.0)
+00:02 +133: /Users/phongnguyen/king/test/court_politics_ui_test.dart: all profiles show discontent but only senior roles and queens show ambition at Size(1440.0, 1000.0)
+00:02 +134: /Users/phongnguyen/king/test/court_politics_ui_test.dart: all profiles show discontent but only senior roles and queens show ambition at Size(1440.0, 1000.0)
+00:02 +135: /Users/phongnguyen/king/test/court_politics_ui_test.dart: all profiles show discontent but only senior roles and queens show ambition at Size(1440.0, 1000.0)
+00:02 +136: /Users/phongnguyen/king/test/court_politics_ui_test.dart: all profiles show discontent but only senior roles and queens show ambition at Size(1440.0, 1000.0)
+00:02 +137: /Users/phongnguyen/king/test/court_politics_ui_test.dart: all profiles show discontent but only senior roles and queens show ambition at Size(1440.0, 1000.0)
+00:02 +138: /Users/phongnguyen/king/test/neglect_test.dart: repeated skipping or rest-only loses within ten weeks across seeds
+00:02 +139: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:02 +140: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:02 +141: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:02 +142: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +143: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +144: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +145: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +146: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +147: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +148: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +149: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +150: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +151: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +152: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +153: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +154: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +155: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +156: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +157: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +158: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +159: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +160: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +161: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(1440.0, 1000.0)
+00:03 +162: /Users/phongnguyen/king/test/chain_settlement_test.dart: market cash funding settles 3/4 from only paid steps
+00:03 +163: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +164: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +165: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +166: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +167: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +168: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +169: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +170: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +171: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +172: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +173: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +174: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +175: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +176: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +177: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +178: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +179: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +180: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +181: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +182: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +183: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +184: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +185: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +186: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +187: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +188: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +189: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +190: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +191: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +192: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +193: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +194: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +195: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +196: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +197: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +198: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +199: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +200: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +201: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +202: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +203: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +204: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +205: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:03 +206: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +207: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +208: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +209: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +210: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +211: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +212: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +213: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +214: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +215: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +216: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +217: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +218: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +219: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +220: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +221: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +222: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +223: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +224: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +225: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +226: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +227: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +228: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +229: /Users/phongnguyen/king/test/personality_ui_test.dart: personality is hidden until third conversation and survives reload at Size(390.0, 844.0)
+00:04 +230: /Users/phongnguyen/king/test/reign_ui_test.dart: major objectives confirm actual dispatch, costs and mobile layout at Size(1440.0, 1000.0), seasonal=false
+00:04 +231: /Users/phongnguyen/king/test/reign_ui_test.dart: major objectives confirm actual dispatch, costs and mobile layout at Size(1440.0, 1000.0), seasonal=false
+00:04 +232: /Users/phongnguyen/king/test/reign_ui_test.dart: major objectives confirm actual dispatch, costs and mobile layout at Size(1440.0, 1000.0), seasonal=false
+00:04 +233: /Users/phongnguyen/king/test/reign_ui_test.dart: major objectives confirm actual dispatch, costs and mobile layout at Size(1440.0, 1000.0), seasonal=false
+00:04 +234: /Users/phongnguyen/king/test/reign_ui_test.dart: major objectives confirm actual dispatch, costs and mobile layout at Size(1440.0, 1000.0), seasonal=false
+00:04 +235: /Users/phongnguyen/king/test/reign_ui_test.dart: major objectives confirm actual dispatch, costs and mobile layout at Size(1440.0, 1000.0), seasonal=false
+00:04 +236: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +237: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +238: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +239: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +240: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +241: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +242: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +243: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +244: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +245: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +246: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +247: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +248: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +249: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +250: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +251: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +252: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +253: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +254: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +255: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +256: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +257: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +258: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +259: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +260: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +261: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +262: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +263: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +264: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +265: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +266: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +267: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +268: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +269: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +270: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +271: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +272: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +273: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +274: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +275: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +276: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +277: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +278: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +279: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +280: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +281: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +282: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +283: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +284: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +285: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +286: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +287: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +288: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:04 +289: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:05 +290: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:05 +291: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:05 +292: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:05 +293: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:05 +294: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:05 +295: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:05 +296: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:05 +297: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:05 +298: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:05 +299: /Users/phongnguyen/king/test/petition_assignment_ui_test.dart: petition delegation previews and commits  at Size(1440.0, 1000.0)
+00:05 +300: /Users/phongnguyen/king/test/harem_ui_test.dart: candidate previews, admission and queen second passive work at Size(1440.0, 1000.0)
+00:05 +301: /Users/phongnguyen/king/test/harem_ui_test.dart: candidate previews, admission and queen second passive work at Size(1440.0, 1000.0)
+00:05 +302: /Users/phongnguyen/king/test/harem_ui_test.dart: candidate previews, admission and queen second passive work at Size(1440.0, 1000.0)
+00:05 +303: /Users/phongnguyen/king/test/harem_ui_test.dart: candidate previews, admission and queen second passive work at Size(1440.0, 1000.0)
+00:05 +304: /Users/phongnguyen/king/test/harem_ui_test.dart: candidate previews, admission and queen second passive work at Size(1440.0, 1000.0)
+00:05 +305: /Users/phongnguyen/king/test/harem_ui_test.dart: candidate previews, admission and queen second passive work at Size(1440.0, 1000.0)
+00:05 +306: /Users/phongnguyen/king/test/harem_ui_test.dart: candidate previews, admission and queen second passive work at Size(1440.0, 1000.0)
+00:05 +307: /Users/phongnguyen/king/test/harem_ui_test.dart: candidate previews, admission and queen second passive work at Size(1440.0, 1000.0)
+00:05 +308: /Users/phongnguyen/king/test/harem_ui_test.dart: candidate previews, admission and queen second passive work at Size(1440.0, 1000.0)
+00:06 +309: /Users/phongnguyen/king/test/harem_ui_test.dart: candidate previews, admission and queen second passive work at Size(1440.0, 1000.0)
+00:06 +310: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +311: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +312: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +313: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +314: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +315: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +316: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +317: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +318: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +319: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +320: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +321: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +322: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +323: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +324: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +325: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +326: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +327: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +328: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +329: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +330: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +331: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +332: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +333: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +334: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +335: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +336: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +337: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +338: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +339: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:06 +340: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +341: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +342: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +343: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +344: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +345: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +346: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +347: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +348: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +349: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +350: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +351: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +352: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +353: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +354: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +355: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +356: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +357: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +358: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +359: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +360: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +361: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +362: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +363: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +364: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +365: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +366: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +367: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +368: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +369: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +370: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +371: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +372: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:07 +373: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:08 +374: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:08 +375: /Users/phongnguyen/king/test/event_catalog_test.dart: every choice executes through engine and survives save/load
+00:08 +376: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:08 +377: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:08 +378: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:08 +379: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:08 +380: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:08 +381: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:08 +382: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:08 +383: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:08 +384: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:08 +385: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:08 +386: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:08 +387: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:08 +388: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:08 +389: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:08 +390: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +391: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +392: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +393: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +394: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +395: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +396: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +397: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +398: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +399: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +400: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +401: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +402: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +403: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +404: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +405: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +406: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +407: /Users/phongnguyen/king/test/outcome_ui_test.dart: due results show once in a grouped popup and can be reread after reload at Size(1440.0, 1000.0)
+00:09 +408: /Users/phongnguyen/king/test/health_ui_test.dart: treatment previews current recovery and herbal fee at Size(1440.0, 1000.0)
+00:09 +409: /Users/phongnguyen/king/test/health_ui_test.dart: treatment previews current recovery and herbal fee at Size(1440.0, 1000.0)
+00:09 +410: /Users/phongnguyen/king/test/event_catalog_test.dart: expanded payments are validated atomically, including grain exchange
+00:09 +411: /Users/phongnguyen/king/test/event_catalog_test.dart: expanded payments are validated atomically, including grain exchange
+00:10 +412: /Users/phongnguyen/king/test/event_catalog_test.dart: expanded payments are validated atomically, including grain exchange
+00:10 +413: /Users/phongnguyen/king/test/event_catalog_test.dart: expanded payments are validated atomically, including grain exchange
+00:10 +414: /Users/phongnguyen/king/test/event_catalog_test.dart: expanded payments are validated atomically, including grain exchange
+00:10 +415: /Users/phongnguyen/king/test/event_catalog_test.dart: expanded payments are validated atomically, including grain exchange
+00:10 +416: /Users/phongnguyen/king/test/event_catalog_test.dart: expanded payments are validated atomically, including grain exchange
+00:10 +417: /Users/phongnguyen/king/test/palace_treatment_ui_test.dart: herbal discount appears in treatment UI and matches actual debit and ledger
+00:10 +418: /Users/phongnguyen/king/test/palace_treatment_ui_test.dart: herbal discount appears in treatment UI and matches actual debit and ledger
+00:10 +419: /Users/phongnguyen/king/test/palace_treatment_ui_test.dart: herbal discount appears in treatment UI and matches actual debit and ledger
+00:10 +420: /Users/phongnguyen/king/test/palace_treatment_ui_test.dart: herbal discount appears in treatment UI and matches actual debit and ledger
+00:10 +421: /Users/phongnguyen/king/test/palace_treatment_ui_test.dart: herbal discount appears in treatment UI and matches actual debit and ledger
+00:10 +422: /Users/phongnguyen/king/test/palace_treatment_ui_test.dart: herbal discount appears in treatment UI and matches actual debit and ledger
+00:10 +423: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:10 +424: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:10 +425: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:10 +426: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:10 +427: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +428: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +429: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +430: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +431: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +432: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +433: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +434: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +435: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +436: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +437: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +438: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +439: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +440: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +441: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +442: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +443: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +444: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +445: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +446: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +447: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +448: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +449: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +450: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +451: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +452: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +453: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +454: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +455: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +456: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +457: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +458: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +459: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +460: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +461: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +462: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +463: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +464: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +465: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +466: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +467: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +468: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +469: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +470: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +471: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +472: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +473: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +474: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +475: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +476: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +477: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +478: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +479: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +480: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +481: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +482: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +483: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +484: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +485: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +486: /Users/phongnguyen/king/test/game_ui_test.dart: revenue work previews cash, commits and locks repeats at Size(1440.0, 1000.0)
+00:11 +487: /Users/phongnguyen/king/test/event_catalog_test.dart: normal event selection exhausts unseen eligible stories before repeating
+00:11 +488: /Users/phongnguyen/king/test/event_catalog_test.dart: normal event selection exhausts unseen eligible stories before repeating
+00:11 +489: /Users/phongnguyen/king/test/event_catalog_test.dart: normal event selection exhausts unseen eligible stories before repeating
+00:11 +490: /Users/phongnguyen/king/test/event_catalog_test.dart: normal event selection exhausts unseen eligible stories before repeating
+00:11 +491: /Users/phongnguyen/king/test/event_catalog_test.dart: normal event selection exhausts unseen eligible stories before repeating
+00:11 +492: /Users/phongnguyen/king/test/event_catalog_test.dart: normal event selection exhausts unseen eligible stories before repeating
+00:11 +493: /Users/phongnguyen/king/test/event_catalog_test.dart: normal event selection exhausts unseen eligible stories before repeating
+00:12 +494: /Users/phongnguyen/king/test/event_catalog_test.dart: normal event selection exhausts unseen eligible stories before repeating
+00:12 +495: /Users/phongnguyen/king/test/event_catalog_test.dart: normal event selection exhausts unseen eligible stories before repeating
+00:12 +496: /Users/phongnguyen/king/test/event_catalog_test.dart: normal event selection exhausts unseen eligible stories before repeating
+00:12 +497: /Users/phongnguyen/king/test/event_catalog_test.dart: normal event selection exhausts unseen eligible stories before repeating
+00:12 +498: /Users/phongnguyen/king/test/event_catalog_test.dart: normal event selection exhausts unseen eligible stories before repeating
+00:12 +499: /Users/phongnguyen/king/test/event_catalog_test.dart: normal event selection exhausts unseen eligible stories before repeating
+00:12 +500: /Users/phongnguyen/king/test/reign_test.dart: every major can be completed within six weeks with cooperative honest officers and successful rolls
+00:12 +501: /Users/phongnguyen/king/test/reign_test.dart: every major can be completed within six weeks with cooperative honest officers and successful rolls
+00:12 +502: /Users/phongnguyen/king/test/reign_test.dart: every major can be completed within six weeks with cooperative honest officers and successful rolls
+00:12 +503: /Users/phongnguyen/king/test/reign_test.dart: every major can be completed within six weeks with cooperative honest officers and successful rolls
+00:13 +504: /Users/phongnguyen/king/test/palace_ui_test.dart: study and grouped duties charge one action each and survive reload at Size(1440.0, 1000.0)
+00:13 +505: /Users/phongnguyen/king/test/palace_ui_test.dart: study and grouped duties charge one action each and survive reload at Size(1440.0, 1000.0)
+00:13 +506: /Users/phongnguyen/king/test/palace_ui_test.dart: study and grouped duties charge one action each and survive reload at Size(1440.0, 1000.0)
+00:13 +507: /Users/phongnguyen/king/test/palace_ui_test.dart: study and grouped duties charge one action each and survive reload at Size(1440.0, 1000.0)
+00:13 +508: /Users/phongnguyen/king/test/petition_economy_ui_test.dart: economic choices preview net profit, failure and settlement at Size(1440.0, 1000.0)
+00:13 +509: /Users/phongnguyen/king/test/petition_economy_ui_test.dart: economic choices preview net profit, failure and settlement at Size(1440.0, 1000.0)
+00:13 +510: /Users/phongnguyen/king/test/petition_economy_ui_test.dart: economic choices preview net profit, failure and settlement at Size(1440.0, 1000.0)
+00:13 +511: /Users/phongnguyen/king/test/petition_economy_ui_test.dart: economic choices preview net profit, failure and settlement at Size(1440.0, 1000.0)
+00:13 +512: /Users/phongnguyen/king/test/petition_economy_ui_test.dart: economic choices preview net profit, failure and settlement at Size(1440.0, 1000.0)
+00:13 +513: /Users/phongnguyen/king/test/game_ui_test.dart: expanded event previews risks and saves deferred result at Size(390.0, 844.0)
+00:13 +514: /Users/phongnguyen/king/test/palace_ui_test.dart: study and grouped duties charge one action each and survive reload at Size(390.0, 844.0)
+00:13 +515: /Users/phongnguyen/king/test/palace_ui_test.dart: study and grouped duties charge one action each and survive reload at Size(390.0, 844.0)
+00:14 +516: /Users/phongnguyen/king/test/game_ui_test.dart: ability help and paid choice of successor work at Size(390.0, 844.0)
+00:14 +517: /Users/phongnguyen/king/test/palace_ui_test.dart: insufficient money and grain disable confirmation without mutations at Size(390.0, 844.0)
+00:14 +518: /Users/phongnguyen/king/test/palace_ui_test.dart: insufficient money and grain disable confirmation without mutations at Size(390.0, 844.0)
+00:14 +519: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(1440.0, 1000.0)
+00:15 +520: /Users/phongnguyen/king/test/game_ui_test.dart: all screens render without overflow at Size(390.0, 844.0)
+00:15 +521: /Users/phongnguyen/king/test/game_ui_test.dart: complete a run, show score and recover ending from storage
+00:15 +522: /Users/phongnguyen/king/test/game_ui_test.dart: old rules scores remain viewable separately from current scores
+00:15 +523: /Users/phongnguyen/king/test/game_ui_test.dart: critical court warning leads to a saved collapse ending on mobile
+00:15 +524: /Users/phongnguyen/king/test/game_ui_test.dart: authority warning leads to a saved puppet ending on mobile
+00:15 +525: /Users/phongnguyen/king/test/game_ui_test.dart: all five zero-stat warnings fit on mobile while recovery remains possible
+00:16 +526: /Users/phongnguyen/king/test/game_ui_test.dart: long assassination explanation fits mobile before the time summary
+00:16 +527: /Users/phongnguyen/king/test/game_ui_test.dart: seasonal recommendation accepts the named tú nữ without palace admission
+00:16 +528: All tests passed!

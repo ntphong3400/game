@@ -1,0 +1,8 @@
+00:00 +0: loading /Users/phongnguyen/king/tools/giang_son_visual_test.dart
+00:00 +0: render Giang Sơn at Size(1440.0, 900.0)
+00:03 +1: render Giang Sơn at Size(1280.0, 720.0)
+00:04 +2: render Giang Sơn at Size(1024.0, 768.0)
+00:07 +3: render Giang Sơn at Size(844.0, 390.0)
+00:08 +4: render Giang Sơn at Size(390.0, 844.0)
+00:10 +5: render Giang Sơn at Size(320.0, 568.0)
+00:11 +6: All tests passed!

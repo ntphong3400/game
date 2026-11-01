@@ -1,0 +1,14 @@
+{
+  "results": [
+    "No save -> intro -> start -> requested character",
+    "In-app navigation + browser Back/Forward preserve the document and correct screens",
+    "Reload restores character URL and page",
+    "All 45 active-game section URLs open directly",
+    "Regional character origin survives reload",
+    "Missing IDs, wrong roster, and legacy hash bookmarks resolve safely",
+    "Unknown URL has a working recovery action",
+    "Offline reload restores a previously loaded character path",
+    "IndexedDB game archive remains byte-for-byte unchanged after navigation and reloads"
+  ],
+  "errors": []
+}

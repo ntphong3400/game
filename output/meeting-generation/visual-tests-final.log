@@ -1,0 +1,12 @@
+00:00 +0: loading /Users/phongnguyen/king/tools/all_meetings_visual_test.dart
+00:00 +0: render consort_mai meeting at Size(1440.0, 900.0)
+00:01 +1: render consort_mai meeting at Size(390.0, 844.0)
+00:01 +2: render consort_yen meeting at Size(1440.0, 900.0)
+00:01 +3: render consort_yen meeting at Size(390.0, 844.0)
+00:01 +4: render general meeting at Size(1440.0, 900.0)
+00:02 +5: render general meeting at Size(390.0, 844.0)
+00:02 +6: render doctor meeting at Size(1440.0, 900.0)
+00:03 +7: render doctor meeting at Size(390.0, 844.0)
+00:03 +8: render prince meeting at Size(1440.0, 900.0)
+00:03 +9: render prince meeting at Size(390.0, 844.0)
+00:03 +10: All tests passed!
