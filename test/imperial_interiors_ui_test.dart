@@ -61,7 +61,32 @@ void main() {
             GameApp(controller: controller, initialRoute: route),
           );
           await tester.pumpAndSettle();
-          expect(find.byKey(ValueKey('scene-header-$route')), findsOneWidget);
+          expect(
+            find.byKey(ValueKey('scene-header-$route')),
+            route == 'court' ? findsNothing : findsOneWidget,
+          );
+          if (route == 'court') {
+            expect(
+              find.byKey(const ValueKey('court-overview')),
+              findsOneWidget,
+            );
+            expect(find.byKey(const ValueKey('court-affairs')), findsNothing);
+            for (final entry
+                in {
+                  'authority': controller.state!.authority,
+                  'stability': controller.state!.stability,
+                  'people': controller.state!.people,
+                  'health': controller.state!.health,
+                }.entries) {
+              expect(
+                find.descendant(
+                  of: find.byKey(ValueKey('court-stat-${entry.key}')),
+                  matching: find.text('${entry.value}/100'),
+                ),
+                findsOneWidget,
+              );
+            }
+          }
           expect(controller.state!.toJson(), before);
           expect(tester.takeException(), isNull);
         },

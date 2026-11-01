@@ -1,3 +1,4 @@
+import 'support/navigation.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -109,7 +110,7 @@ void main() {
             (await live.load()).active!.pending.single.assignment!.toJson(),
             assigned.toJson(),
           );
-          await tap(find.text('Quốc sự').first);
+          await openSection(tester, 'kingdom');
           await tap(find.byKey(const ValueKey('kingdom-open-1')));
           final pending = find.textContaining(
             '${assigned.personLabel} · ${assigned.chance}% thành công',

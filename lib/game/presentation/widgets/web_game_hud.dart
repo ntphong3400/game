@@ -8,7 +8,7 @@ const _deep = Color(0xFF102922);
 const _gold = Color(0xFFD9B873);
 const _ivory = Color(0xFFFFF1CE);
 
-/// Navigation and calendar only; game metrics live in their own pages.
+/// Navigation, calendar and remaining actions shared by every game page.
 class WebGameHud extends StatelessWidget {
   const WebGameHud({
     super.key,
@@ -50,6 +50,13 @@ class WebGameHud extends StatelessWidget {
           ),
           const SizedBox(height: 3),
           _fitText('Thiên Hòa · năm ${state.year}', size: 10, color: _gold),
+          const SizedBox(height: 3),
+          _fitText(
+            '${state.points} hành động còn lại',
+            key: const ValueKey('hud-actions-remaining'),
+            size: 10,
+            color: _ivory,
+          ),
         ],
       ),
     );

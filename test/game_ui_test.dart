@@ -166,7 +166,7 @@ void main() {
           (await gateway.load()).active!.pending.single.toJson(),
           pending.toJson(),
         );
-        await tester.tap(find.text('Quốc sự').first);
+        await openSection(tester, 'kingdom');
         await tester.pumpAndSettle();
         await tester.tap(find.byKey(const ValueKey('kingdom-open-1')));
         await tester.pumpAndSettle();
@@ -375,8 +375,21 @@ void main() {
       );
       await tester.tap(find.byKey(const ValueKey('citadel-location-court')));
       await tester.pumpAndSettle();
-      expect(find.text('Giang sơn trong tay người'), findsOneWidget);
-      expect(find.byKey(const ValueKey('neglect-warning')), findsOneWidget);
+      expect(find.text('Giang sơn trong tay người'), findsNothing);
+      expect(find.byKey(const ValueKey('court-affairs')), findsNothing);
+      for (final id in [
+        'authority',
+        'stability',
+        'treasury',
+        'food',
+        'military',
+        'population',
+        'people',
+        'health',
+      ]) {
+        expect(find.byKey(ValueKey('court-stat-$id')), findsOneWidget);
+      }
+      expect(find.byKey(const ValueKey('neglect-warning')), findsNothing);
       expect(tester.takeException(), isNull);
       for (final label in [
         'Quốc sự',

@@ -138,7 +138,9 @@ void main() {
       final router = routerOf(tester);
       await tap(tester, 'giang-son-palace');
       await tap(tester, 'citadel-location-court');
-      await tap(tester, 'court-affairs');
+      expect(find.byKey(const ValueKey('neglect-warning')), findsNothing);
+      router.go('/kingdom');
+      await tester.pumpAndSettle();
       expect(router.routeInformationProvider.value.uri.path, '/kingdom');
       await tap(tester, 'section-back');
       expect(router.routeInformationProvider.value.uri.path, '/court');

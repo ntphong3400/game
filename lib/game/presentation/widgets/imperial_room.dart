@@ -14,9 +14,11 @@ class RoomStage extends StatelessWidget {
     required this.scene,
     required this.title,
     required this.child,
+    this.showHeader = true,
   });
   final String scene, title;
   final Widget child;
+  final bool showHeader;
 
   String get label => switch (scene) {
     'court' => 'TRIỀU CHÍNH · NGỰ THƯ PHÒNG',
@@ -48,35 +50,36 @@ class RoomStage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Padding(
-                key: ValueKey('scene-header-$scene'),
-                padding: EdgeInsets.only(bottom: dense ? 10 : 18),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (!dense) ...[
+              if (showHeader)
+                Padding(
+                  key: ValueKey('scene-header-$scene'),
+                  padding: EdgeInsets.only(bottom: dense ? 10 : 18),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (!dense) ...[
+                        Text(
+                          formatGameNumbers(label),
+                          style: const TextStyle(
+                            color: muted,
+                            fontSize: 10,
+                            letterSpacing: 1.1,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                      ],
                       Text(
-                        formatGameNumbers(label),
-                        style: const TextStyle(
-                          color: muted,
-                          fontSize: 10,
-                          letterSpacing: 1.1,
+                        formatGameNumbers(title),
+                        style: TextStyle(
+                          fontFamily: 'Lora',
+                          color: forest,
+                          fontSize: dense ? 17 : (compact ? 21 : 25),
+                          height: 1.3,
                         ),
                       ),
-                      const SizedBox(height: 6),
                     ],
-                    Text(
-                      formatGameNumbers(title),
-                      style: TextStyle(
-                        fontFamily: 'Lora',
-                        color: forest,
-                        fontSize: dense ? 17 : (compact ? 21 : 25),
-                        height: 1.3,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
               Expanded(child: KeyedSubtree(key: ValueKey(scene), child: child)),
             ],
           ),

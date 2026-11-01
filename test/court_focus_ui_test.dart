@@ -48,6 +48,13 @@ void main() {
             openedWeek: s.week,
             deadline: s.week + 1,
           ),
+          for (var i = 0; i < 6; i++)
+            Petition(
+              id: 'overflow-$i',
+              definitionId: 'community_03',
+              openedWeek: s.week,
+              deadline: s.week + 1,
+            ),
         ];
       });
       final controller = GameController(gateway);
@@ -66,6 +73,44 @@ void main() {
       expect(find.text('Mỗi ý chỉ đều được ghi vào sử.'), findsNothing);
       expect(find.byKey(const ValueKey('reign-situation')), findsNothing);
       expect(find.byKey(const ValueKey('open-finance')), findsNothing);
+      final overview = find.byKey(const ValueKey('court-overview'));
+      final header = find.byKey(const ValueKey('court-petition-header'));
+      final count = find.byKey(const ValueKey('court-petition-count'));
+      final overviewRect = tester.getRect(overview);
+      final headerRect = tester.getRect(header);
+      final countRect = tester.getRect(count);
+      expect(find.text('8 CHỜ'), findsOneWidget);
+      expect(find.byKey(const ValueKey('neglect-warning')), findsNothing);
+      expect(find.textContaining('trình đầy đủ ngay đầu mùa'), findsNothing);
+      for (final unit in [
+        'tạ',
+        'lượng vàng',
+        'điểm',
+        'điểm quân lực',
+        'người',
+        'tiền',
+      ]) {
+        expect(
+          find.descendant(of: overview, matching: find.text(unit)),
+          findsNothing,
+        );
+      }
+      final firstCard = find.byKey(const ValueKey('petition-card-a'));
+      final originalTop = tester.getTopLeft(firstCard).dy;
+      final listPane = find.byKey(const ValueKey('court-petition-scroll'));
+      await tester.drag(listPane, const Offset(0, -300));
+      await tester.pumpAndSettle();
+      expect(tester.getTopLeft(firstCard).dy, lessThan(originalTop));
+      expect(tester.getRect(overview), overviewRect);
+      expect(tester.getRect(header), headerRect);
+      expect(tester.getRect(count), countRect);
+      final scrollable = find.descendant(
+        of: listPane,
+        matching: find.byType(Scrollable),
+      );
+      tester.state<ScrollableState>(scrollable).position.jumpTo(0);
+      await tester.pumpAndSettle();
+
       final inline =
           find.byKey(const ValueKey('petition-desk')).evaluate().isNotEmpty;
       if (inline) {

@@ -50,21 +50,16 @@ void main() {
         expect(find.text('Thiên Hòa · năm 1'), findsOneWidget);
         expect(find.text('Năm trị vì 1 · 18 tuổi'), findsNothing);
         expect(find.text('12 hành động còn lại'), findsOneWidget);
-        expect(
-          find.textContaining('4–6 tấu chương'),
-          size.width < 700 ? findsOneWidget : findsNothing,
-        );
+        expect(find.textContaining('4–6 tấu chương'), findsNothing);
         expect(
           controller.state!.petitions,
           hasLength(controller.state!.seasonPetitionTarget),
         );
         expect(find.textContaining('thêm tin sau'), findsNothing);
         expect(find.textContaining('Một tuần mới'), findsNothing);
-        expect(
-          find.text(size.width < 700 ? 'Tấu chương mùa Xuân' : 'Tấu chương'),
-          findsOneWidget,
-        );
-        await tester.tap(find.text('Quốc sự').first);
+        expect(find.text('Tấu chương mùa Xuân'), findsOneWidget);
+        expect(find.byKey(const ValueKey('neglect-warning')), findsNothing);
+        await openSection(tester, 'kingdom');
         await tester.pumpAndSettle();
         for (final title in [
           'Ban hành công việc',

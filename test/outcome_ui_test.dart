@@ -1,3 +1,4 @@
+import 'support/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:van_tue/app/game_controller.dart';
@@ -145,7 +146,7 @@ void main() {
         );
         await tester.pumpAndSettle();
         expect(dialog, findsNothing);
-        await tester.tap(find.text('Quốc sự').first);
+        await openSection(tester, 'kingdom');
         await tester.pumpAndSettle();
         await tester.tap(find.byKey(const ValueKey('kingdom-open-4')));
         await tester.pumpAndSettle();

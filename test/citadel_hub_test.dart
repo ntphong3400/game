@@ -190,7 +190,7 @@ void main() {
         expect(find.byType(CitadelHub), findsOneWidget);
         expect(
           find.text('${controller.state!.points} hành động còn lại'),
-          findsNothing,
+          findsOneWidget,
         );
         await tester.tap(find.byKey(const ValueKey('giang-son-farms')));
         await tester.pumpAndSettle();

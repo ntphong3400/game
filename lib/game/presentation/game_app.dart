@@ -51,6 +51,7 @@ import 'meeting_scenes.dart';
 import 'widgets/character_meeting_page.dart';
 import '../logic/court_rules.dart';
 import 'widgets/court_roster_panel.dart';
+import 'widgets/court_overview.dart';
 import 'widgets/court_government_panel.dart';
 import 'widgets/court_personnel_dialogs.dart';
 import 'widgets/personnel_passives.dart';
@@ -689,7 +690,7 @@ class _GameShellState extends State<GameShell> {
         builder: (context, bounds) {
           final desktop = bounds.maxWidth >= 1050;
           final title = switch (route) {
-            'court' => 'Giang sơn trong tay người',
+            'court' => 'Triều chính',
             'treasury' => desktop ? 'Hộ bộ · Sổ tiền và kho lương' : 'Hộ bộ',
             'people' =>
               courtGovernmentOpen
@@ -730,6 +731,7 @@ class _GameShellState extends State<GameShell> {
                     child: RoomStage(
                       scene: route,
                       title: title,
+                      showHeader: route != 'court',
                       child: _page(),
                     ),
                   ),
@@ -956,15 +958,6 @@ class _GameShellState extends State<GameShell> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Align(
-          alignment: Alignment.centerRight,
-          child: TextButton.icon(
-            key: const ValueKey('court-affairs'),
-            onPressed: () => navigate('kingdom'),
-            icon: const Icon(Icons.landscape_outlined, size: 18),
-            label: const Text('Quốc sự'),
-          ),
-        ),
         if (_outcomeReadReady && unread.isNotEmpty)
           Align(
             alignment: Alignment.centerRight,
@@ -1013,12 +1006,6 @@ class _GameShellState extends State<GameShell> {
             'Cần chăm sóc long thể. Đến Long thể để xem tình trạng và dưỡng sức.',
             'health',
           ),
-        if (s.affairsThisWeek == 0)
-          _courtAlert(
-            'neglect-warning',
-            'Chưa xử lý việc nước ${s.periodName} này. Khép ${s.periodName} ngay sẽ giảm uy quyền, ổn định và lòng dân. Đến Quốc sự để xử lý.',
-            'kingdom',
-          ),
         if (s.major != null)
           _courtAlert(
             'court-major-warning',
@@ -1058,54 +1045,89 @@ class _GameShellState extends State<GameShell> {
     ),
   );
 
+  Widget _petitionHeading() => KeyedSubtree(
+    key: const ValueKey('court-petition-header'),
+    child: _section(
+      s.seasonal ? 'Tấu chương mùa ${s.season}' : 'Tấu chương trong tuần',
+      trailing: Tag(
+        '${s.petitions.length} CHỜ',
+        key: const ValueKey('court-petition-count'),
+      ),
+    ),
+  );
+
   Widget _courtDesk() => LayoutBuilder(
     builder: (context, bounds) {
-      if (bounds.maxWidth < 700 || bounds.maxHeight < 300) {
-        return RoomPane(
-          padding: 0,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _courtNotices(),
-              if (s.petitions.isEmpty) _courtDone() else _petitions(),
-            ],
-          ),
-        );
-      }
+      final inline = bounds.maxWidth >= 700 && bounds.maxHeight >= 300;
       final petition =
           s.petitions.where((p) => p.id == selectedPetitionId).firstOrNull ??
           (approvedPetitionTitle == null ? s.petitions.firstOrNull : null);
-      return Row(
-        key: const ValueKey('petition-desk'),
+      return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(
-            width: (bounds.maxWidth * .31).clamp(250.0, 350.0),
-            child: RoomPane(
-              padding: 0,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [_petitions(compact: true)],
-              ),
-            ),
-          ),
-          const SizedBox(width: 20),
+          CourtOverview(state: s, dense: bounds.maxHeight < 300),
+          const SizedBox(height: 12),
+          if (!inline) _petitionHeading(),
           Expanded(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: paper,
-                border: Border.all(color: line),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: RoomPane(
-                padding: 22,
-                controller: courtReadingController,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [_courtNotices(), _courtReading(petition)],
-                ),
-              ),
-            ),
+            child:
+                inline
+                    ? Row(
+                      key: const ValueKey('petition-desk'),
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        SizedBox(
+                          width: (bounds.maxWidth * .31).clamp(250.0, 350.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              _petitionHeading(),
+                              Expanded(
+                                child: RoomPane(
+                                  key: const ValueKey('court-petition-scroll'),
+                                  padding: 0,
+                                  child: _petitions(compact: true),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              color: paper,
+                              border: Border.all(color: line),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: RoomPane(
+                              padding: 22,
+                              controller: courtReadingController,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _courtNotices(),
+                                  _courtReading(petition),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                    : RoomPane(
+                      key: const ValueKey('court-petition-scroll'),
+                      padding: 0,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _courtNotices(),
+                          if (s.petitions.isEmpty)
+                            _courtDone()
+                          else
+                            _petitions(),
+                        ],
+                      ),
+                    ),
           ),
         ],
       );
@@ -1284,24 +1306,6 @@ class _GameShellState extends State<GameShell> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _section(
-          compact
-              ? 'Tấu chương'
-              : s.seasonal
-              ? 'Tấu chương mùa ${s.season}'
-              : 'Tấu chương trong tuần',
-          trailing: Tag('${s.petitions.length} CHỜ'),
-        ),
-        if (s.seasonal && !compact)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: Text(
-              formatGameNumbers(
-                '${s.actionsPerTurn} hành động mỗi mùa · 4–6 tấu chương · trình đầy đủ ngay đầu mùa.',
-              ),
-              style: const TextStyle(fontSize: 10, color: muted),
-            ),
-          ),
         if (petitions.isEmpty)
           const Text(
             'Không còn tấu chờ xử lý.',
@@ -4115,133 +4119,100 @@ class _GameShellState extends State<GameShell> {
     if (s.health <= 20) 'Sức khỏe',
   ];
 
-  Widget _weekbar(bool desktop) => DefaultTextStyle(
-    style: const TextStyle(
-      fontFamily: 'BeVietnam',
-      fontSize: 12,
-      color: imperialIvory,
-    ),
-    child: Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: desktop ? 32 : 16,
-        vertical: route == 'court' || route == 'kingdom' ? 8 : 16,
+  Widget _weekbar(bool desktop) {
+    if (s.seasonal &&
+        _criticalStatNames.isEmpty &&
+        s.affairsThisWeek != 0 &&
+        !(s.points == 0 && s.overtime == 0)) {
+      return const SizedBox.shrink();
+    }
+    return DefaultTextStyle(
+      style: const TextStyle(
+        fontFamily: 'BeVietnam',
+        fontSize: 12,
+        color: imperialIvory,
       ),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFF08251E), Color(0xFF123D30), Color(0xFF061D18)],
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: desktop ? 32 : 16,
+          vertical: route == 'court' || route == 'kingdom' ? 8 : 16,
         ),
-        image: DecorationImage(
-          image: AssetImage('assets/images/imperial/jade-texture.webp'),
-          fit: BoxFit.cover,
-          opacity: .25,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF08251E), Color(0xFF123D30), Color(0xFF061D18)],
+          ),
+          image: DecorationImage(
+            image: AssetImage('assets/images/imperial/jade-texture.webp'),
+            fit: BoxFit.cover,
+            opacity: .25,
+          ),
+          border: Border(top: BorderSide(color: imperialGold)),
         ),
-        border: Border(top: BorderSide(color: imperialGold)),
-      ),
-      child: SafeArea(
-        top: false,
-        child: Row(
-          children: [
-            if (desktop) ...[
-              const ImperialIcon('time', size: 38),
-              const SizedBox(width: 12),
+        child: SafeArea(
+          top: false,
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (_criticalStatNames.isNotEmpty) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        formatGameNumbers(
+                          _criticalStatNames.length == 1
+                              ? '${_criticalStatNames.single} nguy cấp'
+                              : '${_criticalStatNames.length} chỉ số nguy cấp',
+                        ),
+                        style: const TextStyle(
+                          fontSize: 9,
+                          color: Color(0xFFFFAC8E),
+                        ),
+                      ),
+                    ],
+                    if (s.affairsThisWeek == 0) ...[
+                      const SizedBox(height: 4),
+                      const Text(
+                        'Chưa xử lý quốc sự',
+                        style: TextStyle(fontSize: 9, color: Color(0xFFFFAC8E)),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              if (s.points == 0 && s.overtime == 0)
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: TextButton(
+                    onPressed: busy ? null : _overtimeDialog,
+                    child: const Text(
+                      'Làm thêm',
+                      style: TextStyle(fontSize: 11, color: Color(0xFFFFAC8E)),
+                    ),
+                  ),
+                ),
+              if (!s.seasonal)
+                FilledButton(
+                  style: FilledButton.styleFrom(
+                    backgroundColor: terracotta,
+                    foregroundColor: imperialIvory,
+                    side: const BorderSide(color: imperialGold),
+                  ),
+                  onPressed: busy ? null : _nextWeek,
+                  child: Text(
+                    formatGameNumbers(
+                      desktop ? 'Sang tuần tiếp theo   →' : 'Sang tuần  →',
+                    ),
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                ),
             ],
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    formatGameNumbers('${s.points} hành động còn lại'),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-                  ),
-                  if (_criticalStatNames.isNotEmpty) ...[
-                    const SizedBox(height: 4),
-                    Text(
-                      formatGameNumbers(
-                        _criticalStatNames.length == 1
-                            ? '${_criticalStatNames.single} nguy cấp'
-                            : '${_criticalStatNames.length} chỉ số nguy cấp',
-                      ),
-                      style: const TextStyle(
-                        fontSize: 9,
-                        color: Color(0xFFFFAC8E),
-                      ),
-                    ),
-                  ],
-                  if (s.affairsThisWeek == 0) ...[
-                    const SizedBox(height: 4),
-                    const Text(
-                      'Chưa xử lý quốc sự',
-                      style: TextStyle(fontSize: 9, color: Color(0xFFFFAC8E)),
-                    ),
-                  ],
-                  const SizedBox(height: 5),
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    alignment: Alignment.centerLeft,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        for (var i = 0; i < s.actionsPerTurn; i++)
-                          Container(
-                            width: 17,
-                            height: 3,
-                            margin: const EdgeInsets.only(right: 4),
-                            decoration: BoxDecoration(
-                              color: i < s.points ? gold : line,
-                              borderRadius: BorderRadius.circular(2),
-                            ),
-                          ),
-                        if (desktop)
-                          const Padding(
-                            padding: EdgeInsets.only(left: 9),
-                            child: Text(
-                              'Thời gian chỉ trôi khi bạn sẵn sàng.',
-                              style: TextStyle(
-                                fontSize: 9,
-                                color: imperialGold,
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            if (s.points == 0 && s.overtime == 0)
-              Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: TextButton(
-                  onPressed: busy ? null : _overtimeDialog,
-                  child: const Text(
-                    'Làm thêm',
-                    style: TextStyle(fontSize: 11, color: Color(0xFFFFAC8E)),
-                  ),
-                ),
-              ),
-            if (!s.seasonal)
-              FilledButton(
-                style: FilledButton.styleFrom(
-                  backgroundColor: terracotta,
-                  foregroundColor: imperialIvory,
-                  side: const BorderSide(color: imperialGold),
-                ),
-                onPressed: busy ? null : _nextWeek,
-                child: Text(
-                  formatGameNumbers(
-                    desktop ? 'Sang tuần tiếp theo   →' : 'Sang tuần  →',
-                  ),
-                  style: const TextStyle(fontSize: 12),
-                ),
-              ),
-          ],
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 
   Future<void> _overtimeDialog() async {
     final yes = await showDialog<bool>(

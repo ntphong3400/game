@@ -45,7 +45,7 @@ void main() {
     const Size(320, 568),
   ]) {
     for (final route in ['citadel', 'capital', 'court']) {
-      testWidgets('top bar shows page, parent and season at $size on $route', (
+      testWidgets('top bar shows season and actions at $size on $route', (
         tester,
       ) async {
         final controller = await start(tester, size, route: route);
@@ -68,7 +68,16 @@ void main() {
           route == 'citadel' ? findsNothing : findsOneWidget,
         );
         expect(find.byKey(const ValueKey('web-hud-stat-scroll')), findsNothing);
-        expect(find.byKey(const ValueKey('citadel-actions')), findsNothing);
+        final remaining = find.byKey(const ValueKey('hud-actions-remaining'));
+        expect(find.descendant(of: hud, matching: remaining), findsOneWidget);
+        expect(
+          tester.widget<Text>(remaining).data,
+          '${controller.state!.points} hành động còn lại',
+        );
+        expect(
+          find.text('${controller.state!.points} hành động còn lại'),
+          findsOneWidget,
+        );
         for (final label in [
           'Ngân khố',
           'Số dân',
@@ -111,24 +120,30 @@ void main() {
     }
   }
 
-  testWidgets(
-    'loading the save refreshes the calendar without restoring metrics',
-    (tester) async {
-      final controller = await start(tester, const Size(390, 844));
-      await (controller.gateway as LocalGameGateway).store.update((archive) {
-        archive.active!.completedWeeks += 1;
-        archive.active!.treasury = 1234567;
-      });
-      await controller.load();
-      await tester.pumpAndSettle();
-      expect(
-        tester.widget<Text>(find.byKey(const ValueKey('room-calendar'))).data,
-        'Mùa ${controller.state!.season}',
-      );
-      expect(find.byKey(const ValueKey('web-hud-stat-treasury')), findsNothing);
-      expect(tester.takeException(), isNull);
-    },
-  );
+  testWidgets('loading the save refreshes the calendar and remaining actions', (
+    tester,
+  ) async {
+    final controller = await start(tester, const Size(390, 844));
+    await (controller.gateway as LocalGameGateway).store.update((archive) {
+      archive.active!.completedWeeks += 1;
+      archive.active!.treasury = 1234567;
+      archive.active!.points = 5;
+    });
+    await controller.load();
+    await tester.pumpAndSettle();
+    expect(
+      tester.widget<Text>(find.byKey(const ValueKey('room-calendar'))).data,
+      'Mùa ${controller.state!.season}',
+    );
+    expect(
+      tester
+          .widget<Text>(find.byKey(const ValueKey('hud-actions-remaining')))
+          .data,
+      '5 hành động còn lại',
+    );
+    expect(find.byKey(const ValueKey('web-hud-stat-treasury')), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets('legacy save uses the same top bar without population metrics', (
     tester,
