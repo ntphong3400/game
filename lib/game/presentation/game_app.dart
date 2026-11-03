@@ -3,6 +3,8 @@ import '../logic/currency_rules.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'game_routes.dart';
+import 'music/background_music.dart';
+import 'music/music_scope.dart';
 import 'widgets/imperial_dialog.dart';
 import '../../app/game_controller.dart';
 import '../data/content.dart';
@@ -17,11 +19,10 @@ import 'widgets/population_panel.dart';
 import '../logic/population_rules.dart';
 import '../logic/reign_rules.dart';
 import '../logic/harem_rules.dart';
-import '../logic/palace_rules.dart';
 import '../logic/petition_assignment_rules.dart';
 import '../logic/health_rules.dart';
 import '../logic/chain_settlement_rules.dart';
-import 'widgets/palace_panel.dart';
+import 'widgets/harem_quest_panel.dart';
 import 'widgets/citadel_hub.dart';
 import 'widgets/capital_hub.dart';
 import 'widgets/locality_hub.dart';
@@ -66,9 +67,11 @@ class GameApp extends StatefulWidget {
     required this.controller,
     this.initialRoute,
     this.outcomeReadStore,
+    this.musicController,
   });
   final GameController controller;
   final OutcomeReadStore? outcomeReadStore;
+  final BackgroundMusicController? musicController;
 
   /// Starting section; existing section tests can open their subject directly.
   final String? initialRoute;
@@ -76,7 +79,19 @@ class GameApp extends StatefulWidget {
   State<GameApp> createState() => _GameAppState();
 }
 
-class _GameAppState extends State<GameApp> {
+class _GameAppState extends State<GameApp> with WidgetsBindingObserver {
+  late final _ownsMusic = widget.musicController == null;
+  late final _music =
+      _ownsMusic ? BackgroundMusicController() : widget.musicController!;
+  void _syncMusic() => _music.selectLocation(
+    GameLocation.parse(router.routeInformationProvider.value.uri),
+  );
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    _music.setSuspended(state != AppLifecycleState.resumed);
+  }
+
   final routingRefresh = ValueNotifier(0);
   void refreshRouting() {
     final uri = router.routeInformationProvider.value.uri;
@@ -100,6 +115,13 @@ class _GameAppState extends State<GameApp> {
   void initState() {
     super.initState();
     widget.controller.addListener(refreshRouting);
+    WidgetsBinding.instance.addObserver(this);
+    final lifecycle = WidgetsBinding.instance.lifecycleState;
+    _music.setSuspended(
+      lifecycle != null && lifecycle != AppLifecycleState.resumed,
+    );
+    router.routeInformationProvider.addListener(_syncMusic);
+    _syncMusic();
   }
 
   @override
@@ -175,6 +197,9 @@ class _GameAppState extends State<GameApp> {
   @override
   void dispose() {
     widget.controller.removeListener(refreshRouting);
+    WidgetsBinding.instance.removeObserver(this);
+    router.routeInformationProvider.removeListener(_syncMusic);
+    if (_ownsMusic) _music.dispose();
     router.dispose();
     routingRefresh.dispose();
     super.dispose();
@@ -183,6 +208,7 @@ class _GameAppState extends State<GameApp> {
   @override
   Widget build(BuildContext context) => MaterialApp.router(
     routerConfig: router,
+    builder: (context, child) => MusicScope(controller: _music, child: child!),
     title: 'Vạn Tuế — Một đời đế vương',
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
@@ -702,7 +728,7 @@ class _GameShellState extends State<GameShell> {
             'journal' => 'Sử quán',
             'scores' => 'Điện lưu danh',
             'harem' =>
-              palaceManagementOpen ? 'Học tập & cung vụ' : 'Sau rèm châu',
+              palaceManagementOpen ? 'Câu chuyện hậu cung' : 'Sau rèm châu',
             _ => 'Long thể & nhịp sống',
           };
           return Scaffold(
@@ -1452,7 +1478,7 @@ class _GameShellState extends State<GameShell> {
                       Text(formatGameNumbers('${p.name} · ${p.displayRole}')),
                       Text(
                         formatGameNumbers(
-                          '${p.specialty} · năng lực ${p.abilityLabel} · mệt ${p.strain} · bất mãn ${p.discontent}\n${petitionChance(s, e, c, p)}% thành công',
+                          '${p.specialty} · ${p.isConsort ? 'thiện cảm ${p.affection}' : 'năng lực ${p.abilityLabel}'} · mệt ${p.strain} · bất mãn ${p.discontent}\n${petitionChance(s, e, c, p)}% thành công',
                         ),
                         style: const TextStyle(fontSize: 11, color: muted),
                       ),
@@ -1504,6 +1530,9 @@ class _GameShellState extends State<GameShell> {
     if (s.points < 1) return 'Cần 1 hành động.';
     if (s.treasury < actionCost(s, a)) return 'Không đủ ngân khố.';
     if (s.grain < actionGrainCost(s, a)) return 'Không đủ lương thực.';
+    if (a.id == 'buy_grain' && s.grain >= foodCapacity(s)) {
+      return 'Kho lương đã đầy.';
+    }
     if (developmentTasks.contains(a.id)) {
       final reason = developmentBlocked(s, a.id);
       if (reason != null) return reason;
@@ -1621,7 +1650,7 @@ class _GameShellState extends State<GameShell> {
                     padding: 14,
                     child: Text(
                       formatGameNumbers(
-                        '${_actionDescription(a)}\n\nCần chuyên môn ${taskSpecialties[a.id]}. Ước tính dựa trên năng lực, chuyên môn, mệt mỏi, quan hệ và tính cách đã biết. Phẩm chất chưa rõ có thể đổi kết quả; thành công không được bảo đảm. Người đang làm công việc dài hạn không có trong danh sách. ${taskFailureHint(a.id)}',
+                        '${_actionDescription(a)}\n\nCần chuyên môn ${taskSpecialties[a.id]}. Ước tính dựa trên năng lực, chuyên môn, mệt mỏi, quan hệ và tính cách đã biết. Phẩm chất chưa rõ có thể đổi kết quả; thành công không được bảo đảm. Người đang làm công việc dài hạn không có trong danh sách. ${taskFailureHint(a.id, s)}',
                       ),
                       style: const TextStyle(fontSize: 12, height: 1.7),
                     ),
@@ -1709,7 +1738,7 @@ class _GameShellState extends State<GameShell> {
                             'Đúng chuyên môn · ước tính thành công ${actionSuccessChance(s, a.id, person)}%\n\n'
                             'Tốn 1 hành động. Thành công tăng đúng 1 cấp.\n'
                             '${personalityWorkHint(s, person)}'
-                        : '${a.title}\nChuyên môn ${person.specialty} · năng lực ${person.abilityLabel}\n${fitLabel(TaskAssessment.preview(a.id, person, s).fit)} · ước tính thành công ${actionSuccessChance(s, a.id, person)}%\n\nChi ${actionCost(s, a)} ${moneyUnit(s)}${actionGrainCost(s, a) > 0 ? ' và ${whole(actionGrainCost(s, a))} ${foodUnit(s)}' : ''}, 1 hành động. ${actionRewardDescription(s, a.id, person)}\n${personalityWorkHint(s, person)}\n\n${revenueTasks.contains(a.id) ? '${revenueRewardPreview(a.id, person, s)}\n\n' : ''}${taskFailureHint(a.id)} Kinh phí không hoàn lại khi thất bại.',
+                        : '${a.title}\nChuyên môn ${person.specialty} · năng lực ${person.abilityLabel}\n${fitLabel(TaskAssessment.preview(a.id, person, s).fit)} · ước tính thành công ${actionSuccessChance(s, a.id, person)}%\n\nChi ${actionCost(s, a)} ${moneyUnit(s)}${actionGrainCost(s, a) > 0 ? ' và ${whole(actionGrainCost(s, a))} ${foodUnit(s)}' : ''}, 1 hành động. ${actionRewardDescription(s, a.id, person)}\n${personalityWorkHint(s, person)}\n\n${revenueTasks.contains(a.id) ? '${revenueRewardPreview(a.id, person, s)}\n\n' : ''}${taskFailureHint(a.id, s)} Kinh phí không hoàn lại khi thất bại.',
                   ),
                   style: const TextStyle(height: 1.8),
                 ),
@@ -1818,12 +1847,22 @@ class _GameShellState extends State<GameShell> {
       );
     }
     if (harem && s.seasonal && palaceManagementOpen) {
-      return PalacePanel(
+      return HaremQuestPanel(
         state: s,
         busy: busy,
-        onAssign:
+        personId: selectedConsortId,
+        onPerson: _openCharacterMeeting,
+        onOffice:
+            (office) => chooseCourtAppointment(
+              context,
+              s,
+              office,
+              (type, target, option) =>
+                  act(type, target: target, option: option),
+            ),
+        onSend:
             (personId, option) =>
-                act('palace', target: personId, option: option),
+                act('harem-quest', target: personId, option: option),
       );
     }
 
@@ -2079,7 +2118,11 @@ class _GameShellState extends State<GameShell> {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               Text(
-                formatGameNumbers(harem ? 'Hậu cung' : 'Triều thần'),
+                formatGameNumbers(
+                  harem
+                      ? 'Hậu cung ${haremResidentCount(s)}/$haremLimit'
+                      : 'Triều thần',
+                ),
                 style: const TextStyle(
                   fontFamily: 'Lora',
                   fontSize: 27,
@@ -2091,7 +2134,7 @@ class _GameShellState extends State<GameShell> {
                   key: const ValueKey('open-palace-management'),
                   onPressed: () => _showPalaceManagement(true),
                   icon: const Icon(Icons.auto_stories_outlined, size: 17),
-                  label: const Text('Học tập & cung vụ'),
+                  label: const Text('Câu chuyện & passive'),
                 ),
             ],
           ),
@@ -2168,7 +2211,7 @@ class _GameShellState extends State<GameShell> {
               ),
               Text(
                 formatGameNumbers(
-                  '${c.specialty} · năng lực ${c.abilityLabel} · thiện cảm ${c.affection}',
+                  '${c.specialty} · ${c.isConsort ? 'thiện cảm ${c.affection}' : 'năng lực ${c.abilityLabel} · thiện cảm ${c.affection}'}',
                 ),
                 style: const TextStyle(fontSize: 11),
               ),
@@ -2252,13 +2295,14 @@ class _GameShellState extends State<GameShell> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          formatGameNumbers('Năng lực ${c.abilityLabel}'),
-                          style: const TextStyle(
-                            fontFamily: 'Lora',
-                            fontSize: 20,
+                        if (!c.isConsort)
+                          Text(
+                            formatGameNumbers('Năng lực ${c.abilityLabel}'),
+                            style: const TextStyle(
+                              fontFamily: 'Lora',
+                              fontSize: 20,
+                            ),
                           ),
-                        ),
                         Text(
                           formatGameNumbers('Chuyên môn: ${c.specialty}'),
                           style: const TextStyle(fontSize: 12),
@@ -2282,7 +2326,7 @@ class _GameShellState extends State<GameShell> {
         const SizedBox(height: 16),
         _smallMeter('Thiện cảm', c.affection),
         const SizedBox(height: 12),
-        _smallMeter('Năng lực', c.ability),
+        if (!c.isConsort) _smallMeter('Năng lực', c.ability),
         const SizedBox(height: 12),
         KeyedSubtree(
           key: ValueKey('plot-${c.id}'),
@@ -2328,18 +2372,6 @@ class _GameShellState extends State<GameShell> {
         ),
         if (harem && s.seasonal) ...[
           const SizedBox(height: 10),
-          Text(
-            formatGameNumbers(palaceProgress(s, c)),
-            style: const TextStyle(fontSize: 11),
-          ),
-          Text(
-            formatGameNumbers(
-              c.ability >= 100
-                  ? 'Năng lực đã tối đa'
-                  : 'Kinh nghiệm ${c.palaceExperience}/${palaceExperienceNeeded(c.ability)} · ${c.palaceDutiesCompleted} cung vụ · ${c.palaceCoursesCompleted} khóa học',
-            ),
-            style: const TextStyle(fontSize: 10, color: muted),
-          ),
           ExpansionTile(
             tilePadding: EdgeInsets.zero,
             title: const Text(
@@ -2544,11 +2576,12 @@ class _GameShellState extends State<GameShell> {
                           key: ValueKey('harem-affection-${c.id}'),
                           style: const TextStyle(fontSize: 11, color: forest),
                         ),
-                        Text(
-                          formatGameNumbers('Năng lực ${c.abilityLabel}'),
-                          key: ValueKey('harem-ability-${c.id}'),
-                          style: const TextStyle(fontSize: 11, color: forest),
-                        ),
+                        if (!c.isConsort)
+                          Text(
+                            formatGameNumbers('Năng lực ${c.abilityLabel}'),
+                            key: ValueKey('harem-ability-${c.id}'),
+                            style: const TextStyle(fontSize: 11, color: forest),
+                          ),
                       ],
                     ),
                     const SizedBox(height: 8),
@@ -2687,28 +2720,10 @@ class _GameShellState extends State<GameShell> {
           }
           return ok ? s.journal.first.title : controller.error;
         }
-        if (option == 'palace-duty' || option == 'palace-study') {
-          String? feedback;
-          Future<bool> assign(String id, String command) async {
-            final ok = await act(
-              'palace',
-              target: id,
-              option: command,
-              showSnackBar: false,
-            );
-            feedback =
-                ok
-                    ? s.journal.first.title
-                    : controller.error ?? 'Chưa thực hiện được.';
-            return ok;
-          }
-
-          if (option == 'palace-duty') {
-            await choosePalaceDuty(context, s, assign, person: current);
-          } else {
-            await choosePalaceStudy(context, s, assign, person: current);
-          }
-          return feedback;
+        if (option == 'harem-quest') {
+          selectedConsortId = current.id;
+          navigate('harem-management');
+          return null;
         }
         if (option == 'cut-office') {
           final office = courtOfficeFor(s, current.id);
@@ -2756,7 +2771,7 @@ class _GameShellState extends State<GameShell> {
         'expel',
         'demote',
         if (person.inHarem && !person.queen) 'queen',
-        if (person.inHarem && s.seasonal) ...['palace-duty', 'palace-study'],
+        if (person.inHarem && s.seasonal) 'harem-quest',
         if (person.inHarem) 'visit',
       ],
       if (!person.isConsort && s.hasCourtSystem) ...[
@@ -2772,8 +2787,15 @@ class _GameShellState extends State<GameShell> {
       if (id == 'demote-court') return _demotionMeetingAction(person);
       if (id == 'convict') return _convictionMeetingAction(person);
       if (id == 'cut-office') return _courtRetirementAction(person);
-      if (id == 'palace-duty' || id == 'palace-study') {
-        return _palaceMeetingAction(person, id);
+      if (id == 'harem-quest') {
+        return const MeetingAction(
+          id: 'harem-quest',
+          label: 'Câu chuyện & passive',
+          description:
+              'Xem tuyến nhiệm vụ, chi phí, mục tiêu và đóng góp thực nhận.',
+          costLabel: 'Xem không tốn hành động',
+          requiresConfirmation: false,
+        );
       }
       final option =
           options[id] ??
@@ -2788,6 +2810,8 @@ class _GameShellState extends State<GameShell> {
               ? 'Nhân vật không còn hiện diện.'
               : s.ended
               ? 'Triều đại đã kết thúc.'
+              : id == 'invite' && haremAdmissionBlocked(s) != null
+              ? haremAdmissionBlocked(s)
               : id == 'invite' && person.inHarem
               ? 'Đã nhập cung'
               : ['invite', 'queen'].contains(id) &&
@@ -2824,7 +2848,7 @@ class _GameShellState extends State<GameShell> {
         ),
         'queen' => (
           'Sắc phong ${person.name} làm Hoàng hậu.',
-          'Thiện cảm tăng tối đa 18, bất mãn giảm tối đa 18, ảnh hưởng +12; ổn định +${person.ability ~/ 25}.${s.seasonal ? '\n${authoredMoneyText(s, haremPassivePreview(person, asQueen: true, state: s))}' : ''}',
+          'Thiện cảm tăng tối đa 18, bất mãn giảm tối đa 18, ảnh hưởng +12; ổn định +3.${s.seasonal ? '\n${authoredMoneyText(s, haremPassivePreview(person, asQueen: true, state: s))}' : ''}',
           'Phe ${person.faction} +8, phe đối lập −9; người phe đối lập giảm 4 thiện cảm và tăng 4 bất mãn. '
               '${s.court.any((c) => c.queen && c.available && c.id != person.id) ? 'Hoàng hậu hiện tại trở thành Phi tần: thiện cảm −25 (người đã đạt 100 vẫn giữ 100), bất mãn +25; ổn định −10.' : 'Ngôi hậu hiện đang trống.'}',
         ),
@@ -2927,42 +2951,6 @@ class _GameShellState extends State<GameShell> {
         'Ngừng đóng góp, các vị trí đang giữ để trống; công vụ gián đoạn, quân được thu hồi. Không đổi uy quyền hoặc ổn định triều đình.',
     disabledReason: evidenceBlocked(s, person, 75),
   );
-
-  MeetingAction _palaceMeetingAction(Courtier person, String id) {
-    final study = id == 'palace-study';
-    final reason =
-        !person.available
-            ? 'Nhân vật không còn hiện diện.'
-            : s.ended
-            ? 'Triều đại đã kết thúc.'
-            : s.points < 1
-            ? 'Hết hành động'
-            : palacePersonUnavailable(
-                  s,
-                  person,
-                  duty:
-                      study
-                          ? null
-                          : palaceDuties.firstWhere((d) => d.minAbility == 0),
-                ) ??
-                (study && s.treasury < money(s, 20)
-                    ? 'Không đủ ngân khố'
-                    : null);
-    return MeetingAction(
-      id: id,
-      label: study ? 'Theo học trong cung' : 'Giao cung vụ',
-      description:
-          study
-              ? 'Chọn khóa học cho ${person.name}.'
-              : 'Chọn cung vụ cho ${person.name}.',
-      costLabel:
-          study
-              ? '1 hành động · ${moneyText(s, money(s, 20))} · 2 mùa'
-              : 'Chọn việc và xem chi phí',
-      disabledReason: reason,
-      requiresConfirmation: false,
-    );
-  }
 
   MeetingAction _courtRetirementAction(Courtier person) {
     final office = courtOfficeFor(s, person.id);
@@ -3104,15 +3092,13 @@ class _GameShellState extends State<GameShell> {
         '1 hành động · chi ${money(s, 60)} ${moneyUnit(s)} · ảnh hưởng các gia tộc${s.seasonal ? '\n${haremPassivePreview(c, asQueen: true, state: s)}' : ''}',
         money(s, 60),
       ),
-    if (c.inHarem && c.isConsort && s.seasonal) ...[
-      ('palace-duty', 'Giao cung vụ', palaceProgress(s, c), 0),
+    if (c.inHarem && c.isConsort && s.seasonal)
       (
-        'palace-study',
-        'Theo học trong cung',
-        '${money(s, 20)} ${moneyUnit(s)} · 1 hành động · 2 mùa · ${palaceProgress(s, c)}',
-        money(s, 20),
+        'harem-quest',
+        'Câu chuyện & passive',
+        'Xem nhiệm vụ quan hệ và điều kiện đóng góp.',
+        0,
       ),
-    ],
     if (c.inHarem)
       (
         'visit',
@@ -3239,14 +3225,15 @@ class _GameShellState extends State<GameShell> {
                     'investigate' => 'scroll',
                     'dismiss' => 'people',
                     'invite' => 'harem',
-                    'palace-duty' => 'court',
-                    'palace-study' => 'journal',
+                    'harem-quest' => 'journal',
                     _ => 'citizens',
                   }, size: 38),
                   onPressed:
                       s.points < 1 ||
                               s.treasury < option.$4 ||
                               _courtOptionBlocked(c, option.$1) != null ||
+                              (option.$1 == 'invite' &&
+                                  haremAdmissionBlocked(s) != null) ||
                               (['invite', 'queen'].contains(option.$1) &&
                                   haremPromotionBlocked(s, c) != null)
                           ? null
@@ -3322,20 +3309,9 @@ class _GameShellState extends State<GameShell> {
       } else {
         await _replacementDialog(c);
       }
-    } else if (option == 'palace-duty' && mounted) {
-      await choosePalaceDuty(
-        context,
-        s,
-        (id, option) => act('palace', target: id, option: option),
-        person: c,
-      );
-    } else if (option == 'palace-study' && mounted) {
-      await choosePalaceStudy(
-        context,
-        s,
-        (id, option) => act('palace', target: id, option: option),
-        person: c,
-      );
+    } else if (option == 'harem-quest') {
+      selectedConsortId = c.id;
+      navigate('harem-management');
     } else if (option != null) {
       await act('courtier', target: c.id, option: option);
     }

@@ -1,3 +1,5 @@
+> Tài liệu lịch sử. Học tập/cung vụ đã được thay bằng [nhiệm vụ quan hệ hậu cung](harem-relationship-quests.md); các giá và điều kiện dưới đây không còn áp dụng cho lượt theo mùa hiện tại.
+
 # Học tập và cung vụ — 0.14.0
 
 Áp dụng cho lượt chơi theo mùa. Khu Cung vụ & học tập nằm đầu tab Hậu cung; danh sách 12 việc mở trong hộp chọn theo bốn nhóm. Nhân vật có trạng thái rảnh/bận, kinh nghiệm, số cung vụ và khóa học hoàn thành. Điều kiện đóng góp thụ động được thu gọn để đọc khi cần. Có thể giao việc hoặc cho theo học từ hồ sơ từng người.

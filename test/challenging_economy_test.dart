@@ -40,7 +40,7 @@ void main() {
     'new economy is persisted; historical saves and weekly games retain prices',
     () {
       final s = fresh();
-      expect(s.balanceVersion, 1);
+      expect(s.balanceVersion, 2);
       expect(reload(s).challengingEconomy, true);
       s.pending.add(
         Consequence(

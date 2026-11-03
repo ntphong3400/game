@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'food_disruption.dart';
+export 'food_disruption.dart';
 import 'covert_mission.dart';
 export 'covert_mission.dart';
 import '../logic/management_rules.dart' show initializeManagement;
@@ -11,6 +13,8 @@ import 'portraits.dart';
 export 'portraits.dart';
 import 'game_labels.dart';
 export 'game_labels.dart';
+import 'harem_quest.dart';
+export 'harem_quest.dart';
 import 'palace_work.dart';
 export 'palace_work.dart';
 import 'reign.dart';
@@ -28,13 +32,15 @@ export 'calendar.dart';
 export 'personality.dart';
 export 'reign.dart';
 import 'finance.dart';
+import 'food_ledger.dart';
+export 'food_ledger.dart';
 import 'outcome_report.dart';
 export 'finance.dart';
 export 'outcome_report.dart';
 
 const schemaVersion = 2;
-const rulesVersion = 'mvp-0.27.0';
-const contentVersion = 24;
+const rulesVersion = 'mvp-0.28.0';
+const contentVersion = 25;
 
 String specialtyForRole(String role) => switch (role) {
   'Hộ bộ' || 'Thương chính' || 'Quan điền' => 'Kinh tế',
@@ -101,7 +107,7 @@ class Courtier {
     required this.faction,
     required this.trait,
     required this.age,
-    required this.ability,
+    int ability = 0,
     required this.loyalty,
     required this.ambition,
     required this.integrity,
@@ -136,7 +142,8 @@ class Courtier {
     this.portraitId,
     List<Personality>? personalities,
     String? specialty,
-  }) : meritHistory = meritHistory ?? [],
+  }) : ability = role == 'Tiểu thư' ? 0 : ability,
+       meritHistory = meritHistory ?? [],
        _affection = affection.clamp(0, 100),
        specialty = specialty ?? specialtyForRole(role),
        personalities = characterPersonalities(
@@ -282,7 +289,7 @@ class Courtier {
     palaceCoursesCompleted: number(j, 'palaceCoursesCompleted'),
     portraitId: j['portraitId'] is String ? j['portraitId'] as String : null,
     age: number(j, 'age'),
-    ability: number(j, 'ability'),
+    ability: j['role'] == 'Tiểu thư' ? 0 : number(j, 'ability'),
     managementGrowthHalf: number(j, 'managementGrowthHalf'),
     loyalty: number(j, 'loyalty'),
     ambition: number(j, 'ambition'),
@@ -335,13 +342,11 @@ class Courtier {
     'trait': trait,
     'personalities': personalities.map((p) => p.name).toList(),
     'personalityContacts': personalityContacts,
-    'palaceExperience': palaceExperience,
-    'palaceDutiesCompleted': palaceDutiesCompleted,
-    'palaceCoursesCompleted': palaceCoursesCompleted,
+    // Legacy palace XP is intentionally absent from new saves.
     'portraitId': portraitId,
     'age': age,
-    'ability': ability,
-    'managementGrowthHalf': managementGrowthHalf,
+    if (!isConsort) 'ability': ability,
+    if (!isConsort) 'managementGrowthHalf': managementGrowthHalf,
     'loyalty': loyalty,
     'ambition': ambition,
     'integrity': integrity,
@@ -577,7 +582,11 @@ class GameState {
   // New reigns opt into the calibrated economy. Missing on historical saves:
   // never reprice an ongoing reign or rewrite already committed outcomes.
   int balanceVersion = 0;
+  List<FoodWeek> foodWeeks = [];
   bool get challengingEconomy => balanceVersion >= 1;
+  bool get foodPressureEnabled =>
+      balanceVersion >= 2 && seasonal && population != null;
+  List<FoodDisruption> foodDisruptions = [];
   int treasury = 520, people = 65, authority = 62, army = 60;
   int health = 88, stability = 64, grain = 100, levee = 65;
   int economyLevel = 1, agricultureLevel = 1, leveeLevel = 1;
@@ -697,6 +706,9 @@ class GameState {
 
   int nextOfficialCandidate = 0;
   List<WorkOrder> projects = [];
+  int haremVersion = 1;
+  List<HaremQuest> haremQuests = [];
+  Map<String, int> haremChapterTurns = {};
   List<PalaceWork> palaceWorks = [];
   List<PalaceEffect> palaceEffects = [];
   List<Petition> petitions = [];
@@ -785,6 +797,7 @@ class GameState {
           'mvp-0.24.0',
           'mvp-0.25.0',
           'mvp-0.26.0',
+          'mvp-0.27.0',
           rulesVersion,
         ].contains(j['rulesVersion']) ||
         ![
@@ -805,6 +818,7 @@ class GameState {
           21,
           22,
           23,
+          24,
           contentVersion,
         ].contains(j['contentVersion'])) {
       throw const FormatException(
@@ -822,9 +836,23 @@ class GameState {
               .toList(),
     );
     s.revision = number(j, 'revision');
+    s.haremVersion = number(j, 'haremVersion');
+    s.haremQuests =
+        (j['haremQuests'] as List? ?? [])
+            .map((q) => HaremQuest.fromJson(object(q)))
+            .toList();
+    s.haremChapterTurns = Map<String, int>.from(j['haremChapterTurns'] ?? {});
     s.courtSystemVersion = number(j, 'courtSystemVersion');
     s.managementVersion = number(j, 'managementVersion');
     s.balanceVersion = number(j, 'balanceVersion');
+    s.foodWeeks =
+        (j['foodWeeks'] as List? ?? [])
+            .map((e) => FoodWeek.fromJson(object(e)))
+            .toList();
+    s.foodDisruptions =
+        (j['foodDisruptions'] as List? ?? [])
+            .map((v) => FoodDisruption.fromJson(object(v)))
+            .toList();
     s.lastManagementTurn = number(j, 'lastManagementTurn');
     s.lastCourtPassiveTurn = number(j, 'lastCourtPassiveTurn');
     s.courtPersonnelMatters =
@@ -1072,10 +1100,15 @@ class GameState {
   }
 
   Map<String, dynamic> toJson() => {
+    'haremVersion': haremVersion,
+    'haremQuests': haremQuests.map((q) => q.toJson()).toList(),
+    'haremChapterTurns': haremChapterTurns,
     'storySystemVersion': storySystemVersion,
     'courtSystemVersion': courtSystemVersion,
     'managementVersion': managementVersion,
     'balanceVersion': balanceVersion,
+    'foodWeeks': foodWeeks.map((e) => e.toJson()).toList(),
+    'foodDisruptions': foodDisruptions.map((v) => v.toJson()).toList(),
     'lastManagementTurn': lastManagementTurn,
     'lastCourtPassiveTurn': lastCourtPassiveTurn,
     'courtPersonnelMatters':

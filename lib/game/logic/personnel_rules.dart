@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import '../models/game_state.dart';
 import 'personality_rules.dart';
 import 'development_rules.dart';
@@ -76,15 +77,18 @@ String? seasonalActionDescription(GameState s, String task) =>
         ? null
         : switch (task) {
           'commerce' =>
-            'Ứng 40 vốn; qua Hạ–Thu–Đông nếu mở ở Xuân, nhận doanh thu cuối Xuân năm sau. Quan bận đến lúc về; có thể mất vốn.',
+            'Ứng ${moneyText(s, money(s, 40))} vốn; qua Hạ–Thu–Đông nếu mở ở Xuân, nhận doanh thu cuối Xuân năm sau. Quan bận đến lúc về; có thể mất vốn.',
           'collect_arrears' =>
-            'Thuế tồn giảm dần 45 → 15; tiền chuyển vào kho cuối mùa sau. Lòng dân −2, mệt +4, căng thẳng +3; chờ 2 mùa giữa các lần truy thu.',
+            'Thuế tồn giảm dần ${moneyText(s, money(s, 45))} → ${moneyText(s, money(s, 15))}; tiền chuyển vào kho cuối mùa sau. Lòng dân −2, mệt +4, căng thẳng +3; chờ 2 mùa giữa các lần truy thu.',
           'sell_surplus' =>
             'Xuất 40 thóc, giữ lại 25; đối soát và nhận tiền khi khép mùa. Mệt +2, chỉ 1 lần/mùa; có rủi ro mất hàng.',
           'security' =>
             'Chi 55; cơ bản giảm 7 tiến độ mỗi âm mưu, căng thẳng +3. Chờ 3 mùa giữa hai lần huy động, kể cả thất bại; hiệu quả tùy người giỏi An ninh.',
           'maintain_levee' =>
-            'Chi 20; phục hồi cơ bản 12 tình trạng đê ngay khi thành công. Chỉ bảo dưỡng 1 lần/mùa; không tăng cấp công trình.',
+            'Chi ${moneyText(s, money(s, 20))}; phục hồi cơ bản 12 tình trạng đê ngay khi thành công. Chỉ bảo dưỡng 1 lần/mùa; không tăng cấp công trình.',
+          'repair' =>
+            'Chi ${moneyText(s, money(s, 80))}; tu bổ trong ${s.workTurns(4)} mùa, '
+                'cơ bản phục hồi 30 tình trạng đê khi thành công; không tăng cấp công trình.',
           'farm' =>
             'Chi 55; canh tác bổ sung trong 2 mùa, cơ bản +35 thóc và +4 lòng dân một lần. Muốn tăng sản lượng hằng năm, chọn Phát triển nông nghiệp.',
           _ =>
@@ -145,7 +149,11 @@ String revenueRewardPreview(String task, Courtier officer, [GameState? state]) {
   if (task == 'commerce') {
     return 'Ước tính khi thành công ${state?.seasonal == true ? 'cuối ${state!.date(state.week + commerceDuration(state) - 1)}' : 'sau 4 tuần'}: nhận $gain ngân khố trước thất thoát. Đây là doanh thu, chưa trừ ${state == null ? 40 : money(state, 40)} ${state == null ? 'tiền' : moneyUnit(state)} vốn đã chi; phẩm chất chưa rõ có thể đổi kết quả.';
   }
-  return 'Ước tính khi thành công: ngân khố +$gain ${state?.seasonal == true ? (task == 'collect_arrears' ? 'cuối mùa sau' : 'khi khép mùa') : 'ngay'}, trước thất thoát. ${task == 'collect_arrears' ? 'Dù thành công hay thất bại: lòng dân −2, mệt +4, căng thẳng +3; chờ ${state?.seasonal == true ? 2 : 4} ${state?.periodName ?? 'tuần'} mới được truy thu tiếp.' : 'Xuất 40 lương thực, giữ lại ít nhất 25; mệt +2. Thóc đã xuất không được hoàn nếu thất bại; chỉ làm 1 lần/${state?.periodName ?? 'tuần'}.'}';
+  final foodDetail =
+      state?.population != null
+          ? 'Xuất 100.000 tạ, giữ đủ khẩu phần một mùa'
+          : 'Xuất 40 lương thực, giữ lại ít nhất 25';
+  return 'Ước tính khi thành công: ngân khố +$gain ${state?.seasonal == true ? (task == 'collect_arrears' ? 'cuối mùa sau' : 'khi khép mùa') : 'ngay'}, trước thất thoát. ${task == 'collect_arrears' ? 'Dù thành công hay thất bại: lòng dân −2, mệt +4, căng thẳng +3; chờ ${state?.seasonal == true ? 2 : 4} ${state?.periodName ?? 'tuần'} mới được truy thu tiếp.' : '$foodDetail; mệt +2. Thóc đã xuất không được hoàn nếu thất bại; chỉ làm 1 lần/${state?.periodName ?? 'tuần'}.'}';
 }
 
 int specialtyFit(String specialty, String wanted) {
@@ -173,12 +181,12 @@ String fitLabel(int fit) =>
 class TaskAssessment {
   TaskAssessment(this.task, this.officer, [this.state])
     : fit = specialtyFit(officer.specialty, taskSpecialties[task]!),
-      ability = officer.abilityScore,
+      ability = officer.isConsort ? officer.affection : officer.abilityScore,
       strain = officer.strain,
       personality = PersonalityAssessment(officer, state);
   TaskAssessment.preview(this.task, this.officer, [this.state])
     : fit = specialtyFit(officer.specialty, taskSpecialties[task]!),
-      ability = officer.abilityScore,
+      ability = officer.isConsort ? officer.affection : officer.abilityScore,
       strain = officer.strain,
       personality = PersonalityAssessment(officer, state, knownOnly: true);
   TaskAssessment.forSpecialty(
@@ -188,7 +196,7 @@ class TaskAssessment {
     this.state, {
     bool knownOnly = false,
   }) : fit = specialtyFit(officer.specialty, specialty),
-       ability = officer.abilityScore,
+       ability = officer.isConsort ? officer.affection : officer.abilityScore,
        strain = officer.strain,
        personality = PersonalityAssessment(
          officer,
@@ -217,7 +225,7 @@ class TaskAssessment {
       .round()
       .clamp(10, 180);
   int reward(int base) =>
-      base <= 0 ? base : (base * rewardPercent / 100).round().clamp(1, 999);
+      base <= 0 ? base : math.max(1, (base * rewardPercent / 100).round());
 }
 
 int appointmentRank(String destinationRole) =>
@@ -255,7 +263,6 @@ bool officerBusy(GameState s, String id) =>
         false) ||
     (s.population?.orders.any((o) => o.officerId == id) ?? false) ||
     s.projects.any((p) => p.officerId == id) ||
-    s.palaceWorks.any((p) => p.personId == id) ||
     s.pending.any((p) => p.assignment?.assigneeId == id) ||
     s.pending.any((p) => p.kind == 'envoy' && p.target == id) ||
     (s.major?.objectives.any((o) => o.working && o.officerId == id) ?? false);
@@ -296,7 +303,9 @@ List<Courtier> taskOfficers(GameState s, String task) {
 }
 
 String abilityExplanation(Courtier c) =>
-    'Năng lực ${c.ability} thể hiện khả năng làm việc. Chuyên môn: ${c.specialty}. Đúng chuyên môn và năng lực cao giúp tăng xác suất thành công và mức thu được. Giao trái chuyên môn hoặc năng lực thấp dễ thất bại, có thể làm giảm các chỉ số quốc gia. Chuyên môn không tự đổi khi được bổ nhiệm chức vụ mới.';
+    c.isConsort
+        ? 'Nhân vật hậu cung không có chỉ số năng lực. Thiện cảm và câu chuyện quyết định đóng góp; tấu chương xét thiện cảm, chuyên môn và tính cách đã biết.'
+        : 'Năng lực ${c.ability} thể hiện khả năng làm việc. Chuyên môn: ${c.specialty}. Đúng chuyên môn và năng lực cao giúp tăng xác suất thành công và mức thu được. Giao trái chuyên môn hoặc năng lực thấp dễ thất bại, có thể làm giảm các chỉ số quốc gia. Chuyên môn không tự đổi khi được bổ nhiệm chức vụ mới.';
 
 int actionSuccessChance(GameState s, String task, Courtier c) =>
     developmentTasks.contains(task)
@@ -326,23 +335,28 @@ String roleAbilityExplanation(Courtier c, [GameState? state]) {
     'Đại tướng' =>
       'Đóng góp ${roleEffect(c, 'Quân sự', c.ability ~/ 3)} điểm sức phòng thủ, tính cả độ phù hợp Quân sự.',
     'Tiểu thư' =>
-      'Khi phong hậu: Ổn định triều đình +${c.ability ~/ 25}. Năng lực từ 75 và thiện cảm trên 40 giúp thêm 1 Ổn định triều đình mỗi 3 tuần.',
+      'Mở câu chuyện ở thiện cảm ≥60; hoàn thành và thiện cảm >70 để đóng góp. Hoàng hậu có tuyến riêng ở thiện cảm ≥85.',
     _ =>
       'Khi giao quốc sự, hãy xem chuyên môn và dự báo kết quả trong danh sách người phụ trách.',
   };
 }
 
-String taskFailureHint(String task) => switch (task) {
+String taskFailureHint(String task, [GameState? state]) => switch (task) {
   'upgrade_economy' || 'upgrade_farm' || 'upgrade_levee' =>
     'Khi hết thời gian thi công mới xét thành công. Thất bại giữ nguyên cấp, vốn đã chi không hoàn lại. Quan rời triều thì dự án tạm dừng, có thể bổ nhiệm người thay.',
   'maintain_levee' =>
     'Bảo dưỡng có thể thất bại: mất kinh phí và đê hư thêm 2 điểm.',
   'collect_arrears' =>
-    'Thất bại không thu được tiền, giảm uy quyền/lòng dân; thất bại nặng còn mất 10 ngân khố và 2 Ổn định triều đình.',
+    'Thất bại không thu được tiền, giảm uy quyền/lòng dân; thất bại nặng còn mất '
+        '${state == null ? '10 ngân khố' : moneyText(state, money(state, 10))} và 2 Ổn định triều đình.',
   'sell_surplus' =>
-    'Thất bại mất 40 thóc đã xuất mà không thu được tiền, giảm uy quyền/lòng dân; thất bại nặng mất thêm 8 ngân khố.',
+    'Thất bại mất ${state?.population == null ? '40 thóc' : '100.000 tạ'} đã xuất mà không thu được tiền, '
+        'giảm uy quyền/lòng dân; thất bại nặng mất thêm '
+        '${state == null ? '8 ngân khố' : moneyText(state, money(state, 8))}.',
   'commerce' =>
-    'Thất bại không có doanh thu, mất 40 vốn và thêm 10 ngân khố/1 uy quyền; thất bại nặng mất thêm 20 ngân khố/2 uy quyền/2 lòng dân.',
+    'Thất bại không có doanh thu, mất ${state == null ? '40' : moneyText(state, money(state, 40))} vốn '
+        'và thêm ${state == null ? '10 ngân khố' : moneyText(state, money(state, 10))}/1 uy quyền; '
+        'thất bại nặng mất thêm ${state == null ? '20 ngân khố' : moneyText(state, money(state, 20))}/2 uy quyền/2 lòng dân.',
   'train' => 'Thất bại mất quân lực/uy quyền; thất bại nặng còn tốn ngân khố.',
   'repair' =>
     'Thất bại làm đê yếu, mất lòng dân; thất bại nặng mất thêm uy quyền/ngân khố.',

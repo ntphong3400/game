@@ -50,8 +50,14 @@ List<double> warTroopRatios(WarMission m) =>
 int warTroops(WarMission m, double ratio) => roundTroops(m.enemyTroops * ratio);
 int warMissionCost(GameState s, WarMission m, int troops) =>
     money(s, (m.duration == 2 ? 15 : 8) + troops / 1000);
-int warMissionFood(int troops) => foodAmount(troops * 30 * 2 / 100 * 1.1);
-int warFoodCredit(int troops) => foodAmount(troops * 30 * 1.5 / 100);
+int warMissionFood(int troops, [GameState? s, WarMission? mission]) =>
+    s?.foodPressureEnabled == true
+        ? foodAmount(
+          troops * 90 * 2 / 100 * (mission?.duration == 2 ? 1.4 : 1.2),
+        )
+        : foodAmount(troops * 30 * 2 / 100 * 1.1);
+int warFoodCredit(int troops, [GameState? s]) =>
+    foodAmount(troops * (s?.foodPressureEnabled == true ? 90 : 30) * 1.5 / 100);
 
 String? warOfficerBlocked(GameState s, Courtier c) {
   if (!c.available || c.isConsort || c.age < 18) {
@@ -179,7 +185,7 @@ class WarPreview {
             .clamp(1, 100)
             .toDouble();
     cost = warMissionCost(s, m, troops);
-    food = warMissionFood(troops);
+    food = warMissionFood(troops, s, m);
   }
   final int troops;
   late final double command, affection, winChance, base;
@@ -225,7 +231,7 @@ String? warDeployBlocked(
   }
   if (s.points < 1) return 'Cần 1 hành động.';
   if (s.treasury < warMissionCost(s, m, troops)) return 'Ngân khố không đủ.';
-  if (s.grain < warMissionFood(troops)) return 'Kho lương không đủ.';
+  if (s.grain < warMissionFood(troops, s, m)) return 'Kho lương không đủ.';
   return null;
 }
 

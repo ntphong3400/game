@@ -9,7 +9,6 @@ import 'package:van_tue/game/logic/game_gateway.dart';
 import 'package:van_tue/game/logic/personnel_rules.dart';
 import 'package:van_tue/game/logic/population_rules.dart';
 import 'package:van_tue/game/logic/chain_settlement_rules.dart';
-import 'package:van_tue/game/logic/palace_rules.dart';
 import 'package:van_tue/game/logic/reign_rules.dart';
 import 'package:van_tue/game/models/game_state.dart';
 
@@ -86,7 +85,6 @@ void main() {
       appointmentCost(candidate, 'Tri phủ', s),
       appointmentCost(candidate, 'Tri phủ') * 100,
     );
-    expect(palaceDutyCost(s, palaceDuty('charity')!), 2000);
     s.treasury = 8000;
     expect(PersonalityAssessment(s.court.first, s).scarce, false);
     s.treasury = 7999;
@@ -102,7 +100,7 @@ void main() {
     final s = fresh();
     expect(budgetIncome(s).first.amount, 8000);
     expect(budgetExpenses(s)['army']!.amount, 4500);
-    expect(budgetExpenses(s)['people']!.amount, 2000);
+    expect(budgetExpenses(s).containsKey('people'), false);
     s.population!.productiveCivilians = 950001;
     expect(budgetIncome(s).first.amount, 8001);
     s.population!.productiveCivilians = 950000;
@@ -116,7 +114,7 @@ void main() {
     () {
       var s = send(fresh(), 'population', target: 'settle');
       expect(s.treasury, 46000);
-      expect(s.grain, 3993000);
+      expect(s.grain, 3991250);
       s = send(s, 'courtier', target: 'general', option: 'reward');
       expect(s.treasury, 44000);
       reconcile(s);
@@ -161,7 +159,7 @@ void main() {
     expect(currencyEvent(s, e).choices.first.cost, 5000);
     s = send(s, 'petition', target: 'population_refugees', option: '0');
     expect(s.treasury, 45000);
-    expect(s.grain, 3990000);
+    expect(s.grain, 3987500);
     reconcile(s);
   });
   test(
@@ -301,7 +299,7 @@ void main() {
     },
   );
   test(
-    'palace price reductions and study costs use gold without multiplying buffs twice',
+    'retired palace discounts cannot change native gold treatment costs',
     () {
       final s = fresh();
       s.palaceEffects.add(
@@ -314,10 +312,9 @@ void main() {
           uses: 1,
         ),
       );
-      expect(palaceTreatmentDiscount(s), 800);
-      expect(actionCost(s, actions.firstWhere((a) => a.id == 'treat')), 1700);
+      expect(actionCost(s, actions.firstWhere((a) => a.id == 'treat')), 2500);
       final result = send(s, 'action', target: 'treat');
-      expect(result.treasury, 48300);
+      expect(result.treasury, 47500);
       reconcile(result);
     },
   );

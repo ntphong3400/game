@@ -6,15 +6,49 @@ extension PopulationEngine on GameEngine {
     p.changes.update(label, (n) => n + amount, ifAbsent: () => amount);
   }
 
-  void _food(GameState s, int amount, String title) {
+  int _food(
+    GameState s,
+    int amount,
+    String title, {
+    String detail = '',
+    String category = 'event',
+    int? requested,
+    int applied = 0,
+    int rationNeed = 0,
+  }) {
     if (s.population == null) {
       s.grain += amount;
-      return;
+      return amount;
     }
-    final next = (s.grain + amount).clamp(0, foodCapacity);
+    _foodWeek(s);
+    final next = (s.grain + amount).clamp(0, foodCapacity(s));
     final actual = next - s.grain;
     s.grain = next;
+    if (actual != 0 || (requested ?? amount) != 0 || applied > 0) {
+      _recordFood(
+        s,
+        FoodEntry(
+          title: title,
+          detail: detail,
+          category: category,
+          amount: actual,
+          requested: requested ?? amount,
+          balanceAfter: s.grain,
+          applied: applied,
+          rationNeed: rationNeed,
+        ),
+      );
+    }
     _populationChange(s, '$title (tạ)', actual);
+    if (amount > actual) {
+      s.note(
+        'Kho lương đầy',
+        '$title: nhận ${whole(actual)} tạ; ${whole(amount - actual)} tạ vượt sức chứa '
+            '${whole(foodCapacity(s))} tạ, không thể nhập kho.',
+        'warning',
+      );
+    }
+    return actual;
   }
 
   void _recruitPopulation(GameState s, int count, {double training = 20}) {
@@ -122,7 +156,7 @@ extension PopulationEngine on GameEngine {
     _spend(
       s,
       money(s, populationActionMoney(kind)),
-      grain: populationActionFood(kind),
+      grain: populationActionFood(kind, s),
       title: populationActionNames[kind]!,
       detail: populationActionHint(s, kind),
     );
@@ -142,7 +176,11 @@ extension PopulationEngine on GameEngine {
         p.changeMorale(8 / (uses + 1));
         s.actionCounts[kind] = uses + 1;
       case 'supply_army':
-        p.foodCredit += populationActionFood(kind);
+        _prepayFood(
+          s,
+          populationActionFood(kind, s),
+          'Khẩu phần tiếp tế đã cấp trước',
+        );
       default:
         final count = switch (kind) {
           'settle' || 'recruit' || 'equipment' => 5000,
@@ -259,12 +297,19 @@ extension PopulationEngine on GameEngine {
     s.affairsThisWeek++;
   }
 
-  bool _populationEffect(GameState s, String key, int value, String title) {
+  bool _populationEffect(
+    GameState s,
+    String key,
+    int value,
+    String title, {
+    String detail = '',
+    String category = 'event',
+  }) {
     final p = s.population;
     if (p == null) return false;
     switch (key) {
       case 'food':
-        _food(s, value, title);
+        _food(s, value, title, detail: detail, category: category);
       case 'training':
         p.changeTraining(value.toDouble());
       case 'equipment':
@@ -318,6 +363,15 @@ extension PopulationEngine on GameEngine {
     p.yearlyFarmLabor += farmLaborFactor(s);
     p.yearlyEconomicLabor += economicLaborFactor(s);
     p.yearlyLaborSamples++;
+    if (s.foodPressureEnabled &&
+        (foodProductionLoss(s) > 0 || p.campaignWorkers > 0)) {
+      s.note(
+        'Sản xuất bị gián đoạn',
+        '${foodPressureHint(s)} '
+            'Đã ghi hệ số lao động và năng suất ${(farmLaborFactor(s) * 100).toStringAsFixed(1)}% cho mùa này; không sửa ngược các mùa đã chốt.',
+        'warning',
+      );
+    }
   }
 
   void _populationSeason(GameState s) {
@@ -472,6 +526,10 @@ extension PopulationEngine on GameEngine {
     p.serviceSoldiers = p.soldiers;
     p.productiveCivilians = p.civilians;
     p.foodCredit = 0;
+    p.campaignWorkers =
+        s.foodPressureEnabled
+            ? p.deployments.fold<int>(0, (n, d) => n + d.troops)
+            : 0;
     p.wageCoverage = 100;
     p.changes = {};
   }
@@ -483,7 +541,19 @@ extension PopulationEngine on GameEngine {
     final coverage = need == 0 ? 100.0 : available * 100 / need;
     p.logistics = .6 * coverage + .4 * p.wageCoverage;
     if (coverage < 100) p.changeMorale(-(100 - coverage) / 10);
-    _food(s, -available, 'Tiêu dùng dân sự và quân đội');
+    final total = populationFoodConsumption(s);
+    final credit = math.min(total, p.foodCredit);
+    _food(
+      s,
+      -available,
+      'Tiêu dùng dân sự và quân đội',
+      category: 'consumption',
+      requested: -need,
+      applied: credit,
+      rationNeed: total,
+      detail:
+          'Khẩu phần ${whole(total)} − đã cấp trước ${whole(credit)} = còn phải cấp ${whole(need)} tạ.',
+    );
     if (available < need) {
       _losePopulation(
         s,
@@ -534,7 +604,11 @@ extension PopulationEngine on GameEngine {
     if (leader != null) _assignOfficer(s, leader);
     // Thirty days of expedition food is prepaid in grainCost. Credit only the
     // ordinary 1.5-cân ration; the expedition premium remains a real cost.
-    p.foodCredit += foodAmount(c.troops * 30 * 1.5 / 100);
+    _prepayFood(
+      s,
+      foodAmount(c.troops * 30 * 1.5 / 100),
+      'Khẩu phần nhiệm vụ: ${e.title}',
+    );
     p.deployments.add(
       ArmyDeployment(
         id: '${s.runId}-${s.revision}-${e.id}',
@@ -554,6 +628,7 @@ extension PopulationEngine on GameEngine {
         failureEffects: c.laterFailureEffects,
       ),
     );
+    _recordCampaignWorkers(s);
     s.note(
       'Điều quân: ${e.title}',
       '${whole(c.troops)} quân làm nhiệm vụ trong mùa này; '

@@ -5,7 +5,6 @@ import 'harem_rules.dart';
 import 'population_rules.dart';
 import 'currency_rules.dart';
 import 'warfare_rules.dart';
-import 'palace_rules.dart';
 import 'development_rules.dart';
 import 'court_rules.dart';
 
@@ -69,7 +68,7 @@ List<BudgetItem> budgetIncome(GameState s) => [
     BudgetItem(
       'Gia sản hậu cung: ${contribution.person.name}',
       '${authoredMoneyText(s, contribution.description)}. Hỗ trợ từ ${contribution.person.faction}; '
-          'cần thiện cảm >70 và năng lực >60. Tổng tối đa ${money(s, 20)} ${moneyUnit(s)}/mùa, chưa trừ chi hậu cung.',
+          'cần hoàn thành câu chuyện và thiện cảm >70. Tổng tối đa ${money(s, 50)} ${moneyUnit(s)}/mùa, chưa trừ chi hậu cung.',
       money(s, contribution.amount),
     ),
   if (s.autumnTaxDue)
@@ -108,7 +107,7 @@ List<BudgetItem> budgetIncome(GameState s) => [
 
 Map<String, BudgetItem> budgetExpenses(GameState s) {
   final consorts = s.court.where((c) => c.available && c.inHarem).length;
-  final saving = s.seasonal ? palaceUpkeepSaving(s) : 0;
+  const saving = 0;
   return {
     for (final item in tributePayments(s))
       'tribute:${item.country.id}': BudgetItem(
@@ -126,11 +125,12 @@ Map<String, BudgetItem> budgetExpenses(GameState s) {
           ? (s.seasonal ? 45 + s.war * 12 : 12 + s.war * 3)
           : money(s, (45 + s.war * 12) * s.population!.serviceSoldiers / 50000),
     ),
-    'people': BudgetItem(
-      'Dân sinh thường lệ',
-      '${money(s, s.seasonal ? 20 : 5)} ${moneyUnit(s)} mỗi ${s.periodName}; mở kho cứu tế chủ động được tính riêng.',
-      money(s, s.seasonal ? 20 : 5),
-    ),
+    if (!s.foodPressureEnabled)
+      'people': BudgetItem(
+        'Dân sinh thường lệ',
+        '${money(s, s.seasonal ? 20 : 5)} ${moneyUnit(s)} mỗi ${s.periodName}; mở kho cứu tế chủ động được tính riêng.',
+        money(s, s.seasonal ? 20 : 5),
+      ),
     if (reignStage(s) > 0)
       'realm': BudgetItem(
         'Điều hành giai đoạn ${reignStageName(s)}',
@@ -147,16 +147,19 @@ Map<String, BudgetItem> budgetExpenses(GameState s) {
       ),
     'court': BudgetItem(
       'Triều đình và hậu cung',
-      '${money(s, s.seasonal ? 30 : 8)} ${moneyUnit(s)} nền + $consorts phi tần/hoàng hậu × ${money(s, s.seasonal ? 6 : 2)}.'
-          '${saving > 0 ? ' Cung vụ tiết kiệm ${money(s, saving)} ${moneyUnit(s)} kỳ này.' : ''}',
+      '${money(s, s.seasonal ? 30 : 8)} ${moneyUnit(s)} nền + $consorts phi tần/hoàng hậu × ${money(s, s.seasonal ? 6 : 2)}.',
       money(s, s.seasonal ? 30 + consorts * 6 - saving : 8 + consorts * 2),
     ),
   };
 }
 
 List<String> budgetPaymentOrder(GameState s) => [
-  s.priority,
-  s.priority == 'army' ? 'people' : 'army',
+  if (s.foodPressureEnabled)
+    'army'
+  else ...[
+    s.priority,
+    s.priority == 'army' ? 'people' : 'army',
+  ],
   'court',
   if (reignStage(s) > 0) 'realm',
   for (final o in s.obligations.where(

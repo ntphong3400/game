@@ -9,20 +9,33 @@ import 'package:van_tue/game/logic/finance_rules.dart';
 import 'package:van_tue/game/logic/personnel_rules.dart';
 import 'package:van_tue/game/logic/petition_assignment_rules.dart';
 import 'package:van_tue/game/logic/population_rules.dart';
+import 'package:van_tue/game/logic/warfare_rules.dart';
+import 'package:van_tue/game/logic/frontier_rules.dart';
 import 'package:van_tue/game/models/game_state.dart';
 
 /// Deterministic, public-information heuristic, not an optimal player.
 /// Never peeks at RNG, plots, loyalty, hidden qualities or committed outcomes.
 /// Every state transition goes through a real command, including end-of-season.
 class BalancePlayer {
-  BalancePlayer(this.seed, this.policy, {bool baseline = false})
-    : engine = GameEngine(challengeBalance: !baseline);
+  BalancePlayer(
+    this.seed,
+    this.policy, {
+    bool baseline = false,
+    bool previousFood = false,
+  }) : engine = GameEngine(
+         challengeBalance: !baseline,
+         foodBalance: !previousFood,
+       );
   final int seed;
   final String policy;
   final GameEngine engine;
   late GameState s = engine.start('balance-$seed', 'Balance', seed);
   final rejected = <String, int>{};
   int minimumCash = 50000, peakDebt = 0, completedChains = 0;
+  int minimumFood = 4000000, shortageSeasons = 0, lowReserveSeasons = 0;
+  int harvested = 0, foodPurchases = 0, agricultureUpgrades = 0;
+  int deployed = 0, resupplied = 0, warSeasons = 0;
+  final foodTrace = <Map<String, dynamic>>[];
   bool send(String type, String target, String option, {String assignee = ''}) {
     try {
       s = engine.execute(
@@ -39,6 +52,32 @@ class BalancePlayer {
       );
       minimumCash = math.min(minimumCash, s.treasury);
       peakDebt = math.max(peakDebt, s.debt);
+      minimumFood = math.min(minimumFood, s.grain);
+      if (type == 'action' && target == 'buy_grain') foodPurchases++;
+      if (type == 'action' && target == 'upgrade_farm') agricultureUpgrades++;
+      if (type == 'endWeek') {
+        if (s.warfare?.active != null) warSeasons++;
+        if (s.journal.any(
+          (j) =>
+              j.week == s.week - (s.ended ? 0 : 1) &&
+              j.title == 'Thiếu khẩu phần',
+        )) {
+          shortageSeasons++;
+        }
+        if (foodDays(s) < 90) lowReserveSeasons++;
+        if (s.lastHarvestYear > 0 &&
+            s.lastHarvestYear * 4 - 1 == s.week - (s.ended ? 0 : 1)) {
+          harvested += s.lastHarvestAmount;
+        }
+        foodTrace.add({
+          'turn': s.completedWeeks,
+          'food': s.grain,
+          'days': foodDays(s),
+          'farmLevel': s.agricultureLevel,
+          'population': s.population!.population,
+          'war': s.war,
+        });
+      }
       return true;
     } on GameRuleException catch (e) {
       rejected.update('$type:$target:$e', (v) => v + 1, ifAbsent: () => 1);
@@ -228,6 +267,53 @@ class BalancePlayer {
     return false;
   }
 
+  bool campaign() {
+    final active = s.warfare?.active;
+    if (active == null) {
+      if (s.treasury < 15000) return false;
+      final enemy =
+          s.warfare!.neighbors
+              .where((n) => n.status != 'treaty' && n.cooldownUntil <= s.week)
+              .firstOrNull;
+      return enemy != null &&
+          send('war', enemy.id, jsonEncode({'action': 'declare'}));
+    }
+    for (final m in s.warfare!.missions.where(
+      (m) => m.status == 'deployed' && m.intervention,
+    )) {
+      if (s.grain >= warMissionFood(m.troops, s, m) && s.treasury >= 1000) {
+        if (send('war', m.id, jsonEncode({'action': 'intervene'}))) {
+          resupplied++;
+          return true;
+        }
+      }
+    }
+    final leaders = warOfficers(s);
+    for (final m in s.warfare!.missions.where((m) => m.status == 'open')) {
+      for (final ratio in warTroopRatios(m).reversed) {
+        final troops = warTroops(m, ratio);
+        if (troops > missionAvailable(s, m) ||
+            s.grain <
+                warMissionFood(troops, s, m) + populationFoodConsumption(s)) {
+          continue;
+        }
+        for (final leader in leaders) {
+          if (warDeployBlocked(s, m, ratio, leader, null) != null) continue;
+          if (send(
+            'war',
+            m.id,
+            jsonEncode({'action': 'deploy', 'ratio': ratio}),
+            assignee: leader.id,
+          )) {
+            deployed++;
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   GameState run(int cap) {
     while (!s.ended && s.completedWeeks < cap) {
       if (policy != 'idle') {
@@ -257,7 +343,9 @@ class BalancePlayer {
             continue;
           }
           final enemy = s.warfare?.active;
-          if (enemy != null &&
+          if (policy == 'campaign' && campaign()) continue;
+          if (policy != 'campaign' &&
+              enemy != null &&
               !diplomacyAttempted &&
               s.treasury > 2500 &&
               send(
@@ -365,12 +453,18 @@ void main(List<String> args) {
       'no-maintenance',
       'neglect',
       'idle',
+      'campaign',
     ].contains(policy)) {
       throw ArgumentError(policy);
     }
     final players = [
       for (var seed = start; seed < start + count; seed++)
-        BalancePlayer(seed, policy, baseline: args.contains('--baseline')),
+        BalancePlayer(
+          seed,
+          policy,
+          baseline: args.contains('--baseline'),
+          previousFood: args.contains('--previous-food'),
+        ),
     ];
     final runs = [for (final p in players) p.run(cap)];
     final seasons = runs.map((s) => s.completedWeeks).toList()..sort();
@@ -379,7 +473,10 @@ void main(List<String> args) {
       endings.update(s.endKind ?? 'alive', (v) => v + 1, ifAbsent: () => 1);
     }
     final report = {
-      'profile': args.contains('--baseline') ? '0.26' : '0.27',
+      'profile':
+          args.contains('--baseline')
+              ? '0.26'
+              : (runs.first.foodPressureEnabled ? '0.28' : '0.27'),
       'policy': policy,
       'seeds': count,
       'startSeed': start,
@@ -403,6 +500,34 @@ void main(List<String> args) {
       ),
       'rejectionExamples':
           players.expand((p) => p.rejected.keys).toSet().take(5).toList(),
+      'shortageSeasons': players.fold(0, (n, p) => n + p.shortageSeasons),
+      'runsWithShortage': players.where((p) => p.shortageSeasons > 0).length,
+      'lowReserveSeasons': players.fold(0, (n, p) => n + p.lowReserveSeasons),
+      'foodPurchases': players.fold(0, (n, p) => n + p.foodPurchases),
+      'deployments': players.fold(0, (n, p) => n + p.deployed),
+      'resupplyPayments': players.fold(0, (n, p) => n + p.resupplied),
+      'warSeasons': players.fold(0, (n, p) => n + p.warSeasons),
+      'agricultureUpgrades': players.fold(
+        0,
+        (n, p) => n + p.agricultureUpgrades,
+      ),
+      'totalHarvested': players.fold(0, (n, p) => n + p.harvested),
+      'medianMinimumFood':
+          (players.map((p) => p.minimumFood).toList()
+            ..sort())[(count - 1) ~/ 2],
+      'medianFinalFood':
+          (runs.map((s) => s.grain).toList()..sort())[(count - 1) ~/ 2],
+      if (args.contains('--runs'))
+        'runs': [
+          for (var i = 0; i < players.length; i++)
+            {
+              'seed': players[i].seed,
+              'seasons': runs[i].completedWeeks,
+              'end': runs[i].endKind,
+              'shortageSeasons': players[i].shortageSeasons,
+              'trace': players[i].foodTrace,
+            },
+        ],
     };
     stdout.writeln(jsonEncode(report));
     if (args.contains('--trace')) {

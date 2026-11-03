@@ -127,7 +127,7 @@ void main() {
           expect(lan(result).loyalty, person.loyalty);
           expect(lan(result).influence, person.influence);
           expect(lan(result).ambition, person.ambition);
-          expect(lan(result).ability, person.ability);
+          expect(lan(result).ability, 0);
           expect(result.court.where((c) => c.queen), isEmpty);
           expect(haremPassives(lan(result)).length, 1);
           expect(
@@ -227,47 +227,18 @@ void main() {
   }
 
   test(
-    'a demoted consort stops studying without a refund or experience reward',
+    'demotion preserves an allocated personal story without ability or XP',
     () {
       final engine = GameEngine();
       var s = fresh(engine, 'Phi tần');
-      s.treasury = 100000;
-      s = engine.execute(
-        s,
-        GameCommand(
-          id: 'study',
-          runId: s.runId,
-          expectedRevision: s.revision,
-          type: 'palace',
-          target: 'consort_lan',
-          option: 'study',
-        ),
-      );
-      final ability = lan(s).ability;
-      final experience = lan(s).palaceExperience;
+      engine.prepareHaremQuests(s);
+      final route = haremQuestFor(s, 'consort_lan')!.definitionId;
       final treasury = s.treasury;
       s = engine.execute(s, command(s, 'demote'));
       expect(s.treasury, treasury);
-      expect(s.palaceWorks, hasLength(1));
-      s.petitions.clear();
-      s = engine.execute(
-        s,
-        GameCommand(
-          id: 'close',
-          runId: s.runId,
-          expectedRevision: s.revision,
-          type: 'endWeek',
-        ),
-      );
+      expect(haremQuestFor(s, 'consort_lan')!.definitionId, route);
       expect(s.palaceWorks, isEmpty);
-      expect(lan(s).ability, ability);
-      expect(lan(s).palaceExperience, experience);
-      expect(
-        s.outcomes.any(
-          (o) => o.title.contains(lan(s).name) && o.status == 'interrupted',
-        ),
-        true,
-      );
+      expect(lan(s).toJson().containsKey('ability'), isFalse);
     },
   );
 }

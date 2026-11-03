@@ -34,7 +34,7 @@ MeetingScene meetingSceneFor(Courtier person, {GameState? state}) {
         state == null ? const [] : personMeetingContributions(person, state),
     contributionCondition:
         harem
-            ? 'Điều kiện chung: đã nhập cung, thiện cảm >70 và năng lực >60.'
+            ? 'Hoàn thành câu chuyện cá nhân và thiện cảm >70. Hoàng hậu: tuyến riêng và thiện cảm ≥85. Cam kết xung đột phải được duy trì.'
             : post != null
             ? 'Năng lực >${post.abilityThreshold}, thiện cảm >${post.affectionThreshold}. ${post.growthLabel}.'
             : 'Nhất phẩm: năng lực ≥90, thiện cảm ≥80. Nhị phẩm: năng lực ≥80, thiện cảm ≥70. Cần giữ chức trọn mùa.',
@@ -120,24 +120,12 @@ MeetingContribution _haremContribution(
   HaremPassive passive,
   List<HaremContribution> contributions,
 ) {
-  final active = passive.eligible(person);
+  final active = passive.eligible(person, state: state);
   final treasury = passive.benefit == HaremBenefit.treasury;
   String amount(int value) =>
       treasury ? '${moneyText(state, money(state, value))}/mùa' : '$value/mùa';
-  final ability = passive.queenBonus ? queenPassiveAbility : 60;
-  final missing = [
-    if (person.age < 18) 'cần đủ 18 tuổi',
-    if (person.affection <= 70) 'cần thiện cảm >70',
-    if (person.ability <= ability) 'cần năng lực >$ability',
-  ];
-  var status =
-      !person.available
-          ? 'Không hoạt động · Đã rời hậu cung'
-          : !person.inHarem
-          ? 'Có thể kích hoạt sau khi trở thành Phi tần'
-          : active
-          ? 'Đang hoạt động'
-          : 'Chưa kích hoạt · ${missing.join(', ')}';
+  final reason = haremPassiveBlocked(state, person, queen: passive.queenBonus);
+  var status = reason == null ? 'Đang hoạt động' : 'Chưa kích hoạt · $reason';
   final actual =
       contributions
           .where(
@@ -165,7 +153,7 @@ MeetingContribution _haremContribution(
     status: status,
     condition:
         passive.queenBonus
-            ? 'Điều kiện riêng: Hoàng hậu và năng lực >$ability.'
+            ? 'Điều kiện riêng: hoàn thành tuyến Hoàng hậu, thiện cảm ≥85 và còn ngôi hậu.'
             : null,
     enhancement:
         !treasury && person.affection <= 95

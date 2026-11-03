@@ -38,7 +38,8 @@ class LocalGameGateway implements GameGateway {
         state.seasonal &&
         !state.ended &&
         (!state.midSeasonDelivered || engine.storyPetitionsNeedSync(state));
-    if (!syncStory && !needsCharacterPublicIds(state)) {
+    final syncHarem = engine.haremQuestsNeedSync(state);
+    if (!syncStory && !syncHarem && !needsCharacterPublicIds(state)) {
       return archive;
     }
     return _update((latest) {
@@ -46,7 +47,8 @@ class LocalGameGateway implements GameGateway {
       if (current != null && current.seasonal && !current.ended) {
         final stories = engine.prepareStoryPetitions(current);
         final petitions = engine.revealSeasonPetitions(current);
-        if (stories || petitions) current.revision++;
+        final harem = engine.prepareHaremQuests(current);
+        if (stories || petitions || harem) current.revision++;
       }
     });
   }

@@ -216,7 +216,7 @@ String chainSettlementRewardText(GameState s, StoryArc arc) {
       'loyalty': 'trung thành',
     };
     texts.add(
-      '${c.name}: ${p.value.entries.map((e) => '${labels[e.key]} ${e.value >= 0 ? '+' : '−'}${e.value.abs()}').join(', ')}',
+      '${c.name}: ${p.value.entries.where((e) => !c.isConsort || e.key != 'ability').map((e) => '${labels[e.key]} ${e.value >= 0 ? '+' : '−'}${e.value.abs()}').join(', ')}',
     );
   }
   if (arc.kind == 'exams' && arc.completedSteps == 4) {

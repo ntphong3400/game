@@ -19,15 +19,7 @@ void main() {
     const Size(390, 844),
     const Size(320, 568),
   ]) {
-    for (final mode in [
-      'Tú nữ',
-      'Phi tần',
-      'Hoàng hậu',
-      'study',
-      'duty',
-      'queen',
-      'visit',
-    ]) {
+    for (final mode in ['Tú nữ', 'Phi tần', 'Hoàng hậu', 'queen', 'visit']) {
       testWidgets('harem badge and direct actions $mode at $size', (
         tester,
       ) async {
@@ -103,7 +95,7 @@ void main() {
         ]) {
           expect(action(id), findsOneWidget);
         }
-        for (final id in ['palace-duty', 'palace-study', 'visit']) {
+        for (final id in ['harem-quest', 'visit']) {
           expect(action(id), rank == 'Tú nữ' ? findsNothing : findsOneWidget);
         }
         expect(

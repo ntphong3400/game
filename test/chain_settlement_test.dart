@@ -293,10 +293,7 @@ void main() {
         final before = Map<String, int>.of(s.factions);
         final a = s.court.firstWhere((c) => c.id == ids[0]),
             b = s.court.firstWhere((c) => c.id == ids[1]);
-        final abilityA = a.ability,
-            abilityB = b.ability,
-            affectionA = a.affection,
-            affectionB = b.affection;
+        final affectionA = a.affection, affectionB = b.affection;
         s = settleChoice(s, '0');
         expect(s.factions[factions[0]], before[factions[0]]! + [3, 4, 5, 6][i]);
         expect(
@@ -308,8 +305,8 @@ void main() {
         }
         final afterA = s.court.firstWhere((c) => c.id == ids[0]),
             afterB = s.court.firstWhere((c) => c.id == ids[1]);
-        expect(afterA.ability, abilityA + (i == 3 ? 5 : 0));
-        expect(afterB.ability, abilityB + (i == 3 ? 5 : 0));
+        expect(afterA.ability, 0);
+        expect(afterB.ability, 0);
         expect(afterA.affection, affectionA + (i == 3 ? 12 : 0));
         expect(afterB.affection, affectionB + (i == 3 ? 3 : 0));
         if (i < 3) s = nextSettlementSeason(s);

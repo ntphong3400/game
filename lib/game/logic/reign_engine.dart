@@ -341,7 +341,11 @@ extension ReignEngine on GameEngine {
       return;
     }
     final before = _outcomeStats(s);
-    final effects = missionEffects(m);
+    final rawEffects = missionEffects(m);
+    final effects =
+        definition.group == 'disaster'
+            ? protectLeveeFromDisaster(s, rawEffects)
+            : rawEffects;
     _apply(
       s,
       effects,
@@ -355,7 +359,10 @@ extension ReignEngine on GameEngine {
     m.resolvedWeek = s.week;
     m.result = missionResultLabel(m.responseScore);
     if (m.responseScore <= 1) {
-      final aftermath = majorAftermath(m);
+      final aftermath =
+          definition.group == 'disaster'
+              ? protectLeveeFromDisaster(s, majorAftermath(m))
+              : majorAftermath(m);
       s.obligations.add(
         Obligation(
           id: 'aftermath-${m.id}',

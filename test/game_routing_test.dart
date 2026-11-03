@@ -9,7 +9,7 @@ import 'package:van_tue/game/presentation/game_app.dart';
 import 'package:van_tue/game/presentation/game_routes.dart';
 import 'package:van_tue/game/presentation/widgets/character_meeting_page.dart';
 import 'package:van_tue/game/presentation/widgets/court_government_panel.dart';
-import 'package:van_tue/game/presentation/widgets/palace_panel.dart';
+import 'package:van_tue/game/presentation/widgets/harem_quest_panel.dart';
 
 Future<GameController> savedController({bool load = true}) async {
   final gateway = LocalGameGateway(MemoryGameStore());
@@ -200,7 +200,7 @@ void main() {
       expect(find.byType(CourtGovernmentPanel), findsOneWidget);
       router.go('/harem/management');
       await tester.pumpAndSettle();
-      expect(find.byType(PalacePanel), findsOneWidget);
+      expect(find.byType(HaremQuestPanel), findsOneWidget);
       for (final path in [
         '/locality/granary',
         '/frontier/north/gate',

@@ -3,6 +3,13 @@ part of 'game_engine.dart';
 extension StoryPetitionEngine on GameEngine {
   bool storyPetitionsNeedSync(GameState s) {
     if (!s.seasonal || s.ended) return false;
+    if (s.foodDisruptions.any(
+      (e) =>
+          foodRecoveryDue(s, e) &&
+          !s.petitions.any((p) => p.definitionId == foodRecoveryId(e)),
+    )) {
+      return true;
+    }
     if (s.storySystemVersion < 1) return true;
     final m = s.major;
     if (m != null &&
@@ -64,7 +71,8 @@ extension StoryPetitionEngine on GameEngine {
         changed = true;
       }
     }
-    return _syncStoryPetitions(s) || changed;
+    final recoveryChanged = _syncFoodRecoveryPetitions(s);
+    return _syncStoryPetitions(s) || recoveryChanged || changed;
   }
 
   void _initializeStory(GameState s, StoryArc arc) {
@@ -270,6 +278,7 @@ extension StoryPetitionEngine on GameEngine {
       objective.officerId = '';
       objective.finishWeek = 0;
       current.decisions = [...current.decisions, index];
+      _recordCrisisPressure(s, current, index);
       current.decisionLabels = [...current.decisionLabels, label];
       current.damageTaken = Map.of(current.damageTaken);
       for (final entry in (deployment ? <String, int>{} : c.effects).entries) {
@@ -432,6 +441,7 @@ extension StoryPetitionEngine on GameEngine {
         continue;
       }
       for (final e in p.value.entries) {
+        if (c.isConsort && e.key == 'ability') continue;
         final old = switch (e.key) {
           'ability' => c.ability,
           'affection' => c.affection,

@@ -316,28 +316,28 @@ void main() {
           GameApp(controller: controller, initialRoute: 'harem'),
         );
         await tester.pumpAndSettle();
-        expect(find.byKey(const ValueKey('palace-panel')), findsNothing);
+        expect(find.byKey(const ValueKey('harem-quest-panel')), findsNothing);
         final open = find.byKey(const ValueKey('open-palace-management'));
         await tester.ensureVisible(open);
         await tester.tap(open);
         await tester.pumpAndSettle();
-        expect(find.byKey(const ValueKey('palace-panel')), findsOneWidget);
+        expect(find.byKey(const ValueKey('harem-quest-panel')), findsOneWidget);
         expect(
           find.byKey(const ValueKey('character-profile-true')),
           findsNothing,
         );
         expect(
           find.byKey(const ValueKey('open-palace-duties')),
-          findsOneWidget,
+          findsNothing,
         );
-        expect(find.byKey(const ValueKey('open-palace-study')), findsOneWidget);
+        expect(find.byKey(const ValueKey('open-palace-study')), findsNothing);
         expect(controller.state!.toJson(), before);
         expect(tester.takeException(), isNull);
         final back = find.byKey(const ValueKey('section-back'));
         await tester.ensureVisible(back);
         await tester.tap(back);
         await tester.pumpAndSettle();
-        expect(find.byKey(const ValueKey('palace-panel')), findsNothing);
+        expect(find.byKey(const ValueKey('harem-quest-panel')), findsNothing);
         expect(
           find.byKey(const ValueKey('character-profile-true')),
           findsNothing,

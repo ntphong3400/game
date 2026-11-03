@@ -1,9 +1,11 @@
 import 'currency_rules.dart';
 import '../models/game_state.dart';
+import 'harem_quest_rules.dart';
+export '../models/harem_quest.dart' show HaremBenefit;
+export 'harem_quest_rules.dart';
 
-const haremStatCap = 3;
-const haremTreasuryCap = 20;
-const queenPassiveAbility = 90;
+const haremStatCap = 5;
+const haremTreasuryCap = 50;
 
 const haremExpulsionFactionLoss = 2;
 const haremExpulsionStabilityLoss = 0;
@@ -48,30 +50,13 @@ String? haremPromotionBlocked(GameState s, Courtier c) =>
         ? 'Chỉ tuyển hoặc sắc phong lại từ ${s.date(s.cooldowns['harem-demotion:${c.id}']!)}.'
         : null;
 
-enum HaremBenefit {
-  authority('Uy quyền'),
-  people('Lòng dân'),
-  stability(stabilityLabel),
-  treasury('Ngân khố');
-
-  const HaremBenefit(this.label);
-  final String label;
-  int get cap => this == treasury ? haremTreasuryCap : haremStatCap;
-}
-
 class HaremPassive {
   const HaremPassive(this.benefit, {this.queenBonus = false});
   final HaremBenefit benefit;
   final bool queenBonus;
 
-  bool eligible(Courtier c) =>
-      c.isConsort &&
-      c.available &&
-      c.inHarem &&
-      c.age >= 18 &&
-      c.affection > 70 &&
-      c.ability > 60 &&
-      (!queenBonus || (c.queen && c.ability > queenPassiveAbility));
+  bool eligible(Courtier c, {GameState? state}) =>
+      state != null && haremPassiveBlocked(state, c, queen: queenBonus) == null;
 
   int value(Courtier c) =>
       benefit == HaremBenefit.treasury
@@ -136,14 +121,34 @@ class HaremContribution {
 }
 
 class HaremBenefits {
-  HaremBenefits(GameState s) {
+  HaremBenefits(
+    GameState s, {
+    String previewPersonId = '',
+    bool previewQueen = false,
+    String excludePersonId = '',
+  }) {
     if (!s.seasonal) return;
     final people =
-        s.court.where((c) => c.isConsort && c.available && c.inHarem).toList()
+        s.court
+            .where(
+              (c) =>
+                  c.isConsort &&
+                  c.available &&
+                  c.inHarem &&
+                  c.id != excludePersonId,
+            )
+            .toList()
           ..sort((a, b) => a.id.compareTo(b.id));
-    for (final c in people) {
+    // Old over-cap saves retain their people, but only ten residents contribute.
+    // Preserve ID ordering; always reserve the queen's place in the ten.
+    final queenIds = people.where((c) => c.queen).map((c) => c.id).toSet();
+    final admitted =
+        {...queenIds, ...people.map((c) => c.id)}.take(haremLimit).toSet();
+    for (final c in people.where((c) => admitted.contains(c.id))) {
       for (final passive in haremPassives(c)) {
-        if (!passive.eligible(c)) continue;
+        final preview =
+            c.id == previewPersonId && passive.queenBonus == previewQueen;
+        if (!preview && !passive.eligible(c, state: s)) continue;
         final requested = passive.value(c);
         final amount = requested.clamp(
           0,
@@ -169,37 +174,31 @@ String haremPassivePreview(
 }) {
   final lines = <String>[];
   for (final passive in haremPassives(c, asQueen: asQueen)) {
-    final benefit = passive.benefit;
+    final treasury = passive.benefit == HaremBenefit.treasury;
     final effect =
-        benefit == HaremBenefit.treasury
-            ? 'Gia sản gia tộc: +${state == null ? 10 : money(state, 10)} ${state?.goldStandard == true ? 'lượng vàng' : 'Ngân khố'}/mùa'
-            : '+1 ${benefit.label}/mùa; thiện cảm >95: +2';
+        treasury
+            ? '+${state == null ? 10 : money(state, 10)} ${state?.goldStandard == true ? 'lượng vàng' : 'tiền'}/mùa'
+            : '+1 ${passive.benefit.label}/mùa; thiện cảm >95: +2';
     final reason =
-        !c.available
-            ? 'đã rời hậu cung'
-            : !c.inHarem
-            ? 'sau khi nhập cung'
-            : c.ability <= 60
-            ? 'cần năng lực >60'
-            : c.affection <= 70
-            ? 'cần thiện cảm >70'
-            : passive.queenBonus &&
-                (!c.queen || c.ability <= queenPassiveAbility)
-            ? 'cần là Hoàng hậu và năng lực >$queenPassiveAbility'
-            : 'đang hoạt động';
+        state == null
+            ? 'cần hoàn thành tuyến quan hệ'
+            : haremPassiveBlocked(state, c, queen: passive.queenBonus) ??
+                'đang hoạt động';
     lines.add(
-      '${passive.queenBonus ? 'Đóng góp bổ sung của Hoàng hậu: ' : ''}$effect ($reason).',
-    );
-  }
-  if (!c.queen && !asQueen) {
-    final extra = haremPassives(c, asQueen: true).last;
-    lines.add(
-      'Khi phong hậu, năng lực >$queenPassiveAbility: thêm ${extra.benefit.label}.',
+      '${passive.queenBonus ? 'Hoàng hậu · bổ sung' : 'Cá nhân'}: $effect ($reason).',
     );
   }
   lines.add(
-    'Điều kiện: đã nhập cung, thiện cảm >70 và năng lực >60.'
-    '${c.queen || asQueen ? ' Đóng góp thứ hai cần năng lực >$queenPassiveAbility.' : ''}',
+    'Mở nhiệm vụ cá nhân: thiện cảm ≥60. Hoàn thành và thiện cảm >70 để đóng góp.',
+  );
+  if (c.queen || asQueen) {
+    lines.add(
+      'Tuyến Hoàng hậu: hoàn thành tuyến cá nhân, thiện cảm ≥85 và còn giữ ngôi hậu.',
+    );
+  }
+  lines.add(
+    'Tối đa 10 người, gồm Hoàng hậu. Trần: +5 mỗi chỉ số và '
+    '+${state == null ? 50 : money(state, 50)} ${state?.goldStandard == true ? 'lượng vàng' : 'tiền'}/mùa.',
   );
   return lines.join('\n');
 }

@@ -6,6 +6,7 @@ const types = {
   '.html': 'text/html; charset=utf-8', '.js': 'application/javascript',
   '.json': 'application/json', '.wasm': 'application/wasm', '.svg': 'image/svg+xml',
   '.png': 'image/png', '.webp': 'image/webp', '.ttf': 'font/ttf', '.woff2': 'font/woff2',
+  '.mp3': 'audio/mpeg',
 };
 
 export function createStaticServer(directory) {
@@ -32,10 +33,37 @@ export function createStaticServer(directory) {
         file = resolve(root, 'index.html');
       }
       const content = await readFile(file);
-      res.writeHead(200, {
+      const headers = {
         'Content-Type': types[extname(file)] || 'application/octet-stream',
+        'Content-Length': content.length,
         'Cache-Control': 'no-cache',
-      });
+        'Accept-Ranges': 'bytes',
+      };
+      // Browsers use byte ranges to determine MP3 duration and buffer audio.
+      if (req.headers.range) {
+        const match = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range);
+        let start = 0, end = content.length - 1;
+        if (match?.[1]) {
+          start = Number(match[1]);
+          if (match[2]) end = Math.min(Number(match[2]), end);
+        } else if (match?.[2]) {
+          start = Math.max(0, content.length - Number(match[2]));
+        }
+        if (!match || (!match[1] && !match[2]) ||
+            start > end || start >= content.length ||
+            !Number.isSafeInteger(start) || !Number.isSafeInteger(end)) {
+          res.writeHead(416, { 'Content-Range': `bytes */${content.length}` }).end();
+          return;
+        }
+        res.writeHead(206, {
+          ...headers,
+          'Content-Length': end - start + 1,
+          'Content-Range': `bytes ${start}-${end}/${content.length}`,
+        });
+        res.end(req.method === 'HEAD' ? undefined : content.subarray(start, end + 1));
+        return;
+      }
+      res.writeHead(200, headers);
       res.end(req.method === 'HEAD' ? undefined : content);
     } catch {
       res.writeHead(404).end('Not found');

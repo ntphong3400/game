@@ -41,7 +41,7 @@ void main() {
         store = await IndexedGameStore.open(factory, name: name);
         final first = LocalGameGateway(store), second = LocalGameGateway(other);
         final loaded = (await first.load()).active!;
-        expect(loaded.balanceVersion, 1);
+        expect(loaded.balanceVersion, 2);
         expect(loaded.chains.single.settlementVersion, 2);
         final command = GameCommand(
           id: 'final',

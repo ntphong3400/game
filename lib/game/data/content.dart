@@ -1,5 +1,4 @@
 import '../models/game_state.dart';
-import '../logic/palace_rules.dart';
 import '../logic/development_rules.dart';
 import '../logic/petition_rules.dart';
 export '../logic/petition_rules.dart';
@@ -8,6 +7,7 @@ import 'expanded_events.dart';
 import 'regional_officials.dart';
 import 'population_content.dart';
 import '../logic/population_rules.dart';
+import '../logic/food_pressure_rules.dart';
 import '../logic/currency_rules.dart';
 import 'story_petitions.dart';
 import 'court_personnel_petitions.dart';
@@ -1433,15 +1433,23 @@ EventDefinition eventById(String id) =>
 
 /// Shared by commands, confirmation dialogs and expiry forecasts.
 EventDefinition eventForState(GameState s, String id) {
+  final recovery = foodRecoveryEvent(s, id);
+  if (recovery != null) return recovery;
   final matter = courtMatterForEvent(s, id);
   if (matter != null) return courtPersonnelEvent(s, matter);
   final story = storyEventForState(s, id);
   if (story != null) {
-    return currencyEvent(s, warEvent(s, populationEvent(s, story)));
+    return foodCostEvent(
+      s,
+      currencyEvent(s, warEvent(s, populationEvent(s, story))),
+    );
   }
   final e = eventById(id);
   if (!s.seasonal || e.condition.startsWith('population')) {
-    return currencyEvent(s, warEvent(s, populationEvent(s, e)));
+    return foodCostEvent(
+      s,
+      currencyEvent(s, warEvent(s, populationEvent(s, e))),
+    );
   }
   final seasonal = EventDefinition(
     e.id,
@@ -1455,7 +1463,10 @@ EventDefinition eventForState(GameState s, String id) {
     family: e.family,
     trigger: e.trigger,
   );
-  return currencyEvent(s, warEvent(s, populationEvent(s, seasonal)));
+  return foodCostEvent(
+    s,
+    currencyEvent(s, warEvent(s, populationEvent(s, seasonal))),
+  );
 }
 
 const urgentEventIds = [
@@ -1509,7 +1520,7 @@ int actionGrainCost(GameState s, ActionDefinition a) =>
     s.population == null
         ? a.grainCost
         : populationActionNames.containsKey(a.id)
-        ? populationActionFood(a.id)
+        ? populationActionFood(a.id, s)
         : switch (a.id) {
           'relief' => 100000,
           'sell_surplus' => 100000,
@@ -1521,11 +1532,6 @@ int actionCost(GameState s, ActionDefinition a) =>
         ? developmentCost(s, a.id)
         : s.seasonal && a.id == 'security'
         ? money(s, 55)
-        : a.id == 'treat'
-        ? (money(s, a.cost) - palaceTreatmentDiscount(s)).clamp(
-          0,
-          money(s, a.cost),
-        )
         : money(s, a.cost);
 
 const actions = [

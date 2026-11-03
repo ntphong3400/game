@@ -1,6 +1,8 @@
 import '../models/event_definition.dart';
 import '../models/game_state.dart';
 import '../logic/population_rules.dart';
+import '../logic/development_rules.dart';
+import '../logic/food_pressure_rules.dart';
 import 'expanded_events.dart' show eventEffectText;
 import 'reign_content.dart';
 
@@ -206,25 +208,25 @@ const populationEvents = [
 
 EventDefinition populationEvent(GameState s, EventDefinition e) {
   if (s.population == null) return e;
+  final disaster =
+      e.category == 'Thiên tai' ||
+      e.id == 'flood' ||
+      e.trigger == 'flood' ||
+      (e.id.startsWith('major:') &&
+          majorDefinition(e.id.split(':')[1]).group == 'disaster');
+  Map<String, int> convert(Map<String, int> effects, String context) =>
+      populationEffects(
+        disaster ? protectLeveeFromDisaster(s, effects) : effects,
+        context: context,
+        challenging: s.challengingEconomy,
+      );
   final choices =
       e.choices.map((c) {
         if (c.nativeResources) return c;
         final context = '${e.id} ${e.title} ${c.label}'.toLowerCase();
-        final effects = populationEffects(
-          c.effects,
-          context: context,
-          challenging: s.challengingEconomy,
-        );
-        final later = populationEffects(
-          c.laterEffects,
-          context: context,
-          challenging: s.challengingEconomy,
-        );
-        final failure = populationEffects(
-          c.laterFailureEffects,
-          context: context,
-          challenging: s.challengingEconomy,
-        );
+        final effects = convert(c.effects, context);
+        final later = convert(c.laterEffects, context);
+        final failure = convert(c.laterFailureEffects, context);
         final battle =
             e.category == 'Quân sự' &&
             RegExp(
@@ -258,6 +260,18 @@ EventDefinition populationEvent(GameState s, EventDefinition e) {
           if (c.cost > 0) 'Chi ${c.cost} tiền',
           if (grain > 0) 'Xuất ${whole(grain)} tạ',
           eventEffectText(effects),
+          if (ordinaryDisasterHint(s, e, e.choices.indexOf(c)).isNotEmpty)
+            ordinaryDisasterHint(s, e, e.choices.indexOf(c)),
+          if (e.id.startsWith('major:') &&
+              s.major != null &&
+              crisisProductionHint(
+                s,
+                s.major!,
+                e.choices.indexOf(c),
+              ).isNotEmpty)
+            crisisProductionHint(s, s.major!, e.choices.indexOf(c)),
+          if (disaster && (c.effects['levee'] ?? 0) < 0 && s.leveeLevel > 1)
+            'Đã giảm ${leveeDisasterReductions[s.leveeLevel]}% thiệt hại đê do cấp công trình',
           if (troops > 0)
             '${whole(troops)} quân làm nhiệm vụ; tổn thất '
                 '${majorBattle ? '20–50%' : '1–20%'}; thất bại nặng 50–70%',
@@ -298,6 +312,7 @@ EventDefinition populationEvent(GameState s, EventDefinition e) {
     minWeek: e.minWeek,
     family: e.family,
     trigger: e.trigger,
+    foodCostsNative: e.foodCostsNative,
   );
 }
 
@@ -337,5 +352,6 @@ EventDefinition warEvent(GameState s, EventDefinition e) {
     minWeek: e.minWeek,
     family: e.family,
     trigger: e.trigger,
+    foodCostsNative: e.foodCostsNative,
   );
 }

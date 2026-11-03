@@ -183,7 +183,7 @@ class PopulationPanel extends StatelessWidget {
         'Quân khí sản xuất dự kiến',
         '${whole(manufacturedEquipment(s))} bộ/mùa trước hao mòn',
       ),
-      row('Kho lương', '${whole(s.grain)} tạ / ${whole(foodCapacity)} tạ'),
+      row('Kho lương', '${whole(s.grain)} tạ / ${whole(foodCapacity(s))} tạ'),
       row(
         'Tiêu dùng đủ khẩu phần',
         '${whole(populationFoodConsumption(s))} tạ/mùa',

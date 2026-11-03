@@ -69,5 +69,6 @@ EventDefinition currencyEvent(GameState s, EventDefinition e) {
     minWeek: e.minWeek,
     family: e.family,
     trigger: e.trigger,
+    foodCostsNative: e.foodCostsNative,
   );
 }

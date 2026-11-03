@@ -36,7 +36,7 @@ String hudTitleFor(GameState state, String section) {
     'people' => 'Triều thần',
     'people-government' => 'Bộ máy triều đình',
     'harem' => 'Hậu cung',
-    'harem-management' => 'Học tập & cung vụ',
+    'harem-management' => 'Câu chuyện hậu cung',
     'health' => 'Long thể',
     'journal' => 'Sử quán',
     'population' => 'Dân cư & Lao động',

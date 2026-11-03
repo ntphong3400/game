@@ -2,6 +2,7 @@ import '../data/expanded_events.dart' show eventEffectText;
 import '../models/event_definition.dart';
 import '../models/game_state.dart';
 import 'currency_rules.dart';
+import 'dart:math' as math;
 
 const _higherIsBetter = {
   'treasury',
@@ -88,9 +89,10 @@ EventChoice seasonalPetitionChoice(GameState s, EventChoice c) {
               ? e.value
               : e.key == 'plotReduce'
               ? (e.value * .4).floor().clamp(1, 4)
-              : (e.value.abs() * (e.key == 'treasury' ? .75 : .65))
-                      .floor()
-                      .clamp(1, 999) *
+              : math.max(
+                    1,
+                    (e.value.abs() * (e.key == 'treasury' ? .75 : .65)).floor(),
+                  ) *
                   e.value.sign,
   };
   final effects = reduced(c.effects);

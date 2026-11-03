@@ -16,9 +16,10 @@ void main() {
     (const Size(390, 844), 1.0),
     (const Size(320, 568), 1.0),
     (const Size(390, 844), 1.3),
+    (const Size(1024, 1366), 1.0),
   ]) {
     testWidgets(
-      'treasury dossiers stay reachable and ledger scrolls independently at $size scale=$scale',
+      'treasury dossiers stay reachable with responsive scrolling at $size scale=$scale',
       (tester) async {
         tester.view.physicalSize = size;
         tester.view.devicePixelRatio = 1;
@@ -61,14 +62,25 @@ void main() {
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull, reason: 'initial layout');
         final hud = tester.getRect(find.byType(RoomHud));
+        final portrait = size.height > size.width;
         final rects = <Rect>[];
         for (var i = 1; i <= 4; i++) {
           final button = find.byKey(ValueKey('treasury-open-$i'));
-          expect(button.hitTestable(), findsOneWidget);
           final rect = tester.getRect(button);
           rects.add(rect);
           expect(rect.top, greaterThanOrEqualTo(hud.bottom));
-          expect(rect.bottom, lessThan(size.height - 60));
+          if (portrait) {
+            expect(rect.width, greaterThan(size.width * .7));
+            expect(rect.height, greaterThan(180));
+            if (i > 1) {
+              expect(rect.top, greaterThan(rects[i - 2].bottom));
+              expect(rect.left, rects.first.left);
+              expect(rect.width, rects.first.width);
+            }
+          } else {
+            expect(button.hitTestable(), findsOneWidget);
+            expect(rect.bottom, lessThan(size.height - 60));
+          }
         }
         final scroll =
             tester
@@ -84,14 +96,24 @@ void main() {
         await tester.pumpAndSettle();
         expect(scroll.offset, greaterThan(0));
         expect(tester.getRect(find.byType(RoomHud)), hud);
-        for (var i = 1; i <= 4; i++) {
+        if (portrait) {
           expect(
-            tester.getRect(find.byKey(ValueKey('treasury-open-$i'))),
-            rects[i - 1],
+            tester.getRect(find.byKey(const ValueKey('treasury-open-1'))).top,
+            lessThan(rects.first.top),
+            reason: 'portrait cards scroll with the ledger',
           );
+        } else {
+          for (var i = 1; i <= 4; i++) {
+            expect(
+              tester.getRect(find.byKey(ValueKey('treasury-open-$i'))),
+              rects[i - 1],
+            );
+          }
         }
         for (var i = 1; i <= 4; i++) {
-          await tester.tap(find.byKey(ValueKey('treasury-open-$i')));
+          final button = find.byKey(ValueKey('treasury-open-$i'));
+          await tester.ensureVisible(button);
+          await tester.tap(button);
           await tester.pumpAndSettle();
           expect(tester.takeException(), isNull, reason: 'document $i');
           if (i == 1) {
@@ -192,6 +214,11 @@ void main() {
         expect(find.text('Khoản thu 119').hitTestable(), findsOneWidget);
         expect(tester.getRect(find.byType(RoomHud)), hudRect);
         for (var i = 1; i <= 4; i++) {
+          if (size.height > size.width) {
+            await tester.ensureVisible(
+              find.byKey(ValueKey('treasury-open-$i')),
+            );
+          }
           expect(
             find.byKey(ValueKey('treasury-open-$i')).hitTestable(),
             findsOneWidget,

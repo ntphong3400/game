@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import '../models/game_state.dart';
 import '../models/number_format.dart';
 import 'currency_rules.dart';
+import 'food_pressure_rules.dart';
 import 'management_rules.dart' show managementEquipmentBonus;
 
 const populationPolicies = {
@@ -10,7 +11,10 @@ const populationPolicies = {
   'balanced': 'Cân bằng',
 };
 const initialFood = 4000000;
-const foodCapacity = 8000000;
+const foodCapacities = [0, 8000000, 10000000, 12000000, 14000000, 16000000];
+int foodCapacityAtLevel(int level) => foodCapacities[level.clamp(1, 5)];
+int foodCapacity(GameState s) =>
+    s.population == null ? 200 : foodCapacityAtLevel(s.agricultureLevel);
 
 /// Every positive food receipt/payment rounds UP exactly once, in tạ.
 int foodAmount(num value) => math.max(0, value.ceil());
@@ -50,14 +54,25 @@ double farmLaborFactor(GameState s) {
   final p = s.population;
   if (p == null) return 1;
   final capacity = 650000 * (1 + (s.agricultureLevel - 1) * .25);
-  return math.min(p.productiveCivilians * .6, capacity) / 570000;
+  final base = math.min(p.productiveCivilians * .6, capacity) / 570000;
+  final affected =
+      math.min(productiveWorkers(s) * .6, capacity) /
+      570000 *
+      (1 - foodProductionLoss(s) / 100);
+  return s.foodPressureEnabled ? math.max(base * .65, affected) : base;
 }
+
+int productiveWorkers(GameState s) => math.max(
+  0,
+  s.population!.productiveCivilians -
+      (s.foodPressureEnabled ? s.population!.campaignWorkers : 0),
+);
 
 double economicLaborFactor(GameState s) {
   final p = s.population;
   if (p == null) return 1;
   final capacity = 325000 * (1 + (s.economyLevel - 1) * .25);
-  return math.min(p.productiveCivilians * .3, capacity) /
+  return math.min(productiveWorkers(s) * .3, capacity) /
       285000 *
       (1 - p.militaryAllocation) /
       .8;
@@ -84,7 +99,7 @@ int manufacturedEquipment(GameState s) {
     0,
     (2000 *
                 math.min(
-                  p.productiveCivilians * .3,
+                  productiveWorkers(s) * .3,
                   325000 * (1 + (s.economyLevel - 1) * .25),
                 ) /
                 285000 *
@@ -149,26 +164,33 @@ int populationActionMoney(String kind) => switch (kind) {
   'supply_army' => 20,
   _ => 0,
 };
-int populationActionFood(String kind) => switch (kind) {
-  'public_health' => 5000,
-  'settle' => 7000,
-  'refugees' => 10000,
-  'return' => 4000,
-  'supply_army' => 20000,
-  _ => 0,
-};
+int populationActionFood(String kind, [GameState? s]) {
+  final base = switch (kind) {
+    'public_health' => 5000,
+    'settle' => 7000,
+    'refugees' => 10000,
+    'return' => 4000,
+    'supply_army' => 20000,
+    _ => 0,
+  };
+  return s?.foodPressureEnabled == true &&
+          ['public_health', 'settle', 'refugees', 'return'].contains(kind)
+      ? (base * 1.25).ceil()
+      : base;
+}
+
 String populationActionHint(
   GameState s,
   String kind,
 ) => authoredMoneyText(s, switch (kind) {
   'public_health' =>
-    'Chi 35 tiền, 5.000 tạ, 1 hành động. Mức dịch bệnh giảm 1, lòng dân +1; một lần mỗi mùa.',
+    'Chi 35 tiền, ${whole(populationActionFood(kind, s))} tạ, 1 hành động. Mức dịch bệnh giảm 1, lòng dân +1; một lần mỗi mùa.',
   'settle' =>
-    'Chi 40 tiền, 7.000 tạ, 1 hành động. Nhận 5.000 lao động sau 2 mùa.',
+    'Chi 40 tiền, ${whole(populationActionFood(kind, s))} tạ, 1 hành động. Nhận 5.000 lao động sau 2 mùa.',
   'refugees' =>
-    'Chi 50 tiền, 10.000 tạ, 1 hành động. Tiếp nhận 10.000 lao động sau 1 mùa; cần có đoàn người xin vào.',
+    'Chi 50 tiền, ${whole(populationActionFood(kind, s))} tạ, 1 hành động. Tiếp nhận 10.000 lao động sau 1 mùa; cần có đoàn người xin vào.',
   'return' =>
-    'Chi 30 tiền, 4.000 tạ, 1 hành động. Sau 1 mùa nhận lại tối đa 10.000 dân lưu tán; không vượt số còn chưa hồi hương.',
+    'Chi 30 tiền, ${whole(populationActionFood(kind, s))} tạ, 1 hành động. Sau 1 mùa nhận lại tối đa 10.000 dân lưu tán; không vượt số còn chưa hồi hương.',
   'recruit' =>
     'Chi 25 tiền, 1 hành động. Sau 1 mùa chuyển 5.000 lao động dân sự thành tân binh, huấn luyện 20; không tăng tổng dân số.',
   'demobilize' =>
@@ -189,7 +211,7 @@ String? populationActionBlocked(GameState s, String kind) {
   if (s.treasury < money(s, populationActionMoney(kind))) {
     return 'Ngân khố không đủ.';
   }
-  if (s.grain < populationActionFood(kind)) return 'Kho lương không đủ.';
+  if (s.grain < populationActionFood(kind, s)) return 'Kho lương không đủ.';
   if (kind == 'public_health' &&
       ((s.actionCounts[kind] ?? 0) > 0 || p.diseaseLevel == 0)) {
     return 'Chỉ phòng dịch khi có dịch; một lần mỗi mùa.';
@@ -287,7 +309,9 @@ String? populationActionDescription(GameState s, String task) {
       'Chi 45 tiền, 1 hành động; cơ bản nhận 200.000 tạ, tùy người phụ trách và rủi ro thực hiện.',
     'sell_surplus' =>
       'Xuất 100.000 tạ, giữ đủ khẩu phần một mùa; cơ bản nhận 25 tiền khi khép mùa, tùy người phụ trách.',
-    'relief' => 'Chi 20 tiền, 100.000 tạ; tăng lòng dân tùy người phụ trách.',
+    'relief' =>
+      'Chi 20 tiền, 100.000 tạ; tăng lòng dân tùy người phụ trách.'
+          '${s.foodPressureEnabled ? ' Khi thành công, khẩu phần đã cấp được đối trừ tiêu dùng toàn quốc mùa này.' : ''}',
     'farm' =>
       'Chi 55 tiền; canh tác bổ sung trong 2 mùa, cơ bản nhận ${s.challengingEconomy ? '350.000' : '52.500'} tạ và lòng dân +4.',
     'train' =>

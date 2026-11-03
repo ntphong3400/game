@@ -47,6 +47,13 @@ void main() {
         expect(controller.state!.treasury, 50000);
         await tester.tap(find.byKey(const ValueKey('treasury-open-3')));
         await tester.pumpAndSettle();
+        expect(find.textContaining('4.400.000 tạ/năm'), findsWidgets);
+        expect(find.textContaining('Sức chứa kho 10.000.000 tạ'), findsWidgets);
+        expect(find.textContaining('6.500 lượng vàng'), findsWidgets);
+        expect(
+          find.textContaining('10% thiệt hại tình trạng đê'),
+          findsWidgets,
+        );
         final buy = find.byKey(const ValueKey('action-buy_grain'));
         await tester.ensureVisible(buy);
         await tester.tap(buy);
@@ -64,12 +71,20 @@ void main() {
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
         expect(controller.state!.treasury, 45500);
-        expect(controller.state!.grain, greaterThan(4000000));
+        expect(controller.state!.grain, greaterThan(4200000));
         expect((await actualGateway.load()).active!.treasury, 45500);
         expect(
           controller.state!.financialWeeks.single.entries.first.amount,
           -4500,
         );
+        await store.update((archive) {
+          archive.active!.agricultureLevel = 2;
+          archive.active!.grain = 10000000;
+        });
+        await controller.load();
+        await tester.pumpAndSettle();
+        expect(tester.widget<OutlinedButton>(buy).onPressed, isNull);
+        expect(find.textContaining('Kho lương đã đầy.'), findsWidgets);
       },
     );
   }

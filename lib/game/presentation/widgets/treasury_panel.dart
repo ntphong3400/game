@@ -68,7 +68,10 @@ class _TreasuryPanelState extends State<TreasuryPanel> {
   @override
   Widget build(BuildContext context) => LayoutBuilder(
     builder: (context, bounds) {
-      final wide = bounds.maxWidth >= 920 && bounds.maxHeight >= 360;
+      final portrait =
+          MediaQuery.orientationOf(context) == Orientation.portrait;
+      final wide =
+          !portrait && bounds.maxWidth >= 920 && bounds.maxHeight >= 360;
       final dense = bounds.maxHeight < 430;
       final primary = IndexedStack(
         index: section == 0 ? 0 : 1,
@@ -77,7 +80,18 @@ class _TreasuryPanelState extends State<TreasuryPanel> {
             ledgerScroll,
             'treasury-ledger-scroll',
             const PageStorageKey('treasury-ledger-position'),
-            FinancePanel(state: s, flat: true),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                if (portrait) ...[
+                  _header(),
+                  const SizedBox(height: 20),
+                  for (var i = 1; i <= 4; i++) _portraitDossier(i),
+                  const SizedBox(height: 12),
+                ],
+                FinancePanel(state: s, flat: true),
+              ],
+            ),
           ),
           section == 0
               ? const SizedBox.shrink()
@@ -99,7 +113,7 @@ class _TreasuryPanelState extends State<TreasuryPanel> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (!dense) ...[_header(), const SizedBox(height: 16)],
+          if (!dense && !portrait) ...[_header(), const SizedBox(height: 16)],
           Expanded(
             child:
                 wide
@@ -124,7 +138,7 @@ class _TreasuryPanelState extends State<TreasuryPanel> {
                     : Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        if (section == 0) ...[
+                        if (section == 0 && !portrait) ...[
                           _shortcuts(
                             dense: dense,
                             horizontal: dense && bounds.maxWidth >= 600,
@@ -183,9 +197,10 @@ class _TreasuryPanelState extends State<TreasuryPanel> {
 
   String _summary(int value) => switch (value) {
     1 =>
-      'Thuế ${taxLabels[s.tax]} · ưu tiên ${s.priority == 'army' ? 'quân đội' : 'cứu tế'}',
+      'Thuế ${taxLabels[s.tax]}${s.foodPressureEnabled ? '' : ' · ưu tiên ${s.priority == 'army' ? 'quân đội' : 'cứu tế'}'}',
     2 => 'Truy thu · bán lương · thương mại',
-    3 => '${whole(s.grain)} ${foodUnit(s)} · Đê điều ${s.levee}/100',
+    3 =>
+      '${whole(s.grain)}${s.population == null ? '' : '/${whole(foodCapacity(s))}'} ${foodUnit(s)} · Đê điều ${s.levee}/100',
     _ =>
       s.projects.isNotEmpty
           ? '${projectTitle(s.projects.first.kind)} · ${s.projects.first.progress}/${s.projects.first.duration} kỳ'
@@ -332,6 +347,99 @@ class _TreasuryPanelState extends State<TreasuryPanel> {
         ),
       );
     },
+  );
+
+  Widget _portraitDossier(int value) => Padding(
+    padding: const EdgeInsets.only(bottom: 12),
+    child: MemorialPaper(
+      readKey: ValueKey('treasury-paper-$value'),
+      child: TextButton(
+        key: ValueKey('treasury-open-$value'),
+        onPressed: () => open(value),
+        style: TextButton.styleFrom(
+          foregroundColor: ink,
+          padding: const EdgeInsets.all(12),
+          minimumSize: Size.zero,
+          textStyle: const TextStyle(fontFamily: 'BeVietnam'),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 84,
+                  height: 112,
+                  child: _painting(value, thumbnail: true),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        formatGameNumbers(titles[value - 1]),
+                        style: const TextStyle(
+                          fontFamily: 'Lora',
+                          fontSize: 17,
+                          height: 1.35,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        formatGameNumbers(_summary(value)),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          height: 1.6,
+                          color: forest,
+                        ),
+                      ),
+                      if (value == 4 && s.projects.isNotEmpty) ...[
+                        const SizedBox(height: 8),
+                        LinearProgressIndicator(
+                          value:
+                              s.projects.first.duration > 0
+                                  ? (s.projects.first.progress /
+                                          s.projects.first.duration)
+                                      .clamp(0.0, 1.0)
+                                  : 0,
+                          minHeight: 4,
+                          backgroundColor: line,
+                          color: forest,
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              formatGameNumbers(_preview(value)),
+              style: const TextStyle(fontSize: 12, height: 1.6, color: muted),
+            ),
+            const SizedBox(height: 12),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  'Mở sổ',
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: forest,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(width: 6),
+                Icon(Icons.arrow_forward, size: 15, color: forest),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
   );
 
   Widget _shortcuts({
@@ -562,39 +670,41 @@ class _TreasuryPanelState extends State<TreasuryPanel> {
           style: const TextStyle(fontSize: 11, color: muted),
         ),
       ],
-      const SizedBox(height: 22),
-      const Text(
-        'Ưu tiên khi thiếu tiền',
-        style: TextStyle(fontFamily: 'Lora', fontSize: 17),
-      ),
-      const SizedBox(height: 10),
-      Wrap(
-        spacing: 8,
-        runSpacing: 8,
-        children: [
-          ChoiceChip(
-            label: const Text('Ưu tiên quân đội'),
-            selected: s.priority == 'army',
-            onSelected:
-                widget.busy || s.points == 0
-                    ? null
-                    : (_) => widget.onPolicy('priority', 'army'),
-          ),
-          ChoiceChip(
-            label: const Text('Ưu tiên cứu tế'),
-            selected: s.priority == 'people',
-            onSelected:
-                widget.busy || s.points == 0
-                    ? null
-                    : (_) => widget.onPolicy('priority', 'people'),
-          ),
-        ],
-      ),
-      const SizedBox(height: 10),
-      const Text(
-        'Chọn chính sách để ban hành. Thay chính sách tốn 1 hành động. Khoản được ưu tiên sẽ thanh toán trước khi ngân khố không đủ trả tất cả.',
-        style: TextStyle(fontSize: 11, color: muted),
-      ),
+      if (!s.foodPressureEnabled) ...[
+        const SizedBox(height: 22),
+        const Text(
+          'Ưu tiên khi thiếu tiền',
+          style: TextStyle(fontFamily: 'Lora', fontSize: 17),
+        ),
+        const SizedBox(height: 10),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            ChoiceChip(
+              label: const Text('Ưu tiên quân đội'),
+              selected: s.priority == 'army',
+              onSelected:
+                  widget.busy || s.points == 0
+                      ? null
+                      : (_) => widget.onPolicy('priority', 'army'),
+            ),
+            ChoiceChip(
+              label: const Text('Ưu tiên cứu tế'),
+              selected: s.priority == 'people',
+              onSelected:
+                  widget.busy || s.points == 0
+                      ? null
+                      : (_) => widget.onPolicy('priority', 'people'),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        const Text(
+          'Chọn chính sách để ban hành. Thay chính sách tốn 1 hành động. Khoản được ưu tiên sẽ thanh toán trước khi ngân khố không đủ trả tất cả.',
+          style: TextStyle(fontSize: 11, color: muted),
+        ),
+      ],
     ],
   );
 
@@ -605,7 +715,10 @@ class _TreasuryPanelState extends State<TreasuryPanel> {
         spacing: 26,
         runSpacing: 10,
         children: [
-          _stockValue('Lương thực dự trữ', '${whole(s.grain)} ${foodUnit(s)}'),
+          _stockValue(
+            'Lương thực dự trữ',
+            '${whole(s.grain)} / ${whole(foodCapacity(s))} ${foodUnit(s)}',
+          ),
           _stockValue('Tình trạng đê điều', '${s.levee}/100'),
           if (s.seasonal) ...[
             _stockValue('Cấp nông nghiệp', '${s.agricultureLevel}/5'),
@@ -624,6 +737,7 @@ class _TreasuryPanelState extends State<TreasuryPanel> {
         Text(
           formatGameNumbers(
             'Đê cấp ${s.leveeLevel}: giảm ${leveeWearReductions[s.leveeLevel]}% hao mòn. '
+            '${s.population == null ? '' : 'Giảm ${leveeDisasterReductions[s.leveeLevel]}% thiệt hại tình trạng đê do thiên tai. '}'
             'Cuối mùa ${s.season} dự kiến −${leveeWearThisSeason(s)} điểm. '
             'Mốc đê và sản lượng: 0: 30%, 30: 60%, 60: 100%, '
             '80: 110%, 95–100: 120%.',

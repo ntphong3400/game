@@ -157,12 +157,12 @@ void main() {
       await tester.ensureVisible(action);
       await tester.tap(action);
       await tester.pumpAndSettle();
-      expect(find.textContaining('7.000 tạ'), findsWidgets);
+      expect(find.textContaining('8.750 tạ'), findsWidgets);
       await tester.tap(find.text('Ban lệnh').last);
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
       expect(controller.state!.population!.orders.single.count, 5000);
-      expect(controller.state!.grain, 3993000);
+      expect(controller.state!.grain, 3991250);
     },
   );
 }

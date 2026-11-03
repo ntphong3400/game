@@ -1,4 +1,30 @@
-# Phát triển kinh tế, nông nghiệp và đê điều — 0.20.0
+# Phát triển kinh tế, nông nghiệp và đê điều
+
+## Cân bằng hiện tại — lượt mới 0.28, balanceVersion 2
+
+Các giá dưới đây là lượng vàng thực tế. Mọi lợi ích vẫn bắt đầu từ mùa sau khi hoàn thành; nâng cấp không cấp ngay tiền hoặc thóc, không tự sửa tình trạng đê.
+
+| Cấp | Thưởng thuế nền/năm | Sản lượng nền/năm (tạ) | Sức chứa kho (tạ) | Giảm hao mòn đê | Giảm thiệt hại đê do thiên tai |
+|---|---:|---:|---:|---:|---:|
+| 1 | 0 | 4.100.000 | 8.000.000 | 0% | 0% |
+| 2 | 4.000 | 4.400.000 | 10.000.000 | 15% | 10% |
+| 3 | 9.500 | 4.700.000 | 12.000.000 | 30% | 20% |
+| 4 | 17.000 | 5.000.000 | 14.000.000 | 45% | 30% |
+| 5 | 27.000 | 5.300.000 | 16.000.000 | 60% | 40% |
+
+Giá nâng kinh tế lên cấp 2–5 giữ 8.000/15.000/24.000/36.000 vàng; nông nghiệp giữ 7.000/13.000/21.000/32.000 vàng. Giá nâng đê giảm 35%, còn 6.500/11.700/18.200/26.000 vàng. Thưởng thuế là tổng của cấp hiện tại, chịu hệ số lao động cả vụ và điều chỉnh Hộ bộ. Sản lượng giữ hệ số lao động, đê và thời tiết cũ.
+
+Mua lương cơ bản 200.000 tạ được nhân hiệu quả người phụ trách và tỷ lệ giao nhận; không còn bị chặn ở 999. Hạn mức 0–100 của chỉ số và sức chứa kho vẫn giữ riêng. Khi nhập kho vượt sức chứa, chỉ cộng phần còn chỗ và ghi nhật ký số tạ không nhập được. Kho mở rộng theo cấp đang có, dùng chung cho nhập kho, mua lương, giới hạn cuối lệnh và các màn hình; tải lại giữ nguyên tồn kho hợp lệ.
+
+Ngân khố hiển thị sản lượng nền trước/sau nâng cấp, sức chứa, số mùa đủ ăn và dự báo vụ gặt. Dự báo dùng lao động cả vụ hiện tại, thời tiết 100%, tình trạng đê đã ghi và giả định tồn kho giữ nguyên đến vụ gặt; thực nhập và phần vượt kho tính trước khẩu phần mùa Thu.
+
+Bảo vệ thiên tai chỉ giảm hiệu ứng âm trên **tình trạng đê** trong tấu chương Thiên tai, cảnh báo lũ và đại biến cố nhóm disaster. Không giảm mất dân/lương/vàng, hao mòn thường lệ, sửa chữa thất bại hoặc phá hoại. Thiệt hại còn lại làm tròn lên. Xem trước và thực thi dùng cùng bản hiệu ứng; kết quả chờ được chốt khi quyết định và không giảm lần thứ hai lúc nhận.
+
+Bản lưu 0.27 có balanceVersion 1 giữ sản lượng 4,5/6/7,5/9/10,5 triệu tạ, giá tấu, tiếp tế và ngân sách cũ. Không đổi tồn kho, RNG, công trình, nghĩa vụ hoặc kết quả đã chốt. Lượt lịch sử chưa có dân số giữ thưởng kinh tế, giá nâng đê và sức chứa cũ. Chi tiết gián đoạn sản xuất, cứu trợ và hạch toán khẩu phần: [cân bằng 0.28](balance-food-028.md).
+
+Kiểm tra hồi quy: `resource_development_test.dart`, `currency_ui_test.dart`, cùng các bộ development/population/currency hiện có.
+
+## Thiết kế lịch sử 0.20.0 — lượt chưa có dân số
 
 Áp dụng cho chế độ theo mùa. Ngân khố là tiền, lương thực là thóc riêng biệt;
 thóc vẫn có sức chứa 200. Các con số dưới đây là cấu hình cân bằng ban đầu.

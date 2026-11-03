@@ -7,6 +7,7 @@ import 'support/legacy_gateway.dart';
 import 'package:van_tue/game/logic/finance_rules.dart';
 import 'package:van_tue/game/logic/harem_rules.dart';
 import 'package:van_tue/game/models/game_state.dart';
+import 'support/harem_fixture.dart';
 
 Courtier consort(
   String id, {
@@ -73,18 +74,19 @@ GameState send(
 
 void main() {
   test(
-    'passives require strictly over 70 affection and 60 ability; 96 doubles stats',
+    'passives require completed stories and affection over 70; 96 doubles stats',
     () {
-      for (final (ability, affection, value) in [
-        (60, 96, 0),
-        (61, 70, 0),
-        (61, 71, 1),
-        (61, 95, 1),
-        (61, 96, 2),
+      for (final (completed, affection, value) in [
+        (false, 96, 0),
+        (true, 70, 0),
+        (true, 71, 1),
+        (true, 95, 1),
+        (true, 96, 2),
       ]) {
-        final s =
-            fresh()
-              ..court.add(consort('a', ability: ability, affection: affection));
+        final s = fresh();
+        final c = consort('a', affection: affection);
+        s.court.add(c);
+        if (completed) completeHaremStory(s, c);
         expect(HaremBenefits(s).total(HaremBenefit.authority), value);
       }
     },
@@ -121,6 +123,7 @@ void main() {
                   affection: 96,
                 ),
               );
+        completeHaremStory(s, s.court.last);
         expect(
           HaremBenefits(s).total(HaremBenefit.treasury),
           ['Thế gia', 'Hoàng tộc'].contains(faction) ? 10 : 0,
@@ -135,7 +138,7 @@ void main() {
         ),
       );
       expect(primaryHaremBenefit(s.court.last), HaremBenefit.stability);
-      for (var i = 0; i < 3; i++) {
+      for (var i = 0; i < 6; i++) {
         s.court.add(
           consort(
             'rich-$i',
@@ -145,52 +148,45 @@ void main() {
           ),
         );
       }
+      for (final c in s.court.where((c) => c.isConsort)) {
+        completeHaremStory(s, c);
+      }
       final income = HaremBenefits(s);
-      expect(income.total(HaremBenefit.treasury), 20);
+      expect(income.total(HaremBenefit.treasury), 50);
       expect(
         income.contributions
             .where((c) => c.passive.benefit == HaremBenefit.treasury)
             .map((c) => c.amount),
-        [10, 10, 0],
+        [10, 10, 10, 10, 10, 0],
       );
       expect(
         budgetIncome(s).where((i) => i.title.startsWith('Gia sản hậu cung:')),
-        hasLength(2),
+        hasLength(5),
       );
     },
   );
 
   test(
-    'each stat caps at three and queen second passive needs strictly over 90 ability',
+    'each stat caps at five and queen requires a separate story and 85 affection',
     () {
       final s = fresh();
       for (var i = 0; i < 3; i++) {
-        s.court.add(consort('stat-$i', affection: 96));
+        final c = consort('stat-$i', affection: 96);
+        s.court.add(c);
+        completeHaremStory(s, c);
       }
-      expect(HaremBenefits(s).total(HaremBenefit.authority), 3);
+      expect(HaremBenefits(s).total(HaremBenefit.authority), 5);
       s.court.removeWhere((c) => c.isConsort);
-      final queen = consort('queen', queen: true, ability: 90);
+      final queen = consort('queen', queen: true, affection: 85);
       s.court.add(queen);
-      expect(HaremBenefits(s).total(HaremBenefit.authority), 1);
+      completeHaremStory(s, queen);
       expect(HaremBenefits(s).total(HaremBenefit.stability), 0);
-      queen.ability = 91;
+      completeHaremStory(s, queen, queen: true);
       expect(HaremBenefits(s).total(HaremBenefit.stability), 1);
+      queen.affection = 84;
+      expect(HaremBenefits(s).total(HaremBenefit.stability), 0);
       queen.affection = 96;
-      expect(HaremBenefits(s).total(HaremBenefit.authority), 2);
       expect(HaremBenefits(s).total(HaremBenefit.stability), 2);
-      queen.affection = 70;
-      expect(HaremBenefits(s).contributions, isEmpty);
-      final diplomatic = consort(
-        'diplomat',
-        queen: true,
-        ability: 99,
-        personality: Personality.diplomatic,
-      );
-      expect(
-        haremPassives(diplomatic).map((p) => p.benefit).toSet(),
-        hasLength(2),
-      );
-      queen.affection = 71;
       queen.queen = false;
       expect(HaremBenefits(s).total(HaremBenefit.stability), 0);
     },
@@ -237,9 +233,13 @@ void main() {
         ),
         consort('people', personality: Personality.compassionate),
       ]);
+      for (final c in s.court.where((c) => c.isConsort)) {
+        completeHaremStory(s, c);
+        if (c.queen) completeHaremStory(s, c, queen: true);
+      }
       final control = s.copy();
-      for (final c in control.court.where((c) => c.isConsort)) {
-        c.ability = 60;
+      for (final q in control.haremQuests) {
+        q.stage = 0;
       }
       final baseline = send(control, 'endWeek');
       final forecast = BudgetProjection(s);

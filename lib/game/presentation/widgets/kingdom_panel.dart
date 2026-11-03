@@ -520,7 +520,7 @@ class _KingdomPanelState extends State<KingdomPanel> {
       _ => (
         Icons.public_outlined,
         action.icon == 'population'
-            ? action.description
+            ? populationActionHint(s, action.id)
             : 'Cử sứ giả đàm phán, hạ nhiệt chiến sự.',
       ),
     };

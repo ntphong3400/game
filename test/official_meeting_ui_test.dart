@@ -74,7 +74,10 @@ void main() {
             (sprite.image as AssetImage).assetName,
             meetingCharacterAsset(person),
           );
-          expect(sprite.fit, BoxFit.contain);
+          expect(
+            sprite.fit,
+            size.height > size.width ? BoxFit.fitHeight : BoxFit.contain,
+          );
           expect(
             find.byKey(const ValueKey('meeting-action-invite')),
             findsNothing,

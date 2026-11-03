@@ -128,8 +128,11 @@ void main() {
             findsOneWidget,
           );
           expect(
-            find.descendant(of: portrait, matching: find.text('Năng lực 91')),
-            findsOneWidget,
+            find.descendant(
+              of: portrait,
+              matching: find.byKey(const ValueKey('harem-ability-consort_mai')),
+            ),
+            findsNothing,
           );
           expect(
             find.byKey(const ValueKey('profile-action-$personId-audience')),

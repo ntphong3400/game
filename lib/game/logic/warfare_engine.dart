@@ -150,7 +150,11 @@ extension WarfareEngine on GameEngine {
         m.due = s.week + m.duration - 1;
         _assignOfficer(s, leader);
         if (deputy != null) _assignOfficer(s, deputy);
-        s.population!.foodCredit += warFoodCredit(troops);
+        _prepayFood(
+          s,
+          warFoodCredit(troops, s),
+          'Khẩu phần xuất quân: ${m.title}',
+        );
         s.population!.deployments.add(
           ArmyDeployment(
             id: m.id,
@@ -173,6 +177,7 @@ extension WarfareEngine on GameEngine {
         s.workThisWeek++;
         s.affairsThisWeek++;
         _respond(s, 'border');
+        _recordCampaignWorkers(s);
         s.note(
           'Điều quân: ${m.title}',
           '${whole(troops)} quân, chủ tướng ${leader.name}${deputy == null ? '' : ', phó tướng ${deputy.name}'}. Cơ hội thắng ${quote.winChance.toStringAsFixed(1)}%; nguy cơ bỏ nhiệm vụ ${quote.withdrawal}%. Trở về cuối ${s.date(m.due)}. Còn ${whole(s.population!.availableSoldiers)} quân có thể điều động.',
@@ -192,10 +197,14 @@ extension WarfareEngine on GameEngine {
         _spend(
           s,
           money(s, 10),
-          grain: warMissionFood(m.troops),
+          grain: warMissionFood(m.troops, s, m),
           title: 'Tiếp tế: ${m.title}',
         );
-        s.population!.foodCredit += warFoodCredit(m.troops);
+        _prepayFood(
+          s,
+          warFoodCredit(m.troops, s),
+          'Khẩu phần tiếp tế: ${m.title}',
+        );
         m.intervention = false;
         m.relief = 1;
         s.workThisWeek++;
@@ -752,7 +761,7 @@ extension WarfareEngine on GameEngine {
       m.intervention = true;
       s.note(
         'Xin tiếp tế: ${m.title}',
-        'Đường tiếp tế gặp khó khăn. Cấp ${moneyText(s, money(s, 10))}, ${whole(warMissionFood(m.troops))} tạ hoặc rút quân. Bỏ mặc làm nhiệm vụ thất bại; quân vẫn trở về theo lịch.',
+        'Cần tiếp tế cho mùa tiếp theo. Cấp ${moneyText(s, money(s, 10))}, ${whole(warMissionFood(m.troops, s, m))} tạ hoặc rút quân. Bỏ mặc làm nhiệm vụ thất bại; quân vẫn trở về theo lịch.',
         'warning',
       );
     }

@@ -17,6 +17,8 @@ void main() {
   for (final size in [
     const Size(1440, 900),
     const Size(844, 390),
+    const Size(700, 400),
+    const Size(768, 1024),
     const Size(390, 844),
     const Size(320, 568),
   ]) {
@@ -56,16 +58,12 @@ void main() {
               .data,
           '${person.affection}',
         );
-        expect(
-          tester
-              .widget<Text>(find.byKey(const ValueKey('meeting-ability')))
-              .data,
-          '${person.ability}',
-        );
+        expect(find.byKey(const ValueKey('meeting-ability')), findsNothing);
         final sprite = tester.widget<Image>(
           find.byKey(const ValueKey('meeting-fullbody')),
         );
-        expect(sprite.fit, BoxFit.contain);
+        final portrait = size.height > size.width;
+        expect(sprite.fit, portrait ? BoxFit.fitHeight : BoxFit.contain);
         expect(
           (sprite.image as AssetImage).assetName,
           contains('ngoc-lan-fullbody'),
@@ -77,6 +75,22 @@ void main() {
         final pageRect = tester.getRect(find.byType(CharacterMeetingPage));
         expect(pageRect.contains(figureRect.topLeft), isTrue);
         expect(pageRect.contains(figureRect.bottomRight), isTrue);
+        final conversation = find.byKey(const ValueKey('meeting-conversation'));
+        final conversationRect = tester.getRect(conversation);
+        if (portrait) {
+          expect(figureRect.overlaps(conversationRect), isTrue);
+          expect(figureRect.height, greaterThan(size.height * .8));
+          expect(figureRect.top, lessThan(conversationRect.top));
+          expect(figureRect.bottom, greaterThan(conversationRect.bottom - 30));
+          await tester.drag(conversation, const Offset(0, -150));
+          await tester.pumpAndSettle();
+          expect(
+            tester.getRect(find.byKey(const ValueKey('meeting-fullbody'))),
+            figureRect,
+          );
+        } else {
+          expect(figureRect.overlaps(conversationRect), isFalse);
+        }
         expect(tester.takeException(), isNull);
         expect(find.text('GẶP GỠ'), findsNothing);
         expect(find.text('Hỏi thăm'), findsNothing);

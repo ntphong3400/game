@@ -4,10 +4,11 @@ import '../data/content.dart';
 import '../data/expanded_events.dart' show eventEffectText;
 import '../models/game_state.dart';
 import 'personnel_rules.dart';
+import 'food_pressure_rules.dart';
 import 'finance_rules.dart';
 import 'currency_rules.dart';
 import 'harem_rules.dart';
-import 'palace_rules.dart';
+import '../data/harem_quests.dart';
 import 'reign_rules.dart';
 import 'court_politics_rules.dart';
 import 'petition_assignment_rules.dart';
@@ -26,11 +27,13 @@ import 'court_initialization.dart';
 import '../data/reign_content.dart';
 import '../data/story_petitions.dart';
 part 'reign_engine.dart';
-part 'palace_engine.dart';
+part 'harem_quest_engine.dart';
 part 'petition_engine.dart';
 part 'story_engine.dart';
 part 'development_engine.dart';
+part 'food_pressure_engine.dart';
 part 'population_engine.dart';
+part 'food_ledger_engine.dart';
 part 'warfare_engine.dart';
 part 'frontier_engine.dart';
 part 'court_engine.dart';
@@ -46,11 +49,13 @@ class GameEngine {
     this.populationEnabled = true,
     this.goldEnabled = true,
     this.challengeBalance = true,
+    this.foodBalance = true,
   });
   final bool populationEnabled;
   final bool goldEnabled;
   final bool seasonal;
   final bool challengeBalance;
+  final bool foodBalance;
   int _next(GameState s, int max) {
     s.rng = (s.rng * 48271) % 2147483647;
     return s.rng % max;
@@ -67,7 +72,8 @@ class GameEngine {
     );
     s.seasonal = seasonal;
     if (seasonal && populationEnabled && goldEnabled && challengeBalance) {
-      s.balanceVersion = 1;
+      s.balanceVersion = foodBalance ? 2 : 1;
+      if (!foodBalance) s.scoreRules = 'mvp-0.27.0';
     }
     if (!challengeBalance) s.scoreRules = 'mvp-0.26.0';
     if (seasonal && populationEnabled && goldEnabled) {
@@ -84,6 +90,7 @@ class GameEngine {
     }
     s.points = s.actionsPerTurn;
     _financeWeek(s);
+    _foodWeek(s);
     final factions = factionOpponents.keys.toList();
     s.hostileFaction = factions[_next(s, factions.length)];
     s.factions = {
@@ -129,6 +136,7 @@ class GameEngine {
     }
     _addPetition(s, 'levee_warning');
     if (seasonal) _seasonPetitions(s);
+    prepareHaremQuests(s);
     s.ensurePortraits();
     return s;
   }
@@ -144,7 +152,9 @@ class GameEngine {
       throw const GameRuleException('Lượt trị vì đã kết thúc.');
     }
     final s = original.copy();
+    prepareHaremQuests(s);
     _financeWeek(s);
+    _foodWeek(s);
     // A terminal state cannot be revived by issuing one more command.
     _finishIfCritical(s);
     if (!s.ended) {
@@ -199,7 +209,11 @@ class GameEngine {
         case 'courtier':
           _courtier(s, command.target, command.option);
         case 'palace':
-          _palaceOrder(s, command.target, command.option);
+          throw const GameRuleException(
+            'Học tập và cung vụ đã được thay bằng nhiệm vụ quan hệ.',
+          );
+        case 'harem-quest':
+          _haremQuestOrder(s, command.target, command.option);
         case 'mission':
           _missionOrder(s, command.target, command.option);
         case 'chain':
@@ -226,6 +240,11 @@ class GameEngine {
                 : 'Thuế được đặt ở mức ${taxLabels[value]}.',
           );
         case 'priority':
+          if (s.foodPressureEnabled) {
+            throw const GameRuleException(
+              'Cứu trợ được quyết định qua hành động hoặc tấu chương.',
+            );
+          }
           if (!['army', 'people'].contains(command.option) ||
               s.priority == command.option) {
             throw const GameRuleException('Hãy chọn ưu tiên chi trả khác.');
@@ -265,13 +284,17 @@ class GameEngine {
     _warSync(s);
     _clamp(s);
     _finishIfCritical(s);
-    if (s.ended) _closeFinanceWeek(s);
+    if (s.ended) {
+      _closeFinanceWeek(s);
+      _closeFoodWeek(s);
+    }
     s.revision++;
     s.history.add({
       ...command.toJson(),
       'week': original.week,
       'revision': s.revision,
     });
+    prepareHaremQuests(s);
     s.ensurePortraits();
     return s;
   }
@@ -386,7 +409,7 @@ class GameEngine {
     if (s.population == null) {
       s.grain -= grain;
     } else {
-      _food(s, -grain, title);
+      _food(s, -grain, title, detail: detail, category: category);
     }
   }
 
@@ -438,8 +461,7 @@ class GameEngine {
         'Chỉ tổ chức hòa giải các phe một lần mỗi tuần.',
       );
     }
-    if (id == 'buy_grain' &&
-        s.grain >= (s.population == null ? 200 : foodCapacity)) {
+    if (id == 'buy_grain' && s.grain >= foodCapacity(s)) {
       throw const GameRuleException('Kho lương đã đầy.');
     }
     Courtier? officer;
@@ -479,10 +501,6 @@ class GameEngine {
       detail:
           'Kinh phí ban đầu $paidCost ${moneyUnit(s)}${definition.grainCost > 0 ? ' và ${definition.grainCost} lương thực' : ''}.${officer == null ? '' : ' Giao ${officer.name} (${officer.role}) phụ trách.'} Không hoàn lại khi thất bại.',
     );
-    if (id == 'treat') {
-      final herbs = palaceEffect(s, 'herbs');
-      if (herbs != null && herbs.uses > 0) herbs.uses--;
-    }
     s.actionCounts[id] = uses + 1;
     if (id == 'security' && s.seasonal) {
       s.cooldowns['task:security'] = s.week + securityCooldown;
@@ -554,7 +572,7 @@ class GameEngine {
       case 'sell_surplus':
         final gain = rewardMoney(revenueBase!);
         final paymentDetail =
-            '${officer!.name}: cơ bản ${money(s, revenueBase)} ${moneyUnit(s)} × hiệu quả ${assessment!.rewardPercent}%, làm tròn = ${s.goldStandard ? money(s, revenueBase * assessment.rewardPercent / 100) : assessment.reward(revenueBase)}; kiểm đếm nhận $delivery% = $gain.${id == 'sell_surplus' ? ' Đã xuất 40 lương thực.' : ' Thuế tồn thu được trong lần xử lý này.'}';
+            '${officer!.name}: cơ bản ${money(s, revenueBase)} ${moneyUnit(s)} × hiệu quả ${assessment!.rewardPercent}%, làm tròn = ${s.goldStandard ? money(s, revenueBase * assessment.rewardPercent / 100) : assessment.reward(revenueBase)}; kiểm đếm nhận $delivery% = $gain.${id == 'sell_surplus' ? ' Đã xuất ${whole(actionGrainCost(s, definition))} ${foodUnit(s)}.' : ' Thuế tồn thu được trong lần xử lý này.'}';
         if (s.seasonal) {
           final due = s.week + (id == 'collect_arrears' ? 1 : 0);
           s.pending.add(
@@ -589,12 +607,21 @@ class GameEngine {
         final base = s.people >= 75 ? 2 : 5;
         final gain = reward(math.max(1, base ~/ (uses + 1)));
         s.people += gain;
+        _creditReliefFood(s, actionGrainCost(s, definition));
         result =
-            'Chi 20 và xuất 25 lương thực. Lòng dân +$gain. Cứu tế lặp lại hoặc khi lòng dân đã cao có hiệu quả thấp hơn.';
+            'Chi ${moneyText(s, paidCost)} và xuất ${whole(actionGrainCost(s, definition))} ${foodUnit(s)}. Lòng dân +$gain. Cứu tế lặp lại hoặc khi lòng dân đã cao có hiệu quả thấp hơn.';
       case 'buy_grain':
         final amount = reward(s.population == null ? 30 : 200000);
-        _food(s, amount, definition.title);
-        result = 'Lương thực +$amount ${foodUnit(s)} · chi ${definition.cost}.';
+        final received = _food(
+          s,
+          amount,
+          definition.title,
+          category: 'purchase',
+          detail:
+              'Cơ bản 200.000 tạ × hiệu quả ${assessment?.rewardPercent ?? 100}% × giao nhận $delivery%.',
+        );
+        result =
+            'Lương thực +${whole(received)} ${foodUnit(s)} · chi ${moneyText(s, paidCost)}.';
       case 'mediate':
         for (final faction in s.factions.keys) {
           s.factions[faction] = s.factions[faction]! + reward(2);
@@ -1039,6 +1066,8 @@ class GameEngine {
   }
 
   void _admit(GameState s, Courtier c) {
+    final admission = haremAdmissionBlocked(s);
+    if (admission != null) throw GameRuleException(admission);
     c.inHarem = true;
     c.affection += 8;
     c.discontent = math.max(0, c.discontent - 8);
@@ -1092,7 +1121,7 @@ class GameEngine {
             'Kín đáo, có tài thu xếp việc cung đình',
           ][_next(s, 4)],
       age: 18 + _next(s, 11),
-      ability: 55 + _next(s, 31),
+      ability: 0,
       loyalty: 50 + _next(s, 31),
       ambition: 30 + _next(s, 36),
       integrity: 50 + _next(s, 36),
@@ -1287,7 +1316,7 @@ class GameEngine {
         c.discontent = math.max(0, c.discontent - 18);
         c.influence += 12;
         _favorFaction(s, c.faction, 8, 4);
-        s.stability += c.ability ~/ 25;
+        s.stability += 3;
         s.note(
           'Sắc phong Hoàng hậu',
           '${c.name} nhận kim sách. Vị thế các gia tộc trong triều thay đổi.',
@@ -1328,6 +1357,10 @@ class GameEngine {
     final p = s.petitions.where((p) => p.id == petitionId).firstOrNull;
     if (p == null) {
       throw const GameRuleException('Tấu chương đã được xử lý hoặc hết hạn.');
+    }
+    if (isFoodRecoveryEvent(p.definitionId)) {
+      _resolveFoodRecovery(s, p, option, assigneeId: assigneeId);
+      return;
     }
     if (isCourtPersonnelEvent(p.definitionId)) {
       _resolveCourtPersonnel(s, p, option, assigneeId);
@@ -1391,6 +1424,9 @@ class GameEngine {
           '${choice.label}.${choice.grainCost > 0 ? ' Xuất thêm ${choice.grainCost} lương thực.' : ''}',
       category: 'event',
     );
+    if (s.foodPressureEnabled && ['flood', 'hunger'].contains(e.id)) {
+      _creditReliefFood(s, (choice.grainCost * 4) ~/ 5);
+    }
     s.workThisWeek += petitionPoints(s, choice);
     final deployment = s.population != null && choice.troops > 0;
     if (deployment) _deployChoice(s, e, choice, assigneeId);
@@ -1420,6 +1456,7 @@ class GameEngine {
     }
     if ((choice.effects['plotReduce'] ?? 0) > 0) _respond(s, 'plot');
     if (!deployment) _queuePetitionResult(s, e, choice, assignment);
+    _recordOrdinaryDisaster(s, e, index);
     s.petitions.remove(p);
     s.note(
       e.title,
@@ -1474,7 +1511,16 @@ class GameEngine {
     );
     for (final entry in resolved.entries) {
       final value = entry.value;
-      if (_populationEffect(s, entry.key, value, title)) continue;
+      if (_populationEffect(
+        s,
+        entry.key,
+        value,
+        title,
+        detail: detail,
+        category: category,
+      )) {
+        continue;
+      }
       switch (entry.key) {
         case 'treasury':
         case 'gold':
@@ -1656,6 +1702,10 @@ class GameEngine {
         if (s.ended) return;
         continue;
       }
+      if (isFoodRecoveryEvent(p.definitionId)) {
+        _resolveFoodRecovery(s, p, '2', expired: true);
+        continue;
+      }
       final definition = eventForState(s, p.definitionId);
       if (['Khủng hoảng', 'Âm mưu'].contains(definition.category)) {
         ignoredCrises++;
@@ -1683,6 +1733,7 @@ class GameEngine {
         targetId: p.targetId,
       );
       _queuePetitionResult(s, definition, fallback, assignment);
+      _recordOrdinaryDisaster(s, definition, definition.choices.length - 1);
       s.petitions.remove(p);
       s.note(
         'Tấu chương quá hạn',
@@ -1699,7 +1750,7 @@ class GameEngine {
     _consequences(s);
     _health(s);
     _finishIfCritical(s);
-    if (!s.ended) _palaceSeason(s);
+    if (!s.ended) _settleHaremQuests(s);
     _finishIfCritical(s);
     if (!s.ended) _reignWeek(s);
     _finishIfCritical(s);
@@ -1738,6 +1789,7 @@ class GameEngine {
       'Sổ tiền tuần ${s.week}: thu ${_financeWeek(s).income} · thực chi ${_financeWeek(s).expense}; ngân khố ${s.treasury}. ${s.healthReport}',
     );
     _closeFinanceWeek(s);
+    _closeFoodWeek(s);
     if (s.ended) return;
     s.completedWeeks++;
     _frontierNewYear(s);
@@ -1754,6 +1806,7 @@ class GameEngine {
     s.favorsThisWeek.clear();
     s.responsesThisWeek.clear();
     if (s.population != null) _populationNewSeason(s);
+    _foodWeek(s);
     if (s.completedWeeks % (s.seasonal ? 4 : 52) == 0) _ageCourt(s);
     // Continuations reserve their place before the ordinary random draw.
     if (s.seasonal) _reignGenerate(s);
@@ -1928,15 +1981,15 @@ class GameEngine {
         s.note(
           'Đóng góp hậu cung',
           '${authoredMoneyText(s, harem.summary)}.\n${harem.contributions.map((c) => authoredMoneyText(s, c.description)).join('\n')}\n'
-              'Chốt theo thiện cảm/năng lực khi tính kinh tế cuối mùa; '
-              'tối đa +3 mỗi chỉ số, +20 ngân khố. Tiền đã ghi vào sổ thu chi, chưa trừ chi hậu cung.',
+              'Chốt theo thiện cảm, dấu mốc quan hệ và cam kết nhân sự cuối mùa; '
+              'tối đa +5 mỗi chỉ số, +50 ngân khố. Tiền đã ghi vào sổ thu chi, chưa trừ chi hậu cung.',
           'gold',
         );
       }
     } else {
       final queen = s.court.where((c) => c.available && c.queen).firstOrNull;
       if (queen != null &&
-          queen.ability >= 75 &&
+          queen.affection > 70 &&
           queen.affection > 40 &&
           s.week % (s.seasonal ? 1 : 3) == 0) {
         s.stability++;
@@ -1956,7 +2009,14 @@ class GameEngine {
               : foodAmount(
                 base * factor * weather / 10000 * annualFarmLaborFactor(s),
               );
-      _food(s, harvest, 'Thu hoạch');
+      _food(
+        s,
+        harvest,
+        'Thu hoạch',
+        category: 'harvest',
+        detail:
+            'Nền ${whole(base)} × đê ${factor.toStringAsFixed(1)}% × thời tiết $weather% × lao động ${(annualFarmLaborFactor(s) * 100).toStringAsFixed(1)}%.',
+      );
       s.lastHarvestYear = s.year;
       s.lastHarvestAmount = harvest;
       s.lastHarvestWeather = weather;
@@ -1964,8 +2024,9 @@ class GameEngine {
       s.note(
         'Mùa gặt',
         'Nông nghiệp cấp ${s.agricultureLevel}: nền $base × đê cả vụ '
-            '${factor.toStringAsFixed(1)}% × thời tiết $weather% = $harvest thóc. '
-            'Xuân 20% · Hạ 50% · Thu 30%; chưa trừ tiêu hao ${grainConsumption(s)} thóc mùa này.',
+            '${factor.toStringAsFixed(1)}% × thời tiết $weather%'
+            '${s.population == null ? '' : ' × lao động ${(annualFarmLaborFactor(s) * 100).toStringAsFixed(1)}%'} = ${whole(harvest)} ${foodUnit(s)}. '
+            'Xuân 20% · Hạ 50% · Thu 30%; chưa trừ tiêu hao ${whole(grainConsumption(s))} ${foodUnit(s)} mùa này.',
         'gold',
       );
       return;
@@ -2067,7 +2128,13 @@ class GameEngine {
                 challenging: s.challengingEconomy,
               );
       if (p.kind == 'farm') {
-        _food(s, farmFood, 'Canh tác bổ sung');
+        _food(
+          s,
+          farmFood,
+          'Canh tác bổ sung',
+          category: 'project',
+          detail: '${officer.name} hoàn thành canh tác.',
+        );
         s.people += 4;
       }
       s.note(
@@ -2118,8 +2185,6 @@ class GameEngine {
     for (final e in s.factions.entries) 'Phe ${e.key}': e.value,
     for (final c in s.court) 'Thiện cảm ${c.name}': c.affection,
     for (final c in s.court) 'Bất mãn ${c.name}': c.discontent,
-    for (final c in s.court.where((c) => c.isConsort))
-      'Năng lực ${c.name}': c.ability,
   };
 
   void _recordOutcome(
@@ -2720,11 +2785,16 @@ class GameEngine {
     }
     if (s.season == 'Hạ' && s.levee < 40 && _next(s, 100) < 40 - s.levee ~/ 2) {
       if (_addTriggered(s, 'flood')) {
-        s.grain = math.max(
-          0,
-          s.grain -
-              (s.population == null ? 12 : authoredFood(12, context: 'flood')),
-        );
+        if (s.population == null) {
+          s.grain = math.max(0, s.grain - 12);
+        } else {
+          _food(
+            s,
+            -authoredFood(12, context: 'flood'),
+            'Lũ tràn qua ruộng',
+            category: 'disaster',
+          );
+        }
         s.people = math.max(0, s.people - 5);
         s.note(
           'Đê đã vỡ',
@@ -2946,7 +3016,18 @@ class GameEngine {
     s.army = s.army.clamp(0, 100);
     s.health = s.health.clamp(0, 100);
     s.stability = s.stability.clamp(0, 100);
-    s.grain = s.grain.clamp(0, s.population == null ? 200 : foodCapacity);
+    final food = s.grain.clamp(0, foodCapacity(s));
+    if (s.population != null && food != s.grain) {
+      _food(
+        s,
+        food - s.grain,
+        'Điều chỉnh giới hạn kho',
+        category: 'adjustment',
+        detail: 'Đối chiếu tồn kho với giới hạn hiện tại.',
+      );
+    } else {
+      s.grain = food;
+    }
     final p = s.population;
     if (p != null) {
       p.population = math.max(0, p.population);

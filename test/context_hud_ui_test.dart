@@ -70,7 +70,7 @@ void main() {
           '/people': 'Triều thần',
           '/people/government': 'Bộ máy triều đình',
           '/harem': 'Hậu cung',
-          '/harem/management': 'Học tập & cung vụ',
+          '/harem/management': 'Câu chuyện hậu cung',
           '/health': 'Long thể',
           '/journal': 'Sử quán',
           '/scores': 'Vọng Thiên Các',

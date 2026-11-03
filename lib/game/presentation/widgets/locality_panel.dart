@@ -14,6 +14,7 @@ import 'memorial_paper.dart';
 import 'population_panel.dart';
 import '../../logic/management_rules.dart';
 import 'management_panel.dart';
+import 'food_ledger_panel.dart';
 
 /// Local workspaces share the existing state, command validation and dialogs.
 /// Phủ nha combines local personnel and the existing work ledger.
@@ -69,11 +70,14 @@ class LocalityPanel extends StatelessWidget {
             const SizedBox(height: 16),
             _section('Giao việc địa phương', _destinations()),
             _section('Quan đang phụ trách', _assignedPeople()),
+          ] else if (place == LocalityPlace.granary) ...[
+            FoodLedgerPanel(state: s, flat: true),
+            const SizedBox(height: 24),
           ] else
             _section('Tình hình hiện tại', _overview()),
           if (place == LocalityPlace.commerce)
             _section('Chính sách thuế & sản xuất', _commercePolicies()),
-          if (place == LocalityPlace.granary)
+          if (place == LocalityPlace.granary && !s.foodPressureEnabled)
             _section('Ưu tiên chi trả', _reliefPolicy()),
           if (place != LocalityPlace.administration)
             _section(
@@ -181,7 +185,8 @@ class LocalityPanel extends StatelessWidget {
           ),
           Text(
             formatGameNumbers(
-              'Cấp đê hiện tại giảm ${leveeWearReductions[s.leveeLevel]}% hao mòn thường lệ.',
+              'Cấp đê hiện tại giảm ${leveeWearReductions[s.leveeLevel]}% hao mòn thường lệ.'
+              '${s.population == null ? '' : ' Giảm ${leveeDisasterReductions[s.leveeLevel]}% thiệt hại tình trạng đê do thiên tai.'}',
             ),
           ),
         ],
@@ -196,7 +201,7 @@ class LocalityPanel extends StatelessWidget {
       children: [
         _row('Lương thực dự trữ', '${whole(s.grain)} ${foodUnit(s)}'),
         if (s.population != null) ...[
-          _row('Sức chứa', '${whole(foodCapacity)} tạ'),
+          _row('Sức chứa', '${whole(foodCapacity(s))} tạ'),
           _row('Dự trữ tương đương', '${foodDays(s)} ngày'),
           _row(
             'Khẩu phần đã cấp trước',
@@ -327,59 +332,205 @@ class LocalityPanel extends StatelessWidget {
     );
   }
 
+  String _actionArtwork(ActionDefinition action) => switch (action.id) {
+    'upgrade_farm' ||
+    'settle' ||
+    'return' => 'assets/images/petitions/agriculture.webp',
+    'farm' => 'assets/images/kingdom/farm.webp',
+    'upgrade_levee' ||
+    'maintain_levee' ||
+    'repair' => 'assets/images/petitions/river.webp',
+    'collect_arrears' => 'assets/images/kingdom/dossier-obligations.webp',
+    'commerce' ||
+    'upgrade_economy' ||
+    'sell_surplus' => 'assets/images/petitions/trade.webp',
+    'buy_grain' ||
+    'relief' ||
+    'public_health' ||
+    'refugees' => 'assets/images/kingdom/relief.webp',
+    _ => 'assets/images/kingdom/dossier-progress.webp',
+  };
+
   Widget _action(ActionDefinition action) {
     final reason = blockedReason(action);
+    final title = Text(
+      formatGameNumbers(action.title),
+      style: const TextStyle(fontFamily: 'Lora', fontSize: 17, height: 1.35),
+    );
+    final costs = Wrap(
+      spacing: 8,
+      runSpacing: 6,
+      children: [
+        KingdomPill('${actionCost(s, action)} ${moneyUnit(s)}'),
+        if (actionGrainCost(s, action) > 0)
+          KingdomPill('${whole(actionGrainCost(s, action))} ${foodUnit(s)}'),
+        const KingdomPill('1 hành động'),
+      ],
+    );
+    final description = Text(
+      formatGameNumbers(actionDescription(action)),
+      style: const TextStyle(fontSize: 12, height: 1.6, color: muted),
+    );
+    final footer = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (reason != null) ...[
+          Text(
+            formatGameNumbers(reason),
+            style: const TextStyle(
+              fontSize: 11,
+              height: 1.5,
+              color: terracotta,
+            ),
+          ),
+          const SizedBox(height: 8),
+        ],
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Flexible(
+              child: Text(
+                populationActionNames.containsKey(action.id)
+                    ? 'Xem & ban lệnh'
+                    : 'Xem & giao việc',
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  fontSize: 11,
+                  color: reason == null ? forest : muted,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            const SizedBox(width: 6),
+            Icon(
+              Icons.arrow_forward,
+              size: 15,
+              color: reason == null ? forest : muted,
+            ),
+          ],
+        ),
+      ],
+    );
+    Widget artwork(double width, {double? height}) => SizedBox(
+      width: width,
+      height: height,
+      child: ShaderMask(
+        blendMode: BlendMode.dstIn,
+        shaderCallback:
+            (rect) => const LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+                Colors.transparent,
+                Colors.white,
+                Colors.white,
+                Colors.transparent,
+              ],
+              stops: [0, .06, .82, 1],
+            ).createShader(rect),
+        child: Image.asset(
+          _actionArtwork(action),
+          key: ValueKey('locality-action-art-${action.id}'),
+          fit: BoxFit.cover,
+          filterQuality: FilterQuality.medium,
+          excludeFromSemantics: true,
+        ),
+      ),
+    );
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: MemorialPaper(
         readKey: ValueKey('locality-action-paper-${action.id}'),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                formatGameNumbers(action.title),
-                style: const TextStyle(fontFamily: 'Lora', fontSize: 17),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                formatGameNumbers(actionDescription(action)),
-                style: const TextStyle(fontSize: 12),
-              ),
-              const SizedBox(height: 12),
-              Wrap(
-                spacing: 8,
-                runSpacing: 6,
-                children: [
-                  KingdomPill('${actionCost(s, action)} ${moneyUnit(s)}'),
-                  if (actionGrainCost(s, action) > 0)
-                    KingdomPill(
-                      '${whole(actionGrainCost(s, action))} ${foodUnit(s)}',
-                    ),
-                  const KingdomPill('1 hành động'),
-                ],
-              ),
-              const SizedBox(height: 12),
-              OutlinedButton.icon(
-                key: ValueKey('action-${action.id}'),
-                onPressed: reason == null ? () => onAction(action) : null,
-                icon: const Icon(Icons.arrow_forward, size: 17),
-                label: Text(
-                  formatGameNumbers(
-                    populationActionNames.containsKey(action.id)
-                        ? 'Xem & ban lệnh'
-                        : 'Xem & giao việc',
-                  ),
+        child: LayoutBuilder(
+          builder: (context, bounds) {
+            final compact = bounds.maxWidth < 520;
+            return TextButton(
+              key: ValueKey('action-${action.id}'),
+              onPressed: reason == null ? () => onAction(action) : null,
+              style: TextButton.styleFrom(
+                foregroundColor: ink,
+                disabledForegroundColor: ink,
+                padding: EdgeInsets.zero,
+                minimumSize: Size.zero,
+                alignment: Alignment.centerLeft,
+                textStyle: const TextStyle(fontFamily: 'BeVietnam'),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4),
                 ),
               ),
-              if (reason != null)
-                Text(
-                  formatGameNumbers(reason),
-                  style: const TextStyle(fontSize: 11, color: terracotta),
-                ),
-            ],
-          ),
+              child:
+                  compact
+                      ? Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                artwork(84, height: 112),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      title,
+                                      const SizedBox(height: 10),
+                                      costs,
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            description,
+                            const SizedBox(height: 12),
+                            footer,
+                          ],
+                        ),
+                      )
+                      : IntrinsicHeight(
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(minHeight: 164),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: artwork(
+                                  (bounds.maxWidth * .25).clamp(110.0, 154.0),
+                                ),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    8,
+                                    14,
+                                    16,
+                                    12,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      title,
+                                      const SizedBox(height: 8),
+                                      description,
+                                      const SizedBox(height: 10),
+                                      costs,
+                                      const SizedBox(height: 12),
+                                      footer,
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+            );
+          },
         ),
       ),
     );

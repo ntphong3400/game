@@ -1,6 +1,5 @@
 import 'currency_rules.dart';
 import '../models/game_state.dart';
-import 'palace_rules.dart' show palaceEffect;
 import 'personnel_rules.dart' show roleEffect;
 
 const treatmentHealthRecovery = 2;
@@ -18,13 +17,7 @@ String treatmentActionDescription(
   required int baseCost,
   required int cost,
 }) {
-  final herbs = palaceEffect(s, 'herbs');
-  final discount = baseCost - cost;
-  final support =
-      discount > 0
-          ? ' (gốc $baseCost, dược liệu giảm $discount); còn ${herbs?.uses ?? 0} lần hỗ trợ'
-          : '';
-  return 'Chi $cost ${moneyUnit(s)}$support · 1 hành động · sức khỏe +$treatmentHealthRecovery · '
+  return 'Chi $cost ${moneyUnit(s)} · 1 hành động · sức khỏe +$treatmentHealthRecovery · '
       'mức bệnh −${treatmentIllnessRecovery(s)} · mệt mỏi −$treatmentFatigueRecovery. '
       'Hiệu quả áp dụng ngay.';
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../models/number_format.dart';
 import '../../models/game_state.dart';
 import 'hud_policy.dart';
+import '../music/music_scope.dart';
 
 const _jade = Color(0xFF16372F);
 const _deep = Color(0xFF102922);
@@ -140,7 +141,16 @@ class GameTopBar extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(flex: 3, child: calendar ?? const SizedBox.shrink()),
+        Expanded(
+          flex: 3,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Flexible(child: calendar ?? const SizedBox.shrink()),
+              const MusicToggle(),
+            ],
+          ),
+        ),
       ],
     ),
   );

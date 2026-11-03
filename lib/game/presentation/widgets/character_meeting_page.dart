@@ -333,12 +333,33 @@ class _CharacterMeetingPageState extends State<CharacterMeetingPage> {
           child: LayoutBuilder(
             builder: (context, bounds) {
               final compact = bounds.maxWidth < 760;
+              final portrait =
+                  MediaQuery.orientationOf(context) == Orientation.portrait;
               return Column(
                 children: [
                   widget.header ?? _header(compact),
                   Expanded(
                     child:
-                        compact
+                        portrait
+                            ? LayoutBuilder(
+                              builder:
+                                  (context, area) => Stack(
+                                    fit: StackFit.expand,
+                                    children: [
+                                      _character(fullHeight: true),
+                                      Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: ConstrainedBox(
+                                          constraints: BoxConstraints(
+                                            maxHeight: area.maxHeight * .57,
+                                          ),
+                                          child: _conversation(compact: true),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                            )
+                            : compact
                             ? LayoutBuilder(
                               builder:
                                   (context, area) => Column(
@@ -428,12 +449,15 @@ class _CharacterMeetingPageState extends State<CharacterMeetingPage> {
     ),
   );
 
-  Widget _character() => Padding(
-    padding: const EdgeInsets.fromLTRB(12, 8, 12, 10),
+  Widget _character({bool fullHeight = false}) => Padding(
+    padding:
+        fullHeight
+            ? const EdgeInsets.fromLTRB(12, 20, 12, 20)
+            : const EdgeInsets.fromLTRB(12, 8, 12, 10),
     child: Image.asset(
       widget.scene.characterAsset,
       key: const ValueKey('meeting-fullbody'),
-      fit: BoxFit.contain,
+      fit: fullHeight ? BoxFit.fitHeight : BoxFit.contain,
       width: double.infinity,
       height: double.infinity,
       semanticLabel: '${widget.scene.name} toàn thân',
@@ -501,10 +525,12 @@ class _CharacterMeetingPageState extends State<CharacterMeetingPage> {
                     'affection',
                   ),
                 ),
-                const SizedBox(width: 22),
-                Expanded(
-                  child: _stat('Năng lực', widget.scene.ability, 'ability'),
-                ),
+                if (widget.scene.haremRank == null) ...[
+                  const SizedBox(width: 22),
+                  Expanded(
+                    child: _stat('Năng lực', widget.scene.ability, 'ability'),
+                  ),
+                ],
               ],
             ),
             SizedBox(height: compact ? 14 : 20),

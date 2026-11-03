@@ -1,0 +1,248 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "label": "realm started",
+      "path": "/citadel",
+      "src": "kinh_thanh_background.mp3",
+      "time": 30,
+      "duration": 71.314281,
+      "loaded": false,
+      "paused": false,
+      "loop": false,
+      "count": 1
+    },
+    {
+      "label": "realm child /capital",
+      "path": "/capital",
+      "src": "kinh_thanh_background.mp3",
+      "time": 30.23265,
+      "duration": 71.314281,
+      "loaded": true,
+      "paused": false,
+      "loop": false,
+      "count": 1
+    },
+    {
+      "label": "realm child /treasury",
+      "path": "/treasury",
+      "src": "kinh_thanh_background.mp3",
+      "time": 30.625745,
+      "duration": 71.314281,
+      "loaded": true,
+      "paused": false,
+      "loop": false,
+      "count": 1
+    },
+    {
+      "label": "realm child /harem/management",
+      "path": "/harem/management",
+      "src": "kinh_thanh_background.mp3",
+      "time": 30.955542,
+      "duration": 71.314281,
+      "loaded": true,
+      "paused": false,
+      "loop": false,
+      "count": 1
+    },
+    {
+      "label": "realm child /country/north/palace",
+      "path": "/country/north/palace",
+      "src": "kinh_thanh_background.mp3",
+      "time": 31.286814,
+      "duration": 71.314281,
+      "loaded": true,
+      "paused": false,
+      "loop": false,
+      "count": 1
+    },
+    {
+      "label": "realm child /citadel",
+      "path": "/citadel",
+      "src": "kinh_thanh_background.mp3",
+      "time": 31.626296,
+      "duration": 71.314281,
+      "loaded": true,
+      "paused": false,
+      "loop": false,
+      "count": 1
+    },
+    {
+      "label": "second realm track playing",
+      "path": "/citadel",
+      "src": "giang_son_background.mp3",
+      "time": 0.012389,
+      "duration": 97.828563,
+      "loaded": true,
+      "paused": false,
+      "loop": false,
+      "count": 1
+    },
+    {
+      "label": "realm playlist wrapped",
+      "path": "/capital",
+      "src": "kinh_thanh_background.mp3",
+      "time": 0,
+      "duration": 71.314281,
+      "loaded": false,
+      "paused": false,
+      "loop": false,
+      "count": 1
+    },
+    {
+      "label": "child /locality/administration",
+      "path": "/locality/administration",
+      "src": "dia_phuong_background.mp3",
+      "time": 30.282558,
+      "duration": 202.736313,
+      "loaded": true,
+      "paused": false,
+      "loop": true,
+      "count": 1
+    },
+    {
+      "label": "child /locality/agriculture",
+      "path": "/locality/agriculture",
+      "src": "dia_phuong_background.mp3",
+      "time": 30.677245,
+      "duration": 202.736313,
+      "loaded": true,
+      "paused": false,
+      "loop": true,
+      "count": 1
+    },
+    {
+      "label": "child /locality/irrigation",
+      "path": "/locality/irrigation",
+      "src": "dia_phuong_background.mp3",
+      "time": 30.990097,
+      "duration": 202.736313,
+      "loaded": true,
+      "paused": false,
+      "loop": true,
+      "count": 1
+    },
+    {
+      "label": "child /locality/granary",
+      "path": "/locality/granary",
+      "src": "dia_phuong_background.mp3",
+      "time": 31.326075,
+      "duration": 202.736313,
+      "loaded": true,
+      "paused": false,
+      "loop": true,
+      "count": 1
+    },
+    {
+      "label": "child /locality/commerce",
+      "path": "/locality/commerce",
+      "src": "dia_phuong_background.mp3",
+      "time": 31.678471,
+      "duration": 202.736313,
+      "loaded": true,
+      "paused": false,
+      "loop": true,
+      "count": 1
+    },
+    {
+      "label": "child /locality/village",
+      "path": "/locality/village",
+      "src": "dia_phuong_background.mp3",
+      "time": 32.03147,
+      "duration": 202.736313,
+      "loaded": true,
+      "paused": false,
+      "loop": true,
+      "count": 1
+    },
+    {
+      "label": "child /frontier/north/camp",
+      "path": "/frontier/north/camp",
+      "src": "bien_ai_background.mp3",
+      "time": 30.254012,
+      "duration": 122.904,
+      "loaded": true,
+      "paused": false,
+      "loop": true,
+      "count": 1
+    },
+    {
+      "label": "child /frontier/north/command",
+      "path": "/frontier/north/command",
+      "src": "bien_ai_background.mp3",
+      "time": 30.588454,
+      "duration": 122.904,
+      "loaded": true,
+      "paused": false,
+      "loop": true,
+      "count": 1
+    },
+    {
+      "label": "child /frontier/north/gate",
+      "path": "/frontier/north/gate",
+      "src": "bien_ai_background.mp3",
+      "time": 30.919946,
+      "duration": 122.904,
+      "loaded": true,
+      "paused": false,
+      "loop": true,
+      "count": 1
+    },
+    {
+      "label": "child /frontier/west/gate",
+      "path": "/frontier/west/gate",
+      "src": "bien_ai_background.mp3",
+      "time": 31.240036,
+      "duration": 122.904,
+      "loaded": true,
+      "paused": false,
+      "loop": true,
+      "count": 1
+    },
+    {
+      "label": "court playing",
+      "path": "/court",
+      "src": "trieu_chinh_background.mp3",
+      "time": 0.225779,
+      "duration": 100.56,
+      "loaded": true,
+      "paused": false,
+      "loop": true,
+      "count": 1
+    },
+    {
+      "label": "court looped",
+      "path": "/court",
+      "src": "trieu_chinh_background.mp3",
+      "time": 0,
+      "duration": 100.56,
+      "loaded": true,
+      "paused": false,
+      "loop": true,
+      "count": 1
+    },
+    {
+      "label": "muted from mobile HUD",
+      "path": "/court",
+      "src": "trieu_chinh_background.mp3",
+      "time": 0.877377,
+      "duration": 100.56,
+      "loaded": true,
+      "paused": true,
+      "loop": true,
+      "count": 1
+    },
+    {
+      "label": "saved mute preference and unmute after reload",
+      "path": "/locality",
+      "src": "dia_phuong_background.mp3",
+      "time": 0.165846,
+      "duration": 202.736313,
+      "loaded": true,
+      "paused": false,
+      "loop": true,
+      "count": 1
+    }
+  ],
+  "errors": []
+}

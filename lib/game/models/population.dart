@@ -97,6 +97,7 @@ class PopulationState {
   int yearlyLaborSamples = 0;
   double growthRemainder = 0, agingRemainder = 0, diseaseRemainder = 0;
   int foodCredit = 0;
+  int campaignWorkers = 0;
   double wageCoverage = 100;
   List<PopulationOrder> orders = [];
   List<ArmyDeployment> deployments = [];
@@ -214,6 +215,7 @@ class PopulationState {
     p.agingRemainder = d('agingRemainder', 0);
     p.diseaseRemainder = d('diseaseRemainder', 0);
     p.foodCredit = n('foodCredit', 0);
+    p.campaignWorkers = n('campaignWorkers', 0);
     p.wageCoverage = d('wageCoverage', 100);
     p.orders =
         (j['orders'] as List? ?? [])
@@ -268,6 +270,7 @@ class PopulationState {
     'agingRemainder': agingRemainder,
     'diseaseRemainder': diseaseRemainder,
     'foodCredit': foodCredit,
+    'campaignWorkers': campaignWorkers,
     'wageCoverage': wageCoverage,
     'orders': orders.map((o) => o.toJson()).toList(),
     'deployments': deployments.map((d) => d.toJson()).toList(),

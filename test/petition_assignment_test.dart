@@ -5,7 +5,6 @@ import 'package:van_tue/game/data/game_store.dart';
 import 'support/legacy_engine.dart';
 import 'support/legacy_gateway.dart';
 import 'package:van_tue/game/logic/personnel_rules.dart';
-import 'package:van_tue/game/logic/palace_rules.dart';
 import 'package:van_tue/game/logic/petition_assignment_rules.dart';
 import 'package:van_tue/game/models/game_state.dart';
 
@@ -135,14 +134,11 @@ void main() {
       final result = engine.execute(s, decision(s, person: person.id));
       expect(result.points, 11);
       expect(result.pending.single.assignment!.assigneeId, person.id);
+      expect(officerBusy(result, person.id), isTrue);
       expect(
-        palacePersonUnavailable(
-          result,
-          result.court.firstWhere((c) => c.id == person.id),
-        ),
-        isNotNull,
+        settle(result).outcomes.single.status,
+        result.pending.single.assignment!.succeeded ? 'success' : 'failure',
       );
-      expect(settle(result).outcomes.single.status, 'success');
     },
   );
 
@@ -176,7 +172,6 @@ void main() {
     () {
       for (final mode in [
         'busy',
-        'study',
         'underage',
         'departed',
         'candidate',
@@ -192,17 +187,6 @@ void main() {
               kind: 'farm',
               officerId: c.id,
               startedWeek: 1,
-              duration: 2,
-            ),
-          );
-        }
-        if (mode == 'study') {
-          s.palaceWorks.add(
-            PalaceWork(
-              id: 'study',
-              kind: 'study',
-              personId: c.id,
-              startedTurn: 1,
               duration: 2,
             ),
           );
@@ -359,7 +343,7 @@ void main() {
         isA<GameRuleException>().having(
           (e) => e.message,
           'reason',
-          contains('tấu chương'),
+          contains('đã được thay'),
         ),
       ),
     );

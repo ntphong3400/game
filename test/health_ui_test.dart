@@ -55,7 +55,7 @@ void main() {
                 : scenario == 'herbs'
                 ? 11
                 : 5;
-        final cost = scenario == 'herbs' ? 15 : 25;
+        const cost = 25;
         final controller = GameController(gateway);
         await controller.load();
         await tester.pumpWidget(
@@ -76,7 +76,9 @@ void main() {
         expect(text, contains('Chi $cost tiền'));
         expect(text, contains('sức khỏe +2'));
         expect(text, contains('Hiệu quả áp dụng ngay'));
-        if (scenario == 'herbs') expect(text, contains('dược liệu giảm 10'));
+        if (scenario == 'herbs') {
+          expect(text, isNot(contains('dược liệu giảm')));
+        }
         final before = controller.state!.copy();
         final button = find.byKey(const ValueKey('action-treat'));
         await tester.ensureVisible(button);
@@ -91,7 +93,7 @@ void main() {
         expect(result.treasury, before.treasury - cost);
         expect((await gateway.load()).active!.fatigue, 18);
         if (scenario == 'herbs') {
-          expect(result.palaceEffects.single.uses, 0);
+          expect(result.palaceEffects, isEmpty);
           expect(tester.widget<Text>(preview).data, contains('Chi 25 tiền'));
         }
         expect(tester.takeException(), isNull);

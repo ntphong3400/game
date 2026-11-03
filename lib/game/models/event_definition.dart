@@ -49,8 +49,10 @@ class EventDefinition {
     this.minWeek = 1,
     this.family = '',
     this.trigger = '',
+    this.foodCostsNative = false,
   });
   final String id, title, body, category, condition, family, trigger;
   final List<EventChoice> choices;
   final int cooldown, minWeek;
+  final bool foodCostsNative;
 }

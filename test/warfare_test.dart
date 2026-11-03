@@ -278,7 +278,7 @@ void main() {
       expect(s.population!.soldiers, 50000);
       expect(s.population!.availableSoldiers, 43750);
       expect(s.treasury, before - quote.cost);
-      expect(s.population!.foodCredit, warFoodCredit(6250));
+      expect(s.population!.foodCredit, warFoodCredit(6250, s));
       expect(officerBusy(s, leader.id), true);
       expect(officerBusy(s, deputy.id), true);
       final m2 = s.warfare!.missions[1];

@@ -10,7 +10,7 @@ import 'palace_test.dart' show freshPalace;
 
 void main() {
   testWidgets(
-    'herbal discount appears in treatment UI and matches actual debit and ledger',
+    'retired herbal support is removed and treatment charges the full price',
     (tester) async {
       tester.view.physicalSize = const Size(1440, 1000);
       tester.view.devicePixelRatio = 1;
@@ -18,7 +18,7 @@ void main() {
       addTearDown(tester.view.resetDevicePixelRatio);
       final store = MemoryGameStore();
       await store.update((a) {
-        a.active = freshPalace()..treasury = 15;
+        a.active = freshPalace()..treasury = 25;
         a.active!.palaceEffects.add(
           PalaceEffect(
             kind: 'herbs',
@@ -38,9 +38,7 @@ void main() {
       await tester.pumpAndSettle();
       await openSection(tester, 'health');
       await tester.pumpAndSettle();
-      final price = find.textContaining(
-        'Chi 15 tiền (gốc 25, dược liệu giảm 10)',
-      );
+      final price = find.textContaining('Chi 25 tiền');
       await tester.ensureVisible(price);
       expect(price, findsOneWidget);
       final treatment = find.byKey(const ValueKey('action-treat'));
@@ -50,9 +48,9 @@ void main() {
       await tester.pumpAndSettle();
       expect(controller.state!.treasury, 0);
       expect(controller.state!.points, 11);
-      expect(controller.state!.palaceEffects.single.uses, 2);
-      expect(controller.state!.financialWeeks.last.entries.last.amount, -15);
-      expect(controller.state!.journal.first.text, contains('Đã chi 15 tiền'));
+      expect(controller.state!.palaceEffects, isEmpty);
+      expect(controller.state!.financialWeeks.last.entries.last.amount, -25);
+      expect(controller.state!.journal.first.text, contains('Đã chi 25 tiền'));
       expect(tester.takeException(), isNull);
     },
   );

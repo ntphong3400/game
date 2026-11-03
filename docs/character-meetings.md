@@ -2,6 +2,8 @@
 
 Trang **Gặp gỡ** ở Hậu cung và **Triệu kiến** ở Triều thần đều mở cảnh toàn màn hình theo mẫu Ngọc Lan và Thanh Mai đã duyệt. Các lối mở từ Phủ nha cũng dùng trang này và quay về đúng Địa phương.
 
+Màn hình dọc đặt nhân vật phía sau bảng thông tin, ảnh cao hết vùng dưới thanh tiêu đề với padding trên/dưới 20 px và giữ tỷ lệ. Bảng thông tin neo đáy, cao tối đa 57% vùng nội dung và cuộn riêng; nhân vật đứng yên khi cuộn. Bố cục màn hình ngang giữ nguyên.
+
 ## Bộ ảnh
 
 - 90 diện mạo: 30 hậu cung và 60 triều thần, gồm cả khuôn mặt dùng cho ứng viên tuyển mới.

@@ -3,6 +3,7 @@ library;
 
 import 'dart:convert';
 import 'palace_test.dart' show freshPalace, palaceCommand;
+import 'package:van_tue/game/logic/harem_rules.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:idb_shim/idb_browser.dart';
 import 'package:van_tue/game/data/game_store.dart';
@@ -99,66 +100,81 @@ void main() {
     },
   );
   test(
-    'palace assignment, partial progress and result survive real IndexedDB reopen, retries and competing tabs',
+    'relationship allocation and chapter payments survive real IndexedDB reopen and competing tabs',
     () async {
       final factory = getIdbFactory()!;
-      final name = 'van-tue-palace-${DateTime.now().microsecondsSinceEpoch}';
+      final name =
+          'van-tue-harem-quests-${DateTime.now().microsecondsSinceEpoch}';
       var store = await IndexedGameStore.open(factory, name: name);
       final secondStore = await IndexedGameStore.open(factory, name: name);
       try {
         await store.update((a) => a.active = freshPalace());
-        final gateway = LocalGameGateway(store);
-        final second = LocalGameGateway(secondStore);
-        final initial = (await gateway.load()).active!;
+        final gateway = LocalGameGateway(store),
+            second = LocalGameGateway(secondStore);
+        final loaded = await Future.wait([gateway.load(), second.load()]);
+        expect(loaded[0].toJson(), loaded[1].toJson());
+        final initial = loaded.first.active!;
+        final route = haremQuestFor(initial, 'wife-0')!.definitionId;
+        final cost = haremChapterCost(
+          initial,
+          haremQuestFor(initial, 'wife-0')!,
+          'A',
+        );
         final command = palaceCommand(
           initial,
-          'palace',
+          'harem-quest',
           target: 'wife-0',
-          option: 'study',
+          option: 'personal:A',
         );
-        final assigned = await Future.wait([
+        final paid = await Future.wait([
           gateway.dispatch(command),
           second.dispatch(command),
         ]);
-        expect(assigned[0].toJson(), assigned[1].toJson());
-        expect(assigned.first.active!.points, 11);
-        expect(assigned.first.active!.treasury, 980);
-        expect(assigned.first.active!.palaceWorks, hasLength(1));
-        final firstClose = palaceCommand(assigned.first.active!, 'endWeek');
-        final progressed = await gateway.dispatch(firstClose);
-        expect(progressed.active!.palaceWorks.single.progress, 1);
+        expect(paid[0].toJson(), paid[1].toJson());
+        expect(paid.first.active!.treasury, initial.treasury - cost);
+        expect(paid.first.active!.points, initial.points - 1);
+        expect(haremQuestFor(paid.first.active!, 'wife-0')!.choices, ['A']);
         store.close();
         store = await IndexedGameStore.open(factory, name: name);
         final reopened = LocalGameGateway(store);
-        expect((await reopened.load()).toJson(), progressed.toJson());
+        expect((await reopened.load()).toJson(), paid.first.toJson());
         expect(
           (await reopened.dispatch(command)).toJson(),
-          progressed.toJson(),
+          paid.first.toJson(),
         );
-        await store.update((a) {
-          a.active!.petitions.clear();
-          a.active!.affairsThisWeek = 1;
-        });
-        final last = palaceCommand((await reopened.load()).active!, 'endWeek');
-        final completed = await Future.wait([
-          reopened.dispatch(last),
-          second.dispatch(last),
-        ]);
-        expect(completed[0].toJson(), completed[1].toJson());
-        expect(completed.first.active!.palaceWorks, isEmpty);
-        expect(completed.first.active!.court.first.palaceCoursesCompleted, 1);
-        expect(completed.first.active!.court.first.palaceExperience, 0);
-        expect(completed.first.active!.court.first.ability, 71);
-        expect(completed.first.active!.outcomes, hasLength(1));
-        expect(
-          (await reopened.dispatch(firstClose)).toJson(),
-          completed.first.toJson(),
-        );
+        var latest = paid.first.active!;
+        for (var chapter = 1; chapter < 3; chapter++) {
+          await store.update((a) {
+            a.active!.petitions.clear();
+            a.active!.affairsThisWeek = 1;
+          });
+          latest = (await reopened.load()).active!;
+          latest =
+              (await reopened.dispatch(
+                palaceCommand(latest, 'endWeek'),
+              )).active!;
+          final next = palaceCommand(
+            latest,
+            'harem-quest',
+            target: 'wife-0',
+            option: 'personal:A',
+          );
+          final result = await Future.wait([
+            reopened.dispatch(next),
+            second.dispatch(next),
+          ]);
+          expect(result[0].toJson(), result[1].toJson());
+          latest = result.first.active!;
+        }
+        expect(haremQuestFor(latest, 'wife-0')!.completed, isTrue);
+        expect(haremQuestFor(latest, 'wife-0')!.definitionId, route);
+        expect(latest.court.first.toJson().containsKey('ability'), isFalse);
+        final finalSnapshot = latest.toJson();
         store.close();
         store = await IndexedGameStore.open(factory, name: name);
         expect(
-          (await LocalGameGateway(store).load()).toJson(),
-          completed.first.toJson(),
+          (await LocalGameGateway(store).load()).active!.toJson(),
+          finalSnapshot,
         );
       } finally {
         store.close();

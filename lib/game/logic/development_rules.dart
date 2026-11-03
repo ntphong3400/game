@@ -1,7 +1,9 @@
+import 'dart:math' as math;
 import '../models/game_state.dart';
 import 'personality_rules.dart';
 import 'population_rules.dart';
 import 'currency_rules.dart';
+import 'food_pressure_rules.dart';
 
 const developmentTasks = ['upgrade_economy', 'upgrade_farm', 'upgrade_levee'];
 const developmentSpecialties = {
@@ -14,13 +16,15 @@ const developmentNames = {
   'upgrade_farm': 'Phát triển nông nghiệp',
   'upgrade_levee': 'Nâng cấp đê điều',
 };
-const economyAnnualBonuses = [0, 0, 20, 45, 75, 110];
+const economyAnnualBonuses = [0, 0, 40, 95, 170, 270];
+const legacyEconomyAnnualBonuses = [0, 0, 20, 45, 75, 110];
 const agricultureBaseYields = [0, 60, 80, 100, 120, 140];
 const leveeWearReductions = [0, 0, 15, 30, 45, 60];
+const leveeDisasterReductions = [0, 0, 10, 20, 30, 40];
 const developmentPrices = {
   'upgrade_economy': [0, 0, 80, 150, 240, 360],
   'upgrade_farm': [0, 0, 70, 130, 210, 320],
-  'upgrade_levee': [0, 0, 100, 180, 280, 400],
+  'upgrade_levee': [0, 0, 65, 117, 182, 260],
 };
 const seasonalLeveeWear = {'Xuân': 3, 'Hạ': 8, 'Thu': 4, 'Đông': 3};
 
@@ -44,7 +48,9 @@ int developmentCost(GameState s, String task) {
   if (p != null && developmentNeedsOfficer(s, p)) return 0;
   return money(
     s,
-    developmentPrices[task]![developmentTarget(s, task).clamp(2, 5)],
+    (s.population == null && task == 'upgrade_levee'
+        ? [0, 0, 100, 180, 280, 400]
+        : developmentPrices[task]!)[developmentTarget(s, task).clamp(2, 5)],
   );
 }
 
@@ -103,11 +109,16 @@ String developmentBenefit(
   int level,
 ) => switch (task) {
   'upgrade_economy' =>
-    'Thuế nền tăng tổng cộng ${economyAnnualBonuses[level]} tiền/năm, thu vào vụ Thu; không đổi mức thuế.',
+    'Thuế nền tăng tổng cộng ${moneyText(s, money(s, economyBonusAtLevel(s, level)))}/năm, '
+        'thu vào vụ Thu, trước hệ số lao động và điều chỉnh Hộ bộ; không đổi mức thuế.',
   'upgrade_farm' =>
-    'Sản lượng nền ${agricultureBaseYields[level]} thóc/năm trước hệ số đê và thời tiết.',
+    'Sản lượng nền ${whole(agricultureYieldAtLevel(s, level))} ${foodUnit(s)}/năm '
+        'trước hệ số lao động, đê và thời tiết.'
+        '${s.population == null ? '' : ' Sức chứa kho ${whole(foodCapacityAtLevel(level))} tạ.'}',
   'upgrade_levee' =>
-    'Giảm ${leveeWearReductions[level]}% hao mòn thường lệ; không tự phục hồi tình trạng đê.',
+    'Giảm ${leveeWearReductions[level]}% hao mòn thường lệ'
+        '${s.population == null ? '' : ', giảm ${leveeDisasterReductions[level]}% thiệt hại tình trạng đê do thiên tai'}; '
+        'không tự phục hồi tình trạng đê.',
   _ => '',
 };
 
@@ -121,6 +132,7 @@ String developmentDescription(GameState s, String task) {
   return '${resuming ? 'Bổ nhiệm người thay, không cấp lại vốn' : 'Nâng cấp ${target - 1} lên $target, chi ${developmentCost(s, task)} ${moneyUnit(s)}'}; '
       '${resuming ? 'còn' : 'thi công'} $duration ${s.periodName}. '
       'Cần ${developmentSpecialties[task]}, năng lực ≥${developmentRequiredAbility(target)}. '
+      '${task == 'upgrade_farm' ? 'Sản lượng nền ${whole(agricultureYieldAtLevel(s, target - 1))} → ${whole(agricultureYieldAtLevel(s, target))} ${foodUnit(s)}/năm, tăng ${whole(agricultureYieldAtLevel(s, target) - agricultureYieldAtLevel(s, target - 1))}. ' : ''}'
       '${developmentBenefit(s, task, target)} '
       'Xét thành công khi hoàn tất; thất bại giữ nguyên cấp, không hoàn vốn. '
       'Lợi ích cấp mới áp dụng từ mùa sau khi hoàn thành.';
@@ -139,12 +151,37 @@ double leveeYieldPercent(num condition) {
   return 120;
 }
 
+int economyBonusAtLevel(GameState s, int level) =>
+    (s.population == null
+        ? legacyEconomyAnnualBonuses
+        : economyAnnualBonuses)[level];
 int economyAnnualBonus(GameState s) =>
-    s.seasonal ? economyAnnualBonuses[s.economyLevel] : 0;
+    s.seasonal ? economyBonusAtLevel(s, s.economyLevel) : 0;
+int agricultureYieldAtLevel(GameState s, int level) =>
+    s.foodPressureEnabled
+        ? const [0, 4100000, 4400000, 4700000, 5000000, 5300000][level]
+        : s.population == null
+        ? agricultureBaseYields[level]
+        : foodAmount(4500000 * agricultureBaseYields[level] / 60);
 int agricultureBaseYield(GameState s) =>
-    s.population == null
-        ? agricultureBaseYields[s.agricultureLevel]
-        : foodAmount(4500000 * agricultureBaseYields[s.agricultureLevel] / 60);
+    agricultureYieldAtLevel(s, s.agricultureLevel);
+
+/// Only natural-disaster levee damage uses this protection. Ordinary wear,
+/// failed repairs, sabotage and positive repairs retain their own rules.
+Map<String, int> protectLeveeFromDisaster(
+  GameState s,
+  Map<String, int> effects,
+) {
+  final damage = effects['levee'] ?? 0;
+  if (!s.seasonal || s.population == null || damage >= 0) return effects;
+  return {
+    ...effects,
+    'levee':
+        -(damage.abs() * (100 - leveeDisasterReductions[s.leveeLevel]) / 100)
+            .ceil(),
+  };
+}
+
 int grainConsumption(GameState s) =>
     s.population != null
         ? remainingFoodConsumption(s)
@@ -168,9 +205,29 @@ double harvestLeveePercent(GameState s, {num? autumnCondition}) {
       .3 * leveeYieldPercent(autumnCondition ?? s.levee);
 }
 
-String harvestPlan(GameState s) =>
-    'Nông nghiệp cấp ${s.agricultureLevel}/5: nền ${agricultureBaseYield(s)} thóc/năm. '
-    'Đê Xuân 20% · Hạ 50% · Thu 30%; hệ số cả vụ tạm tính '
-    '${harvestLeveePercent(s).toStringAsFixed(1)}%. '
-    'Mùa chưa chốt tạm dùng tình trạng đê đầu vụ; thời tiết khi gặt dao động 90–110%. '
-    'Thu hoạch tự động cuối Thu; tiêu hao ${grainConsumption(s)} ${foodUnit(s)}/${s.periodName}.';
+int projectedHarvest(GameState s, {int weather = 100}) => foodAmount(
+  agricultureBaseYield(s) *
+      harvestLeveePercent(s) /
+      100 *
+      weather /
+      100 *
+      annualFarmLaborFactor(s),
+);
+
+String harvestPlan(GameState s) {
+  final estimate = projectedHarvest(s);
+  final space = math.max(0, foodCapacity(s) - s.grain);
+  final received = math.min(estimate, space);
+  final overflow = math.max(0, estimate - space);
+  final seasonalNeed =
+      s.population == null ? grainConsumption(s) : populationFoodConsumption(s);
+  return 'Nông nghiệp cấp ${s.agricultureLevel}/5: nền ${whole(agricultureBaseYield(s))} ${foodUnit(s)}/năm. '
+      'Đê Xuân 20% · Hạ 50% · Thu 30%; hệ số cả vụ tạm tính '
+      '${harvestLeveePercent(s).toStringAsFixed(1)}%. '
+      'Mùa chưa chốt tạm dùng tình trạng đê đầu vụ; thời tiết khi gặt dao động 90–110%. '
+      'Thu hoạch tự động cuối Thu; tiêu hao ${whole(grainConsumption(s))} ${foodUnit(s)}/${s.periodName}.'
+      '${s.foodPressureEnabled ? ' ${foodPressureHint(s)} ' : ''}'
+      '${s.population == null ? '' : ' Kho ${whole(s.grain)}/${whole(foodCapacity(s))} tạ, đủ khoảng ${(s.grain / math.max(1, seasonalNeed)).toStringAsFixed(1)} mùa theo khẩu phần hiện tại. '
+              'Với lao động cả vụ hiện tại, thời tiết 100% và kho giữ nguyên đến vụ gặt: '
+              'ước tính gặt ${whole(estimate)} tạ, thực nhập ${whole(received)} tạ, vượt kho ${whole(overflow)} tạ trước tiêu dùng mùa Thu.'}';
+}

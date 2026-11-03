@@ -1,7 +1,7 @@
 name: van_tue
 description: "Vạn Tuế — mô phỏng trị vì theo mùa, xử lý FE và lưu local."
 publish_to: 'none'
-version: 0.27.1
+version: 0.28.0
 
 environment:
   sdk: ^3.7.2
@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
   go_router: ^17.0.0
   idb_shim: ^2.6.6
+  web: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -22,6 +23,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/audio/
     - assets/images/imperial/
     - assets/images/petitions/
     - assets/images/kingdom/

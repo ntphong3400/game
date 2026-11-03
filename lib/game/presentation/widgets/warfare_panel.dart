@@ -305,7 +305,8 @@ class WarfarePanel extends StatelessWidget {
                           ),
                           Text(
                             formatGameNumbers(
-                              'Đã cấp trước ${whole(warFoodCredit(troops))} tạ khẩu phần thường lệ; không thu trùng khi khép mùa.',
+                              'Đã cấp trước ${whole(warFoodCredit(troops, s))} tạ khẩu phần thường lệ; không thu trùng khi khép mùa.'
+                              '${s.foodPressureEnabled ? ' Tiếp tế tính cho 90 ngày; hậu cần ${mission.duration == 2 ? 40 : 20}%. Mỗi quân huy động thêm một dân phu, giảm lao động sản xuất trong mùa.' : ''}',
                             ),
                           ),
                           if (mission.duration == 2)
@@ -670,7 +671,7 @@ class WarfarePanel extends StatelessWidget {
                           m.id,
                           {'action': 'intervene'},
                           detail:
-                              'Chi 1.000 lượng vàng, ${whole(warMissionFood(m.troops))} tạ, 1 hành động.',
+                              'Chi 1.000 lượng vàng, ${whole(warMissionFood(m.troops, s, m))} tạ, 1 hành động.',
                         ),
                       ],
                       if (m.status == 'deployed')

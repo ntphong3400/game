@@ -415,7 +415,7 @@ void main() {
         s.heirId = 'prince';
         for (var stage = 0; stage < 4; stage++) {
           s.treasury = 100000;
-          s.grain = foodCapacity;
+          s.grain = foodCapacity(s);
           s.health = s.stability = s.authority = s.people = 100;
           engine.prepareStoryPetitions(s);
           final p = s.petitions.firstWhere(
