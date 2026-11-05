@@ -17,9 +17,7 @@ bool courtMatterNeedsNominee(CourtPersonnelMatter m, int index) =>
 bool courtMatterAppoints(CourtPersonnelMatter m, int index) =>
     ['nominate', 'recruit', 'reform'].contains(m.kind) &&
     (index == 0 || courtMatterNeedsNominee(m, index));
-bool courtMatterTrains(CourtPersonnelMatter m, int index) =>
-    m.kind == 'reform' && index == 2;
-int courtMatterLastChoice(CourtPersonnelMatter m) => m.kind == 'reform' ? 3 : 2;
+int courtMatterLastChoice(CourtPersonnelMatter m) => 2;
 Courtier? courtMatterCandidate(
   GameState s,
   CourtPersonnelMatter m,
@@ -78,6 +76,9 @@ String? courtMatterInvalid(GameState s, CourtPersonnelMatter m) {
   if (['retire', 'reform'].contains(m.kind) && office.holderId != m.holderId) {
     return 'Người giữ chức đã thay đổi; đề nghị cũ được khép lại.';
   }
+  if (m.kind == 'reform' && c.id == office.holderId) {
+    return 'Đề nghị thay thế phải tiến cử người khác với người đương nhiệm.';
+  }
   return null;
 }
 
@@ -106,6 +107,19 @@ bool courtNomineeQualified(Courtier c, CourtOffice office) {
           c.affection >= (office.grade == 1 ? 80 : 70));
 }
 
+String? courtReformCandidateBlocked(
+  GameState s,
+  Courtier c,
+  CourtOffice office,
+) {
+  final blocked = courtAppointmentBlocked(s, c, office);
+  if (blocked != null) return blocked;
+  if (!courtNomineeQualified(c, office)) {
+    return 'Cần đủ năng lực, thiện cảm và chuyên môn của chức vụ để được tiến cử thay thế.';
+  }
+  return null;
+}
+
 String? courtPersonnelChoiceBlocked(
   GameState s,
   CourtPersonnelMatter m,
@@ -128,7 +142,10 @@ String? courtPersonnelChoiceBlocked(
     if (courtMatterFillsVacancy(s, m, index)) {
       return vacancyNominationBlocked(s, candidate, office);
     }
-    final blocked = courtAppointmentBlocked(s, candidate, office);
+    final blocked =
+        m.kind == 'reform'
+            ? courtReformCandidateBlocked(s, candidate, office)
+            : courtAppointmentBlocked(s, candidate, office);
     if (blocked != null) return blocked;
     if (s.treasury < courtAppointmentCost(s, candidate, office)) {
       return 'Ngân khố không đủ phí bổ nhiệm.';
@@ -142,12 +159,6 @@ String? courtPersonnelChoiceBlocked(
       m.targetGrade,
       exceptional: m.kind == 'patronage',
     );
-  } else if (courtMatterTrains(m, index)) {
-    final holder = courtOfficeHolder(s, courtMatterOffice(s, m)!);
-    if (holder == null || officerBusy(s, holder.id)) {
-      return 'Người giữ chức đang bận hoặc không còn tại vị.';
-    }
-    if (s.treasury < money(s, 12)) return 'Ngân khố không đủ phí bồi dưỡng.';
   } else if (m.kind == 'recruit' && index == 1 && s.treasury < money(s, 5)) {
     return 'Ngân khố không đủ phí khảo hạch.';
   } else if (m.kind == 'retire' && index == 1 && m.verified) {

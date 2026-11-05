@@ -61,7 +61,11 @@ void main() {
             'court': 'Triều chính',
           }[route],
         );
-        expect(tester.getCenter(title).dx, closeTo(size.width / 2, 1));
+        if (route == 'citadel') {
+          expect(tester.getTopLeft(title).dx, closeTo(12, 1));
+        } else {
+          expect(tester.getCenter(title).dx, closeTo(size.width / 2, 1));
+        }
         expect(find.byKey(const ValueKey('room-calendar')), findsOneWidget);
         expect(
           find.descendant(of: hud, matching: find.byType(TextButton)),
@@ -72,10 +76,16 @@ void main() {
         expect(find.descendant(of: hud, matching: remaining), findsOneWidget);
         expect(
           tester.widget<Text>(remaining).data,
-          '${controller.state!.points} hành động còn lại',
+          route == 'citadel'
+              ? 'Còn ${controller.state!.points} hành động'
+              : '${controller.state!.points} hành động còn lại',
         );
         expect(
-          find.text('${controller.state!.points} hành động còn lại'),
+          find.text(
+            route == 'citadel'
+                ? 'Còn ${controller.state!.points} hành động'
+                : '${controller.state!.points} hành động còn lại',
+          ),
           findsOneWidget,
         );
         for (final label in [
@@ -139,7 +149,7 @@ void main() {
       tester
           .widget<Text>(find.byKey(const ValueKey('hud-actions-remaining')))
           .data,
-      '5 hành động còn lại',
+      'Còn 5 hành động',
     );
     expect(find.byKey(const ValueKey('web-hud-stat-treasury')), findsNothing);
     expect(tester.takeException(), isNull);

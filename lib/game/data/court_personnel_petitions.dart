@@ -35,7 +35,7 @@ EventDefinition courtPersonnelEvent(
     'promote' =>
       'Xin sắc phong theo công trạng đã tích lũy. Không cấp thêm công trạng chỉ vì được thăng phẩm.',
     'reform' =>
-      'Người đương nhiệm chưa đạt năng lực hoặc thiện cảm để phát huy passive. Có thể thay người hoặc bồi dưỡng người đang giữ chức.',
+      'Người đương nhiệm chưa đạt năng lực hoặc thiện cảm để phát huy passive. Đề nghị bổ nhiệm người khác đủ năng lực, thiện cảm và chuyên môn thay thế. Người mới phát huy passive sau một mùa giữ chức đầy đủ.',
     _ =>
       'Xin bổ khuyết vị trí đang trống. Người tiến cử chỉ được ghi công sau khi người được chọn giữ chức trọn một mùa, đủ năng lực, đúng chuyên môn và điều kiện của chức vụ.',
   };
@@ -128,15 +128,6 @@ EventDefinition courtPersonnelEvent(
           )
           : appointment(1, 'Chọn người khác để bổ nhiệm'),
     );
-    if (m.kind == 'reform') {
-      choices.add(
-        choice(
-          'Bồi dưỡng người đang giữ chức',
-          'Giữ nguyên chức vụ. Sau một mùa đầy đủ: năng lực +2, thiện cảm +2; bận trong thời gian học. Chưa bảo đảm đạt ngưỡng passive.',
-          cost: money(s, 12),
-        ),
-      );
-    }
   } else if (m.kind == 'retire') {
     choices.add(
       choice(

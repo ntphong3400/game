@@ -231,12 +231,19 @@ class _PetitionDecisionState extends State<PetitionDecision> {
     final candidates =
         [...s.court, ...s.officialsPool]
             .where(
-              (c) => c.available && !c.isConsort && c.id != office.holderId,
+              (c) =>
+                  c.available &&
+                  !c.isConsort &&
+                  c.id != office.holderId &&
+                  (matter!.kind != 'reform' ||
+                      courtReformCandidateBlocked(s, c, office) == null),
             )
             .toList()
           ..sort((a, b) => b.ability.compareTo(a.ability));
     String? candidateBlocked(Courtier c) =>
-        courtOfficeHolder(s, office) == null
+        matter!.kind == 'reform'
+            ? courtReformCandidateBlocked(s, c, office)
+            : courtOfficeHolder(s, office) == null
             ? vacancyNominationBlocked(s, c, office)
             : courtAppointmentBlocked(s, c, office);
     int candidateCost(Courtier c) =>

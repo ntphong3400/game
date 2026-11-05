@@ -122,6 +122,10 @@ void main() {
       (tester) async {
         final (c, _) = await setup(tester, const Size(1440, 900));
         final before = jsonEncode(c.state!.toJson());
+        await tester.tap(
+          find.byKey(const ValueKey('giang-son-region-frontier')),
+        );
+        await tester.pumpAndSettle();
         await click(tester, find.byKey(ValueKey('giang-son-$country-pass')));
         expect(find.byType(FrontierHub), findsOneWidget);
         final background = tester.widget<Image>(

@@ -35,6 +35,7 @@ class WebGameHud extends StatelessWidget {
     return GameTopBar(
       key: const ValueKey('web-game-hud'),
       title: title ?? hudTitleFor(state, section),
+      titleAtStart: section == 'citadel',
       backLabel:
           backLabel ?? (parent == null ? null : hudTitleFor(state, parent)),
       onBack: onBack ?? (parent == null ? null : () => onNavigate(parent)),
@@ -53,9 +54,11 @@ class WebGameHud extends StatelessWidget {
           _fitText('Thiên Hòa · năm ${state.year}', size: 10, color: _gold),
           const SizedBox(height: 3),
           _fitText(
-            '${state.points} hành động còn lại',
+            section == 'citadel'
+                ? 'Còn ${state.points} hành động'
+                : '${state.points} hành động còn lại',
             key: const ValueKey('hud-actions-remaining'),
-            size: 10,
+            size: section == 'citadel' ? 12 : 10,
             color: _ivory,
           ),
         ],
@@ -64,7 +67,7 @@ class WebGameHud extends StatelessWidget {
   }
 }
 
-/// Equal side widths keep the page name at the center of every viewport.
+/// Child pages center their title; the Giang Sơn overview uses a leading title.
 class GameTopBar extends StatelessWidget {
   const GameTopBar({
     super.key,
@@ -73,6 +76,7 @@ class GameTopBar extends StatelessWidget {
     this.onBack,
     this.calendar,
     this.backKey = const ValueKey('section-back'),
+    this.titleAtStart = false,
   });
 
   final String title;
@@ -80,6 +84,7 @@ class GameTopBar extends StatelessWidget {
   final VoidCallback? onBack;
   final Widget? calendar;
   final Key backKey;
+  final bool titleAtStart;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -96,53 +101,66 @@ class GameTopBar extends StatelessWidget {
     ),
     child: Row(
       children: [
-        Expanded(
-          flex: 3,
-          child:
-              onBack == null
-                  ? const SizedBox.shrink()
-                  : Tooltip(
-                    message: backLabel ?? '',
-                    child: TextButton(
-                      key: backKey,
-                      onPressed: onBack,
-                      style: TextButton.styleFrom(
-                        foregroundColor: _gold,
-                        padding: EdgeInsets.zero,
-                        minimumSize: const Size(0, 48),
-                        alignment: Alignment.centerLeft,
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.arrow_back, size: 18),
-                          const SizedBox(width: 5),
-                          Flexible(
-                            child: _fitText(
-                              backLabel ?? '',
-                              size: 13,
-                              color: _gold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-        ),
-        Expanded(
-          flex: 4,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+        if (titleAtStart) ...[
+          Expanded(
             child: _fitText(
               title,
               key: const ValueKey('hud-page-title'),
-              size: 18,
+              size: 23,
               color: _ivory,
-              alignment: Alignment.center,
+              alignment: Alignment.centerLeft,
             ),
           ),
-        ),
+          const SizedBox(width: 12),
+        ] else ...[
+          Expanded(
+            flex: 3,
+            child:
+                onBack == null
+                    ? const SizedBox.shrink()
+                    : Tooltip(
+                      message: backLabel ?? '',
+                      child: TextButton(
+                        key: backKey,
+                        onPressed: onBack,
+                        style: TextButton.styleFrom(
+                          foregroundColor: _gold,
+                          padding: EdgeInsets.zero,
+                          minimumSize: const Size(0, 48),
+                          alignment: Alignment.centerLeft,
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.arrow_back, size: 18),
+                            const SizedBox(width: 5),
+                            Flexible(
+                              child: _fitText(
+                                backLabel ?? '',
+                                size: 13,
+                                color: _gold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+          ),
+          Expanded(
+            flex: 4,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: _fitText(
+                title,
+                key: const ValueKey('hud-page-title'),
+                size: 18,
+                color: _ivory,
+                alignment: Alignment.center,
+              ),
+            ),
+          ),
+        ],
         Expanded(
-          flex: 3,
+          flex: titleAtStart ? 1 : 3,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

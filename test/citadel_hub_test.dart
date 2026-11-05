@@ -80,6 +80,17 @@ void main() {
           ('west', 'country-west'),
           ('south', 'country-south'),
         ]) {
+          if (landmark.endsWith('-pass') ||
+              ['north', 'west', 'south'].contains(landmark)) {
+            await tester.tap(
+              find.byKey(
+                ValueKey(
+                  'giang-son-region-${landmark.endsWith('-pass') ? 'frontier' : 'neighbors'}',
+                ),
+              ),
+            );
+            await tester.pumpAndSettle();
+          }
           final target = find.byKey(ValueKey('giang-son-$landmark'));
           await tester.ensureVisible(target);
           await tester.tap(target);
@@ -89,8 +100,24 @@ void main() {
         }
         final end = find.byKey(const ValueKey('citadel-end-turn'));
         expect(find.text('Khóa mùa'), findsOneWidget);
-        expect(tester.getBottomRight(end).dx, closeTo(size.width - 20, 1));
-        expect(tester.getBottomRight(end).dy, closeTo(size.height - 18, 1));
+        expect(tester.getBottomRight(end).dx, closeTo(size.width - 16, 1));
+        expect(
+          tester.getBottomRight(end).dy,
+          closeTo(
+            tester
+                    .getTopLeft(find.byKey(const ValueKey('giang-son-regions')))
+                    .dy -
+                12,
+            1,
+          ),
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(const ValueKey('giang-son-map')),
+            matching: find.byType(OutlinedButton),
+          ),
+          findsNothing,
+        );
         expect(controller.state!.toJson(), before);
         expect(tester.takeException(), isNull);
       },
@@ -189,7 +216,7 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.byType(CitadelHub), findsOneWidget);
         expect(
-          find.text('${controller.state!.points} hành động còn lại'),
+          find.text('Còn ${controller.state!.points} hành động'),
           findsOneWidget,
         );
         await tester.tap(find.byKey(const ValueKey('giang-son-farms')));
@@ -224,13 +251,21 @@ void main() {
         GameApp(controller: controller, initialRoute: 'citadel'),
       );
       await tester.pumpAndSettle();
+      await tester.tap(
+        find.byKey(const ValueKey('giang-son-region-neighbors')),
+      );
+      await tester.pumpAndSettle();
       expect(find.text('Hàn Kỳ'), findsOneWidget);
       expect(find.text('Xích Lĩnh'), findsOneWidget);
       expect(find.text('Bích Trạch'), findsOneWidget);
+      await tester.tap(find.byKey(const ValueKey('giang-son-region-interior')));
+      await tester.pumpAndSettle();
       await tester.tap(find.byKey(const ValueKey('giang-son-farms')));
       await tester.pumpAndSettle();
       expect(find.byType(LocalityHub), findsOneWidget);
       await tester.tap(find.byKey(const ValueKey('section-back')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('giang-son-region-frontier')));
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const ValueKey('giang-son-north-pass')));
       await tester.pumpAndSettle();

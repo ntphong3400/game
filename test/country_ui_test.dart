@@ -57,6 +57,14 @@ Future<GameController> setup(
 }
 
 Future<void> click(WidgetTester tester, Finder finder) async {
+  if (finder.evaluate().isEmpty &&
+      find
+          .byKey(const ValueKey('giang-son-region-neighbors'))
+          .evaluate()
+          .isNotEmpty) {
+    await tester.tap(find.byKey(const ValueKey('giang-son-region-neighbors')));
+    await tester.pumpAndSettle();
+  }
   if (finder.evaluate().isEmpty) {
     await tester.scrollUntilVisible(
       finder,
@@ -71,15 +79,7 @@ Future<void> click(WidgetTester tester, Finder finder) async {
       maxScrolls: 30,
     );
   }
-  final key = tester.widget(finder).key;
-  final nationalMap =
-      key is ValueKey<String> && key.value.startsWith('giang-son-');
-  // Align national map labels to the left so southern labels stay clear of
-  // the fixed end-season button on a 320px viewport.
-  await Scrollable.ensureVisible(
-    tester.element(finder),
-    alignment: nationalMap ? 0 : .5,
-  );
+  await Scrollable.ensureVisible(tester.element(finder), alignment: .5);
   await tester.pumpAndSettle();
   await tester.tap(finder);
   await tester.pumpAndSettle();

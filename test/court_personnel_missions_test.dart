@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:van_tue/game/data/content.dart';
 import 'package:van_tue/game/data/court_personnel_petitions.dart';
+import 'package:van_tue/game/data/game_store.dart';
 import 'package:van_tue/game/logic/court_rules.dart';
 import 'package:van_tue/game/logic/court_personnel_rules.dart';
 import 'package:van_tue/game/logic/currency_rules.dart';
 import 'package:van_tue/game/logic/game_engine.dart';
+import 'package:van_tue/game/logic/game_gateway.dart';
 import 'package:van_tue/game/logic/personnel_rules.dart';
 import 'package:van_tue/game/models/game_state.dart';
 
@@ -412,7 +414,7 @@ void main() {
     },
   );
   test(
-    'training occupies the incumbent, settles after a full season and does not promise passive activation',
+    'legacy paid training still completes without offering new training',
     () {
       var s = fresh();
       final o = office(s, 'Đại tướng');
@@ -421,7 +423,10 @@ void main() {
             ..ability = 70
             ..affection = 70;
       final m = open(s, 'reform', c, seat: o);
-      s = resolve(s, m, 2);
+      m.status = 'training';
+      m.acceptedTurn = s.week;
+      s.petitions.clear();
+      s = GameState.fromJson(s.toJson());
       expect(officerBusy(s, c.id), isTrue);
       expect(courtDismissalBlocked(s, office(s, 'Đại tướng')), contains('bận'));
       s = close(s);
@@ -442,6 +447,194 @@ void main() {
       );
     },
   );
+  test(
+    'reform only generates with a qualified replacement from either roster',
+    () {
+      for (final source in ['none', 'court', 'pool', 'blocked', 'healthy']) {
+        var generated = 0;
+        for (var seed = 1; seed <= 40; seed++) {
+          var s = fresh(seed);
+          for (final c in [...s.court, ...s.officialsPool]) {
+            c.ability = 20;
+            c.affection = 40;
+            c.merit = 0;
+          }
+          Courtier? replacement;
+          if (source != 'none') {
+            final target = office(s, 'Tể tướng');
+            replacement =
+                source == 'court'
+                    ? holder(s, office(s, 'Thư lại'))
+                    : s.officialsPool.first;
+            replacement
+              ..grade = target.grade
+              ..ability = 90
+              ..affection = 80
+              ..specialty = specialtyForRole(target.role)
+              ..royalEligible = true;
+          }
+          if (source == 'blocked') s.authority = 0;
+          if (source == 'healthy') {
+            for (final o in s.courtOffices.where(
+              (o) => courtPassives(o).isNotEmpty,
+            )) {
+              holder(s, o)
+                ..ability = 100
+                ..affection = 100;
+            }
+          }
+          s.lastCourtRecruitYear = s.year;
+          s.nextCourtPersonnelTurn = s.week;
+          s.midSeasonDelivered = false;
+          s.points = 12;
+          s.treasury = 1000000;
+          s = send(s, 'action', 'govern');
+          for (final m in s.courtPersonnelMatters.where(
+            (m) => m.kind == 'reform',
+          )) {
+            generated++;
+            final target = courtMatterOffice(s, m)!;
+            expect(m.personId, replacement?.id, reason: source);
+            expect(m.personId, isNot(target.holderId));
+            expect(
+              courtReformCandidateBlocked(
+                s,
+                courtPerson(s, m.personId)!,
+                target,
+              ),
+              isNull,
+            );
+          }
+        }
+        expect(
+          generated,
+          source == 'court' || source == 'pool' ? greaterThan(0) : 0,
+          reason: source,
+        );
+      }
+    },
+  );
+  test(
+    'reform replaces the incumbent from either roster at passive thresholds',
+    () {
+      for (final source in ['court', 'pool']) {
+        for (final index in [0, 1]) {
+          final s = fresh();
+          final o = office(s, 'Đại tướng');
+          final incumbent = holder(s, o)..ability = 20;
+          final c =
+              source == 'court'
+                  ? holder(s, office(s, 'Thư lại'))
+                  : s.officialsPool.first;
+          c
+            ..grade = 1
+            ..ability = 90
+            ..affection = 80
+            ..specialty = specialtyForRole(o.role);
+          final m = open(s, 'reform', c, seat: o);
+          final event = courtPersonnelEvent(s, m);
+          expect(event.choices, hasLength(3));
+          expect(event.choices.last.label, 'Bác đề nghị');
+          expect(event.body, isNot(contains('bồi dưỡng')));
+          final result = resolve(s, m, index, index == 1 ? c.id : '');
+          expect(courtOfficeFor(result, c.id)!.id, o.id);
+          expect(result.officialsPool.any((p) => p.id == incumbent.id), isTrue);
+          expect(result.courtPersonnelMatters.last.status, 'watching');
+          expect(
+            courtPassiveBlocked(result, office(result, 'Đại tướng')),
+            contains('mùa'),
+          );
+        }
+      }
+    },
+  );
+  test(
+    'both reform appointment choices recheck replacement qualifications',
+    () {
+      for (final role in ['Đại tướng', 'Đại tư mã']) {
+        for (final invalid in [
+          'ability',
+          'affection',
+          'specialty',
+          'grade',
+          'retired',
+        ]) {
+          for (final index in [0, 1]) {
+            final s = fresh();
+            final o = office(s, role);
+            holder(s, o).ability = 20;
+            final c =
+                s.officialsPool.first
+                  ..grade = o.grade
+                  ..ability = 95
+                  ..affection = 80
+                  ..specialty = specialtyForRole(o.role)
+                  ..royalEligible = true;
+            final m = open(s, 'reform', c, seat: o);
+            switch (invalid) {
+              case 'ability':
+                c.ability = o.grade == 1 ? 89 : 79;
+              case 'affection':
+                c.affection = o.grade == 1 ? 79 : 69;
+              case 'specialty':
+                c.specialty = 'Y thuật';
+              case 'grade':
+                c.grade = o.grade + 1;
+              case 'retired':
+                c.retired = true;
+            }
+            final before = s.toJson();
+            expect(
+              courtPersonnelChoiceBlocked(s, m, index, nomineeId: c.id),
+              isNotNull,
+              reason: '$role/$invalid/$index',
+            );
+            expect(
+              () => resolve(s, m, index, index == 1 ? c.id : ''),
+              throwsA(isA<GameRuleException>()),
+            );
+            expect(s.toJson(), before);
+          }
+        }
+      }
+    },
+  );
+  test('reform rejection no longer starts training', () {
+    final s = fresh();
+    final o = office(s, 'Đại tướng');
+    final incumbent = holder(s, o)..ability = 20;
+    final m = open(s, 'reform', nominee(s, o), seat: o);
+    final result = resolve(s, m, 2);
+    expect(result.courtPersonnelMatters.last.status, 'rejected');
+    expect(
+      courtOfficeHolder(result, office(result, 'Đại tướng'))!.id,
+      incumbent.id,
+    );
+    expect(officerBusy(result, incumbent.id), isFalse);
+    expect(result.treasury, s.treasury);
+    expect(courtPersonnelChoiceBlocked(s, m, 3), contains('không hợp lệ'));
+    expect(
+      courtPersonnelChoiceBlocked(s, m, 1, nomineeId: incumbent.id),
+      contains('Đang giữ chức'),
+    );
+  });
+  test('loading an old self-nomination closes it once without fees', () async {
+    final store = MemoryGameStore();
+    final gateway = LocalGameGateway(store);
+    final s = fresh();
+    final o = office(s, 'Đại tướng');
+    final c = holder(s, o)..ability = 20;
+    final m = open(s, 'reform', c, seat: o);
+    s.midSeasonDelivered = true;
+    await store.update((archive) => archive.active = s);
+    final loaded = (await gateway.load()).active!;
+    expect(loaded.courtPersonnelMatters.last.status, 'closed');
+    expect(loaded.petitions.any((p) => p.definitionId == m.eventId), isFalse);
+    expect(loaded.treasury, s.treasury);
+    expect(loaded.points, s.points);
+    expect(courtPerson(loaded, c.id)!.ability, 20);
+    expect((await gateway.load()).active!.toJson(), loaded.toJson());
+  });
   test(
     'stale and expired petitions close without executing personnel actions',
     () {

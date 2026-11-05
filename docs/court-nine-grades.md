@@ -109,7 +109,7 @@ Từ mùa thứ hai, mỗi lần mở tấu nhân sự đặt lịch lần sau c
 | Đề nghị hồi hương quan đối lập | Cho hồi hương / đối chiếu công việc / bác |
 | Xin thăng phẩm theo công | Sắc phong / xét dịp khác / bác |
 | Xin thăng phẩm đặc cách | Sắc phong đặc cách / yêu cầu lập công và rèn năng lực / bác |
-| Kiện toàn trọng chức | Bổ nhiệm người tiến cử / chọn người khác / bồi dưỡng đương nhiệm / bác |
+| Kiện toàn trọng chức | Bổ nhiệm người tiến cử thay thế / chọn người khác đủ điều kiện / bác |
 
 Người dâng tấu, phe và người được đề nghị đều hiển thị cụ thể. Tấu hồi hương do phe đối lập của quan mục tiêu dâng. Phương án nhận chức dùng nguyên phí, phẩm, thân phận và uy quyền của luật bổ nhiệm. Chọn ứng viên khác cập nhật chi phí trước khi xác nhận ngự phê. Tấu không tự miễn điều kiện hoặc bổ nhiệm khi khảo hạch.
 
@@ -119,7 +119,7 @@ Thăng phẩm thường cần đủ năng lực, công trạng, thành tích l�
 
 Tiến cử chỉ được đánh giá sau một mùa đầy đủ trong cùng vị trí: đủ phẩm, năng lực phù hợp cấp chức, độ phù hợp chuyên môn ≥80; chức có passive còn cần đủ thiện cảm. Thành công ghi +2 công trạng cho người tiến cử và uy quyền +1; một cặp người/chức chỉ được thưởng một lần trong ván. Rời chức rồi quay lại trước đánh giá hủy kết quả chờ. Không tự tiến cử bản thân để nhận công trạng. Người chưa đạt yêu cầu không đem lại thưởng tiến cử.
 
-Bồi dưỡng đương nhiệm tốn 1.200 lượng vàng và một hành động; người đó bận tới khi giữ nguyên chức trọn một mùa đầy đủ. Kết quả: năng lực +2, thiện cảm +2, giữ trần 100 và luật biến động thiện cảm mỗi mùa. Chưa chắc đạt ngưỡng passive. Nếu rời vị trí trước kết quả thì khóa học khép lại không trao tăng chỉ số.
+Kiện toàn trọng chức chỉ đề nghị thay người đương nhiệm chưa đủ năng lực hoặc thiện cảm để phát huy passive. Ứng viên được tìm trong cả Triều thần và Chờ bổ nhiệm, phải khác đương nhiệm, đủ phẩm, năng lực, thiện cảm, chuyên môn và các điều kiện bổ nhiệm thông thường. Chức Nhất phẩm cần năng lực ≥90, thiện cảm ≥80; Nhị phẩm cần năng lực ≥80, thiện cảm ≥70. Không có ứng viên phù hợp thì không tạo tấu; lựa chọn người khác cũng áp dụng cùng điều kiện. Không còn phương án bồi dưỡng. Tấu cũ tiến cử chính đương nhiệm được khép lại khi tải ván; các đợt bồi dưỡng đã trả phí từ bản lưu cũ vẫn hoàn tất theo luật trước đây.
 
 Bác đề nghị hoặc hết hạn làm phe dâng tấu −1. Hết hạn không tự hành động nhân sự, không thu phí hoặc hành động. Nếu người liên quan qua đời, chức đã đổi người hoặc người đó đã đạt phẩm đích, tấu khép lại trung lập. Kết quả được ghi Sử ký; phí và thao tác dùng cơ chế lưu lệnh hiện có để chống thực hiện trùng.
 

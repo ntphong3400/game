@@ -280,7 +280,7 @@ class GameEngine {
           throw const GameRuleException('Hành động không hợp lệ.');
       }
     }
-    _refreshCourtPersonnel(s);
+    refreshCourtPersonnel(s);
     _warSync(s);
     _clamp(s);
     _finishIfCritical(s);
@@ -1675,7 +1675,7 @@ class GameEngine {
       for (final n in s.warfare?.neighbors ?? <NeighborState>[])
         n.id: FrontierDefense(s, n),
     };
-    _refreshCourtPersonnel(s);
+    refreshCourtPersonnel(s);
     var ignoredCrises = 0;
     for (final p in s.petitions.where((p) => p.deadline <= s.week).toList()) {
       if (isCourtPersonnelEvent(p.definitionId)) {

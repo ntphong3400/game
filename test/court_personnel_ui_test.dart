@@ -7,13 +7,121 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:van_tue/app/game_controller.dart';
 import 'package:van_tue/game/data/game_store.dart';
 import 'package:van_tue/game/logic/game_gateway.dart';
+import 'package:van_tue/game/logic/game_engine.dart';
 import 'package:van_tue/game/logic/court_rules.dart';
 import 'package:van_tue/game/logic/court_personnel_rules.dart';
 import 'package:van_tue/game/models/game_state.dart';
 import 'package:van_tue/game/presentation/game_app.dart';
+import 'package:van_tue/game/presentation/widgets/petition_decision.dart';
 
 void main() {
   for (final size in [const Size(1440, 900), const Size(390, 844)]) {
+    testWidgets('reform picker only offers qualified replacements at $size', (
+      tester,
+    ) async {
+      tester.view.physicalSize = size;
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      final s = GameEngine().start('reform-ui', 'An', 42);
+      s.authority = 95;
+      for (final c in [...s.court, ...s.officialsPool]) {
+        c.ability = 20;
+        c.affection = 40;
+      }
+      final office = s.courtOffices.firstWhere((o) => o.role == 'Đại tướng');
+      final courtCandidate =
+          courtOfficeHolder(
+            s,
+            s.courtOffices.firstWhere((o) => o.role == 'Thư lại'),
+          )!;
+      final poolCandidate = s.officialsPool.first;
+      final unqualified = s.officialsPool[1];
+      for (final c in [courtCandidate, poolCandidate]) {
+        c
+          ..grade = 1
+          ..ability = 90
+          ..affection = 80
+          ..specialty = specialtyForRole(office.role);
+      }
+      // Ordinarily appointable, but below this office's passive threshold.
+      unqualified
+        ..grade = 1
+        ..ability = 89
+        ..affection = 80
+        ..specialty = specialtyForRole(office.role);
+      final matter = CourtPersonnelMatter(
+        id: 'reform-ui',
+        kind: 'reform',
+        personId: poolCandidate.id,
+        sponsorId: courtCandidate.id,
+        openedTurn: s.week,
+        officeId: office.id,
+        holderId: office.holderId,
+      );
+      s.courtPersonnelMatters.add(matter);
+      final petition = Petition(
+        id: matter.id,
+        definitionId: matter.eventId,
+        openedWeek: s.week,
+        deadline: s.week + 1,
+      );
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: PetitionDecision(
+                state: s,
+                petition: petition,
+                pickAssignee: (_, __) async => null,
+                onConfirm: (_, __) async => true,
+                onReadLater: () {},
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Bồi dưỡng'), findsNothing);
+      expect(find.byKey(const ValueKey('petition-choice-3')), findsNothing);
+      expect(find.text('Bác đề nghị'), findsOneWidget);
+      await tester.tap(find.byKey(const ValueKey('petition-choice-1')));
+      await tester.pumpAndSettle();
+      final picker = find.byKey(const ValueKey('personnel-nominee-picker'));
+      await tester.ensureVisible(picker);
+      await tester.tap(picker);
+      await tester.pumpAndSettle();
+      expect(find.byType(ListTile), findsNWidgets(2));
+      expect(
+        find.byKey(ValueKey('personnel-candidate-${courtCandidate.id}')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(ValueKey('personnel-candidate-${poolCandidate.id}')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(ValueKey('personnel-candidate-${unqualified.id}')),
+        findsNothing,
+      );
+      expect(
+        find.byKey(ValueKey('personnel-candidate-${office.holderId}')),
+        findsNothing,
+      );
+      await tester.tap(
+        find.byKey(ValueKey('personnel-candidate-${courtCandidate.id}')),
+      );
+      await tester.pumpAndSettle();
+      expect(
+        tester
+            .widget<FilledButton>(
+              find.byKey(const ValueKey('confirm-petition')),
+            )
+            .onPressed,
+        isNotNull,
+      );
+      expect(tester.takeException(), isNull);
+    });
     for (final kind in ['nominate', 'patronage', 'authority']) {
       testWidgets('$kind personnel preview and confirmed action at $size', (
         tester,

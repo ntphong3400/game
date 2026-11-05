@@ -62,13 +62,7 @@ extension CourtPersonnelEngine on GameEngine {
       s.workThisWeek++;
       s.affairsThisWeek++;
       _apply(s, choice.effects, title: e.title, detail: choice.label);
-      if (courtMatterTrains(m, index)) {
-        m.personId = courtOfficeHolder(s, courtMatterOffice(s, m)!)!.id;
-        m.status = 'training';
-        m.acceptedTurn = s.week;
-      } else if (index == 1 &&
-          ['retire', 'recruit'].contains(m.kind) &&
-          !m.verified) {
+      if (index == 1 && ['retire', 'recruit'].contains(m.kind) && !m.verified) {
         m.verified = true;
         p.deadline = s.week + 1;
         s.note(
@@ -129,8 +123,15 @@ extension CourtPersonnelEngine on GameEngine {
     );
   }
 
-  void _refreshCourtPersonnel(GameState s) {
-    if (!s.hasCourtSystem) return;
+  bool courtPersonnelNeedsSync(GameState s) =>
+      s.hasCourtSystem &&
+      s.courtPersonnelMatters.any(
+        (m) => m.status == 'open' && courtMatterInvalid(s, m) != null,
+      );
+
+  bool refreshCourtPersonnel(GameState s) {
+    if (!s.hasCourtSystem) return false;
+    var changed = false;
     for (final m in s.courtPersonnelMatters) {
       String? reason;
       if (m.status == 'open') {
@@ -143,6 +144,7 @@ extension CourtPersonnelEngine on GameEngine {
         }
       }
       if (reason == null) continue;
+      changed = true;
       m.status = 'closed';
       s.petitions.removeWhere((p) => p.definitionId == m.eventId);
       s.note(
@@ -151,10 +153,11 @@ extension CourtPersonnelEngine on GameEngine {
         'warning',
       );
     }
+    return changed;
   }
 
   void _settleCourtPersonnel(GameState s) {
-    _refreshCourtPersonnel(s);
+    refreshCourtPersonnel(s);
     for (final m in s.courtPersonnelMatters.where(
       (m) =>
           ['watching', 'training'].contains(m.status) &&
@@ -163,6 +166,7 @@ extension CourtPersonnelEngine on GameEngine {
       final office = courtMatterOffice(s, m)!;
       final c = courtPerson(s, m.personId)!;
       if (m.status == 'training') {
+        // Honor training already paid for in saves from the old petition rules.
         c.ability = (c.ability + 2).clamp(0, 100);
         c.affection += 2;
         m.status = 'completed';
@@ -288,19 +292,11 @@ extension CourtPersonnelEngine on GameEngine {
               c.affection < (office.grade == 1 ? 80 : 70))) {
         final candidates =
             people
-                .where(
-                  (a) =>
-                      a.id != c.id &&
-                      courtNomineeQualified(a, office) &&
-                      courtAppointmentBlocked(s, a, office) == null,
-                )
+                .where((a) => courtReformCandidateBlocked(s, a, office) == null)
                 .toList()
               ..sort((a, b) => b.ability.compareTo(a.ability));
-        // Training remains available even when authority prevents replacement.
-        final nominee = candidates.isEmpty ? c : candidates.first;
-        if (candidates.isNotEmpty ||
-            (!officerBusy(s, c.id) && s.treasury >= money(s, 12))) {
-          offers.add(offer('reform', nominee, office: office));
+        if (candidates.isNotEmpty) {
+          offers.add(offer('reform', candidates.first, office: office));
         }
       }
     }
