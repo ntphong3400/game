@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
-/// Painted atlas cells stay decorative; labels and hit targets remain native.
+/// Imperial icons stay decorative; labels and hit targets remain native.
 class ImperialIcon extends StatelessWidget {
   const ImperialIcon(this.name, {super.key, this.size = 40});
   final String name;
@@ -28,6 +28,14 @@ class ImperialIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (name == 'action') {
+      return ExcludeSemantics(
+        child: SizedBox.square(
+          dimension: size,
+          child: const CustomPaint(painter: _ActionIconPainter()),
+        ),
+      );
+    }
     final index = names.indexOf(switch (name) {
       'population' => 'citizens',
       'military' => 'army',
@@ -57,6 +65,85 @@ class ImperialIcon extends StatelessWidget {
       ),
     );
   }
+}
+
+class _ActionIconPainter extends CustomPainter {
+  const _ActionIconPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.scale(size.width / 24, size.height / 24);
+    canvas.translate(12, 12);
+    canvas.rotate(-0.18);
+    canvas.translate(-12, -12);
+
+    final tablet =
+        Path()
+          ..moveTo(9, 2)
+          ..quadraticBezierTo(12, 0.7, 15, 2)
+          ..quadraticBezierTo(15.5, 4.2, 18.5, 4.5)
+          ..lineTo(18, 18.5)
+          ..quadraticBezierTo(17.5, 21.3, 12, 22.2)
+          ..quadraticBezierTo(6.5, 21.3, 6, 18.5)
+          ..lineTo(5.5, 4.5)
+          ..quadraticBezierTo(8.5, 4.2, 9, 2)
+          ..close();
+    final bounds = tablet.getBounds();
+    canvas.drawPath(
+      tablet,
+      Paint()
+        ..shader = const LinearGradient(
+          colors: [Color(0xFFA54225), Color(0xFF54200D), Color(0xFF79301A)],
+        ).createShader(bounds),
+    );
+    canvas.drawPath(
+      tablet,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2.2
+        ..strokeJoin = StrokeJoin.round
+        ..color = const Color(0xFF603510),
+    );
+    canvas.drawPath(
+      tablet,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1.3
+        ..strokeJoin = StrokeJoin.round
+        ..shader = const LinearGradient(
+          colors: [Color(0xFFFFDF86), Color(0xFF9B5A1D), Color(0xFFECC15A)],
+        ).createShader(bounds),
+    );
+    final engraving =
+        Path()
+          ..moveTo(8.3, 12.3)
+          ..lineTo(12, 8.4)
+          ..lineTo(15.7, 12.3)
+          ..moveTo(11.4, 11.9)
+          ..lineTo(12.8, 12.8)
+          ..moveTo(9.6, 14.3)
+          ..lineTo(14.5, 14.3)
+          ..lineTo(12.6, 16.7)
+          ..moveTo(11, 16.2)
+          ..lineTo(13.1, 18.3);
+    canvas.drawPath(
+      engraving,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1.15
+        ..strokeCap = StrokeCap.round
+        ..strokeJoin = StrokeJoin.round
+        ..color = const Color(0xFFFFD77C),
+    );
+    canvas.drawCircle(
+      const Offset(12, 4.9),
+      0.9,
+      Paint()..color = const Color(0xFFECC15A),
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant _ActionIconPainter oldDelegate) => false;
 }
 
 /// Nine-slice raster art preserves the carved corners at every panel size.

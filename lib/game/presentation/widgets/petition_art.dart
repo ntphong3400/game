@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'imperial_assets.dart';
 import 'imperial_theme.dart';
 
 String petitionArtFor(String category) => switch (category) {
@@ -8,15 +9,19 @@ String petitionArtFor(String category) => switch (category) {
   _ => 'palace',
 };
 
-IconData petitionCategoryIcon(String category) => switch (category) {
-  'Nông nghiệp' => Icons.grass_outlined,
-  'Thương mại' || 'Ngân khố' => Icons.savings_outlined,
-  'Quân sự' => Icons.shield_outlined,
-  'Dân sinh' => Icons.groups_outlined,
-  'Công trình' || 'Thiên tai' => Icons.water_outlined,
-  'Sức khỏe' => Icons.spa_outlined,
-  _ => Icons.account_balance_outlined,
-};
+Widget petitionCategoryIcon(String category, {Color color = muted}) =>
+    switch (category) {
+      'Nông nghiệp' => const ImperialIcon('grain', size: 22),
+      'Thương mại' || 'Ngân khố' => const ImperialIcon('treasury', size: 22),
+      'Quân sự' => const ImperialIcon('army', size: 22),
+      'Dân sinh' => const ImperialIcon('people', size: 22),
+      'Sức khỏe' => const ImperialIcon('health', size: 22),
+      'Triều chính' => const ImperialIcon('court', size: 22),
+      'Hậu cung' => const ImperialIcon('harem', size: 22),
+      'Công trình' ||
+      'Thiên tai' => Icon(Icons.water_outlined, size: 22, color: color),
+      _ => Icon(Icons.account_balance_outlined, size: 22, color: color),
+    };
 
 class PetitionPainting extends StatelessWidget {
   const PetitionPainting({

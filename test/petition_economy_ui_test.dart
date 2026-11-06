@@ -5,6 +5,8 @@ import 'package:van_tue/game/data/game_store.dart';
 import 'support/legacy_gateway.dart';
 import 'package:van_tue/game/models/game_state.dart';
 import 'package:van_tue/game/presentation/game_app.dart';
+import 'package:van_tue/game/presentation/widgets/imperial_assets.dart';
+import 'package:van_tue/game/presentation/widgets/petition_impacts.dart';
 
 void main() {
   for (final size in [const Size(1440, 1000), const Size(390, 844)]) {
@@ -69,7 +71,22 @@ void main() {
             'lãi sau vốn ${example.profit} tiền',
           );
           expect(preview, findsNothing);
-          await tap(find.byKey(const ValueKey('petition-choice-0')));
+          final option = find.byKey(const ValueKey('petition-choice-0'));
+          final treasuryIcon = find.byWidgetPredicate(
+            (widget) => widget is ImperialIcon && widget.name == 'treasury',
+          );
+          expect(
+            find.descendant(of: option, matching: treasuryIcon),
+            findsOneWidget,
+          );
+          await tap(option);
+          expect(
+            find.descendant(
+              of: find.byType(PetitionImpacts),
+              matching: treasuryIcon,
+            ),
+            findsWidgets,
+          );
           expect(preview, findsOneWidget);
           final text = tester.widget<Text>(preview).data!;
           expect(text, contains('Vốn/phí ứng ${example.cost} tiền'));

@@ -60,13 +60,14 @@ class ImperialAlertDialog extends StatelessWidget {
     super.key,
     required this.title,
     this.content,
+    this.aboveFrame,
     this.actions = const [],
     this.insetPadding,
     this.icon = 'scroll',
     this.width = 660,
   });
   final Widget title;
-  final Widget? content;
+  final Widget? content, aboveFrame;
   final List<Widget> actions;
   final EdgeInsets? insetPadding;
   final String icon;
@@ -85,6 +86,7 @@ class ImperialAlertDialog extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       content: _DialogSurface(
         title: title,
+        aboveFrame: aboveFrame,
         body: _unwrapScroll(content ?? const SizedBox.shrink()),
         actions: actions,
         icon: icon,
@@ -166,11 +168,13 @@ class _DialogSurface extends StatefulWidget {
   const _DialogSurface({
     required this.title,
     required this.body,
+    this.aboveFrame,
     required this.actions,
     required this.icon,
     required this.width,
   });
   final Widget title, body;
+  final Widget? aboveFrame;
   final List<Widget> actions;
   final String icon;
   final double width;
@@ -191,6 +195,97 @@ class _DialogSurfaceState extends State<_DialogSurface> {
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
     final compact = media.size.width < 600 || media.size.height < 500;
+    final frame = DecoratedBox(
+      key: const ValueKey('imperial-dialog-frame'),
+      decoration: const BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Color(0x99000000),
+            blurRadius: 32,
+            offset: Offset(0, 12),
+          ),
+        ],
+      ),
+      child: ImperialSkin(
+        edge: compact ? 32 : 44,
+        child: Padding(
+          padding: EdgeInsets.all(compact ? 20 : 28),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                key: const ValueKey('imperial-dialog-header'),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (!compact && widget.title is! Row) ...[
+                    ImperialIcon(widget.icon, size: 44),
+                    const SizedBox(width: 14),
+                  ],
+                  Expanded(
+                    child: Semantics(
+                      namesRoute: true,
+                      child: DefaultTextStyle.merge(
+                        style: TextStyle(
+                          fontFamily: 'Lora',
+                          fontSize: compact ? 20 : 24,
+                          height: 1.3,
+                          color: ink,
+                        ),
+                        child: widget.title,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  IconButton(
+                    key: const ValueKey('close-imperial-dialog'),
+                    tooltip: 'Đóng hộp thoại',
+                    visualDensity: VisualDensity.compact,
+                    onPressed: () => Navigator.maybePop(context),
+                    icon: const Icon(Icons.close, color: gold, size: 20),
+                  ),
+                ],
+              ),
+              SizedBox(height: widget.aboveFrame == null ? 12 : 8),
+              const Divider(height: 1, color: gold),
+              Flexible(
+                child: Scrollbar(
+                  controller: _scroll,
+                  thumbVisibility: !compact,
+                  child: SingleChildScrollView(
+                    key: const ValueKey('imperial-dialog-scroll'),
+                    controller: _scroll,
+                    padding:
+                        widget.aboveFrame == null
+                            ? const EdgeInsets.fromLTRB(0, 18, 8, 18)
+                            : const EdgeInsets.symmetric(vertical: 5),
+                    child: DefaultTextStyle.merge(
+                      style: const TextStyle(
+                        fontSize: 13,
+                        height: 1.7,
+                        color: ink,
+                      ),
+                      child: widget.body,
+                    ),
+                  ),
+                ),
+              ),
+              if (widget.actions.isNotEmpty) ...[
+                const Divider(height: 1, color: line),
+                SizedBox(height: widget.aboveFrame == null ? 12 : 8),
+                Wrap(
+                  key: const ValueKey('imperial-dialog-actions'),
+                  alignment: WrapAlignment.end,
+                  spacing: 10,
+                  runSpacing: 8,
+                  children: widget.actions,
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
     return ConstrainedBox(
       constraints: BoxConstraints(
         maxHeight: math.max(
@@ -203,93 +298,18 @@ class _DialogSurfaceState extends State<_DialogSurface> {
       ),
       child: SizedBox(
         width: widget.width,
-        child: DecoratedBox(
-          decoration: const BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Color(0x99000000),
-                blurRadius: 32,
-                offset: Offset(0, 12),
-              ),
-            ],
-          ),
-          child: ImperialSkin(
-            edge: compact ? 32 : 44,
-            child: Padding(
-              padding: EdgeInsets.all(compact ? 20 : 28),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Row(
-                    key: const ValueKey('imperial-dialog-header'),
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (!compact && widget.title is! Row) ...[
-                        ImperialIcon(widget.icon, size: 44),
-                        const SizedBox(width: 14),
-                      ],
-                      Expanded(
-                        child: Semantics(
-                          namesRoute: true,
-                          child: DefaultTextStyle.merge(
-                            style: TextStyle(
-                              fontFamily: 'Lora',
-                              fontSize: compact ? 20 : 24,
-                              height: 1.3,
-                              color: ink,
-                            ),
-                            child: widget.title,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 6),
-                      IconButton(
-                        key: const ValueKey('close-imperial-dialog'),
-                        tooltip: 'Đóng hộp thoại',
-                        visualDensity: VisualDensity.compact,
-                        onPressed: () => Navigator.maybePop(context),
-                        icon: const Icon(Icons.close, color: gold, size: 20),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  const Divider(height: 1, color: gold),
-                  Flexible(
-                    child: Scrollbar(
-                      controller: _scroll,
-                      thumbVisibility: !compact,
-                      child: SingleChildScrollView(
-                        key: const ValueKey('imperial-dialog-scroll'),
-                        controller: _scroll,
-                        padding: const EdgeInsets.fromLTRB(0, 18, 8, 18),
-                        child: DefaultTextStyle.merge(
-                          style: const TextStyle(
-                            fontSize: 13,
-                            height: 1.7,
-                            color: ink,
-                          ),
-                          child: widget.body,
-                        ),
-                      ),
-                    ),
-                  ),
-                  if (widget.actions.isNotEmpty) ...[
-                    const Divider(height: 1, color: line),
-                    const SizedBox(height: 12),
-                    Wrap(
-                      key: const ValueKey('imperial-dialog-actions'),
-                      alignment: WrapAlignment.end,
-                      spacing: 10,
-                      runSpacing: 8,
-                      children: widget.actions,
-                    ),
+        child:
+            widget.aboveFrame == null
+                ? frame
+                : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    widget.aboveFrame!,
+                    const SizedBox(height: 10),
+                    Flexible(child: frame),
                   ],
-                ],
-              ),
-            ),
-          ),
-        ),
+                ),
       ),
     );
   }

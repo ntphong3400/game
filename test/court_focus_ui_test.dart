@@ -146,6 +146,48 @@ void main() {
       }
 
       await open('a');
+      final petitionOverview = find.byKey(const ValueKey('petition-overview'));
+      if (inline) {
+        expect(petitionOverview, findsNothing);
+      } else {
+        final frame = find.byKey(const ValueKey('imperial-dialog-frame'));
+        expect(
+          tester.getBottomLeft(petitionOverview).dy,
+          lessThan(tester.getTopLeft(frame).dy),
+        );
+        expect(
+          find.descendant(of: petitionOverview, matching: find.byType(Tooltip)),
+          findsNWidgets(8),
+        );
+        expect(
+          find.descendant(of: petitionOverview, matching: find.text('1K')),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: petitionOverview,
+            matching: find.text('${controller.state!.authority}'),
+          ),
+          findsOneWidget,
+        );
+        final authority = find.byKey(const ValueKey('petition-stat-authority'));
+        final population = find.byKey(
+          const ValueKey('petition-stat-population'),
+        );
+        final authorityTop = tester.getTopLeft(authority).dy;
+        final populationTop = tester.getTopLeft(population).dy;
+        if (size.width == 320) expect(populationTop, greaterThan(authorityTop));
+        if (size.width == 390) expect(populationTop, authorityTop);
+        await tap(find.byKey(const ValueKey('petition-stat-food')));
+        expect(
+          find.byWidgetPredicate(
+            (widget) =>
+                widget is Text &&
+                widget.textSpan?.toPlainText() == 'Lương thực',
+          ),
+          findsOneWidget,
+        );
+      }
       expect(
         find.descendant(
           of: find.byKey(const ValueKey('petition-card-a')),
@@ -188,7 +230,11 @@ void main() {
       expect(find.byKey(const ValueKey('petition-details-1')), findsOneWidget);
       await tap(find.byKey(const ValueKey('petition-choice-0')));
       expect(find.text('Không giao ai xử lý (mặc định)'), findsOneWidget);
-      if (!inline) await tap(find.text('Đọc sau'));
+      if (!inline) {
+        await tap(find.text('Đọc sau'));
+        expect(petitionOverview, findsNothing);
+        expect(tester.getRect(overview), overviewRect);
+      }
       await open('b');
       await tap(find.byKey(const ValueKey('petition-choice-0')));
       if (!inline) await tap(find.text('Đọc sau'));

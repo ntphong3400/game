@@ -2,6 +2,7 @@ import '../../models/number_format.dart';
 import 'package:flutter/material.dart';
 import '../../data/content.dart';
 import '../../models/game_state.dart';
+import 'imperial_assets.dart';
 import 'imperial_theme.dart';
 
 /// Display-only values from the already resolved choice. No random rolls,
@@ -43,20 +44,40 @@ class PetitionImpacts extends StatelessWidget {
     'rest': 'Lần nghỉ',
     'plotReduce': 'Tiến độ âm mưu',
   };
-  static IconData icon(String key) => switch (key) {
-    'points' => Icons.history_edu_outlined,
-    'treasury' || 'cost' || 'debt' => Icons.savings_outlined,
-    'grain' || 'grainCost' => Icons.grass_outlined,
-    'people' => Icons.groups_outlined,
-    'authority' => Icons.workspace_premium_outlined,
-    'army' || 'war' => Icons.shield_outlined,
-    'health' || 'illness' => Icons.favorite_border,
-    'levee' => Icons.water_outlined,
-    'stability' => Icons.balance_outlined,
-    'fatigue' || 'rest' => Icons.spa_outlined,
-    'stress' => Icons.self_improvement_outlined,
-    _ => Icons.account_balance_outlined,
-  };
+  Widget _icon(String key) {
+    final imperial = switch (key) {
+      'points' => 'action',
+      'treasury' || 'cost' || 'gold' || 'debt' || 'goldDebt' => 'treasury',
+      'grain' || 'food' || 'grainCost' => 'grain',
+      'population' ||
+      'settlers' ||
+      'refugees' ||
+      'returnees' ||
+      'displaced' => 'citizens',
+      'people' || 'authority' || 'stability' || 'health' => key,
+      'army' ||
+      'troops' ||
+      'war' ||
+      'training' ||
+      'equipment' ||
+      'morale' ||
+      'logistics' => 'army',
+      'illness' || 'disease' => 'health',
+      _ => null,
+    };
+    if (imperial != null) return ImperialIcon(imperial, size: 27);
+
+    return Icon(
+      switch (key) {
+        'levee' => Icons.water_outlined,
+        'fatigue' || 'rest' => Icons.spa_outlined,
+        'stress' => Icons.self_improvement_outlined,
+        _ => Icons.account_balance_outlined,
+      },
+      size: 27,
+      color: const Color(0xFF6F7153),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,11 +132,7 @@ class PetitionImpacts extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 5, right: 10),
-                      child: Icon(
-                        icon(entry.key),
-                        size: 27,
-                        color: const Color(0xFF6F7153),
-                      ),
+                      child: _icon(entry.key),
                     ),
                     Expanded(
                       child: Column(

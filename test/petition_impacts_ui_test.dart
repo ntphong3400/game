@@ -6,6 +6,8 @@ import 'package:van_tue/game/data/game_store.dart';
 import 'package:van_tue/game/models/game_state.dart';
 import 'support/legacy_gateway.dart';
 import 'package:van_tue/game/presentation/game_app.dart';
+import 'package:van_tue/game/presentation/widgets/imperial_assets.dart';
+import 'package:van_tue/game/presentation/widgets/petition_impacts.dart';
 
 void main() {
   for (final size in [const Size(1440, 900), const Size(390, 844)]) {
@@ -66,6 +68,14 @@ void main() {
         expect(
           find.byKey(const ValueKey('petition-impact-grain')),
           findsOneWidget,
+        );
+        final icons = find.descendant(
+          of: find.byType(PetitionImpacts),
+          matching: find.byType(ImperialIcon),
+        );
+        expect(
+          tester.widgetList<ImperialIcon>(icons).map((icon) => icon.name),
+          unorderedEquals(['action', 'people', 'grain']),
         );
         final preview = <String, int>{};
         for (final stat in ['points', 'people', 'grain']) {

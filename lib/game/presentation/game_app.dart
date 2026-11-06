@@ -1076,7 +1076,13 @@ class _GameShellState extends State<GameShell> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          CourtOverview(state: s, dense: bounds.maxHeight < 300),
+          Visibility(
+            visible: !petitionDialogOpen,
+            maintainState: true,
+            maintainAnimation: true,
+            maintainSize: true,
+            child: CourtOverview(state: s, dense: bounds.maxHeight < 300),
+          ),
           const SizedBox(height: 12),
           if (!inline) _petitionHeading(),
           Expanded(
@@ -1168,12 +1174,9 @@ class _GameShellState extends State<GameShell> {
           runSpacing: 8,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            Icon(
-              petitionCategoryIcon(
-                eventForState(s, petition.definitionId).category,
-              ),
+            petitionCategoryIcon(
+              eventForState(s, petition.definitionId).category,
               color: forest,
-              size: 22,
             ),
             Text(
               formatGameNumbers(

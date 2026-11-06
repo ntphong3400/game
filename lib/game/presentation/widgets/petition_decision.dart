@@ -2,6 +2,7 @@ import '../../models/number_format.dart';
 import '../../logic/currency_rules.dart';
 import 'package:flutter/material.dart';
 import 'imperial_dialog.dart';
+import 'court_overview.dart';
 import '../../logic/population_rules.dart';
 import '../../data/content.dart';
 import '../../models/game_state.dart';
@@ -295,6 +296,7 @@ class _PetitionDecisionState extends State<PetitionDecision> {
   }
 
   Widget choice(int index) {
+    final choice = e.choices[index];
     final active = selected == index;
     final reason = blockedReason(index);
     final awaitingNominee =
@@ -327,8 +329,11 @@ class _PetitionDecisionState extends State<PetitionDecision> {
                 fontWeight: FontWeight.w400,
               ),
               alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-              minimumSize: const Size(0, 46),
+              padding: EdgeInsets.symmetric(
+                horizontal: 14,
+                vertical: widget.inDialog ? 11 : 12,
+              ),
+              minimumSize: Size(0, widget.inDialog ? 44 : 46),
               backgroundColor:
                   active ? const Color(0xFFDCE3CD) : const Color(0x66FFF9ED),
               shape: RoundedRectangleBorder(
@@ -354,19 +359,18 @@ class _PetitionDecisionState extends State<PetitionDecision> {
                     color: active ? forest : muted,
                   ),
                   const SizedBox(width: 10),
-                  Icon(
-                    index == e.choices.length - 1
-                        ? Icons.pause_circle_outline
-                        : e.choices[index].cost > 0
-                        ? Icons.savings_outlined
-                        : petitionCategoryIcon(e.category),
-                    size: 22,
-                    color: muted,
-                  ),
+                  if (choice.cost > 0)
+                    const ImperialIcon('treasury', size: 22)
+                  else if (choice.grainCost > 0)
+                    const ImperialIcon('grain', size: 22)
+                  else if (index == e.choices.length - 1)
+                    const ImperialIcon('scroll', size: 22)
+                  else
+                    petitionCategoryIcon(e.category),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      formatGameNumbers(e.choices[index].label),
+                      formatGameNumbers(choice.label),
                       style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 14,
@@ -403,23 +407,24 @@ class _PetitionDecisionState extends State<PetitionDecision> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
     final content = Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (widget.inDialog) ...[
           SizedBox(
-            height: 120,
+            height: width < 420 ? 62 : (width < 600 ? 94 : 120),
             width: double.infinity,
             child: PetitionPainting(category: e.category),
           ),
           Tag(e.category.toUpperCase()),
-          const SizedBox(height: 12),
+          const SizedBox(height: 6),
           Text(
             formatGameNumbers(s.authoredText(petitionText(petition, s))),
-            style: const TextStyle(fontSize: 14),
+            style: const TextStyle(fontSize: 14, height: 1.4),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 6),
           Text(
             formatGameNumbers(
               petition.deadline <= s.week
@@ -428,15 +433,15 @@ class _PetitionDecisionState extends State<PetitionDecision> {
             ),
             style: const TextStyle(color: terracotta, fontSize: 12),
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: 8),
           const PetitionRule(),
-          const SizedBox(height: 10),
+          const SizedBox(height: 6),
         ],
         const Text(
           'Ý chỉ của bệ hạ',
           style: TextStyle(fontFamily: 'Lora', fontSize: 20),
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: widget.inDialog ? 6 : 10),
         for (var i = 0; i < e.choices.length; i++) choice(i),
         if (settlement && arc!.kind == 'haremHarmony') ...[
           OutlinedButton(
@@ -535,6 +540,7 @@ class _PetitionDecisionState extends State<PetitionDecision> {
           formatGameNumbers(e.title),
           style: const TextStyle(fontFamily: 'Lora', fontSize: 24),
         ),
+        aboveFrame: CourtOverview(state: s, inPetitionOverlay: true),
         content: SizedBox(
           width: 600,
           child: SingleChildScrollView(child: content),
