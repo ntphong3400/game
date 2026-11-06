@@ -128,6 +128,9 @@ void main() {
         await tester.pumpAndSettle();
         await click(tester, find.byKey(ValueKey('giang-son-$country-pass')));
         expect(find.byType(FrontierHub), findsOneWidget);
+        expect(find.text(garrisonNames[country]!), findsOneWidget);
+        expect(find.text(garrisonNames[country]!.toUpperCase()), findsNothing);
+        expect(find.byKey(const ValueKey('giang-son-regions')), findsNothing);
         final background = tester.widget<Image>(
           find.byKey(ValueKey('frontier-background-$country')),
         );

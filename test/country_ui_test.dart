@@ -133,9 +133,19 @@ void main() {
           final before = jsonEncode(c.state!.toJson());
           await click(tester, find.byKey(ValueKey('giang-son-$country')));
           expect(find.byType(CountryHub), findsOneWidget);
+          expect(find.text(countryNames[country]!), findsOneWidget);
+          expect(find.text(countryNames[country]!.toUpperCase()), findsNothing);
+          expect(find.byKey(const ValueKey('giang-son-regions')), findsNothing);
+          final status = find.textContaining('Quan hệ ');
+          expect(status, findsOneWidget);
+          final map = find.byKey(const ValueKey('country-map-scroll'));
           expect(
-            find.text(countryNames[country]!.toUpperCase()),
-            findsOneWidget,
+            tester.getTopLeft(status).dy,
+            greaterThan(tester.getTopLeft(map).dy),
+          );
+          expect(
+            tester.getBottomLeft(status).dy,
+            lessThan(tester.getBottomLeft(map).dy),
           );
           final background = tester.widget<Image>(
             find.byKey(ValueKey('country-background-$country')),
@@ -307,7 +317,7 @@ void main() {
       expect(find.textContaining('Tin riêng phía Bắc'), findsNothing);
       await click(tester, find.byKey(const ValueKey('country-to-frontier')));
       expect(find.byKey(const ValueKey('frontier-page')), findsOneWidget);
-      expect(find.text('TÂY ẢI'), findsOneWidget);
+      expect(find.text('Tây Ải'), findsOneWidget);
       expect(tester.takeException(), isNull);
     },
   );

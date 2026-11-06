@@ -47,12 +47,12 @@ Future<void> tap(WidgetTester tester, Finder target) async {
 }
 
 void main() {
-  for (final size in [
-    const Size(1440, 900),
-    const Size(1024, 768),
-    const Size(844, 390),
-    const Size(390, 844),
-    const Size(320, 568),
+  for (final (size, columns) in [
+    (const Size(1440, 900), 6),
+    (const Size(1024, 768), 6),
+    (const Size(844, 390), 6),
+    (const Size(390, 844), 3),
+    (const Size(320, 568), 3),
   ]) {
     testWidgets('locality and six workspaces preserve save at $size', (
       tester,
@@ -64,11 +64,47 @@ void main() {
       await tester.pumpAndSettle();
       await tap(tester, find.byKey(const ValueKey('giang-son-farms')));
       expect(find.byType(LocalityHub), findsOneWidget);
-      for (final place in LocalityPlace.values) {
-        await tap(
-          tester,
+      expect(find.text('Địa phương'), findsOneWidget);
+      expect(find.text('ĐỊA PHƯƠNG'), findsNothing);
+      final map = find.byKey(const ValueKey('locality-map-scroll'));
+      final cards = [
+        for (final place in LocalityPlace.values)
           find.byKey(ValueKey('locality-location-${place.name}')),
+      ];
+      final rects = cards.map(tester.getRect).toList();
+      final firstRow = rects.take(columns).toList();
+      final secondRow = rects.skip(columns).toList();
+      expect(tester.getSize(map).width, size.width);
+      expect(tester.getSize(map).height, greaterThan(size.height * .4));
+      expect(tester.getBottomLeft(map).dy, lessThan(firstRow.first.top));
+      for (final rect in firstRow) {
+        expect(rect.top, firstRow.first.top);
+      }
+      if (secondRow.isEmpty) {
+        expect(firstRow.first.left, closeTo(10, .01));
+        expect(size.width - firstRow.last.right, closeTo(10, .01));
+        expect(size.height - firstRow.first.bottom, closeTo(10, .01));
+        expect(
+          firstRow.first.top - tester.getBottomLeft(map).dy,
+          closeTo(10, .01),
         );
+      } else {
+        expect(secondRow.first.top, greaterThan(firstRow.first.bottom));
+        for (final (column, rect) in secondRow.indexed) {
+          expect(rect.top, secondRow.first.top);
+          expect(rect.left, firstRow[column].left);
+        }
+      }
+      for (final (index, place) in LocalityPlace.values.indexed) {
+        final card = cards[index];
+        final rect = rects[index];
+        expect(card.hitTestable(), findsOneWidget);
+        expect(rect.width, closeTo(firstRow.first.width, .01));
+        expect(rect.left, greaterThanOrEqualTo(0));
+        expect(rect.right, lessThanOrEqualTo(size.width));
+        expect(rect.bottom, lessThanOrEqualTo(size.height));
+        await tester.tap(card);
+        await tester.pumpAndSettle();
         expect(
           find.byKey(ValueKey('locality-panel-${place.name}')),
           findsOneWidget,

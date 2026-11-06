@@ -29,6 +29,14 @@ flutter:
     - assets/images/kingdom/
     - assets/images/citadel-landscape.webp
     - assets/images/giang-son-map.webp
+    - assets/images/giang-son-palace.webp
+    - assets/images/giang-son-village.webp
+    - assets/images/giang-son-pass-north.webp
+    - assets/images/giang-son-pass-west.webp
+    - assets/images/giang-son-pass-south.webp
+    - assets/images/giang-son-country-north.webp
+    - assets/images/giang-son-country-west.webp
+    - assets/images/giang-son-country-south.webp
     - assets/images/kinh-thanh-watercolor-v2.webp
     - assets/images/dia-phuong-watercolor.webp
     - assets/images/frontier-watercolor.webp

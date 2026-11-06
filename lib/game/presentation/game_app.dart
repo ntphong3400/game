@@ -612,72 +612,57 @@ class _GameShellState extends State<GameShell> {
     if (neighborCountry != null) {
       final place = countryPlace(route);
       if (place != null) return _countryDetailShell(neighborCountry, place);
-      return Scaffold(
-        backgroundColor: paper,
-        body: CountryHub(
-          key: ValueKey(neighborCountry),
-          state: s,
-          countryId: neighborCountry,
-          busy: busy,
-          onNavigate: navigate,
-          onEndTurn: _nextWeek,
-          onOvertime: _overtimeDialog,
-        ),
+      return CountryHub(
+        key: ValueKey(neighborCountry),
+        state: s,
+        countryId: neighborCountry,
+        busy: busy,
+        onNavigate: navigate,
+        onEndTurn: _nextWeek,
+        onOvertime: _overtimeDialog,
       );
     }
     final frontCountry = frontierCountry(route);
     if (frontCountry != null && s.warfare != null && s.population != null) {
       final place = frontierPlace(route);
       if (place != null) return _frontierDetailShell(frontCountry, place);
-      return Scaffold(
-        backgroundColor: paper,
-        body: FrontierHub(
-          key: ValueKey(frontCountry),
-          state: s,
-          countryId: frontCountry,
-          busy: busy,
-          onNavigate: navigate,
-          onEndTurn: _nextWeek,
-          onOvertime: _overtimeDialog,
-        ),
+      return FrontierHub(
+        key: ValueKey(frontCountry),
+        state: s,
+        countryId: frontCountry,
+        busy: busy,
+        onNavigate: navigate,
+        onEndTurn: _nextWeek,
+        onOvertime: _overtimeDialog,
       );
     }
     if (route == 'capital') {
-      return Scaffold(
-        backgroundColor: paper,
-        body: CapitalHub(
-          state: s,
-          busy: busy,
-          onNavigate: navigate,
-          onEndTurn: _nextWeek,
-          onOvertime: _overtimeDialog,
-        ),
+      return CapitalHub(
+        state: s,
+        busy: busy,
+        onNavigate: navigate,
+        onEndTurn: _nextWeek,
+        onOvertime: _overtimeDialog,
       );
     }
     if (route == 'locality') {
-      return Scaffold(
-        backgroundColor: paper,
-        body: LocalityHub(
-          state: s,
-          busy: busy,
-          onNavigate: navigate,
-          onEndTurn: _nextWeek,
-          onOvertime: _overtimeDialog,
-        ),
+      return LocalityHub(
+        state: s,
+        busy: busy,
+        onNavigate: navigate,
+        onEndTurn: _nextWeek,
+        onOvertime: _overtimeDialog,
       );
     }
     final localPlace = LocalityPlace.fromRoute(route);
     if (localPlace != null) return _localityDetailShell(localPlace);
     if (route == 'citadel') {
-      return Scaffold(
-        backgroundColor: const Color(0xFF142D28),
-        body: CitadelHub(
-          state: s,
-          busy: busy,
-          onNavigate: navigate,
-          onEndTurn: _nextWeek,
-          onOvertime: _overtimeDialog,
-        ),
+      return CitadelHub(
+        state: s,
+        busy: busy,
+        onNavigate: navigate,
+        onEndTurn: _nextWeek,
+        onOvertime: _overtimeDialog,
       );
     }
     return _roomShell();

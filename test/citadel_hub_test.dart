@@ -64,6 +64,21 @@ void main() {
         expect(find.text('Kinh thành'), findsOneWidget);
         expect(find.text('Địa phương'), findsOneWidget);
         final capital = find.byKey(const ValueKey('giang-son-palace'));
+        final locality = find.byKey(const ValueKey('giang-son-farms'));
+        expect(tester.getSize(capital), tester.getSize(locality));
+        expect(tester.getSize(capital).height, greaterThanOrEqualTo(62));
+        expect(
+          tester.getCenter(find.text('Kinh thành')).dy,
+          closeTo(tester.getCenter(find.text('Địa phương')).dy, 0.1),
+        );
+        final count = controller.state!.petitions.length;
+        expect(
+          find.descendant(
+            of: capital,
+            matching: find.text(size.width >= 484 ? '$count tấu sớ' : '$count'),
+          ),
+          findsOneWidget,
+        );
         await tester.ensureVisible(capital);
         await tester.tap(capital);
         await tester.pumpAndSettle();
@@ -71,32 +86,58 @@ void main() {
         expect(find.byType(BottomSheet), findsNothing);
         expect(find.byKey(const ValueKey('nav-citadel')), findsNothing);
         expect(find.byKey(const ValueKey('nav-scores')), findsNothing);
-        for (final (landmark, route) in [
-          ('farms', 'locality'),
-          ('north-pass', 'kingdom'),
-          ('west-pass', 'kingdom'),
-          ('south-pass', 'kingdom'),
-          ('north', 'country-north'),
-          ('west', 'country-west'),
-          ('south', 'country-south'),
+        final artwork = <ImageProvider>{};
+        for (final (region, destinations) in [
+          ('interior', [('palace', 'capital'), ('farms', 'locality')]),
+          (
+            'frontier',
+            [
+              ('north-pass', 'kingdom'),
+              ('west-pass', 'kingdom'),
+              ('south-pass', 'kingdom'),
+            ],
+          ),
+          (
+            'neighbors',
+            [
+              ('north', 'country-north'),
+              ('west', 'country-west'),
+              ('south', 'country-south'),
+            ],
+          ),
         ]) {
-          if (landmark.endsWith('-pass') ||
-              ['north', 'west', 'south'].contains(landmark)) {
-            await tester.tap(
-              find.byKey(
-                ValueKey(
-                  'giang-son-region-${landmark.endsWith('-pass') ? 'frontier' : 'neighbors'}',
-                ),
-              ),
-            );
+          if (region != 'interior') {
+            await tester.tap(find.byKey(ValueKey('giang-son-region-$region')));
             await tester.pumpAndSettle();
           }
-          final target = find.byKey(ValueKey('giang-son-$landmark'));
-          await tester.ensureVisible(target);
-          await tester.tap(target);
-          await tester.pumpAndSettle();
-          expect(routes.last, route);
-          expect(tester.takeException(), isNull);
+          final first = find.byKey(
+            ValueKey('giang-son-${destinations.first.$1}'),
+          );
+          for (final (landmark, route) in destinations) {
+            final target = find.byKey(ValueKey('giang-son-$landmark'));
+            expect(tester.getSize(target), tester.getSize(first));
+            expect(tester.getTopLeft(target).dy, tester.getTopLeft(first).dy);
+            final thumbnail = find.descendant(
+              of: target,
+              matching: find.byType(Image),
+            );
+            expect(artwork.add(tester.widget<Image>(thumbnail).image), isTrue);
+            if (region != 'interior' && size.width <= 390) {
+              final label = find.descendant(
+                of: target,
+                matching: find.byType(Text),
+              );
+              expect(
+                tester.getBottomRight(thumbnail).dy,
+                lessThan(tester.getTopLeft(label).dy),
+              );
+            }
+            await tester.ensureVisible(target);
+            await tester.tap(target);
+            await tester.pumpAndSettle();
+            expect(routes.last, route);
+            expect(tester.takeException(), isNull);
+          }
         }
         final end = find.byKey(const ValueKey('citadel-end-turn'));
         expect(find.text('Khóa mùa'), findsOneWidget);
@@ -124,12 +165,12 @@ void main() {
     );
   }
 
-  for (final size in [
-    const Size(1440, 900),
-    const Size(1024, 768),
-    const Size(844, 390),
-    const Size(390, 844),
-    const Size(320, 568),
+  for (final (size, singleRow) in [
+    (const Size(1440, 900), true),
+    (const Size(1024, 768), true),
+    (const Size(844, 390), false),
+    (const Size(390, 844), false),
+    (const Size(320, 568), false),
   ]) {
     testWidgets('capital opens all destinations and returns at $size', (
       tester,
@@ -141,7 +182,7 @@ void main() {
         GameApp(controller: controller, initialRoute: 'citadel'),
       );
       await tester.pumpAndSettle();
-      for (final (route, label) in [
+      const destinations = [
         ('court', 'Điện Vĩnh An'),
         ('treasury', 'Ngân khố'),
         ('people', 'Phủ Bá Quan'),
@@ -149,13 +190,40 @@ void main() {
         ('health', 'Điện Dưỡng Tâm'),
         ('journal', 'Viện Quốc Sử'),
         ('scores', 'Vọng Thiên Các'),
-      ]) {
+      ];
+      for (final (route, label) in destinations) {
         await tester.ensureVisible(
           find.byKey(const ValueKey('giang-son-palace')),
         );
         await tester.tap(find.byKey(const ValueKey('giang-son-palace')));
         await tester.pumpAndSettle();
         expect(find.byType(CapitalHub), findsOneWidget);
+        if (route == 'court') {
+          expect(find.text('Kinh Thành'), findsOneWidget);
+          expect(find.text('KINH THÀNH'), findsNothing);
+          final court = tester.getRect(
+            find.byKey(const ValueKey('citadel-location-court')),
+          );
+          for (final (id, _) in destinations) {
+            final card = find.byKey(ValueKey('citadel-location-$id'));
+            expect(card.hitTestable(), findsOneWidget);
+            final rect = tester.getRect(card);
+            expect(rect.left, greaterThanOrEqualTo(0));
+            expect(rect.right, lessThanOrEqualTo(size.width + .01));
+            expect(rect.bottom, lessThanOrEqualTo(size.height));
+            if (singleRow) {
+              expect(rect.top, court.top);
+              expect(rect.width, closeTo(court.width, .01));
+              expect(size.height - rect.bottom, closeTo(10, .01));
+              if (id == 'court') expect(rect.left, closeTo(10, .01));
+              if (id == 'scores')
+                expect(size.width - rect.right, closeTo(10, .01));
+            } else if (id != 'court') {
+              expect(rect.top, greaterThan(court.bottom));
+              expect(rect.width, lessThan(court.width));
+            }
+          }
+        }
         expect(find.text('Khóa mùa'), findsNothing);
         expect(find.byType(BottomSheet), findsNothing);
         expect(
@@ -171,7 +239,6 @@ void main() {
           findsNothing,
         );
         final location = find.byKey(ValueKey('citadel-location-$route'));
-        await Scrollable.ensureVisible(tester.element(location), alignment: .5);
         await tester.tap(location);
         await tester.pumpAndSettle();
         expect(find.byType(CapitalHub), findsNothing);
@@ -270,7 +337,7 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('giang-son-north-pass')));
       await tester.pumpAndSettle();
       expect(find.byKey(const ValueKey('frontier-page')), findsOneWidget);
-      expect(find.text('BẮC ẢI'), findsOneWidget);
+      expect(find.text('Bắc Ải'), findsOneWidget);
       expect(controller.state!.toJson(), before);
       expect(tester.takeException(), isNull);
     },
