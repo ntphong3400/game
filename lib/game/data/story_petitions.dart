@@ -10,6 +10,88 @@ bool isStoryEvent(String id) =>
 String chainEventId(StoryArc arc) => 'chain:${arc.kind}:${arc.stage}';
 String majorEventId(MajorMission m) => 'major:${m.kind}:${m.stage}';
 
+String storyStageLabel(int stage, int count) {
+  if (stage == count - 1) return 'Bản tấu cuối';
+  return switch (stage) {
+    0 => 'Bản tấu đầu',
+    1 => 'Bản tấu thứ hai',
+    2 => 'Bản tấu thứ ba',
+    _ => 'Bản tấu thứ ${stage + 1}',
+  };
+}
+
+String chainStageLabel(StoryArc arc) =>
+    storyStageLabel(arc.stage, chainDefinitionFor(arc).stages.length);
+
+String majorStageLabel(MajorMission m) =>
+    storyStageLabel(m.stage, m.objectives.length);
+
+String majorActionTitle(ObjectiveDefinition goal) {
+  final title = goal.title.replaceFirst(
+    RegExp(r'^hoàn tất ', caseSensitive: false),
+    'Tổ chức ',
+  );
+  return '${title[0].toUpperCase()}${title.substring(1)}';
+}
+
+String majorDecisionRecap(MajorMission m) {
+  if (m.decisions.isEmpty) return '';
+  final full = m.decisions.where((i) => i == 0).length;
+  final limited = m.decisions.where((i) => i == 1).length;
+  if (full == m.decisions.length) {
+    return 'Các phần việc trước đã được triều đình huy động đầy đủ.';
+  }
+  if (limited == m.decisions.length) {
+    return 'Các phần việc trước mới được ứng phó bằng nguồn lực hạn chế.';
+  }
+  if (full + limited == 0) {
+    return 'Những phần việc trước chưa được tổ chức ứng phó.';
+  }
+  if (full + limited < m.decisions.length) {
+    return 'Triều đình đã ưu tiên một số phần việc, những việc còn lại chưa được tổ chức ứng phó.';
+  }
+  return 'Triều đình đã huy động đầy đủ ở một số phần việc, những việc còn lại mới được ứng phó có giới hạn.';
+}
+
+// Recall only choices already made, without costs, settlement ratios, or
+// future steps. Full dated records remain available in the history disclosure.
+String chainDecisionRecap(GameState s, StoryArc arc) {
+  if (arc.decisions.isEmpty) return '';
+  final stages = chainDefinitionFor(arc).stages;
+  final actions =
+      [
+            for (var step = 0; step < arc.decisions.length; step++)
+              chainParticipantText(
+                s,
+                arc,
+                stages[step].choices[arc.decisions[step]].label,
+              ),
+          ]
+          .map((label) => '${label[0].toLowerCase()}${label.substring(1)}')
+          .toList();
+  final recap =
+      actions.length == 1
+          ? actions.single
+          : '${actions.take(actions.length - 1).join(', ')} và ${actions.last}';
+  return 'Trước đó, bệ hạ đã $recap.';
+}
+
+String chainOutlook(StoryArc arc) => switch (arc.kind) {
+  'embezzlement' => 'Lần theo tiền cứu trợ để thu hồi phần thất thoát.',
+  'border' => 'Giữ vững biên cương, tìm đường hạ nhiệt xung đột.',
+  'granary' => 'Củng cố nguồn lương để dân qua mùa giáp hạt.',
+  'dyke' => 'Gia cố tuyến đê, bảo vệ dân trước mùa nước lớn.',
+  'justice' => 'Làm rõ oan tình, giữ lòng tin vào phép nước.',
+  'exams' => 'Tìm người có thực tài để giao trọng trách.',
+  'merit' => 'Ghi công xứng đáng để giữ lòng quân.',
+  'refugees' => 'Ổn định sinh kế, vun đắp nguồn lương và lòng dân.',
+  'copper' => 'Khai thác nguồn đồng để gây dựng nguồn thu.',
+  'palaceRumor' => 'Làm rõ lời đồn, khôi phục nền nếp nội cung.',
+  'market' => 'Khơi thông buôn bán, gây dựng nguồn thu từ bến chợ.',
+  'haremHarmony' => 'Thu xếp việc chung, giữ hòa khí trong Phượng điện.',
+  _ => 'Theo đuổi phần việc đến khi có thể khép hồ sơ.',
+};
+
 ChainStage chainStageFor(StoryArc arc) {
   final d = chainDefinitionFor(arc);
   if (usesChainSettlement(arc)) return d.stages[arc.stage];
@@ -206,25 +288,34 @@ EventDefinition _settlementChainEvent(GameState s, StoryArc arc) {
       body += '\nNgười liên quan: ${c.name} (${c.role}).';
     }
   }
-  if (arc.decisionLabels.isNotEmpty) {
-    body += '\nChỉ dụ trước: ${arc.decisionLabels.join(' → ')}.';
-  }
+  final recap = chainDecisionRecap(s, arc);
+  if (recap.isNotEmpty) body += '\n$recap';
   final choices = <EventChoice>[];
   for (var i = 0; i < stage.choices.length; i++) {
     final c = stage.choices[i], quit = chainChoiceAbandons(arc, i);
-    final projected = projectedChainChoice(arc, i);
     final effects = chainChoiceEffects(arc, c);
-    final blocked = chainSettlementChoiceBlocked(s, arc, i);
-    final closes = quit || projected.completedSteps == 4;
-    final costText =
-        c.cost > 0 ? 'Chi ${c.cost} tiền ngay' : 'Không chi ngân khố';
+    final approach =
+        quit
+            ? 'Khép hồ sơ theo phần đã thực hiện. Chi phí đã trả không được hoàn lại.'
+            : arc.kind == 'haremHarmony'
+            ? i == 2
+                ? 'Dùng ngân khố thu xếp việc chung, giữ cân bằng giữa hai bên.'
+                : 'Trao ưu thế cho một bên, khiến phe còn lại bất bình.'
+            : i == 1
+            ? 'Dùng ngân khố để triều đình trực tiếp tổ chức phần việc này.'
+            : [
+              'Giảm gánh ngân khố.',
+              if (effects.containsKey('authority'))
+                'Triều đình phải nhượng bớt quyền định đoạt.',
+              if (effects.containsKey('people'))
+                'Dân phải gánh thêm phần việc, dễ sinh bất mãn.',
+              if (effects.containsKey('stability'))
+                'Việc thu xếp giữa các phe làm triều chính xáo trộn.',
+            ].join(' ');
     choices.add(
       EventChoice(
         chainParticipantText(s, arc, c.label),
-        '$costText · 1 hành động. ${effects.isEmpty ? '' : '${eventEffectText(effects)} ngay. '}'
-        '${quit ? 'Dừng ở ${arc.completedSteps}/4.' : 'Hoàn thành ${projected.completedSteps}/4; ghi nhận thêm ${chainStepValue(arc)} chi phí quy đổi.'} '
-        '${closes ? 'Quyết toán: ${chainSettlementRewardText(s, projected)}' : 'Chưa nhận thưởng; bản tấu tiếp theo ${s.date(s.week + stage.delay)}. Nếu dừng sau bước này: ${chainSettlementRewardText(s, projected)}'}'
-        '${blocked == null ? '' : '\n$blocked'}',
+        approach,
         effects,
         cost: c.cost,
         points: 1,
@@ -234,7 +325,8 @@ EventDefinition _settlementChainEvent(GameState s, StoryArc arc) {
   return EventDefinition(
     chainEventId(arc),
     stage.title,
-    'Chuỗi: ${d.title} · Bản tấu ${arc.stage + 1}/4.\n$body\n\n${chainSettlementSummary(s, arc)}',
+    'Chuỗi: ${d.title}.\n$body\n\n'
+        '${chainOutlook(arc)} Thành quả sẽ được ghi nhận khi hồ sơ khép lại.',
     'Chuỗi sự kiện',
     choices,
     condition: 'storyOnly',
@@ -258,47 +350,45 @@ EventDefinition _majorEvent(GameState s, MajorMission m) {
   final fullDamage = majorPetitionDamage(m, goal, fullCoverage);
   final partialDamage = majorPetitionDamage(m, goal, partialCoverage);
   final ignoredDamage = majorPetitionDamage(m, goal, delivered);
-  final memory =
-      m.decisionLabels.isEmpty
-          ? 'Đây là bản tấu mở đầu.'
-          : 'Chỉ dụ trước: ${m.decisionLabels.join(' → ')}. '
-              '${previous > 0 ? 'Các phần chưa bảo vệ làm kinh phí ứng phó kỳ này tăng ${previous * 20}%.' : 'Các phần đã bảo vệ giúp giữ nguyên kinh phí kỳ này.'}';
+  final action = majorActionTitle(goal);
+  final lowerAction = '${action[0].toLowerCase()}${action.substring(1)}';
+  final memory = majorDecisionRecap(m);
+  final body = [
+    majorBody(s, m),
+    if (m.stage == 0 && unavailable == null)
+      'Trước mắt, triều đình cần $lowerAction.',
+    if (unavailable != null) '$unavailable Chỉ còn phương án dự phòng.',
+    if (memory.isNotEmpty) '\n$memory',
+    if (m.damageTaken.values.any((value) => value != 0))
+      'Những phần chưa được bảo vệ đã để lại tổn thất.',
+  ].join('\n');
   return EventDefinition(
     majorEventId(m),
-    m.stage == 0 ? d.title : '${d.title} · ${goal.title}',
-    'ĐẠI BIẾN CỐ ${d.code} · Bản tấu ${m.stage + 1}/${d.objectives.length} · mức ${m.severity}.\n'
-        '${majorBody(s, m)}\n$memory\n'
-        'Diễn biến cần ngự phê: ${goal.title}. '
-        '${unavailable == null ? '' : '$unavailable Chỉ còn phương án dự phòng, không thể khôi phục người đã mất.'}\n'
-        '${m.damageTaken.isEmpty ? '' : 'Tổn thất đã xảy ra: ${eventEffectText(m.damageTaken)}. Không thu hoặc trừ lại khi tổng kết.\n'}'
-        'Hạn: cuối ${s.date(m.dueWeek)}. Bỏ quá hạn sẽ không tổ chức ứng phó phần việc này.',
+    m.stage == 0 ? d.title : '${d.title} · $action',
+    body,
     'Đại biến cố',
     [
       EventChoice(
-        unavailable == null
-            ? 'Huy động đầy đủ: ${goal.title}'
-            : 'Huy động cho phương án dự phòng',
-        '$cost tiền · $grain thóc · 2 hành động. '
-        '${unavailable == null ? 'Bảo vệ đầy đủ phần việc này.' : 'Chỉ bảo vệ một phần.'} '
-        '${eventEffectText(fullDamage)}. ${_majorNext(s, m)}',
+        unavailable == null ? action : 'Huy động cho phương án dự phòng',
+        '',
         fullDamage,
         cost: cost,
         grainCost: grain,
         points: 2,
       ),
       EventChoice(
-        'Ứng phó có giới hạn',
-        '${(cost * .5).ceil()} tiền · ${(grain * .5).ceil()} thóc · 1 hành động. '
-            'Bảo vệ $partialCoverage%; tổn thất ngay: ${eventEffectText(partialDamage)}. ${_majorNext(s, m)}',
+        unavailable == null
+            ? '$action với nguồn lực hạn chế'
+            : 'Huy động hạn chế cho phương án dự phòng',
+        '',
         partialDamage,
         cost: (cost * .5).ceil(),
         grainCost: (grain * .5).ceil(),
         points: 1,
       ),
       EventChoice(
-        'Chưa huy động, chấp nhận tổn thất',
-        '0 tiền · 0 thóc · 1 hành động khi chủ động ngự phê. '
-            'Không bảo vệ phần việc này; tổn thất ngay: ${eventEffectText(ignoredDamage)}. ${_majorNext(s, m)}',
+        unavailable == null ? 'Tạm hoãn $lowerAction' : 'Chưa tổ chức ứng phó',
+        '',
         ignoredDamage,
         points: 1,
       ),
@@ -306,11 +396,6 @@ EventDefinition _majorEvent(GameState s, MajorMission m) {
     condition: 'storyOnly',
   );
 }
-
-String _majorNext(GameState s, MajorMission m) =>
-    m.stage == m.objectives.length - 1
-        ? 'Khép đại biến cố; phần ứng phó yếu có thể để lại dư âm.'
-        : 'Bản tấu tiếp theo vào ${s.date(s.week + 1)}; quyết định này được giữ lại.';
 
 /// Static lookup also works for old journal/export callers. These definitions
 /// are deliberately excluded from the ordinary random petition pool.

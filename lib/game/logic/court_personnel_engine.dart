@@ -62,17 +62,7 @@ extension CourtPersonnelEngine on GameEngine {
       s.workThisWeek++;
       s.affairsThisWeek++;
       _apply(s, choice.effects, title: e.title, detail: choice.label);
-      if (index == 1 && ['retire', 'recruit'].contains(m.kind) && !m.verified) {
-        m.verified = true;
-        p.deadline = s.week + 1;
-        s.note(
-          'Đã đối chiếu hồ sơ',
-          '${e.title}: năng lực và chuyên môn đã được đối chiếu. Không kết luận về phẩm chất ẩn hoặc sai phạm. Tấu được giữ tới cuối mùa sau.',
-        );
-        return;
-      } else {
-        m.status = index == courtMatterLastChoice(m) ? 'rejected' : 'deferred';
-      }
+      m.status = 'rejected';
     }
     s.petitions.remove(p);
     s.note(e.title, '${choice.label}. ${choice.hint}');

@@ -224,24 +224,3 @@ String chainSettlementRewardText(GameState s, StoryArc arc) {
   }
   return texts.isEmpty ? 'Không có phần thưởng.' : texts.join(' · ');
 }
-
-String chainSettlementSummary(GameState s, StoryArc arc) {
-  final d = chainDefinition(arc.kind);
-  final full = StoryArc.fromJson(arc.toJson())..completedSteps = 4;
-  for (var i = arc.stage; i < 4; i++) {
-    full.investedValue +=
-        d.stages[i].choices[arc.kind == 'haremHarmony' ? 2 : 1].cost *
-        arc.currencyScale;
-  }
-  final paid =
-      arc.resourceCosts.isEmpty
-          ? ''
-          : '\nChỉ số đã đánh đổi: ${eventEffectText({for (final e in arc.resourceCosts.entries) e.key: -e.value})}.';
-  return 'Đã hoàn thành ${arc.completedSteps}/4 · đã cấp ${arc.cashSpent} ${moneyUnit(s)} · tổng chi phí quy đổi ${arc.investedValue}.$paid\n'
-      'Dừng hiện tại nhận: ${chainSettlementRewardText(s, arc)}\n'
-      'Dự kiến hoàn thành 4/4: ${chainSettlementRewardText(s, full)}\n'
-      '${d.economic ? 'Quyết toán trên vốn đã thực hiện' : 'Thưởng theo tiến độ'}: '
-      '${[for (var n = 1; n <= 4; n++) '$n/4 = ${d.economic ? chainMoneyPercent(n, arc.settlementVersion) : chainRewardPercent(n, arc.settlementVersion)}%'].join(', ')}. '
-      '${d.economic ? 'Tổng tiền nhận, chưa trừ vốn đã chi.' : 'Ứng viên và giảm chiến tranh chỉ mở ở 4/4.'}\n'
-      'Chi phí trả ngay. Chỉ nhận phần thưởng khi dừng hoặc hoàn thành chuỗi; quá hạn sẽ dừng và quyết toán.';
-}

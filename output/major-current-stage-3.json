@@ -1,0 +1,35 @@
+{
+  "title": "Mưa lớn đe dọa vỡ đê · Vận lương cứu trợ",
+  "body": "ĐẠI BIẾN CỐ  · Bản tấu 3/4 · mức 2.\nMực nước dâng liên tục. Các đoạn đê xung yếu cần được gia cố, dân vùng trũng cần sơ tán và cứu trợ trước đỉnh lũ.\nChỉ dụ trước: Ứng phó có giới hạn (mùa Xuân · năm 1) → Ứng phó có giới hạn (mùa Hạ · năm 1). Các phần chưa bảo vệ làm kinh phí ứng phó kỳ này tăng 40%.\nDiễn biến cần ngự phê: Vận lương cứu trợ. \nTổn thất đã xảy ra: đê điều -21 · lòng dân -11. Không thu hoặc trừ lại khi tổng kết.\nHạn: cuối mùa Thu · năm 1. Bỏ quá hạn sẽ không tổ chức ứng phó phần việc này.",
+  "deadline": "cuối mùa Thu · năm 1",
+  "choices": [
+    {
+      "label": "Huy động đầy đủ: Vận lương cứu trợ",
+      "hint": "7.700 lượng vàng · 38 thóc · 2 hành động. Bảo vệ đầy đủ phần việc này. không đổi chỉ số ngay. Bản tấu tiếp theo vào mùa Đông · năm 1; quyết định này được giữ lại.",
+      "cost": 7700,
+      "grainCost": 38,
+      "points": 2,
+      "effects": {}
+    },
+    {
+      "label": "Ứng phó có giới hạn",
+      "hint": "3.900 lượng vàng · 19 thóc · 1 hành động. Bảo vệ 50%; tổn thất ngay: lương thực -21. Bản tấu tiếp theo vào mùa Đông · năm 1; quyết định này được giữ lại.",
+      "cost": 3900,
+      "grainCost": 19,
+      "points": 1,
+      "effects": {
+        "grain": -21
+      }
+    },
+    {
+      "label": "Chưa huy động, chấp nhận tổn thất",
+      "hint": "0 lượng vàng · 0 thóc · 1 hành động khi chủ động ngự phê. Không bảo vệ phần việc này; tổn thất ngay: lương thực -42. Bản tấu tiếp theo vào mùa Đông · năm 1; quyết định này được giữ lại.",
+      "cost": 0,
+      "grainCost": 0,
+      "points": 1,
+      "effects": {
+        "grain": -42
+      }
+    }
+  ]
+}

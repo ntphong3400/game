@@ -29,7 +29,7 @@ EventDefinition courtPersonnelEvent(
   final incumbent = office == null ? null : courtOfficeHolder(s, office);
   final intent = switch (m.kind) {
     'retire' =>
-      'Người dâng tấu thuộc phe đối lập, muốn quan này thôi chức. Lời đề nghị có động cơ phe phái; bệ hạ có thể đối chiếu công việc trước khi quyết định.',
+      'Người dâng tấu thuộc phe đối lập, muốn quan này thôi chức. Lời đề nghị có động cơ phe phái; bệ hạ nên cân nhắc mức phù hợp với chức vụ trước khi quyết định.',
     'patronage' =>
       'Người được nâng đỡ chưa đạt năng lực của phẩm đích. Đặc cách chỉ miễn yêu cầu năng lực; vẫn cần công trạng, thành tích lớn và đủ ngân khố. Passive vẫn xét theo điều kiện thực tế.',
     'promote' =>
@@ -40,8 +40,8 @@ EventDefinition courtPersonnelEvent(
       'Xin bổ khuyết vị trí đang trống. Người tiến cử chỉ được ghi công sau khi người được chọn giữ chức trọn một mùa, đủ năng lực, đúng chuyên môn và điều kiện của chức vụ.',
   };
   final assessment =
-      m.verified && c != null && office != null
-          ? '\nKết quả khảo hạch/đối chiếu: phù hợp chuyên môn ${specialtyFit(c.specialty, specialtyForRole(office.role))}%; ${courtNomineeQualified(c, office) ? 'đạt' : 'chưa đạt'} các điều kiện công khai của chức vụ. Đây không phải kết luận về phẩm chất ẩn hay bằng chứng sai phạm.'
+      ['retire', 'recruit'].contains(m.kind) && c != null && office != null
+          ? '\nĐánh giá chức vụ: phù hợp chuyên môn ${specialtyFit(c.specialty, specialtyForRole(office.role))}%; ${courtNomineeQualified(c, office) ? 'đạt' : 'chưa đạt'} các điều kiện công khai của chức vụ. Đây không phải kết luận về phẩm chất ẩn hay bằng chứng sai phạm.'
           : '';
   final body =
       'Người dâng tấu: ${sponsor?.name ?? 'Quan đã rời triều'} · phe ${sponsor?.faction ?? 'không còn hiện diện'}.\n'
@@ -119,15 +119,7 @@ EventDefinition courtPersonnelEvent(
   final choices = <EventChoice>[];
   if (['nominate', 'recruit', 'reform'].contains(m.kind)) {
     choices.add(appointment(0, 'Bổ nhiệm ${c?.name ?? 'người được tiến cử'}'));
-    choices.add(
-      m.kind == 'recruit' && !m.verified
-          ? choice(
-            'Khảo hạch trước khi bổ nhiệm',
-            'Chi 1 hành động; giữ tấu tới cuối mùa sau. Khảo hạch không tự bổ nhiệm hoặc cấp công trạng.',
-            cost: money(s, 5),
-          )
-          : appointment(1, 'Chọn người khác để bổ nhiệm'),
-    );
+    choices.add(appointment(1, 'Chọn người khác để bổ nhiệm'));
   } else if (m.kind == 'retire') {
     choices.add(
       choice(
@@ -139,12 +131,6 @@ EventDefinition courtPersonnelEvent(
           if (sponsorFaction != null) 'faction:$sponsorFaction': 3,
           if (c != null) 'faction:${c.faction}': -4,
         },
-      ),
-    );
-    choices.add(
-      choice(
-        'Đối chiếu công việc trước khi quyết định',
-        'Chi 1 hành động; gia hạn tới cuối mùa sau, không tự cho hồi hương hoặc miễn yêu cầu uy quyền.',
       ),
     );
   } else {
@@ -163,14 +149,6 @@ EventDefinition courtPersonnelEvent(
           if (sponsorFaction != null)
             'faction:$sponsorFaction': m.kind == 'patronage' ? 5 : 2,
         },
-      ),
-    );
-    choices.add(
-      choice(
-        m.kind == 'patronage'
-            ? 'Yêu cầu lập công và rèn năng lực trước'
-            : 'Xét sắc phong vào dịp khác',
-        'Khép đề nghị; không thăng phẩm, không cấp công trạng hay miễn điều kiện cho lần sau.',
       ),
     );
   }

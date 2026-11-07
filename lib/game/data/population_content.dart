@@ -110,7 +110,7 @@ const populationEvents = [
     [
       EventChoice(
         'Cấp thuốc và tổ chức phòng dịch',
-        'Chi 35 tiền, 5.000 tạ; mức dịch −1, lòng dân +2.',
+        '',
         {'disease': -1, 'people': 2},
         cost: 35,
         grainCost: 5000,
@@ -119,7 +119,7 @@ const populationEvents = [
       ),
       EventChoice(
         'Để địa phương tự lo',
-        'Mức dịch +1, lòng dân −3.',
+        '',
         {'disease': 1, 'people': -3},
         points: 1,
         nativeResources: true,
@@ -243,7 +243,7 @@ EventDefinition populationEvent(GameState s, EventDefinition e) {
         final troops =
             battle
                 ? 3000
-                : majorBattle && !c.label.contains('Chưa huy động')
+                : majorBattle && e.choices.indexOf(c) != 2
                 ? (c.points == 2 ? 10000 : 5000)
                 : 0;
         final rations =
@@ -325,7 +325,9 @@ EventDefinition warEvent(GameState s, EventDefinition e) {
   return EventDefinition(
     e.id,
     e.title,
-    'Quân báo yêu cầu ứng phó. Nhận nhiệm vụ để chọn đối sách, số quân và chỉ huy tại Quân sự. Chi phí chỉ thu khi xác nhận xuất quân.',
+    e.id.startsWith('major:')
+        ? '${e.body}\n\nViệc điều quân cần được tổ chức tại Quân sự.'
+        : 'Quân báo yêu cầu ứng phó. Nhận nhiệm vụ để chọn đối sách, số quân và chỉ huy tại Quân sự. Chi phí chỉ thu khi xác nhận xuất quân.',
     e.category,
     [
       for (final c in e.choices)

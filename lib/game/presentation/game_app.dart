@@ -8,7 +8,6 @@ import 'music/music_scope.dart';
 import 'widgets/imperial_dialog.dart';
 import '../../app/game_controller.dart';
 import '../data/content.dart';
-import '../data/reign_content.dart' show majorDefinition;
 import '../models/game_state.dart';
 import '../logic/personnel_rules.dart';
 import 'widgets/palace_art.dart';
@@ -46,6 +45,7 @@ import 'widgets/petition_decision.dart';
 import 'widgets/petition_assignee_option.dart';
 import 'widgets/petition_document.dart';
 import 'widgets/petition_art.dart';
+import 'widgets/petition_story_details.dart';
 import 'widgets/memorial_paper.dart';
 import 'outcome_read_store.dart';
 import 'meeting_scenes.dart';
@@ -1017,13 +1017,6 @@ class _GameShellState extends State<GameShell> {
             'Cần chăm sóc long thể. Đến Long thể để xem tình trạng và dưỡng sức.',
             'health',
           ),
-        if (s.major != null)
-          _courtAlert(
-            'court-major-warning',
-            'Đang ứng phó ${majorDefinition(s.major!.kind).title}. '
-                '${s.major!.petitionDriven ? 'Ngự phê phương án tại Tấu chương.' : 'Đến Quốc sự để củng cố nguồn lực.'}',
-            s.major!.petitionDriven ? 'court' : 'kingdom',
-          ),
       ],
     );
   }
@@ -1169,36 +1162,7 @@ class _GameShellState extends State<GameShell> {
               ),
         ),
         const SizedBox(height: 4),
-        Wrap(
-          spacing: 12,
-          runSpacing: 8,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            petitionCategoryIcon(
-              eventForState(s, petition.definitionId).category,
-              color: forest,
-            ),
-            Text(
-              formatGameNumbers(
-                eventForState(s, petition.definitionId).category.toUpperCase(),
-              ),
-              style: const TextStyle(
-                fontSize: 11,
-                letterSpacing: 1,
-                color: forest,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            Text(
-              formatGameNumbers(
-                petition.deadline <= s.week
-                    ? 'Hạn: cuối ${s.periodName} này'
-                    : 'Còn ${petition.deadline - s.week + 1} ${s.periodName}',
-              ),
-              style: const TextStyle(color: terracotta, fontSize: 12),
-            ),
-          ],
-        ),
+        PetitionMetadata(state: s, petition: petition),
         const SizedBox(height: 6),
         Text(
           formatGameNumbers(eventForState(s, petition.definitionId).title),
@@ -1213,6 +1177,11 @@ class _GameShellState extends State<GameShell> {
         Text(
           formatGameNumbers(s.authoredText(petitionText(petition, s))),
           style: const TextStyle(fontSize: 14, height: 1.7),
+        ),
+        StoryPetitionHistory(
+          key: ValueKey('desk-history-${petition.id}'),
+          state: s,
+          petition: petition,
         ),
         if (!petitionDialogOpen) ...[
           const SizedBox(height: 10),
@@ -1374,11 +1343,14 @@ class _GameShellState extends State<GameShell> {
 
   String _petitionExpiryText(Petition p) {
     final e = eventForState(s, p.definitionId);
+    if (p.storyKind == 'major') {
+      return '${e.title}\n${petitionExpiryWarning(s, p)}';
+    }
     final arc = s.chains.where((a) => a.id == p.storyId).firstOrNull;
     if (arc != null && usesChainSettlement(arc)) {
-      return '${e.title}\nDừng ở ${arc.completedSteps}/4 và quyết toán: ${chainSettlementRewardText(s, arc)}';
+      return '${e.title}\nKhép hồ sơ theo phần đã thực hiện; không thu thêm chi phí. Thành quả được ghi nhận sau khi khép hồ sơ.';
     }
-    return '${e.title}\n${e.choices.last.label}: ${e.choices.last.hint}';
+    return '${e.title}\nQuá hạn: ${e.choices.last.label}.';
   }
 
   Future<void> _petitionDialog(Petition petition) async {

@@ -15,7 +15,7 @@ import 'imperial_theme.dart';
 import 'imperial_assets.dart';
 import 'petition_art.dart';
 import 'petition_impacts.dart';
-import '../../data/expanded_events.dart' show eventEffectText;
+import 'petition_story_details.dart';
 
 class PetitionDecision extends StatefulWidget {
   const PetitionDecision({
@@ -92,49 +92,13 @@ class _PetitionDecisionState extends State<PetitionDecision> {
 
   bool enabled(int index) => blockedReason(index) == null;
 
-  String detailHint(int index) {
-    final c = e.choices[index];
-    var hint = petitionChoiceHint(s, e, c, person: person());
-    if (petitionCanAssign(s, c)) {
-      final chance = petitionChance(s, e, c, person());
-      // The assignee control below owns the person and current probability.
-      // Keep conditional outcomes in the explanation without repeating it.
-      final suffix =
-          ' · ${person()?.name ?? 'Không giao ai'}: $chance% thành công';
-      if (hint.endsWith(suffix)) {
-        hint = hint.substring(0, hint.length - suffix.length);
-      }
-      hint = hint.replaceAll('$chance% thành công', 'Nếu thành công');
-    }
-    final numeric = {
-      for (final effect in c.effects.entries)
-        if (PetitionImpacts.labels.containsKey(effect.key) ||
-            effect.key.startsWith('faction:') ||
-            effect.key.startsWith('affection:'))
-          s
-              .authoredText(eventEffectText({effect.key: effect.value}))
-              .toLowerCase(),
-      'chi ${c.cost}',
-      'chi ${c.cost} ${moneyUnit(s)}',
-      'xuất ${c.grainCost} lương thực',
-      '${petitionPoints(s, c)} hành động',
-      'không đổi chỉ số ngay',
-    };
-    return hint
-        .split(' · ')
-        .where((part) {
-          final normalized =
-              part.trim().replaceFirst(RegExp(r'\.$'), '').toLowerCase();
-          return !numeric.contains(normalized);
-        })
-        .join(' · ');
-  }
-
   Widget choiceDetails(int index) {
-    final c = e.choices[index];
-    final detail = detailHint(index);
+    final c =
+        index < 0 ? const EventChoice('', '', {}, points: 1) : e.choices[index];
     return Container(
-      key: ValueKey('petition-details-$index'),
+      key: ValueKey(
+        index < 0 ? 'chain-stop-details' : 'petition-details-$index',
+      ),
       padding: const EdgeInsets.fromLTRB(18, 10, 18, 10),
       decoration: BoxDecoration(
         color: const Color(0x55C4CFAC),
@@ -170,14 +134,6 @@ class _PetitionDecisionState extends State<PetitionDecision> {
               'CẢNH BÁO: phương án này làm ổn định về 0 và kết thúc lượt chơi.',
               style: TextStyle(color: terracotta),
             ),
-          if (detail.isNotEmpty) ...[
-            const SizedBox(height: 12),
-            Text(
-              formatGameNumbers(detail),
-              key: ValueKey('petition-choice-detail-$index'),
-              style: const TextStyle(fontSize: 12, height: 1.7, color: muted),
-            ),
-          ],
           if (petitionCanAssign(s, c)) ...[
             const SizedBox(height: 14),
             Text(
@@ -214,11 +170,6 @@ class _PetitionDecisionState extends State<PetitionDecision> {
                 color: forest,
                 fontWeight: FontWeight.w600,
               ),
-            ),
-            const SizedBox(height: 6),
-            const Text(
-              'Giao người không tốn thêm hành động. Người được giao sẽ bận đến khi có kết quả. Để mặc định sẽ không tự chọn người thay bạn.',
-              style: TextStyle(fontSize: 12, color: muted, height: 1.6),
             ),
           ],
         ],
@@ -418,20 +369,29 @@ class _PetitionDecisionState extends State<PetitionDecision> {
             width: double.infinity,
             child: PetitionPainting(category: e.category),
           ),
-          Tag(e.category.toUpperCase()),
+          if (petition.isStory)
+            PetitionMetadata(state: s, petition: petition)
+          else
+            Tag(e.category.toUpperCase()),
           const SizedBox(height: 6),
           Text(
             formatGameNumbers(s.authoredText(petitionText(petition, s))),
             style: const TextStyle(fontSize: 14, height: 1.4),
           ),
           const SizedBox(height: 6),
-          Text(
-            formatGameNumbers(
-              petition.deadline <= s.week
-                  ? 'Hạn: cuối ${s.periodName} này'
-                  : 'Còn ${petition.deadline - s.week + 1} ${s.periodName}',
+          if (!petition.isStory)
+            Text(
+              formatGameNumbers(
+                petition.deadline <= s.week
+                    ? 'Hạn: cuối ${s.periodName} này'
+                    : 'Còn ${petition.deadline - s.week + 1} ${s.periodName}',
+              ),
+              style: const TextStyle(color: terracotta, fontSize: 12),
             ),
-            style: const TextStyle(color: terracotta, fontSize: 12),
+          StoryPetitionHistory(
+            key: ValueKey('dialog-history-${petition.id}'),
+            state: s,
+            petition: petition,
           ),
           const SizedBox(height: 8),
           const PetitionRule(),
@@ -455,7 +415,7 @@ class _PetitionDecisionState extends State<PetitionDecision> {
                     : null,
             child: Text(
               formatGameNumbers(
-                '${selected == -1 ? '✓ ' : ''}Dừng chuỗi và quyết toán',
+                '${selected == -1 ? '✓ ' : ''}Dừng tại đây, khép hồ sơ',
               ),
             ),
           ),
@@ -464,26 +424,11 @@ class _PetitionDecisionState extends State<PetitionDecision> {
               formatGameNumbers(blockedReason(-1)!),
               style: const TextStyle(fontSize: 12, color: terracotta),
             ),
-          if (selected == -1)
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Text(
-                formatGameNumbers(
-                  '1 hành động · Quyết toán: ${chainSettlementRewardText(s, arc!)}',
-                ),
-                key: const ValueKey('chain-stop-details'),
-              ),
-            ),
+          if (selected == -1) choiceDetails(-1),
           const SizedBox(height: 12),
         ],
         Text(
-          formatGameNumbers(
-            settlement
-                ? 'Quá hạn: dừng chuỗi và quyết toán theo số bước đã hoàn thành; không thu thêm chi phí hay hoàn thành bước đang chờ.'
-                : petition.isStory
-                ? 'Quá hạn: áp dụng lựa chọn cuối cùng và quyết định diễn biến bản tấu sau.${petition.storyKind == 'major' ? ' Tổn thất có thể làm chỉ số về 0 và kết thúc triều đại.' : ''}'
-                : 'Quá hạn: áp dụng lựa chọn cuối cùng.${['Khủng hoảng', 'Âm mưu'].contains(e.category) ? ' Bỏ mặc bản tấu này còn làm mất uy quyền và Ổn định triều đình.' : ''}',
-          ),
+          petitionExpiryWarning(s, petition),
           key: const ValueKey('petition-expiry-warning'),
           style: const TextStyle(fontSize: 12, color: terracotta),
         ),

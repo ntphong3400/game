@@ -428,6 +428,43 @@ void main() {
       expect(petitionChance(s, e, c, officer), 90);
     },
   );
+  test('military major deferral never commits troops or opens a campaign', () {
+    for (final definition in majorDefinitions.where(
+      (d) => d.group == 'military',
+    )) {
+      for (var stage = 0; stage < definition.objectives.length; stage++) {
+        if (definition.objectives[stage].specialty != 'Quân sự') continue;
+        final s = fresh();
+        s.major = MajorMission(
+          id: 'defer-${definition.id}',
+          kind: definition.id,
+          severity: 1,
+          preparedness: 0,
+          stage: stage,
+          openedWeek: 1,
+          deadline: 4,
+          petitionDriven: true,
+          dueWeek: 1,
+          objectives: [
+            for (final g in definition.objectives) MissionObjective(key: g.key),
+          ],
+        );
+        engine.prepareStoryPetitions(s);
+        final p = s.petitions.singleWhere((p) => p.storyId == s.major!.id);
+        final event = eventForState(s, p.definitionId);
+        final deferred = event.choices.last;
+        expect(deferred.label, startsWith('Tạm hoãn '));
+        expect(deferred.troops, 0);
+        expect(deferred.effects.containsKey('warMission'), false);
+        expect(deferred.cost, 0);
+        expect(deferred.grainCost, 0);
+        expect(deferred.points, 1);
+        expect(event.body, contains(definition.body));
+        expect(event.body, isNot(contains('%')));
+      }
+    }
+  });
+
   test(
     'all existing major events accept their native food and military-stage decisions',
     () {

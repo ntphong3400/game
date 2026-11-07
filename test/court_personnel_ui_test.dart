@@ -122,12 +122,20 @@ void main() {
       );
       expect(tester.takeException(), isNull);
     });
-    for (final kind in ['nominate', 'patronage', 'authority']) {
+    for (final kind in [
+      'nominate',
+      'recruit',
+      'retire',
+      'promote',
+      'patronage',
+      'authority',
+    ]) {
       testWidgets('$kind personnel preview and confirmed action at $size', (
         tester,
       ) async {
         tester.view.physicalSize = size;
         tester.view.devicePixelRatio = 1;
+        final appointment = kind == 'nominate' || kind == 'recruit';
         addTearDown(tester.view.resetPhysicalSize);
         addTearDown(tester.view.resetDevicePixelRatio);
         if (const bool.fromEnvironment('COURT_PERSONNEL_PREVIEWS')) {
@@ -157,7 +165,7 @@ void main() {
           final office = s.courtOffices.firstWhere((o) => o.role == 'Thư lại');
           officeId = office.id;
           final c = courtOfficeHolder(s, office)!;
-          if (kind == 'nominate') {
+          if (appointment) {
             s.court.remove(c);
             c.role = 'Chờ bổ nhiệm';
             s.officialsPool.add(c);
@@ -171,7 +179,7 @@ void main() {
             candidateId = s.officialsPool[1].id;
           } else {
             c
-              ..ability = 20
+              ..ability = kind == 'promote' ? 70 : 20
               ..merit = 5;
             candidateId = c.id;
           }
@@ -179,12 +187,13 @@ void main() {
             final m = CourtPersonnelMatter(
               id: 'personnel-ui',
               kind: kind,
-              personId: kind == 'nominate' ? s.officialsPool.first.id : c.id,
+              personId: appointment ? s.officialsPool.first.id : c.id,
               sponsorId:
                   s.court.firstWhere((p) => !p.isConsort && p.id != c.id).id,
               openedTurn: s.week,
-              officeId: kind == 'nominate' ? office.id : '',
-              targetGrade: kind == 'patronage' ? 8 : 0,
+              officeId: appointment || kind == 'retire' ? office.id : '',
+              holderId: office.holderId,
+              targetGrade: kind == 'patronage' || kind == 'promote' ? 8 : 0,
             );
             s.courtPersonnelMatters.add(m);
             s.petitions.add(
@@ -236,12 +245,29 @@ void main() {
           expect(controller.state!.toJson(), before);
         } else {
           await tap(find.byKey(const ValueKey('read-petition-personnel-ui')));
+          for (final label in [
+            'Đối chiếu công việc trước khi quyết định',
+            'Khảo hạch trước khi bổ nhiệm',
+            'Xét sắc phong vào dịp khác',
+            'Yêu cầu lập công và rèn năng lực trước',
+          ]) {
+            expect(find.text(label), findsNothing);
+          }
+          expect(
+            find.byKey(const ValueKey('petition-choice-2')),
+            appointment ? findsOneWidget : findsNothing,
+          );
+          if (kind == 'retire' || kind == 'recruit') {
+            expect(find.textContaining('Đánh giá chức vụ:'), findsOneWidget);
+          }
           await tap(
             find.byKey(
-              ValueKey('petition-choice-${kind == 'nominate' ? 1 : 0}'),
+              ValueKey(
+                'petition-choice-${appointment || kind == 'retire' ? 1 : 0}',
+              ),
             ),
           );
-          if (kind == 'nominate') {
+          if (appointment) {
             expect(
               tester
                   .widget<FilledButton>(
@@ -305,12 +331,14 @@ void main() {
         } else {
           final initial = controller.state!;
           final expectedFee =
-              kind == 'nominate'
+              appointment
                   ? vacancyPromotion(
                     initial,
                     courtPerson(initial, candidateId)!,
                     initial.courtOffices.firstWhere((o) => o.id == officeId),
                   ).cost
+                  : kind == 'retire'
+                  ? 0
                   : CourtPromotion(
                     initial,
                     courtPerson(initial, candidateId)!,
@@ -319,7 +347,7 @@ void main() {
           await tap(find.byKey(const ValueKey('confirm-petition')));
           expect(controller.state!.points, initial.points - 1);
           expect(controller.state!.treasury, initial.treasury - expectedFee);
-          if (kind == 'nominate') {
+          if (appointment) {
             expect(
               courtOfficeFor(controller.state!, candidateId)!.id,
               officeId,
@@ -328,10 +356,27 @@ void main() {
               controller.state!.courtPersonnelMatters.last.status,
               'watching',
             );
+          } else if (kind == 'retire') {
+            expect(
+              courtPerson(controller.state!, candidateId)!.retired,
+              isFalse,
+            );
+            expect(
+              courtOfficeFor(controller.state!, candidateId)!.id,
+              officeId,
+            );
+            expect(
+              controller.state!.courtPersonnelMatters.last.status,
+              'rejected',
+            );
+            expect(controller.state!.petitions, isEmpty);
           } else {
             expect(courtPerson(controller.state!, candidateId)!.grade, 8);
             expect(courtPerson(controller.state!, candidateId)!.merit, 3);
-            expect(controller.state!.authority, initial.authority - 2);
+            expect(
+              controller.state!.authority,
+              initial.authority + (kind == 'patronage' ? -2 : 1),
+            );
           }
           expect(
             (await gateway.load()).active!.toJson(),

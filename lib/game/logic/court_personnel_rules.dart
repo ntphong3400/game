@@ -2,7 +2,6 @@ import '../models/game_state.dart';
 import 'court_rules.dart';
 import 'management_rules.dart';
 import 'personnel_rules.dart';
-import 'currency_rules.dart';
 
 bool isCourtPersonnelEvent(String id) => id.startsWith('court-personnel:');
 CourtPersonnelMatter? courtMatterForEvent(GameState s, String eventId) =>
@@ -10,14 +9,12 @@ CourtPersonnelMatter? courtMatterForEvent(GameState s, String eventId) =>
 CourtOffice? courtMatterOffice(GameState s, CourtPersonnelMatter m) =>
     s.courtOffices.where((o) => o.id == m.officeId).firstOrNull;
 bool courtMatterNeedsNominee(CourtPersonnelMatter m, int index) =>
-    index == 1 &&
-    (m.kind == 'nominate' ||
-        m.kind == 'reform' ||
-        (m.kind == 'recruit' && m.verified));
+    index == 1 && ['nominate', 'recruit', 'reform'].contains(m.kind);
 bool courtMatterAppoints(CourtPersonnelMatter m, int index) =>
     ['nominate', 'recruit', 'reform'].contains(m.kind) &&
     (index == 0 || courtMatterNeedsNominee(m, index));
-int courtMatterLastChoice(CourtPersonnelMatter m) => 2;
+int courtMatterLastChoice(CourtPersonnelMatter m) =>
+    ['nominate', 'recruit', 'reform'].contains(m.kind) ? 2 : 1;
 Courtier? courtMatterCandidate(
   GameState s,
   CourtPersonnelMatter m,
@@ -159,10 +156,6 @@ String? courtPersonnelChoiceBlocked(
       m.targetGrade,
       exceptional: m.kind == 'patronage',
     );
-  } else if (m.kind == 'recruit' && index == 1 && s.treasury < money(s, 5)) {
-    return 'Ngân khố không đủ phí khảo hạch.';
-  } else if (m.kind == 'retire' && index == 1 && m.verified) {
-    return 'Đã đối chiếu công việc; hãy chấp thuận hoặc bác đề nghị.';
   }
   return null;
 }

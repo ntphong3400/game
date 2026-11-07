@@ -4,6 +4,8 @@ Luật `mvp-0.19.0`, nội dung 18, schema 2. Chuỗi mở mới theo mùa dùng
 
 ## Tiến độ và quyết toán
 
+Màn hình chuỗi đang mở ưu tiên tình thế và hành động: tiêu đề dùng “Bản tấu đầu”, “Bản tấu thứ hai”, “Bản tấu thứ ba”, “Bản tấu cuối”, kèm hạn của bản tấu hiện tại. Bản tấu tóm tắt các chỉ dụ trước trong một câu và gợi mục tiêu bằng lời; lịch sử đầy đủ nằm trong “Xem chỉ dụ trước”, mặc định thu gọn. Nhãn lựa chọn mô tả hành động cụ thể. Khi chọn mới hiện các ô chi phí, hành động và tác động tức thời chính xác; không hiển thị đoạn hint chữ bên dưới. Nút dừng riêng của Phượng điện cũng dùng ô Hành động −1. Không đưa thưởng dự kiến, vốn quy đổi hay bảng tỷ lệ vào bản tấu hoặc cảnh báo trước khi qua mùa; kết quả thực nhận được công bố sau quyết định. Quá hạn khép hồ sơ theo phần đã thực hiện. Cách trình bày này không đổi luật tính thưởng hay dữ liệu bản lưu.
+
 Mỗi chuỗi có 4 bản tấu, bản tiếp theo cách 1 mùa. Mỗi lần xác nhận tốn 1 hành động. Mười một chuỗi có lựa chọn 0 từ bỏ, 1 trả ngân khố, 2 trả chỉ số. Cả hai cách trả hoàn thành một bước và ghi nhận cùng giá trị vốn quy đổi của bước đó. Chi phí chỉ số được liệt kê rõ và phải trả đầy đủ; không được dùng chỉ số đã cạn, hoặc làm các chỉ số sống còn về 0, để nhận vốn quy đổi.
 
 Chuỗi Phượng điện có ba cách hoàn thành: ưu ái A, ưu ái B, trả tiền giữ công bằng. Nút dừng riêng vẫn cần chọn rồi xác nhận. Đọc/đóng hộp thoại không thay đổi tiến độ hay tài nguyên.
@@ -52,6 +54,8 @@ Ví dụ Bến chợ: các bước 40, 50, 60, 70 tiền quy đổi. Dừng 1/4 
 Quan hệ hai phe đổi ngay, không lan thêm tác động đến phe đối địch tự động. Công bằng giữ nguyên quan hệ phe. Nếu ưu ái cùng một người ít nhất 3 lần: phần thưởng quan hệ tối đa của người được ưu ái là thiện cảm +12, bất mãn −15; người kia +3 và −5. Các cách kết hợp khác cho cả hai thiện cảm +10, bất mãn −15. Năng lực +5 mỗi người và ổn định +5 là quỹ thưởng cơ bản; tất cả thưởng này chỉ trao khi quyết toán và nhân tỷ lệ tiến độ.
 
 ## Đại biến cố
+
+Giao diện đại biến cố dùng cùng nhãn bản tấu bằng chữ và thời hạn như chuỗi. Nội dung chính chỉ giữ tình thế, việc cần xử lý và tóm tắt cách ứng phó trước; không hiển thị mã DB, mức độ số, tỷ lệ bảo vệ hay công thức tăng kinh phí. Chỉ dụ đầy đủ và số liệu tổn thất đã xảy ra nằm trong “Xem chỉ dụ trước”, mặc định thu gọn. Ba lựa chọn mang tên phần việc cụ thể, mức huy động hạn chế hoặc tạm hoãn. Phần mở rộng chỉ hiển thị các ô chi phí và tác động tức thời; không hiển thị hint chữ cho mọi loại tấu chương. Cảnh báo tại bản tấu và khi sang mùa thống nhất: “Quá hạn sẽ không tổ chức ứng phó phần việc này.” Thông tin nhân vật đã mất và phương án dự phòng vẫn được nêu khi có liên quan.
 
 Giữ 66 chủ đề, mã DB, điều kiện, ưu tiên mùa, chống lặp, mức độ, chuẩn bị, cam kết và dư âm. Bốn phần nội dung của mỗi chủ đề trở thành bốn bản tấu qua bốn mùa, có hạn cuối mùa mở. Không nhận lệnh `mission` cho hồ sơ mới.
 

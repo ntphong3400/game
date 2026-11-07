@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:van_tue/app/game_controller.dart';
 import 'package:van_tue/game/data/game_store.dart';
+import 'package:van_tue/game/data/reign_content.dart';
+import 'package:van_tue/game/presentation/widgets/petition_story_details.dart';
 import 'support/legacy_gateway.dart';
 import 'package:van_tue/game/presentation/game_app.dart';
 import 'chain_settlement_test.dart' show settlementState;
@@ -46,6 +48,13 @@ void main() {
           s.petitions.single.definitionId = 'chain:haremHarmony:2';
         }
         if (scenario == 'blocked') s.people = 5;
+        if (s.chains.single.stage > 0) {
+          final arc = s.chains.single;
+          arc.decisionLabels = [
+            for (var i = 0; i < arc.stage; i++)
+              '${chainDefinition(arc.kind).stages[i].choices[arc.decisions[i]].label} (mùa Xuân · năm 1)',
+          ];
+        }
         final store = MemoryGameStore();
         await store.update((a) => a.active = s);
         final gateway = LocalGameGateway(store);
@@ -64,13 +73,52 @@ void main() {
                 : find.byKey(const ValueKey('court-reading'));
         final summary = find.descendant(
           of: dialog,
-          matching: find.textContaining('Đã hoàn thành'),
+          matching: find.textContaining('Thành quả sẽ được ghi nhận'),
         );
         expect(summary, findsOneWidget);
         expect(
           tester.widget<Text>(summary).data,
-          contains('Chỉ nhận phần thưởng khi dừng hoặc hoàn thành'),
+          isNot(contains('chi phí quy đổi')),
         );
+        expect(
+          find.descendant(
+            of: dialog,
+            matching: find.text(
+              scenario == 'settle'
+                  ? 'Bản tấu cuối'
+                  : scenario == 'stop'
+                  ? 'Bản tấu thứ ba'
+                  : 'Bản tấu đầu',
+            ),
+          ),
+          findsOneWidget,
+        );
+        expect(find.textContaining('Dừng hiện tại nhận'), findsNothing);
+        expect(find.textContaining('Dự kiến hoàn thành'), findsNothing);
+        if (s.chains.single.decisionLabels.isNotEmpty) {
+          expect(
+            find.byKey(const ValueKey('chain-history-entry-0')),
+            findsNothing,
+          );
+          final disclosure = find.descendant(
+            of: dialog,
+            matching: find.text('Xem chỉ dụ trước'),
+          );
+          await tester.ensureVisible(disclosure);
+          await tester.tap(disclosure);
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(const ValueKey('chain-history-entry-0')),
+            findsOneWidget,
+          );
+          expect(controller.state!.toJson(), before.toJson());
+          await tester.tap(disclosure);
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(const ValueKey('chain-history-entry-0')),
+            findsNothing,
+          );
+        }
         await tester.ensureVisible(find.text('Đọc sau'));
         await tester.tap(find.text('Đọc sau'));
         await tester.pumpAndSettle();
@@ -103,6 +151,54 @@ void main() {
         await tester.ensureVisible(option);
         await tester.tap(option);
         await tester.pumpAndSettle();
+        expect(
+          find.byKey(const ValueKey('petition-choice-detail-0')),
+          findsNothing,
+        );
+        expect(
+          find.byKey(const ValueKey('petition-choice-detail-1')),
+          findsNothing,
+        );
+        expect(
+          find.byKey(const ValueKey('petition-choice-detail-2')),
+          findsNothing,
+        );
+        expect(find.textContaining('không đổi chỉ số ngay'), findsNothing);
+        expect(find.textContaining('Quyết toán:'), findsNothing);
+        expect(find.textContaining('Nếu dừng sau bước này'), findsNothing);
+        expect(
+          find.text('Quá hạn sẽ khép hồ sơ theo phần đã thực hiện.'),
+          findsOneWidget,
+        );
+        if (scenario == 'stop') {
+          expect(
+            find.byKey(const ValueKey('chain-stop-details')),
+            findsOneWidget,
+          );
+          expect(
+            find.byKey(const ValueKey('petition-impact-points')),
+            findsOneWidget,
+          );
+          expect(find.textContaining('1 hành động · Khép hồ sơ'), findsNothing);
+        } else {
+          expect(
+            find.byKey(const ValueKey('petition-impact-points')),
+            findsOneWidget,
+          );
+          if (scenario != 'political') {
+            expect(
+              find.byKey(const ValueKey('petition-impact-cost')),
+              findsOneWidget,
+            );
+          } else {
+            for (final faction in before.chains.single.participantFactions) {
+              expect(
+                find.byKey(ValueKey('petition-impact-faction:$faction')),
+                findsOneWidget,
+              );
+            }
+          }
+        }
         expect(controller.state!.toJson(), before.toJson());
         await tester.ensureVisible(
           find.byKey(const ValueKey('confirm-petition')),
@@ -143,4 +239,37 @@ void main() {
       });
     }
   }
+
+  testWidgets('chain stages and deadlines show the current petition only', (
+    tester,
+  ) async {
+    final s = settlementState('refugees')..seasonal = true;
+    final p = s.petitions.single;
+    final stages = [
+      'Bản tấu đầu',
+      'Bản tấu thứ hai',
+      'Bản tấu thứ ba',
+      'Bản tấu cuối',
+    ];
+    for (var stage = 0; stage < 4; stage++) {
+      s.chains.single.stage = stage;
+      p.definitionId = 'chain:refugees:$stage';
+      p.deadline = s.week + 1;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(body: PetitionMetadata(state: s, petition: p)),
+        ),
+      );
+      expect(find.text(stages[stage]), findsOneWidget);
+      expect(find.text('Còn 2 mùa'), findsOneWidget);
+      p.deadline = s.week;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(body: PetitionMetadata(state: s, petition: p)),
+        ),
+      );
+      expect(find.text('Hạn: cuối mùa này'), findsOneWidget);
+      expect(find.textContaining('/4'), findsNothing);
+    }
+  });
 }

@@ -5,7 +5,6 @@ import 'package:van_tue/game/data/court_personnel_petitions.dart';
 import 'package:van_tue/game/data/game_store.dart';
 import 'package:van_tue/game/logic/court_rules.dart';
 import 'package:van_tue/game/logic/court_personnel_rules.dart';
-import 'package:van_tue/game/logic/currency_rules.dart';
 import 'package:van_tue/game/logic/game_engine.dart';
 import 'package:van_tue/game/logic/game_gateway.dart';
 import 'package:van_tue/game/logic/personnel_rules.dart';
@@ -255,24 +254,34 @@ void main() {
   test(
     'alternative nominees use their own fees and cannot inject an invalid candidate',
     () {
-      final s = fresh();
-      final o = office(s, 'Thư lại');
-      vacate(s, o);
-      final c = nominee(s, o);
-      final m = open(s, 'nominate', c, seat: o);
-      expect(courtPersonnelChoiceBlocked(s, m, 1), contains('chọn người'));
-      expect(
-        () => resolve(s, m, 1, 'missing'),
-        throwsA(isA<GameRuleException>()),
-      );
-      final alternate = s.officialsPool[1]..grade = 8;
-      final price = vacancyPromotion(s, alternate, o).cost;
-      final event = courtPersonnelEvent(s, m, nomineeId: alternate.id);
-      expect(event.choices[1].cost, price);
-      final result = resolve(s, m, 1, alternate.id);
-      expect(result.courtPersonnelMatters.last.personId, alternate.id);
-      expect(result.treasury, s.treasury - price);
-      expect(courtOfficeFor(result, alternate.id)!.id, o.id);
+      for (final kind in ['nominate', 'recruit']) {
+        for (final verified in [false, true]) {
+          final s = fresh();
+          final o = office(s, 'Thư lại');
+          vacate(s, o);
+          final c = nominee(s, o);
+          final m = open(s, kind, c, seat: o)..verified = verified;
+          expect(
+            courtPersonnelEvent(s, m).choices[1].label,
+            'Chọn người khác để bổ nhiệm',
+          );
+          expect(courtPersonnelChoiceBlocked(s, m, 1), contains('chọn người'));
+          expect(
+            () => resolve(s, m, 1, 'missing'),
+            throwsA(isA<GameRuleException>()),
+          );
+          final alternate = s.officialsPool[1]..grade = 8;
+          final price = vacancyPromotion(s, alternate, o).cost;
+          final event = courtPersonnelEvent(s, m, nomineeId: alternate.id);
+          expect(event.choices[1].cost, price);
+          final result = resolve(s, m, 1, alternate.id);
+          expect(result.courtPersonnelMatters.last.personId, alternate.id);
+          expect(result.treasury, s.treasury - price);
+          expect(result.points, s.points - 1);
+          expect(result.petitions, isEmpty);
+          expect(courtOfficeFor(result, alternate.id)!.id, o.id);
+        }
+      }
     },
   );
   test('leaving and returning cannot farm nomination merit', () {
@@ -390,26 +399,89 @@ void main() {
     },
   );
   test(
-    'assessment preserves the candidate and never silently appoints or retires',
+    'recruitment and retirement show public assessments without a paid step',
     () {
       for (final kind in ['recruit', 'retire']) {
-        var s = fresh();
+        final s = fresh();
         final o = office(s, 'Thư lại');
         if (kind == 'recruit') vacate(s, o);
-        final c = kind == 'recruit' ? nominee(s, o) : holder(s, o);
+        final c =
+            (kind == 'recruit' ? nominee(s, o) : holder(s, o))
+              ..ability = 95
+              ..affection = 100
+              ..specialty = specialtyForRole(o.role);
         final m = open(s, kind, c, seat: o);
-        final beforePerson = c.toJson();
-        final treasury = s.treasury;
-        s = resolve(s, m, 1);
-        expect(s.courtPersonnelMatters.last.verified, isTrue);
+        final before = s.toJson();
+        final event = eventForState(s, m.eventId);
+        expect(
+          event.body,
+          contains('Đánh giá chức vụ: phù hợp chuyên môn 100%; đạt'),
+        );
+        expect(event.body, contains('không phải kết luận về phẩm chất ẩn'));
+        expect(s.toJson(), before);
+        c.ability = 0;
         expect(
           eventForState(s, m.eventId).body,
-          contains('Kết quả khảo hạch/đối chiếu'),
+          contains('chưa đạt các điều kiện công khai'),
         );
-        expect(s.courtPersonnelMatters.last.status, 'open');
+        expect(m.verified, isFalse);
         expect(s.petitions.single.deadline, s.week + 1);
-        expect(courtPerson(s, c.id)!.toJson(), beforePerson);
-        expect(s.treasury, treasury - (kind == 'recruit' ? money(s, 5) : 0));
+      }
+    },
+  );
+  test(
+    'all personnel rejections close immediately with only the normal rejection cost',
+    () {
+      for (final kind in [
+        'nominate',
+        'recruit',
+        'reform',
+        'retire',
+        'promote',
+        'patronage',
+      ]) {
+        for (final verified in [false, true]) {
+          var s = fresh();
+          final o = office(s, 'Thư lại');
+          if (['nominate', 'recruit'].contains(kind)) vacate(s, o);
+          final c =
+              ['nominate', 'recruit', 'reform'].contains(kind)
+                  ? nominee(s, o)
+                  : holder(s, o);
+          final m = open(s, kind, c, seat: o, grade: 8)..verified = verified;
+          // Previously assessed petitions keep working after a save reload.
+          s = GameState.fromJson(s.toJson());
+          final loaded = s.courtPersonnelMatters.single;
+          final event = courtPersonnelEvent(s, loaded);
+          final rejection =
+              ['nominate', 'recruit', 'reform'].contains(kind) ? 2 : 1;
+          expect(event.choices, hasLength(rejection + 1));
+          expect(event.choices[rejection].label, 'Bác đề nghị');
+          expect(
+            courtPersonnelChoiceBlocked(s, loaded, rejection + 1),
+            contains('không hợp lệ'),
+          );
+          final sponsor = courtPerson(s, loaded.sponsorId)!;
+          final result = resolve(s, loaded, rejection);
+          expect(result.petitions, isEmpty);
+          expect(result.courtPersonnelMatters.single.status, 'rejected');
+          expect(result.points, s.points - 1);
+          expect(result.treasury, s.treasury);
+          expect(
+            result.courtOffices.map((o) => o.toJson()).toList(),
+            s.courtOffices.map((o) => o.toJson()).toList(),
+          );
+          expect(
+            courtPerson(result, m.personId)!.toJson(),
+            courtPerson(s, m.personId)!.toJson(),
+          );
+          expect(
+            result.factions[sponsor.faction],
+            s.factions[sponsor.faction]! - 1,
+          );
+          expect(result.authority, s.authority);
+          expect(result.stability, s.stability);
+        }
       }
     },
   );

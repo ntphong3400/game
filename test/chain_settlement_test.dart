@@ -90,7 +90,24 @@ void main() {
         final p = s.petitions.singleWhere((p) => p.storyId == arc.id);
         final e = eventForState(s, p.definitionId);
         expect(e.choices, hasLength(3));
-        expect(e.body, contains('Đã hoàn thành $i/4'));
+        expect(
+          e.body,
+          contains('Thành quả sẽ được ghi nhận khi hồ sơ khép lại.'),
+        );
+        for (final spoiler in [
+          '/4',
+          '%',
+          'chi phí quy đổi',
+          'Dừng hiện tại nhận',
+          'Dự kiến hoàn thành',
+          '80–90',
+        ]) {
+          expect(e.body, isNot(contains(spoiler)), reason: '${d.id}: $i');
+          for (final choice in e.choices) {
+            expect(choice.label, isNot(contains(spoiler)));
+            expect(choice.hint, isNot(contains(spoiler)));
+          }
+        }
         final index = d.id == 'haremHarmony' ? 2 : 1;
         final expectedReward = chainSettlementEffects(
           projectedChainChoice(arc, index),

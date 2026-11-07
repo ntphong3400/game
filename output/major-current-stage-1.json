@@ -1,0 +1,35 @@
+{
+  "title": "Mưa lớn đe dọa vỡ đê",
+  "body": "ĐẠI BIẾN CỐ  · Bản tấu 1/4 · mức 2.\nMực nước dâng liên tục. Các đoạn đê xung yếu cần được gia cố, dân vùng trũng cần sơ tán và cứu trợ trước đỉnh lũ.\nĐây là bản tấu mở đầu.\nDiễn biến cần ngự phê: Gia cố đoạn đê xung yếu. \nHạn: cuối mùa Xuân · năm 1. Bỏ quá hạn sẽ không tổ chức ứng phó phần việc này.",
+  "deadline": "cuối mùa Xuân · năm 1",
+  "choices": [
+    {
+      "label": "Huy động đầy đủ: Gia cố đoạn đê xung yếu",
+      "hint": "5.700 lượng vàng · 0 thóc · 2 hành động. Bảo vệ đầy đủ phần việc này. không đổi chỉ số ngay. Bản tấu tiếp theo vào mùa Hạ · năm 1; quyết định này được giữ lại.",
+      "cost": 5700,
+      "grainCost": 0,
+      "points": 2,
+      "effects": {}
+    },
+    {
+      "label": "Ứng phó có giới hạn",
+      "hint": "2.900 lượng vàng · 0 thóc · 1 hành động. Bảo vệ 50%; tổn thất ngay: đê điều -21. Bản tấu tiếp theo vào mùa Hạ · năm 1; quyết định này được giữ lại.",
+      "cost": 2900,
+      "grainCost": 0,
+      "points": 1,
+      "effects": {
+        "levee": -21
+      }
+    },
+    {
+      "label": "Chưa huy động, chấp nhận tổn thất",
+      "hint": "0 lượng vàng · 0 thóc · 1 hành động khi chủ động ngự phê. Không bảo vệ phần việc này; tổn thất ngay: đê điều -42. Bản tấu tiếp theo vào mùa Hạ · năm 1; quyết định này được giữ lại.",
+      "cost": 0,
+      "grainCost": 0,
+      "points": 1,
+      "effects": {
+        "levee": -42
+      }
+    }
+  ]
+}

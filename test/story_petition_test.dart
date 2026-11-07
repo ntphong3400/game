@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:van_tue/game/data/content.dart';
 import 'package:van_tue/game/data/reign_content.dart';
+import 'package:van_tue/game/data/story_petitions.dart';
 import 'package:van_tue/game/data/game_store.dart';
 import 'support/legacy_engine.dart';
 import 'support/legacy_gateway.dart';
@@ -139,7 +140,11 @@ void main() {
     s.court.firstWhere((c) => c.id == 'prince').available = false;
     storyEngine.prepareStoryPetitions(s);
     final p = s.petitions.single;
-    expect(petitionText(p, s), contains('không thể khôi phục người đã mất'));
+    expect(petitionText(p, s), contains('Người kế vị đã qua đời'));
+    expect(
+      eventForState(s, p.definitionId).choices.first.label,
+      'Huy động cho phương án dự phòng',
+    );
     final next = storySend(s, 'petition', target: p.id, option: '0');
     expect(next.heirCondition, 'deceased');
     expect(next.major!.objectives.first.done, false);
@@ -290,7 +295,30 @@ void main() {
           expect(p.storyStage, stage);
           expect(p.deadline, s.week);
           final event = eventForState(s, p.definitionId);
-          expect(event.body, contains(definition.objectives[stage].title));
+          final action = majorActionTitle(definition.objectives[stage]);
+          expect(
+            '${event.title}\n${event.body}'.toLowerCase(),
+            contains(action.toLowerCase()),
+          );
+          expect(event.choices.first.label, action);
+          for (final raw in [
+            '/4',
+            '· mức',
+            'DB-',
+            '%',
+            'Không thu hoặc trừ lại',
+            'Diễn biến cần ngự phê:',
+            'Tổn thất đã xảy ra:',
+          ]) {
+            expect(
+              event.body,
+              isNot(contains(raw)),
+              reason: '${definition.id}: $stage',
+            );
+          }
+          for (final option in event.choices) {
+            expect(option.hint, isEmpty);
+          }
           final c = event.choices.first, money = s.treasury, points = s.points;
           expect(c.cost, greaterThanOrEqualTo(55));
           s = storySend(s, 'petition', target: p.id, option: '0');

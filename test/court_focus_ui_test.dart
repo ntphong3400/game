@@ -216,7 +216,7 @@ void main() {
         '−1',
       );
       await tap(find.byKey(const ValueKey('petition-assignee')));
-      await tap(find.byKey(const ValueKey('petition-person-chancellor')));
+      await tap(find.byKey(const ValueKey('petition-person-treasurer')));
       final assignedPreview =
           tester
               .widget<Text>(
