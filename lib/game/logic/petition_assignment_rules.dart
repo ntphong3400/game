@@ -4,6 +4,9 @@ import 'personnel_rules.dart';
 import 'population_rules.dart';
 import 'petition_rules.dart' show petitionMoneyPreview;
 
+const petitionUnassignedChance = 30;
+const petitionMaxChance = 90;
+
 bool petitionCanAssign(GameState s, EventChoice c) =>
     s.seasonal &&
     ((c.troops > 0) ||
@@ -42,7 +45,11 @@ String petitionTask(String specialty) => switch (specialty) {
   _ => 'relief',
 };
 
-String? petitionAssigneeBlocked(GameState s, Courtier c) {
+String? petitionAssigneeBlocked(
+  GameState s,
+  Courtier c, {
+  required String specialty,
+}) {
   if (!c.available || c.age < 18) {
     return 'Nhân vật phải còn hoạt động và đủ 18 tuổi.';
   }
@@ -50,15 +57,13 @@ String? petitionAssigneeBlocked(GameState s, Courtier c) {
   if (officerBusy(s, c.id)) {
     return 'Đang phụ trách công việc hoặc học tập khác.';
   }
+  if (c.specialty != specialty) {
+    return 'Tấu chương này cần người có chuyên môn $specialty.';
+  }
   return null;
 }
 
-int petitionBaseChance(EventChoice c) =>
-    c.troops > 0
-        ? 60
-        : c.laterEffects.isNotEmpty && c.successChance < 100
-        ? (c.successChance - 25).clamp(20, 60)
-        : 35;
+int petitionBaseChance(EventChoice c) => petitionUnassignedChance;
 
 /// The same public information drives preview and the committed roll. Hidden
 /// qualities cannot leak through the picker or change its advertised chance.
@@ -84,18 +89,24 @@ int petitionChance(
   EventChoice c, [
   Courtier? person,
 ]) {
-  if (c.troops > 0) {
-    final base = person == null ? 60 : actionSuccessChance(s, 'train', person);
-    final strength = militaryStrength(s, troops: c.troops, naval: c.naval);
-    final ratio = strength / (c.troops * .65);
-    return (base + (ratio - 1) * 20).round().clamp(5, 95);
-  }
   final base = petitionBaseChance(c);
   if (person == null) return base;
-  final boost = (petitionAssessment(s, e, c, person).successChance * .4)
+  final assessment = petitionAssessment(s, e, c, person);
+  var effectiveAbility =
+      assessment.ability -
+      officerFatiguePenalty(assessment.strain) +
+      assessment.personality.successModifier(assessment.task, assessment.fit) -
+      assessment.personality.sabotageChance;
+  if (c.troops > 0) {
+    final strength = militaryStrength(s, troops: c.troops, naval: c.naval);
+    final ratio = strength / (c.troops * .65);
+    effectiveAbility += (ratio - 1) * 20;
+  }
+  // Ability 100 with neutral modifiers reaches the cap without fixed bonuses.
+  final boost = (effectiveAbility * (petitionMaxChance - base) / 100)
       .round()
-      .clamp(5, 35);
-  return (base + boost).clamp(5, 95);
+      .clamp(5, petitionMaxChance - base);
+  return (base + boost).clamp(base, petitionMaxChance);
 }
 
 List<Courtier> petitionAssignees(
@@ -103,11 +114,12 @@ List<Courtier> petitionAssignees(
   EventDefinition e,
   EventChoice c,
 ) {
+  final specialty = petitionSpecialty(e, c);
   final people =
       s.court
           .where(
             (p) =>
-                petitionAssigneeBlocked(s, p) == null &&
+                petitionAssigneeBlocked(s, p, specialty: specialty) == null &&
                 (c.troops == 0 || !p.isConsort),
           )
           .toList();

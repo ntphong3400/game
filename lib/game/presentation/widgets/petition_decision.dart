@@ -182,7 +182,7 @@ class _PetitionDecisionState extends State<PetitionDecision> {
             const SizedBox(height: 14),
             Text(
               formatGameNumbers(
-                'Người xử lý · chuyên môn ${petitionSpecialty(e, c)}',
+                'Người xử lý · yêu cầu chuyên môn ${petitionSpecialty(e, c)}',
               ),
               style: const TextStyle(fontWeight: FontWeight.w600),
             ),

@@ -1393,7 +1393,11 @@ class GameEngine {
         );
       }
       person = _person(s, assigneeId);
-      final blocked = petitionAssigneeBlocked(s, person);
+      final blocked = petitionAssigneeBlocked(
+        s,
+        person,
+        specialty: petitionSpecialty(e, choice),
+      );
       if (blocked != null) throw GameRuleException(blocked);
     }
     final chance = managed ? petitionChance(s, e, choice, person) : 0;

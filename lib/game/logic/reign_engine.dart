@@ -43,7 +43,7 @@ extension ReignEngine on GameEngine {
     String meritTitle = 'Hoàn thành công vụ',
     String? meritEventId,
   }) {
-    c.strain = (c.strain + 12).clamp(0, 100);
+    c.strain = (c.strain + officerAssignmentStrain).clamp(0, 100);
     c.assignments++;
     if (success) _merit(s, c, title: meritTitle, eventId: meritEventId);
   }
@@ -699,7 +699,11 @@ extension ReignEngine on GameEngine {
     if (s.ended) return;
     _crisisPressure(s);
     for (final c in s.court.where((c) => c.available)) {
-      c.strain = math.max(0, c.strain - (officerBusy(s, c.id) ? 3 : 8));
+      c.strain = math.max(
+        0,
+        c.strain -
+            (officerBusy(s, c.id) ? officerBusyRecovery : officerIdleRecovery),
+      );
     }
     if (reignStage(s) >= 2 &&
         s.factions.values.reduce(math.max) -

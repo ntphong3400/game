@@ -584,7 +584,11 @@ extension PopulationEngine on GameEngine {
     Courtier? leader;
     if (personId.isNotEmpty) {
       leader = _person(s, personId);
-      final reason = petitionAssigneeBlocked(s, leader);
+      final reason = petitionAssigneeBlocked(
+        s,
+        leader,
+        specialty: petitionSpecialty(e, c),
+      );
       if (reason != null || leader.isConsort) {
         throw GameRuleException(
           reason ?? 'Nhiệm vụ quân sự cần triều thần phụ trách.',

@@ -27,12 +27,16 @@ void main() {
         ..clear()
         ..addAll([Personality.grateful, Personality.diplomatic]);
     }
-    s.court.first.specialty = 'Dân chính';
+    final definition = eventForState(s, event);
+    s.court.first.specialty = petitionSpecialty(
+      definition,
+      definition.choices[event == 'border_riders' ? 1 : 0],
+    );
     s.petitions = [
       Petition(id: 'p', definitionId: event, openedWeek: 1, deadline: 2),
     ];
     s.midSeasonDelivered = true;
-    s.rng = 1; // roll 71: fails unassigned 50%, succeeds assigned 85%.
+    s.rng = 1; // roll 71: fails unassigned 30%, succeeds assigned 90%.
     return s;
   }
 
@@ -74,7 +78,82 @@ void main() {
   }
 
   test(
-    'exactly 148 risky choices offer delegation and all fixed defaults are lower',
+    'every assignable choice lists only available people with the exact specialty',
+    () {
+      final s = fresh();
+      final matching = s.court.first;
+      final related = s.court[1];
+      final unrelated = s.court[2];
+      final specialties = [
+        'Dân chính',
+        'Kinh tế',
+        'Công trình',
+        'Quân sự',
+        'An ninh',
+        'Ngoại giao',
+        'Y thuật',
+        'Cung đình',
+      ];
+      for (final raw in events) {
+        final e = eventForState(s, raw.id);
+        for (final c in e.choices.where((c) => petitionCanAssign(s, c))) {
+          final specialty = petitionSpecialty(e, c);
+          matching.specialty = specialty;
+          related.specialty = specialties.firstWhere(
+            (value) => specialtyFit(value, specialty) == 65,
+          );
+          unrelated.specialty = specialties.firstWhere(
+            (value) => specialtyFit(value, specialty) == 20,
+          );
+          final candidates = petitionAssignees(s, e, c);
+          expect(candidates, contains(matching), reason: '${e.id}: ${c.label}');
+          expect(candidates, isNot(contains(related)));
+          expect(candidates, isNot(contains(unrelated)));
+          expect(candidates.every((p) => p.specialty == specialty), isTrue);
+          matching.strain = 0;
+          matching.available = false;
+          expect(petitionAssignees(s, e, c), isNot(contains(matching)));
+          matching.available = true;
+        }
+      }
+    },
+  );
+
+  test(
+    'repair rejects related and unrelated specialists without changing state',
+    () {
+      for (final specialty in ['Kinh tế', 'Quân sự']) {
+        final s = fresh(event: 'levee_warning');
+        s.court.first.specialty = specialty;
+        final before = jsonEncode(s.toJson());
+        expect(
+          () => engine.execute(s, decision(s, person: s.court.first.id)),
+          throwsA(
+            isA<GameRuleException>().having(
+              (e) => e.message,
+              'reason',
+              contains('chuyên môn Công trình'),
+            ),
+          ),
+        );
+        expect(jsonEncode(s.toJson()), before);
+      }
+    },
+  );
+
+  test('no matching specialists still allows an unassigned petition', () {
+    final s = fresh(event: 'levee_warning');
+    for (final person in s.court) {
+      person.specialty = 'Quân sự';
+    }
+    final e = eventForState(s, 'levee_warning');
+    expect(petitionAssignees(s, e, e.choices.first), isEmpty);
+    final result = engine.execute(s, decision(s));
+    expect(result.pending.single.assignment!.assigneeId, isEmpty);
+  });
+
+  test(
+    'all 148 risky choices share the 30% default and attainable 90% cap',
     () {
       final s = fresh();
       var count = 0;
@@ -83,17 +162,76 @@ void main() {
         for (final c in e.choices) {
           if (!petitionCanAssign(s, c)) continue;
           count++;
-          if (c.laterEffects.isNotEmpty) {
-            expect(petitionBaseChance(c), c.successChance - 25);
-            expect(petitionBaseChance(c), inInclusiveRange(40, 55));
-          } else {
-            expect(petitionBaseChance(c), 35);
-          }
+          expect(petitionBaseChance(c), 30);
+          expect(petitionChance(s, e, c), 30);
+          final person = s.court.first;
+          person.specialty = petitionSpecialty(e, c);
+          expect(petitionChance(s, e, c, person), 90);
         }
       }
       expect(count, 148);
     },
   );
+
+  test(
+    'ability and fatigue match the preview with neutral relations and traits',
+    () {
+      final s = fresh(event: 'levee_warning');
+      final e = eventForState(s, 'levee_warning');
+      final c = e.choices.first;
+      final p = s.court.first;
+      p.affection = 50;
+      p.personalities
+        ..clear()
+        ..addAll([Personality.grateful, Personality.honest]);
+      s.factions[p.faction] = 50;
+      const rows = {
+        0: [35, 35, 35, 35, 35, 35],
+        20: [42, 37, 35, 35, 35, 35],
+        41: [55, 50, 45, 40, 35, 35],
+        60: [66, 61, 56, 52, 47, 42],
+        80: [78, 73, 68, 64, 59, 54],
+        100: [90, 85, 80, 76, 71, 66],
+      };
+      for (final row in rows.entries) {
+        p.ability = row.key;
+        for (var column = 0; column < row.value.length; column++) {
+          p.strain = column * 20;
+          expect(
+            petitionChance(s, e, c, p),
+            row.value[column],
+            reason: 'ability ${p.ability}, fatigue ${p.strain}',
+          );
+        }
+      }
+      p.ability = 100;
+      for (final (fatigue, chance) in [(9, 90), (10, 88), (19, 88), (20, 85)]) {
+        p.strain = fatigue;
+        expect(petitionChance(s, e, c, p), chance);
+      }
+    },
+  );
+
+  test('assignment adds 20 fatigue and busy officers recover 5 per season', () {
+    final s = fresh(event: 'commerce_01');
+    final assigned = engine.execute(s, decision(s, person: 'chancellor'));
+    expect(assigned.court.first.strain, 20);
+    final committedChance = assigned.pending.single.assignment!.chance;
+    final afterSeason = close(assigned);
+    expect(officerBusy(afterSeason, 'chancellor'), isTrue);
+    expect(afterSeason.court.first.strain, 15);
+    expect(afterSeason.pending.single.assignment!.chance, committedChance);
+  });
+
+  test('fatigue caps at 100 and idle recovery floors at zero', () {
+    final s = fresh(event: 'commerce_01');
+    s.court.first.strain = 95;
+    final assigned = engine.execute(s, decision(s, person: 'chancellor'));
+    expect(assigned.court.first.strain, 100);
+    final idle = fresh();
+    idle.court.first.strain = 9;
+    expect(close(idle).court.first.strain, 0);
+  });
 
   test(
     'the same roll fails without a person and succeeds with a skilled courtier',
@@ -108,10 +246,10 @@ void main() {
         decision(assigned, person: 'chancellor'),
       );
       expect(a.pending.single.assignment!.assigneeId, isEmpty);
-      expect(a.pending.single.assignment!.chance, 50);
+      expect(a.pending.single.assignment!.chance, 30);
       expect(a.pending.single.assignment!.succeeded, false);
       expect(b.pending.single.assignment!.chance, preview);
-      expect(preview, 85);
+      expect(preview, 90);
       expect(b.pending.single.assignment!.succeeded, true);
       expect(b.points, a.points);
       expect(b.treasury, a.treasury);
@@ -271,7 +409,7 @@ void main() {
       final option = event == 'border_riders' ? '1' : '0';
       final result = engine.execute(s, decision(s, option: option));
       expect(result.pending.single.assignment!.assigneeId, isEmpty);
-      expect(result.pending.single.assignment!.chance, 35);
+      expect(result.pending.single.assignment!.chance, 30);
       expect(result.pending.single.assignment!.succeeded, false);
       expect(result.projects, isEmpty);
       expect(settle(result).outcomes.single.status, 'failure');
@@ -326,6 +464,7 @@ void main() {
     final s = fresh(event: 'commerce_01');
     s.court.firstWhere((c) => c.id == 'consort_lan').inHarem = true;
     s.court.firstWhere((c) => c.id == 'consort_lan').ability = 80;
+    s.court.firstWhere((c) => c.id == 'consort_lan').specialty = 'Kinh tế';
     final a = engine.execute(s, decision(s, person: 'consort_lan'));
     expect(
       () => engine.execute(
@@ -372,6 +511,21 @@ void main() {
       final later = close(result.copy());
       expect(later.outcomes, hasLength(1));
       expect(later.outcomes.single.toJson(), result.outcomes.single.toJson());
+    },
+  );
+
+  test(
+    'previously committed chances above the new cap survive reload and settlement',
+    () {
+      final s = fresh(event: 'commerce_01');
+      final assigned = engine.execute(s, decision(s, person: 'chancellor'));
+      final raw = assigned.toJson();
+      (raw['pending'] as List).single['assignment']['chance'] = 95;
+      final restored = GameState.fromJson(raw);
+      expect(restored.pending.single.assignment!.chance, 95);
+      final result = settle(restored);
+      expect(result.outcomes.single.status, 'success');
+      expect(result.outcomes.single.detail, contains('95%'));
     },
   );
 

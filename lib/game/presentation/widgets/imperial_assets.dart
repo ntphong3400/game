@@ -26,8 +26,29 @@ class ImperialIcon extends StatelessWidget {
     'time',
   ];
 
+  static const _statusNames = [
+    'levee',
+    'fatigue',
+    'stress',
+    'illness',
+    'health',
+    'rest',
+    'revel',
+    'faction',
+  ];
+
   @override
   Widget build(BuildContext context) {
+    if (name == 'decision') {
+      return Image.asset(
+        'assets/images/imperial/decision.webp',
+        width: size,
+        height: size,
+        fit: BoxFit.contain,
+        filterQuality: FilterQuality.medium,
+        excludeFromSemantics: true,
+      );
+    }
     if (name == 'action') {
       return ExcludeSemantics(
         child: SizedBox.square(
@@ -36,11 +57,15 @@ class ImperialIcon extends StatelessWidget {
         ),
       );
     }
-    final index = names.indexOf(switch (name) {
-      'population' => 'citizens',
-      'military' => 'army',
-      _ => name,
-    });
+    final statusIndex = _statusNames.indexOf(name);
+    final index =
+        statusIndex >= 0
+            ? statusIndex
+            : names.indexOf(switch (name) {
+              'population' => 'citizens',
+              'military' => 'army',
+              _ => name,
+            });
     assert(index >= 0, 'Unknown imperial icon: $name');
     return ExcludeSemantics(
       child: SizedBox.square(
@@ -52,9 +77,11 @@ class ImperialIcon extends StatelessWidget {
                 left: -(index % 4) * size,
                 top: -(index ~/ 4) * size,
                 width: size * 4,
-                height: size * 4,
+                height: size * (statusIndex >= 0 ? 2 : 4),
                 child: Image.asset(
-                  'assets/images/imperial/icons.webp',
+                  statusIndex >= 0
+                      ? 'assets/images/imperial/court-status.webp'
+                      : 'assets/images/imperial/icons.webp',
                   fit: BoxFit.fill,
                   filterQuality: FilterQuality.medium,
                 ),

@@ -19,7 +19,6 @@ import 'widgets/population_panel.dart';
 import '../logic/population_rules.dart';
 import '../logic/reign_rules.dart';
 import '../logic/harem_rules.dart';
-import '../logic/petition_assignment_rules.dart';
 import '../logic/health_rules.dart';
 import '../logic/chain_settlement_rules.dart';
 import 'widgets/harem_quest_panel.dart';
@@ -44,6 +43,7 @@ import 'widgets/imperial_assets.dart';
 import 'widgets/imperial_room.dart';
 import 'widgets/imperial_theme.dart';
 import 'widgets/petition_decision.dart';
+import 'widgets/petition_assignee_option.dart';
 import 'widgets/petition_document.dart';
 import 'widgets/petition_art.dart';
 import 'widgets/memorial_paper.dart';
@@ -1389,17 +1389,25 @@ class _GameShellState extends State<GameShell> {
     final choice = await showDialog<(int, String)>(
       context: context,
       builder:
-          (dialogContext) => PetitionDecision(
-            state: decisionState,
-            petition: petition,
-            inDialog: true,
-            busy: busy,
-            pickAssignee: _choosePetitionAssignee,
-            onReadLater: () => Navigator.pop(dialogContext),
-            onConfirm: (index, assignee) async {
-              Navigator.pop(dialogContext, (index, assignee));
-              return true;
-            },
+          (dialogContext) => AnimatedBuilder(
+            animation: controller,
+            builder:
+                (context, _) => PetitionDecision(
+                  state:
+                      s.runId == decisionState.runId &&
+                              s.petitions.any((p) => p.id == petition.id)
+                          ? s
+                          : decisionState,
+                  petition: petition,
+                  inDialog: true,
+                  busy: busy,
+                  pickAssignee: _choosePetitionAssignee,
+                  onReadLater: () => Navigator.pop(dialogContext),
+                  onConfirm: (index, assignee) async {
+                    Navigator.pop(dialogContext, (index, assignee));
+                    return true;
+                  },
+                ),
           ),
     );
     if (!mounted) return;
@@ -1428,55 +1436,71 @@ class _GameShellState extends State<GameShell> {
     return ok;
   }
 
-  Future<String?> _choosePetitionAssignee(
-    EventDefinition e,
-    EventChoice c,
-  ) => showDialog<String>(
-    context: context,
-    builder:
-        (context) => ImperialSimpleDialog(
-          title: const Text('Chọn người xử lý tấu chương'),
-          children: [
-            ImperialDialogOption(
-              key: const ValueKey('petition-unassigned'),
-              onPressed: () => Navigator.pop(context, ''),
-              child: Text(
-                formatGameNumbers(
-                  'Không giao ai xử lý · ${petitionBaseChance(c)}%',
-                ),
-              ),
-            ),
-            if (petitionAssignees(s, e, c).isEmpty)
-              const Padding(
-                padding: EdgeInsets.all(24),
-                child: Text(
-                  'Chưa có triều thần hoặc người trong hậu cung đủ điều kiện và đang rảnh.',
-                ),
-              ),
-            for (final p in petitionAssignees(s, e, c))
-              ImperialDialogOption(
-                key: ValueKey('petition-person-${p.id}'),
-                leading: CharacterPortrait(person: p, width: 42, height: 56),
-                onPressed: () => Navigator.pop(context, p.id),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 7),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+  Future<String?> _choosePetitionAssignee(EventDefinition e, EventChoice c) =>
+      showDialog<String>(
+        context: context,
+        builder:
+            (dialogContext) => AnimatedBuilder(
+              animation: controller,
+              builder:
+                  (context, _) => ImperialSimpleDialog(
+                    title: const Text('Chọn người xử lý tấu chương'),
                     children: [
-                      Text(formatGameNumbers('${p.name} · ${p.displayRole}')),
-                      Text(
-                        formatGameNumbers(
-                          '${p.specialty} · ${p.isConsort ? 'thiện cảm ${p.affection}' : 'năng lực ${p.abilityLabel}'} · mệt ${p.strain} · bất mãn ${p.discontent}\n${petitionChance(s, e, c, p)}% thành công',
-                        ),
-                        style: const TextStyle(fontSize: 11, color: muted),
+                      PetitionAssigneeList(
+                        state: s,
+                        event: e,
+                        choice: c,
+                        onSelected: (id) => Navigator.pop(dialogContext, id),
+                        onSummon:
+                            (person) => _summonPetitionAssignee(
+                              dialogContext,
+                              person.id,
+                            ),
                       ),
                     ],
                   ),
-                ),
-              ),
-          ],
-        ),
-  );
+            ),
+      );
+
+  Future<void> _summonPetitionAssignee(
+    BuildContext pickerContext,
+    String personId,
+  ) async {
+    final navigator = Navigator.of(pickerContext);
+    await navigator.push<void>(
+      MaterialPageRoute<void>(
+        builder:
+            (meetingContext) => AnimatedBuilder(
+              animation: controller,
+              builder: (context, _) {
+                final person =
+                    s.court
+                        .where((p) => p.id == personId && p.available)
+                        .firstOrNull;
+                if (person == null) {
+                  return Scaffold(
+                    body: Center(
+                      child: TextButton(
+                        onPressed: () => navigator.pop(),
+                        child: const Text('Trở lại chọn người'),
+                      ),
+                    ),
+                  );
+                }
+                return _characterMeeting(
+                  person,
+                  onBack: () => navigator.pop(),
+                  returnLabel: 'Chọn người xử lý',
+                  onNavigate: (section) {
+                    navigator.popUntil((route) => route.settings is Page);
+                    navigate(section);
+                  },
+                );
+              },
+            ),
+      ),
+    );
+  }
 
   IconData _actionIcon(String key) => switch (key) {
     'court' => Icons.account_balance_outlined,
@@ -1556,7 +1580,17 @@ class _GameShellState extends State<GameShell> {
             color: parchment,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(_actionIcon(a.icon), size: 19, color: forest),
+          child: switch (a.id) {
+            'rest' || 'revel' => Padding(
+              padding: const EdgeInsets.all(5),
+              child: ImperialIcon(a.id, size: 27),
+            ),
+            'treat' => const Padding(
+              padding: EdgeInsets.all(5),
+              child: ImperialIcon('illness', size: 27),
+            ),
+            _ => Icon(_actionIcon(a.icon), size: 19, color: forest),
+          },
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -2153,10 +2187,19 @@ class _GameShellState extends State<GameShell> {
                               runSpacing: 6,
                               children: [
                                 for (final entry in s.factions.entries)
-                                  Tag(
-                                    '${entry.key.toUpperCase()}  ${entry.value}',
-                                    color:
-                                        entry.value < 35 ? terracotta : forest,
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const ImperialIcon('faction', size: 22),
+                                      const SizedBox(width: 4),
+                                      Tag(
+                                        '${entry.key.toUpperCase()}  ${entry.value}',
+                                        color:
+                                            entry.value < 35
+                                                ? terracotta
+                                                : forest,
+                                      ),
+                                    ],
                                   ),
                               ],
                             ),
@@ -2611,32 +2654,41 @@ class _GameShellState extends State<GameShell> {
     }
   }
 
-  Widget _characterMeeting(Courtier current) {
+  Widget _characterMeeting(
+    Courtier current, {
+    VoidCallback? onBack,
+    String? returnLabel,
+    ValueChanged<String>? onNavigate,
+  }) {
+    final closeMeeting = onBack ?? _closeCharacterMeeting;
+    final navigateFromMeeting = onNavigate ?? navigate;
     void closeIfDeparted() {
       if (mounted &&
           ![
             ...s.court,
             ...s.officialsPool,
           ].any((c) => c.id == current.id && c.available)) {
-        _closeCharacterMeeting();
+        closeMeeting();
       }
     }
 
-    final backLabel = hudTitleFor(
-      s,
-      GameLocation.sectionFor(widget.location.backPath) ??
-          widget.location.section,
-    );
+    final backLabel =
+        returnLabel ??
+        hudTitleFor(
+          s,
+          GameLocation.sectionFor(widget.location.backPath) ??
+              widget.location.section,
+        );
     return CharacterMeetingPage(
       backLabel: backLabel,
       scene: meetingSceneFor(current, state: s),
-      onBack: _closeCharacterMeeting,
+      onBack: closeMeeting,
       header: WebGameHud(
         state: s,
         section: current.isConsort ? 'harem' : 'people',
         title: 'Tiếp kiến',
-        onNavigate: navigate,
-        onBack: _closeCharacterMeeting,
+        onNavigate: navigateFromMeeting,
+        onBack: closeMeeting,
         backKey: const ValueKey('meeting-back'),
         backLabel: backLabel,
       ),
@@ -2710,7 +2762,7 @@ class _GameShellState extends State<GameShell> {
         }
         if (option == 'harem-quest') {
           selectedConsortId = current.id;
-          navigate('harem-management');
+          navigateFromMeeting('harem-management');
           return null;
         }
         if (option == 'cut-office') {
@@ -3574,7 +3626,7 @@ class _GameShellState extends State<GameShell> {
               runSpacing: 8,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                const Icon(Icons.favorite_border, color: terracotta, size: 34),
+                const ImperialIcon('health', size: 34),
                 Text(
                   formatGameNumbers('${s.health}'),
                   style: const TextStyle(fontFamily: 'Lora', fontSize: 42),
@@ -3584,18 +3636,24 @@ class _GameShellState extends State<GameShell> {
               ],
             ),
             const SizedBox(height: 24),
-            _smallMeter('Mệt mỏi tích lũy', s.fatigue, inverse: true),
+            _smallMeter(
+              'Mệt mỏi tích lũy',
+              s.fatigue,
+              inverse: true,
+              icon: 'fatigue',
+            ),
             const SizedBox(height: 20),
-            _smallMeter('Căng thẳng', s.stress, inverse: true),
+            _smallMeter('Căng thẳng', s.stress, inverse: true, icon: 'stress'),
             const SizedBox(height: 20),
             _smallMeter(
               'Mức hưởng lạc tích lũy',
               s.indulgence,
               maximum: 40,
               inverse: true,
+              icon: 'revel',
             ),
             const SizedBox(height: 20),
-            _smallMeter('Mức bệnh', s.illness, inverse: true),
+            _smallMeter('Mức bệnh', s.illness, inverse: true, icon: 'illness'),
             const SizedBox(height: 24),
             const Divider(),
             const SizedBox(height: 12),
@@ -3734,6 +3792,7 @@ class _GameShellState extends State<GameShell> {
     int? value, {
     int maximum = 100,
     bool inverse = false,
+    String? icon,
   }) {
     final ratio = (value ?? 0) / maximum;
     final bad = value != null && (inverse ? ratio > .55 : ratio < .3);
@@ -3741,6 +3800,10 @@ class _GameShellState extends State<GameShell> {
       children: [
         Row(
           children: [
+            if (icon != null) ...[
+              ImperialIcon(icon, size: 22),
+              const SizedBox(width: 7),
+            ],
             Expanded(
               child: Text(
                 formatGameNumbers(label),

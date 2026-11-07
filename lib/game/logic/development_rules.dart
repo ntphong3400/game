@@ -4,6 +4,7 @@ import 'personality_rules.dart';
 import 'population_rules.dart';
 import 'currency_rules.dart';
 import 'food_pressure_rules.dart';
+import 'officer_fatigue_rules.dart';
 
 const developmentTasks = ['upgrade_economy', 'upgrade_farm', 'upgrade_levee'];
 const developmentSpecialties = {
@@ -95,7 +96,7 @@ int developmentSuccessChance(
   return (80 -
           (target - 2) * 5 +
           (c.ability - developmentRequiredAbility(target)) * .8 -
-          c.strain / 8 +
+          officerFatiguePenalty(c.strain) +
           p.successModifier(assessmentTask, 100) * .5 -
           p.sabotageChance -
           p.corruptionChance * .2)

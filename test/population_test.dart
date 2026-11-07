@@ -371,6 +371,33 @@ void main() {
     expect(ended.population!.soldiers, 0);
   });
   test(
+    'military petitions reject commanders with a different specialty atomically',
+    () {
+      final s = fresh();
+      petition(s, 'population_major_battle');
+      final officer = s.court.firstWhere((x) => x.id == 'general');
+      officer.specialty = 'An ninh';
+      final before = jsonEncode(s.toJson());
+      expect(
+        () => send(
+          s,
+          'petition',
+          target: 'population_major_battle',
+          option: '0',
+          assignee: officer.id,
+        ),
+        throwsA(
+          isA<GameRuleException>().having(
+            (e) => e.message,
+            'reason',
+            contains('chuyên môn Quân sự'),
+          ),
+        ),
+      );
+      expect(jsonEncode(s.toJson()), before);
+    },
+  );
+  test(
     'military event preview and committed roll use quality and commanders',
     () {
       final s = fresh();
@@ -379,6 +406,8 @@ void main() {
           c = e.choices.first;
       final officer = s.court.firstWhere((x) => x.id == 'general');
       final chance = petitionChance(s, e, c, officer);
+      expect(petitionChance(s, e, c), 30);
+      expect(chance, inInclusiveRange(35, 90));
       final result = send(
         s,
         'petition',
@@ -390,6 +419,13 @@ void main() {
       s.population!.training = 0;
       s.population!.equipment = 0;
       expect(petitionChance(s, e, c, officer), lessThan(chance));
+      officer.ability = 100;
+      officer.affection = officer.loyalty = 100;
+      officer.discontent = officer.strain = 0;
+      s.factions[officer.faction] = 100;
+      s.population!.training = 100;
+      s.population!.equipment = 100;
+      expect(petitionChance(s, e, c, officer), 90);
     },
   );
   test(

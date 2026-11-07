@@ -4,6 +4,8 @@ import 'personality_rules.dart';
 import 'development_rules.dart';
 import 'population_rules.dart';
 import 'currency_rules.dart';
+import 'officer_fatigue_rules.dart';
+export 'officer_fatigue_rules.dart';
 export 'development_rules.dart';
 export 'personality_rules.dart';
 export '../models/court_politics.dart' show appointmentRanks;
@@ -212,7 +214,7 @@ class TaskAssessment {
   int get successChance => (20 +
           ability * .6 +
           fit * .25 -
-          strain ~/ 8 +
+          officerFatiguePenalty(strain) +
           personality.successModifier(task, fit) -
           personality.sabotageChance)
       .round()

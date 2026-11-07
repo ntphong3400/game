@@ -81,7 +81,7 @@ void main() {
               }
             }
             expect(petitionDelay(s, c), old.economy!.isRecovery ? 2 : 3);
-            expect(petitionBaseChance(c), old.successChance - 25);
+            expect(petitionBaseChance(c), 30);
           }
           if ((old.effects['treasury'] ?? 0) > 0) {
             if ((old.effects['debt'] ?? 0) > 0) {

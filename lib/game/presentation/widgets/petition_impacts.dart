@@ -14,12 +14,12 @@ class PetitionImpacts extends StatelessWidget {
 
   static const labels = {
     'treasury': 'Ngân khố',
-    'gold': 'Ngân khố (lượng vàng)',
-    'goldDebt': 'Nợ (lượng vàng)',
+    'gold': 'Ngân khố',
+    'goldDebt': 'Nợ',
     'grain': 'Lương thực',
-    'food': 'Lương thực (tạ)',
+    'food': 'Lương thực',
     'training': 'Huấn luyện',
-    'equipment': 'Quân khí (bộ)',
+    'equipment': 'Quân khí',
     'morale': 'Sĩ khí',
     'logistics': 'Hậu cần',
     'population': 'Dân số lao động',
@@ -45,6 +45,9 @@ class PetitionImpacts extends StatelessWidget {
     'plotReduce': 'Tiến độ âm mưu',
   };
   Widget _icon(String key) {
+    if (key.startsWith('faction:') || key.startsWith('affection:')) {
+      return const ImperialIcon('faction', size: 27);
+    }
     final imperial = switch (key) {
       'points' => 'action',
       'treasury' || 'cost' || 'gold' || 'debt' || 'goldDebt' => 'treasury',
@@ -62,21 +65,12 @@ class PetitionImpacts extends StatelessWidget {
       'equipment' ||
       'morale' ||
       'logistics' => 'army',
-      'illness' || 'disease' => 'health',
-      _ => null,
+      'disease' => 'illness',
+      'levee' || 'fatigue' || 'stress' || 'illness' || 'rest' || 'revel' => key,
+      'plotReduce' => 'scroll',
+      _ => 'decision',
     };
-    if (imperial != null) return ImperialIcon(imperial, size: 27);
-
-    return Icon(
-      switch (key) {
-        'levee' => Icons.water_outlined,
-        'fatigue' || 'rest' => Icons.spa_outlined,
-        'stress' => Icons.self_improvement_outlined,
-        _ => Icons.account_balance_outlined,
-      },
-      size: 27,
-      color: const Color(0xFF6F7153),
-    );
+    return ImperialIcon(imperial, size: 27);
   }
 
   @override
@@ -90,7 +84,7 @@ class PetitionImpacts extends StatelessWidget {
       if (choice.cost > 0)
         (
           key: 'cost',
-          label: state.goldStandard ? 'Chi (lượng vàng)' : 'Chi tiền',
+          label: state.goldStandard ? 'Ngân khố' : 'Chi tiền',
           value: -choice.cost,
         ),
       if (choice.grainCost > 0)
@@ -111,58 +105,74 @@ class PetitionImpacts extends StatelessWidget {
     ];
     return LayoutBuilder(
       builder: (context, bounds) {
-        final columns =
-            bounds.maxWidth >= 560
-                ? values.length.clamp(1, 4)
-                : bounds.maxWidth >= 360
-                ? values.length.clamp(1, 3)
-                : bounds.maxWidth >= 240
-                ? values.length.clamp(1, 2)
-                : 1;
-        final width = (bounds.maxWidth - 12 * (columns - 1)) / columns;
+        final textScale = MediaQuery.textScalerOf(context).scale(18) / 18;
+        final columns = bounds.maxWidth >= 520 * textScale ? 2 : 1;
+        final itemWidth =
+            columns == 1
+                ? bounds.maxWidth
+                : ((bounds.maxWidth - 12 * (columns - 1)) / columns)
+                    .clamp(0.0, 320 * textScale)
+                    .toDouble();
+
         return Wrap(
           spacing: 12,
-          runSpacing: 14,
+          runSpacing: 8,
           children: [
             for (final entry in values)
-              SizedBox(
-                width: width,
+              Container(
+                key: ValueKey('petition-impact-row-${entry.key}'),
+                width: itemWidth,
+                constraints: const BoxConstraints(minHeight: 44),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: paper.withValues(alpha: .35),
+                  border: Border.all(color: line.withValues(alpha: .6)),
+                  borderRadius: BorderRadius.circular(6),
+                ),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5, right: 10),
-                      child: _icon(entry.key),
-                    ),
+                    _icon(entry.key),
+                    const SizedBox(width: 10),
                     Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            formatGameNumbers(entry.label),
-                            style: const TextStyle(
-                              fontFamily: 'Lora',
-                              fontSize: 12,
-                              color: ink,
-                            ),
+                      child: Text(
+                        formatGameNumbers(entry.label),
+                        style: const TextStyle(
+                          fontFamily: 'Lora',
+                          fontSize: 13,
+                          color: ink,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: (itemWidth - 20) * .45,
+                      ),
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          formatGameNumbers(
+                            '${entry.value > 0
+                                ? '+'
+                                : entry.value < 0
+                                ? '−'
+                                : ''}${entry.value.abs()}',
                           ),
-                          Text(
-                            formatGameNumbers(
-                              '${entry.value > 0
-                                  ? '+'
-                                  : entry.value < 0
-                                  ? '−'
-                                  : ''}${entry.value.abs()}',
-                            ),
-                            key: ValueKey('petition-impact-${entry.key}'),
-                            style: TextStyle(
-                              fontFamily: 'Lora',
-                              fontSize: 23,
-                              height: 1.3,
-                              color: _color(entry.key, entry.value),
-                            ),
+                          key: ValueKey('petition-impact-${entry.key}'),
+                          maxLines: 1,
+                          softWrap: false,
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontFamily: 'Lora',
+                            fontSize: 18,
+                            height: 1.3,
+                            color: _color(entry.key, entry.value),
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ],

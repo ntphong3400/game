@@ -485,7 +485,7 @@ void main() {
     expect(after.rewardPercent, lessThan(before.rewardPercent));
     s.affairsThisWeek = 1;
     s = send(s, 'endWeek');
-    expect(s.court.firstWhere((x) => x.id == c.id).strain, 72);
+    expect(s.court.firstWhere((x) => x.id == c.id).strain, 70);
   });
 
   test(

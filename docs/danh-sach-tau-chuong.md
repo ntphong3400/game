@@ -1,6 +1,6 @@
 # Danh sách toàn bộ tấu chương — Vạn Tuế
 
-- **Luật:** `mvp-0.19.0` · nội dung 18 · chế độ **theo mùa**.
+- **Luật:** `mvp-0.28.0` · nội dung 25 · chế độ **theo mùa**.
 - **Phạm vi:** 450 tấu chương, 1329 lựa chọn, 18 nhóm.
 - **Nguồn:** catalog đang chạy trong `lib/game/data/content.dart`, `expanded_events.dart`, `event_stories.dart`; quy đổi bằng chính `eventForState()` / `seasonalPetitionChoice()` mà UI và engine đang dùng.
 - **Xuất lại:** `dart run tools/export_petitions.dart`. Công cụ không đọc hay sửa bản lưu người chơi.
@@ -8,7 +8,7 @@
 ## Cách đọc
 
 - Cân bằng 0.18.0: đầu tư nhận kết quả sau 2 mùa; kiểm toán/truy dấu sau 1 mùa. Thưởng kinh tế dùng mức riêng theo phương án; thất bại mất vốn/phí, không trừ thêm tiền, các phạt lòng dân/uy quyền/ổn định liên quan tối đa −1. Kiểm toán độc lập phí 20, thu hồi 60–90 nếu thành công. Hòa đàm có khoản thu phụ giữ quy tắc cũ; khoản vay giữ nguyên tiền và nợ. Phương án nhận tiền ngay còn lại tăng khoảng 35%, làm tròn bội 5. Kết quả đã chốt trong bản lưu giữ thời hạn và mức cũ.
-- **Giao người xử lý (0.16.0):** 148 lựa chọn có rủi ro được chọn triều thần hoặc người trưởng thành đã nhập hậu cung và đang rảnh. Mặc định **không giao ai**: 143 lựa chọn có tỷ lệ nền 40–55% (giảm 25 điểm % so với tỷ lệ biên soạn); 5 công việc riêng có nền 35%. Chọn người cộng 5–35 điểm %, không tốn thêm hành động hoặc phí ngoài phương án. Tỷ lệ chính xác được hiển thị trước khi xác nhận; người được giao bận đến hạn, mệt công vụ +12 khi nhận việc.
+- **Giao người xử lý (0.16.0):** 148 lựa chọn có rủi ro được chọn triều thần hoặc người trưởng thành đã nhập hậu cung, đang rảnh và đúng chuyên môn yêu cầu. Mặc định **không giao ai**: thống nhất 30%. Chọn người cộng 5–60 điểm %, trần chung 90%, không tốn thêm hành động hoặc phí ngoài phương án. Tỷ lệ chính xác được hiển thị trước khi xác nhận; người được giao bận đến hạn, mệt công vụ +20 khi nhận việc.
 - Người được giao, tỷ lệ và nhánh thành công/thất bại được lưu lúc xác nhận. Người đó rời chức, qua đời hoặc không còn đủ điều kiện trước hạn thì công việc gián đoạn và chịu hậu quả nhánh thất bại; kinh phí không hoàn lại. Bản lưu cũ đã có kết quả chờ giữ cách xử lý và tỷ lệ đã ghi.
 - Chi phí, yêu cầu hành động và thưởng/phạt bên dưới là **giá trị thực tế theo mùa**, đã áp dụng quy đổi, làm tròn và phụ phí; không lấy các con số gốc theo tuần làm giá hiện hành.
 - Catalog là toàn bộ nội dung có thể xuất hiện; mỗi mùa bốc mục tiêu 4–6 tấu chương mới, có điều kiện, cooldown và ưu tiên tránh lặp. Việc khẩn theo tình hình và tấu chương cũ còn hạn giữ cơ chế riêng.
@@ -520,8 +520,8 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥160 (chi 160 tiền); chưa có công trình sửa đê đang chạy; người xử lý là tùy chọn.
 - **Tác động ngay — lợi ích và đánh đổi:** Mở công việc sửa đê; người xử lý là tùy chọn, để trống không tự giao người; hoàn tất cuối mùa chọn. Khi thành công: đê điều tăng từ cơ bản 30, điều chỉnh theo người phụ trách nếu có và thất thoát. Xem phụ lục kết quả công trình.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 35%; giao người đủ điều kiện: 40–70%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Mô tả lựa chọn trên UI:** Chi 160 · Bắt đầu tu bổ đê; kết quả tùy người phụ trách · Không giao ai: 35% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Mô tả lựa chọn trên UI:** Chi 160 · Bắt đầu tu bổ đê; kết quả tùy người phụ trách · Không giao ai: 30% thành công
 
 #### Phương án 2 — Huy động dân phu
 
@@ -814,10 +814,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Cấp thóc dựng bè tạm
 
@@ -921,10 +921,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Cấp thóc cho mẻ đầu
 
@@ -1028,10 +1028,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Cấp lương dựng lán
 
@@ -1135,10 +1135,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Cấp thóc trong thời gian học
 
@@ -1242,10 +1242,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Cấp thóc đổi ngày công
 
@@ -1349,10 +1349,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Xuất thóc vận hành trước
 
@@ -1456,10 +1456,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Cấp thóc giúp khởi sự
 
@@ -1563,10 +1563,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Xuất thóc trả công trước
 
@@ -1659,9 +1659,9 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Không có thay đổi chỉ số trực tiếp.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 35%; giao người đủ điều kiện: 40–70%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả công việc riêng:** cuối mùa kế tiếp (sau 1 mùa). Không giao ai: 35% thành công. Có người: 40–70%, theo đánh giá người xử lý. Thành công: ngân khố +60 đến +90; uy quyền +2. Thất bại: không có khoản thưởng này, không hoàn phí.
-- **Mô tả lựa chọn trên UI:** Chi 20 · Không đổi chỉ số ngay · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa): Nếu xác minh được: thu hồi 60–90 tiền, uy quyền +2; có thể chưa đủ chứng cứ · Vốn/phí ứng 20 tiền · Thành công: nhận 60–90 tiền, lãi sau vốn 40–70 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 35% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả công việc riêng:** cuối mùa kế tiếp (sau 1 mùa). Không giao ai: 30% thành công. Có người: 35–90%, theo đánh giá người xử lý. Thành công: ngân khố +60 đến +90; uy quyền +2. Thất bại: không có khoản thưởng này, không hoàn phí.
+- **Mô tả lựa chọn trên UI:** Chi 20 · Không đổi chỉ số ngay · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa): Nếu xác minh được: thu hồi 60–90 tiền, uy quyền +2; có thể chưa đủ chứng cứ · Vốn/phí ứng 20 tiền · Thành công: nhận 60–90 tiền, lãi sau vốn 40–70 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Cho Hộ bộ tự đối chiếu [mặc định khi quá hạn]
 
@@ -1793,10 +1793,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Dàn xếp với chủ kho
 
@@ -1830,10 +1830,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥10 (chi 10 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 40%; giao người đủ điều kiện: 45–75%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 40% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
-- **Kết quả chờ — thất bại 60% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 40% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 40% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Vay thế gia để mở rộng
 
@@ -1902,10 +1902,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận tiền và bỏ qua dấu
 
@@ -1939,10 +1939,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥10 (chi 10 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 40%; giao người đủ điều kiện: 45–75%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 40% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
-- **Kết quả chờ — thất bại 60% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 40% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 40% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Vay tiền đặt lô lớn
 
@@ -2011,10 +2011,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thỏa thuận với người giữ kho
 
@@ -2048,10 +2048,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥10 (chi 10 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 40%; giao người đủ điều kiện: 45–75%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 40% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
-- **Kết quả chờ — thất bại 60% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 40% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 40% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Vay vốn dựng cả xưởng
 
@@ -2120,10 +2120,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu khoản dàn xếp từ hào lý
 
@@ -2157,10 +2157,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥10 (chi 10 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 40%; giao người đủ điều kiện: 45–75%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 40% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
-- **Kết quả chờ — thất bại 60% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 40% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 40% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Vay thế gia mua dụng cụ
 
@@ -2229,10 +2229,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu tiền giải quyết nội bộ
 
@@ -2266,10 +2266,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥10 (chi 10 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 40%; giao người đủ điều kiện: 45–75%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 40% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
-- **Kết quả chờ — thất bại 60% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 40% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 40% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Vay tiền giành phần lớn
 
@@ -2338,10 +2338,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận khoản bù của chủ kho
 
@@ -2375,10 +2375,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥10 (chi 10 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 40%; giao người đủ điều kiện: 45–75%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 40% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
-- **Kết quả chờ — thất bại 60% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 40% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 40% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Vay vốn nhân nhiều lò
 
@@ -2447,10 +2447,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận tiền bồi hoàn kín
 
@@ -2484,10 +2484,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥10 (chi 10 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 40%; giao người đủ điều kiện: 45–75%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 40% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
-- **Kết quả chờ — thất bại 60% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 40% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 40% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Vay thế gia mua sáp lớn
 
@@ -2556,10 +2556,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận tiền dàn xếp của nhà cung
 
@@ -2593,10 +2593,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥10 (chi 10 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 40%; giao người đủ điều kiện: 45–75%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 40% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
-- **Kết quả chờ — thất bại 60% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 40% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 40% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Vay tiền mở rộng ngay
 
@@ -2665,10 +2665,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +70; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ổn định triều đình −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +70 · uy quyền +1. Thất bại: Ổn định triều đình -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 70 tiền, lãi sau vốn 50 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận khoản nộp kín của thế gia
 
@@ -2702,10 +2702,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥10 (chi 10 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 40%; giao người đủ điều kiện: 45–75%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 40% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
-- **Kết quả chờ — thất bại 60% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 40% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 40% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +45; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 10 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +45 · lòng dân +1. Thất bại: lòng dân -1. · Vốn/phí ứng 10 tiền · Thành công: nhận 45 tiền, lãi sau vốn 35 tiền · Thất bại: mất 10 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận khoản vay có điều kiện
 
@@ -2742,9 +2742,9 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Không có thay đổi chỉ số trực tiếp.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 35%; giao người đủ điều kiện: 40–70%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả công việc riêng:** cuối mùa kế tiếp (sau 1 mùa). Không giao ai: 35% thành công. Có người: 40–70%, theo đánh giá người xử lý. Thành công: ngân khố +60 đến +90; uy quyền +2. Thất bại: không có khoản thưởng này, không hoàn phí.
-- **Mô tả lựa chọn trên UI:** Chi 20 · Không đổi chỉ số ngay · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa): Nếu xác minh được: thu hồi 60–90 tiền, uy quyền +2; có thể chưa đủ chứng cứ · Vốn/phí ứng 20 tiền · Thành công: nhận 60–90 tiền, lãi sau vốn 40–70 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 35% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả công việc riêng:** cuối mùa kế tiếp (sau 1 mùa). Không giao ai: 30% thành công. Có người: 35–90%, theo đánh giá người xử lý. Thành công: ngân khố +60 đến +90; uy quyền +2. Thất bại: không có khoản thưởng này, không hoàn phí.
+- **Mô tả lựa chọn trên UI:** Chi 20 · Không đổi chỉ số ngay · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa): Nếu xác minh được: thu hồi 60–90 tiền, uy quyền +2; có thể chưa đủ chứng cứ · Vốn/phí ứng 20 tiền · Thành công: nhận 60–90 tiền, lãi sau vốn 40–70 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Hoàn lại tiền cho dân
 
@@ -2778,9 +2778,9 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥40 (chi 40 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Không có thay đổi chỉ số trực tiếp.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 35%; giao người đủ điều kiện: 40–70%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả công việc riêng:** cuối mùa kế tiếp (sau 1 mùa). Không giao ai: 35% thành công. Có người: 40–70%, theo đánh giá người xử lý. Thành công: giảm tối đa 6 tiến độ âm mưu cho mỗi người còn hoạt động (hậu cung chỉ người đã nhập cung). Thất bại: không giảm âm mưu; không hoàn phí.
-- **Mô tả lựa chọn trên UI:** Chi 40 · Không đổi chỉ số ngay · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa): Nếu xác minh được: mỗi âm mưu giảm tối đa 6; có thể chưa đủ chứng cứ · Không giao ai: 35% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả công việc riêng:** cuối mùa kế tiếp (sau 1 mùa). Không giao ai: 30% thành công. Có người: 35–90%, theo đánh giá người xử lý. Thành công: giảm tối đa 6 tiến độ âm mưu cho mỗi người còn hoạt động (hậu cung chỉ người đã nhập cung). Thất bại: không giảm âm mưu; không hoàn phí.
+- **Mô tả lựa chọn trên UI:** Chi 40 · Không đổi chỉ số ngay · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa): Nếu xác minh được: mỗi âm mưu giảm tối đa 6; có thể chưa đủ chứng cứ · Không giao ai: 30% thành công
 
 #### Phương án 2 — Triệu các phe hòa giải
 
@@ -2989,10 +2989,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận khoản nộp để bỏ kiểm tra
 
@@ -3096,10 +3096,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận tiền bù từ nhà cung cấp
 
@@ -3203,10 +3203,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận tiền trả bù để khép sổ
 
@@ -3310,10 +3310,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận tiền hoàn để thôi tra
 
@@ -3417,10 +3417,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu khoản bù từ người bảo trợ
 
@@ -3524,10 +3524,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận tiền hoàn để kết thúc
 
@@ -3631,10 +3631,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận khoản bồi hoàn kín
 
@@ -3738,10 +3738,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận khoản trả bù để thôi xét
 
@@ -3845,10 +3845,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Dân chính. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +75; Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +75 · Ổn định triều đình +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 75 tiền, lãi sau vốn 50 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận khoản hoàn để khép sổ
 
@@ -3892,9 +3892,9 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥50 (chi 50 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Không có thay đổi chỉ số trực tiếp.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 35%; giao người đủ điều kiện: 40–70%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả công việc riêng:** cuối mùa chọn phương án. Không giao ai: 35% thành công, không tự chọn quan thay người chơi. Có người: 40–70%, theo đánh giá người xử lý. Thành công: giảm chiến tranh từ cơ bản 3, tăng uy quyền từ cơ bản 2, điều chỉnh theo người phụ trách nếu có và thất thoát; bao vây về 0. Thất bại thường: chiến tranh +1, uy quyền −2; thất bại nặng: chiến tranh +2, uy quyền −4, ngân khố −20. Người được giao không còn hợp lệ khi tới hạn: gián đoạn, uy quyền −2. Phí đã chi không hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 50 · Không đổi chỉ số ngay · Nhận kết quả cuối mùa chọn phương án: Kết quả tùy người phụ trách Ngoại giao; có thể thất bại · Không giao ai: 35% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả công việc riêng:** cuối mùa chọn phương án. Không giao ai: 30% thành công, không tự chọn quan thay người chơi. Có người: 35–90%, theo đánh giá người xử lý. Thành công: giảm chiến tranh từ cơ bản 3, tăng uy quyền từ cơ bản 2, điều chỉnh theo người phụ trách nếu có và thất thoát; bao vây về 0. Thất bại thường: chiến tranh +1, uy quyền −2; thất bại nặng: chiến tranh +2, uy quyền −4, ngân khố −20. Người được giao không còn hợp lệ khi tới hạn: gián đoạn, uy quyền −2. Phí đã chi không hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 50 · Không đổi chỉ số ngay · Nhận kết quả cuối mùa chọn phương án: Kết quả tùy người phụ trách Ngoại giao; có thể thất bại · Không giao ai: 30% thành công
 
 #### Phương án 3 — Chờ xem động tĩnh [mặc định khi quá hạn]
 
@@ -4138,10 +4138,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Quân lực +1.
-- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 45% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 30% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Giao tướng toàn quyền điều quân
 
@@ -4245,10 +4245,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Quân lực +1.
-- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 45% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 30% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Cho tướng tự điều quân thử
 
@@ -4352,10 +4352,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Quân lực +1.
-- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 45% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 30% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Cho quân tự đặt quy tắc riêng
 
@@ -4459,10 +4459,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Quân lực +1.
-- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 45% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 30% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Cho tướng tự chọn quân tập
 
@@ -4566,10 +4566,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Quân lực +1.
-- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 45% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 30% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Trao thêm quyền cho tướng
 
@@ -4667,16 +4667,16 @@
 
 **Nội dung tấu chương:**
 
-> Đô đốc xin dựng bãi thử để luyện giữ bến khi thủy quân đối phương xuất hiện.
+> Trấn thủ xin dựng bãi tập để luyện giữ bến trước quân đối phương.
 
 #### Phương án 1 — Cấp phí diễn tập ven sông
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Quân lực +1.
-- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 45% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 30% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Cho tướng tự điều phối lực lượng
 
@@ -4780,10 +4780,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Quân lực +1.
-- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 45% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 30% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Cho tướng tự điều quân ban đêm
 
@@ -4887,10 +4887,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Quân lực +1.
-- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 45% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 30% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Trao tướng quyền tự triển khai
 
@@ -4994,10 +4994,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Quân lực +1.
-- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 45% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Quân lực +6; Áp lực chiến tranh −1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Quân lực −5; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · quân lực +1 · Cuối mùa chọn phương án: 30% thành công: quân lực +6 · áp lực chiến tranh -1. Thất bại: quân lực -5 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Cho tướng quyết việc điều quân
 
@@ -5289,10 +5289,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Xuất lương cứu trước và ghi nợ
 
@@ -5396,10 +5396,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Xuất lương cứu trước và vay nợ
 
@@ -5503,10 +5503,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Xuất lương cứu trước và ghi nợ
 
@@ -5610,10 +5610,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Xuất lương trước và nhận thêm nợ
 
@@ -5717,10 +5717,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Xuất lương trước và ghi thêm nợ
 
@@ -5824,10 +5824,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Xuất lương cứu trước và vay nợ
 
@@ -5931,10 +5931,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Xuất lương trước và nhận nợ
 
@@ -6038,10 +6038,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Xuất lương cứu trước và ghi nợ
 
@@ -6288,10 +6288,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lòng dân +3; Uy quyền +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lòng dân −3; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lòng dân +3 · uy quyền +1. Thất bại: lòng dân -3 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Xuất thóc giữ bếp chung
 
@@ -6500,10 +6500,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥40 (chi 40 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 55% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn Quân sự. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Cho các bên hòa giải tạm
 
@@ -6572,10 +6572,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 50% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Lương thực +16; Đê điều +6.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −8; Lòng dân −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: lương thực +16 · đê điều +6. Thất bại: lương thực -8 · lòng dân -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Xuất lương cứu trước và vay nợ
 
@@ -6808,10 +6808,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Bệnh −1.
-- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 50% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 30% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Dùng thuốc thường ổn định
 
@@ -6915,10 +6915,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Bệnh −1.
-- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 50% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 30% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Dùng phương thuốc thường
 
@@ -7022,10 +7022,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Bệnh −1.
-- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 50% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 30% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Dùng thuốc thường đã quen
 
@@ -7129,10 +7129,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Bệnh −1.
-- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 50% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 30% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Dùng chế độ chữa thông thường
 
@@ -7236,10 +7236,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Bệnh −1.
-- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 50% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 30% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Dùng toa thông thường
 
@@ -7343,10 +7343,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Bệnh −1.
-- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 50% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 30% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Dùng cách chữa thông thường
 
@@ -7450,10 +7450,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Bệnh −1.
-- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 50% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 30% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Dùng thuốc thường ít biến động
 
@@ -7557,10 +7557,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Bệnh −1.
-- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 50% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 30% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Dùng thuốc thường trước
 
@@ -7664,10 +7664,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥60 (chi 60 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Bệnh −1.
-- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 50% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Y thuật. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Sức khỏe +3; Bệnh −5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Bệnh +5; Sức khỏe −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 60 · bệnh -1 · Cuối mùa chọn phương án: 30% thành công: sức khỏe +3 · bệnh -5. Thất bại: bệnh +5 · sức khỏe -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Tiếp tục thuốc thông thường
 
@@ -7795,10 +7795,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥35 (chi 35 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 50% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 30% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Dọa đưa quân tới cửa ải
 
@@ -7832,10 +7832,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 45% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu phí cao với thuyền ngoại
 
@@ -7904,10 +7904,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥35 (chi 35 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 50% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 30% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Đáp bằng tối hậu thư
 
@@ -7941,10 +7941,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 45% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Đánh thuế hàng qua tuyến
 
@@ -8013,10 +8013,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥35 (chi 35 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 50% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 30% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Khẳng định họ phải nhận quà
 
@@ -8050,10 +8050,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 45% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu phí đặc quyền nhập nghề
 
@@ -8122,10 +8122,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥35 (chi 35 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 50% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 30% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Đòi trao người ngay lập tức
 
@@ -8159,10 +8159,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 45% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu phụ phí hàng nhập hội chợ
 
@@ -8231,10 +8231,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥35 (chi 35 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 50% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 30% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Giữ lời lẽ cứng rắn
 
@@ -8268,10 +8268,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 45% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Đánh thuế cao hàng cảng ngoại
 
@@ -8340,10 +8340,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥35 (chi 35 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 50% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 30% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Đòi thả hành lý bằng uy thế
 
@@ -8377,10 +8377,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 45% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu phí ngay từ thương lái ngoại
 
@@ -8449,10 +8449,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥35 (chi 35 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 50% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 30% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Dùng lời đe dọa ép thực hiện
 
@@ -8486,10 +8486,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 45% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Đánh phụ thu tiền ngoại
 
@@ -8558,10 +8558,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥35 (chi 35 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 50% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 30% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Tuyên bố giữ bằng mọi giá
 
@@ -8595,10 +8595,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 45% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu phí bảo hộ cao hơn
 
@@ -8667,10 +8667,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥35 (chi 35 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 50% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối cùng mùa năm sau (sau 4 mùa): Áp lực chiến tranh −1; Ngân khố +11.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Áp lực chiến tranh +1; Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 35 · uy quyền +1 · Cuối cùng mùa năm sau (sau 4 mùa): 30% thành công: áp lực chiến tranh -1 · ngân khố +11. Thất bại: áp lực chiến tranh +1 · uy quyền -3. · Vốn/phí ứng 35 tiền · Thành công: nhận 11 tiền, lãi sau vốn -24 tiền · Thất bại: mất 35 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối cùng mùa năm sau (sau 4 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Công khai cảnh cáo nước bạn
 
@@ -8704,10 +8704,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 45% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Ngoại giao. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Thái độ phe Thế gia +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · phe Thế gia +1. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu tiền quyền vào xưởng
 
@@ -10021,10 +10021,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥50 (chi 50 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 50% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Khám xét rộng người mang thư
 
@@ -10131,10 +10131,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥30 (chi 30 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu phí qua bến mới
 
@@ -10238,10 +10238,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥30 (chi 30 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu phí thương lộ núi
 
@@ -10345,10 +10345,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥30 (chi 30 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Giữ tuyến mới để thu phí
 
@@ -10452,10 +10452,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥30 (chi 30 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu lệ phí trên tuyến khảo sát
 
@@ -10559,10 +10559,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥30 (chi 30 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu phí đoàn xe qua đèo
 
@@ -10666,10 +10666,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥30 (chi 30 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Đặt phí trên đường mới
 
@@ -10773,10 +10773,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥30 (chi 30 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu phí gom hàng đi xa
 
@@ -10880,10 +10880,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥30 (chi 30 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu phí đăng tên nhà buôn
 
@@ -10987,10 +10987,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥30 (chi 30 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +85; Lương thực +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Không có thay đổi chỉ số trực tiếp. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 30 · lòng dân +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +85 · lương thực +5. Thất bại: Không đổi chỉ số ngay. · Vốn/phí ứng 30 tiền · Thành công: nhận 85 tiền, lãi sau vốn 55 tiền · Thất bại: mất 30 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu phí qua cửa ải
 
@@ -11097,10 +11097,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Trưng thêm ruộng gieo ngay
 
@@ -11204,10 +11204,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Ép mở rộng diện tích ngay
 
@@ -11311,10 +11311,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Trưng đất đào ao rộng
 
@@ -11418,10 +11418,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Trưng bãi làm vườn rộng
 
@@ -11525,10 +11525,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Buộc các làng gom rơm
 
@@ -11632,10 +11632,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Trưng nhân lực khai hết ruộng
 
@@ -11739,10 +11739,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Trưng ruộng gieo diện rộng
 
@@ -11846,10 +11846,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥70 (chi 70 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 50% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Kinh tế. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Lương thực +22; Lòng dân +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Lương thực −6; Ngân khố −10. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 70 · lòng dân +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: lương thực +22 · lòng dân +1. Thất bại: lương thực -6 · ngân khố -10. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Ép gieo ngay diện rộng
 
@@ -11956,10 +11956,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥80 (chi 80 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 55% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Huy động dân gia cố bờ
 
@@ -12028,10 +12028,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 45% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận tiền dàn xếp nhà thầu
 
@@ -12065,10 +12065,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥80 (chi 80 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 55% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Trưng dân phu chống bờ
 
@@ -12137,10 +12137,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 45% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận tiền giảm giá để bỏ qua
 
@@ -12174,10 +12174,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥80 (chi 80 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 55% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Huy động người dùng bến sửa
 
@@ -12246,10 +12246,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 45% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thu khoản hoàn tiền nội bộ
 
@@ -12283,10 +12283,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥80 (chi 80 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 55% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Huy động dân thông cống
 
@@ -12355,10 +12355,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 45% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận tiền bảo lãnh nhà thầu
 
@@ -12392,10 +12392,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥80 (chi 80 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 55% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Huy động làng mở lối nước
 
@@ -12464,10 +12464,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 45% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận khoản bù của người cung
 
@@ -12501,10 +12501,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥80 (chi 80 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 55% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Trưng ngày công cư dân
 
@@ -12573,10 +12573,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 45% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận tiền hoàn kín từ chủ việc
 
@@ -12610,10 +12610,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥80 (chi 80 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 55% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Huy động thương hộ đào lại
 
@@ -12682,10 +12682,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 45% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Cho người cung mua lại kín
 
@@ -12719,10 +12719,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥80 (chi 80 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 55% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Huy động dân lấp lối khoét
 
@@ -12791,10 +12791,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 45% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Chấp nhận khoản bù của chủ thầu
 
@@ -12828,10 +12828,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥80 (chi 80 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Lòng dân +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 55% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Đê điều +11; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Ngân khố −15; Uy quyền −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 80 · lòng dân +1 · Cuối mùa chọn phương án: 30% thành công: đê điều +11 · lòng dân +2. Thất bại: ngân khố -15 · uy quyền -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Huy động dân gia cố tức thì
 
@@ -12900,10 +12900,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥20 (chi 20 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 45%; giao người đủ điều kiện: 50–80%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 45% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
-- **Kết quả chờ — thất bại 55% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 45% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 45% thành công
+- **Người xử lý tùy chọn:** chuyên môn Công trình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa kế tiếp (sau 1 mùa): Ngân khố +60; Đê điều +5.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 20 · uy quyền +1 · Cuối mùa kế tiếp (sau 1 mùa): 30% thành công: ngân khố +60 · đê điều +5. Thất bại: uy quyền -1. · Vốn/phí ứng 20 tiền · Thành công: nhận 60 tiền, lãi sau vốn 40 tiền · Thất bại: mất 20 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa kế tiếp (sau 1 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Nhận tiền dàn xếp của chủ quỹ
 
@@ -13010,10 +13010,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥40 (chi 40 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 55% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Hòa giải theo đề nghị các bên
 
@@ -13117,10 +13117,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥40 (chi 40 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 55% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Thỏa thuận mức nộp tạm
 
@@ -13224,10 +13224,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥40 (chi 40 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 55% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Hòa giải chia tài sản tạm
 
@@ -13331,10 +13331,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥40 (chi 40 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 55% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Dàn xếp trách nhiệm giữa các đội
 
@@ -13438,10 +13438,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥40 (chi 40 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 55% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Hòa giải để kết thúc vụ án
 
@@ -13545,10 +13545,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥40 (chi 40 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 55% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Tổ chức hòa giải tạm
 
@@ -13652,10 +13652,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥40 (chi 40 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 55% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Dàn xếp bồi thường đôi bên
 
@@ -13759,10 +13759,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥40 (chi 40 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 55%; giao người đủ điều kiện: 60–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 55% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
-- **Kết quả chờ — thất bại 45% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 55% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 55% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Uy quyền +3; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −3; Lòng dân −2. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 40 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: uy quyền +3 · lòng dân +2. Thất bại: uy quyền -3 · lòng dân -2. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Hòa giải và sửa vài bản án
 
@@ -14642,10 +14642,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥50 (chi 50 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 50% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Khám xét rộng các khu bếp
 
@@ -14749,10 +14749,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥50 (chi 50 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 50% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Khám xét những người phục vụ
 
@@ -14856,10 +14856,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥50 (chi 50 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 50% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Khám xét toàn đội phục vụ
 
@@ -14963,10 +14963,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥50 (chi 50 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 50% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Khám xét rộng các kho hàng
 
@@ -15070,10 +15070,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥50 (chi 50 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 50% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Khám xét toàn bộ người trong kho
 
@@ -15177,10 +15177,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥50 (chi 50 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 50% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Khám xét người mang mật hiệu
 
@@ -15284,10 +15284,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥50 (chi 50 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 50% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Khám xét rộng khu quanh tháp
 
@@ -15391,10 +15391,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥50 (chi 50 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 50% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn An ninh. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa chọn phương án: Tiến độ âm mưu mỗi nhân vật −4 (tối thiểu 0); Ổn định triều đình +1.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Tiến độ âm mưu mỗi nhân vật +5 (tối thiểu 0); Uy quyền −3. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 50 · uy quyền +1 · Cuối mùa chọn phương án: 30% thành công: âm mưu -4 · Ổn định triều đình +1. Thất bại: âm mưu +5 · uy quyền -3. · Không giao ai: 30% thành công
 
 #### Phương án 2 — Khám xét các nhóm phục vụ
 
@@ -15571,10 +15571,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Tự cùng học và hướng dẫn thợ
 
@@ -15678,10 +15678,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Tự học cùng nhóm thợ
 
@@ -15785,10 +15785,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Tự học và góp cách làm
 
@@ -15892,10 +15892,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Tự nghiên cứu cùng thợ
 
@@ -15999,10 +15999,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Tự học cùng nhóm thợ
 
@@ -16106,10 +16106,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Tự nghiên cứu cùng thợ
 
@@ -16213,10 +16213,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Tự học và góp ý cùng thợ
 
@@ -16320,10 +16320,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Tự nghiên cứu cùng thợ mộc
 
@@ -16427,10 +16427,10 @@
 
 - **Yêu cầu / chi phí khi chủ động chọn:** 1 hành động; ngân khố ≥25 (chi 25 tiền).
 - **Tác động ngay — lợi ích và đánh đổi:** Uy quyền +1.
-- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 50%; giao người đủ điều kiện: 55–85%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
-- **Kết quả chờ — thành công 50% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
-- **Kết quả chờ — thất bại 50% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
-- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 50% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 50% thành công
+- **Người xử lý tùy chọn:** chuyên môn Cung đình. Không giao ai: 30%; giao người đủ điều kiện: 35–90%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.
+- **Kết quả chờ — thành công 30% khi không giao ai:** cuối mùa sau nữa (sau 2 mùa): Ngân khố +70; Lòng dân +2.
+- **Kết quả chờ — thất bại 70% khi không giao ai:** cùng thời điểm: Uy quyền −1. Chi phí đã trả không được hoàn lại.
+- **Mô tả lựa chọn trên UI:** Chi 25 · uy quyền +1 · Cuối mùa sau nữa (sau 2 mùa): 30% thành công: ngân khố +70 · lòng dân +2. Thất bại: uy quyền -1. · Vốn/phí ứng 25 tiền · Thành công: nhận 70 tiền, lãi sau vốn 45 tiền · Thất bại: mất 25 tiền đã ứng, không phạt thêm tiền · Nhận kết quả cuối mùa sau nữa (sau 2 mùa) · Không giao ai: 30% thành công
 
 #### Phương án 2 — Tự học cùng nhóm thợ trẻ
 
@@ -16448,11 +16448,11 @@
 
 ## Phụ lục — công trình sửa đê và kết quả phụ thuộc nhân vật
 
-- Sửa đê khởi tạo từ tấu chương hoàn tất cuối mùa chọn. Không giao ai dùng tỷ lệ nền 35%; nếu đã giao người thì người đó phải còn đủ điều kiện tới hạn. Thay quan không tự chuyển phân công tấu chương cho người mới; mất người phụ trách làm công việc gián đoạn. Phí ban đầu đã chi theo lựa chọn, không trừ lại khi hoàn tất.
-- Điểm đánh giá người xử lý = làm tròn [20 + 0,6×năng lực + 0,25×độ phù hợp − ⌊mệt công vụ/8⌋ + điều chỉnh tính cách/quan hệ − nguy cơ phá việc], giới hạn 5–95. Điểm cộng tỷ lệ = làm tròn [điểm đánh giá ×0,4], giới hạn 5–35 điểm %. Tỷ lệ thành công = nền không giao ai + điểm cộng, tối đa 95%. Chỉ dùng tính cách đã biết; trung thành chưa xác minh được thay bằng giá trị trung tính 50, nên tỷ lệ hiển thị và tỷ lệ được chốt luôn thống nhất và không tiết lộ phẩm chất ẩn. Độ phù hợp chuyên môn là 100/65/20 cho đúng/liên quan/trái chuyên môn.
+- Sửa đê khởi tạo từ tấu chương hoàn tất cuối mùa chọn. Không giao ai dùng tỷ lệ nền 30%; nếu đã giao người thì người đó phải còn đủ điều kiện tới hạn. Thay quan không tự chuyển phân công tấu chương cho người mới; mất người phụ trách làm công việc gián đoạn. Phí ban đầu đã chi theo lựa chọn, không trừ lại khi hoàn tất.
+- Điểm hiệu dụng = năng lực − 4×⌊mệt công vụ/10⌋ + điều chỉnh tính cách/quan hệ − nguy cơ phá việc. Không cộng điểm nền 20 hoặc điểm đúng chuyên môn 25. Điểm cộng tỷ lệ = làm tròn [0,6×điểm hiệu dụng], giới hạn 5–60 điểm %. Tỷ lệ thành công = 30% + điểm cộng, tối đa 90%. Nhận việc +20 mệt (tối đa 100); cuối mùa hồi 10 nếu rảnh, hồi 5 nếu còn bận (tối thiểu 0). Hậu cung dùng thiện cảm thay năng lực. Chỉ dùng tính cách đã biết; trung thành chưa xác minh được thay bằng giá trị trung tính 50, nên tỷ lệ hiển thị và tỷ lệ được chốt luôn thống nhất và không tiết lộ phẩm chất ẩn. Chỉ người đúng chuyên môn được nhận việc, độ phù hợp là 100.
 - Hiệu quả thưởng = làm tròn [45 + 0,6×năng lực + 0,3×độ phù hợp − ⌊mệt công vụ/5⌋ + điều chỉnh tính cách], giới hạn 10–180%. Phần thưởng cơ bản được nhân tỷ lệ này, làm tròn, tối thiểu 1; sau đó có thể thất thoát do phẩm chất. Quan hệ và bất mãn ảnh hưởng hợp tác, còn liêm chính ảnh hưởng thất thoát.
 - Sửa đê thành công: tăng đê điều từ cơ bản 30 theo hiệu quả và phần nhận được sau thất thoát. Thất bại thường: đê điều −4, lòng dân −2. Thất bại nặng: đê điều −8, lòng dân −4, uy quyền −3, ngân khố −15, ngoài phí đã cấp.
-- Kiểm toán, mật thám, ngoại giao và sửa đê mới đều dùng tỷ lệ nền 35% nếu không giao ai; có người sẽ cộng theo đánh giá trên. Chỉ các kết quả chờ được tạo trước 0.16.0 mới giữ cơ chế cũ.
+- Kiểm toán, mật thám, ngoại giao và sửa đê mới đều dùng tỷ lệ nền 30% nếu không giao ai; có người sẽ cộng theo đánh giá trên, tối đa 90%. Kết quả đã ngự phê trước lần cập nhật này giữ tỷ lệ và nhánh đã chốt.
 
 ## Nguồn đối chiếu
 

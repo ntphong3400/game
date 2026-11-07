@@ -210,18 +210,7 @@ class BalancePlayer {
         }
         Courtier? person;
         if (petitionCanAssign(s, c)) {
-          final pool =
-              s.court
-                  .where((c) => petitionAssigneeBlocked(s, c) == null)
-                  .toList()
-                ..sort(
-                  (a, b) => petitionChance(
-                    s,
-                    e,
-                    c,
-                    b,
-                  ).compareTo(petitionChance(s, e, c, a)),
-                );
+          final pool = petitionAssignees(s, e, c);
           person = pool.firstOrNull;
         }
         final chance =

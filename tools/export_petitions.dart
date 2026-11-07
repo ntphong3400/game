@@ -102,11 +102,11 @@ String followupText(String kind) => switch (kind) {
     'Nhận doanh thu ngẫu nhiên 70–95 tiền vào ngân khố. Đây là doanh thu, chưa trừ chi phí đã bỏ ra; không có nhánh thất bại riêng.',
   'weapons' => 'Quân lực +8. Không có nhánh thất bại riêng.',
   'audit' =>
-    'Không giao ai: 35% thành công. Có người: 40–70%, theo đánh giá người xử lý. Thành công: ngân khố +$petitionAuditMinimum đến +$petitionAuditMaximum; uy quyền +2. Thất bại: không có khoản thưởng này, không hoàn phí.',
+    'Không giao ai: 30% thành công. Có người: 35–90%, theo đánh giá người xử lý. Thành công: ngân khố +$petitionAuditMinimum đến +$petitionAuditMaximum; uy quyền +2. Thất bại: không có khoản thưởng này, không hoàn phí.',
   'security' =>
-    'Không giao ai: 35% thành công. Có người: 40–70%, theo đánh giá người xử lý. Thành công: giảm tối đa 6 tiến độ âm mưu cho mỗi người còn hoạt động (hậu cung chỉ người đã nhập cung). Thất bại: không giảm âm mưu; không hoàn phí.',
+    'Không giao ai: 30% thành công. Có người: 35–90%, theo đánh giá người xử lý. Thành công: giảm tối đa 6 tiến độ âm mưu cho mỗi người còn hoạt động (hậu cung chỉ người đã nhập cung). Thất bại: không giảm âm mưu; không hoàn phí.',
   'envoy' =>
-    'Không giao ai: 35% thành công, không tự chọn quan thay người chơi. Có người: 40–70%, theo đánh giá người xử lý. Thành công: giảm chiến tranh từ cơ bản 3, tăng uy quyền từ cơ bản 2, điều chỉnh theo người phụ trách nếu có và thất thoát; bao vây về 0. Thất bại thường: chiến tranh +1, uy quyền −2; thất bại nặng: chiến tranh +2, uy quyền −4, ngân khố −20. Người được giao không còn hợp lệ khi tới hạn: gián đoạn, uy quyền −2. Phí đã chi không hoàn lại.',
+    'Không giao ai: 30% thành công, không tự chọn quan thay người chơi. Có người: 35–90%, theo đánh giá người xử lý. Thành công: giảm chiến tranh từ cơ bản 3, tăng uy quyền từ cơ bản 2, điều chỉnh theo người phụ trách nếu có và thất thoát; bao vây về 0. Thất bại thường: chiến tranh +1, uy quyền −2; thất bại nặng: chiến tranh +2, uy quyền −4, ngân khố −20. Người được giao không còn hợp lệ khi tới hạn: gián đoạn, uy quyền −2. Phí đã chi không hoàn lại.',
   _ => throw StateError('Unknown followup: $kind'),
 };
 
@@ -155,7 +155,7 @@ void main(List<String> args) {
     '- Cân bằng 0.18.0: đầu tư nhận kết quả sau 2 mùa; kiểm toán/truy dấu sau 1 mùa. Thưởng kinh tế dùng mức riêng theo phương án; thất bại mất vốn/phí, không trừ thêm tiền, các phạt lòng dân/uy quyền/ổn định liên quan tối đa −1. Kiểm toán độc lập phí 20, thu hồi 60–90 nếu thành công. Hòa đàm có khoản thu phụ giữ quy tắc cũ; khoản vay giữ nguyên tiền và nợ. Phương án nhận tiền ngay còn lại tăng khoảng 35%, làm tròn bội 5. Kết quả đã chốt trong bản lưu giữ thời hạn và mức cũ.',
   );
   line(
-    '- **Giao người xử lý (0.16.0):** 148 lựa chọn có rủi ro được chọn triều thần hoặc người trưởng thành đã nhập hậu cung và đang rảnh. Mặc định **không giao ai**: 143 lựa chọn có tỷ lệ nền 40–55% (giảm 25 điểm % so với tỷ lệ biên soạn); 5 công việc riêng có nền 35%. Chọn người cộng 5–35 điểm %, không tốn thêm hành động hoặc phí ngoài phương án. Tỷ lệ chính xác được hiển thị trước khi xác nhận; người được giao bận đến hạn, mệt công vụ +12 khi nhận việc.',
+    '- **Giao người xử lý (0.16.0):** 148 lựa chọn có rủi ro được chọn triều thần hoặc người trưởng thành đã nhập hậu cung, đang rảnh và đúng chuyên môn yêu cầu. Mặc định **không giao ai**: thống nhất 30%. Chọn người cộng 5–60 điểm %, trần chung 90%, không tốn thêm hành động hoặc phí ngoài phương án. Tỷ lệ chính xác được hiển thị trước khi xác nhận; người được giao bận đến hạn, mệt công vụ +20 khi nhận việc.',
   );
   line(
     '- Người được giao, tỷ lệ và nhánh thành công/thất bại được lưu lúc xác nhận. Người đó rời chức, qua đời hoặc không còn đủ điều kiện trước hạn thì công việc gián đoạn và chịu hậu quả nhánh thất bại; kinh phí không hoàn lại. Bản lưu cũ đã có kết quả chờ giữ cách xử lý và tỷ lệ đã ghi.',
@@ -300,7 +300,7 @@ void main(List<String> args) {
         final chance = managed ? petitionBaseChance(c) : c.successChance;
         if (managed) {
           line(
-            '- **Người xử lý tùy chọn:** chuyên môn ${petitionSpecialty(e, c)}. Không giao ai: $chance%; giao người đủ điều kiện: ${chance + 5}–${(chance + 35).clamp(5, 95)}%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.',
+            '- **Người xử lý tùy chọn:** chuyên môn ${petitionSpecialty(e, c)}. Không giao ai: $chance%; giao người đủ điều kiện: ${chance + 5}–$petitionMaxChance%. Tỷ lệ cụ thể phụ thuộc nhân vật được chọn.',
           );
         }
         if (c.followup.isNotEmpty) {
@@ -334,10 +334,10 @@ void main(List<String> args) {
   line('## Phụ lục — công trình sửa đê và kết quả phụ thuộc nhân vật');
   line();
   line(
-    '- Sửa đê khởi tạo từ tấu chương hoàn tất cuối mùa chọn. Không giao ai dùng tỷ lệ nền 35%; nếu đã giao người thì người đó phải còn đủ điều kiện tới hạn. Thay quan không tự chuyển phân công tấu chương cho người mới; mất người phụ trách làm công việc gián đoạn. Phí ban đầu đã chi theo lựa chọn, không trừ lại khi hoàn tất.',
+    '- Sửa đê khởi tạo từ tấu chương hoàn tất cuối mùa chọn. Không giao ai dùng tỷ lệ nền 30%; nếu đã giao người thì người đó phải còn đủ điều kiện tới hạn. Thay quan không tự chuyển phân công tấu chương cho người mới; mất người phụ trách làm công việc gián đoạn. Phí ban đầu đã chi theo lựa chọn, không trừ lại khi hoàn tất.',
   );
   line(
-    '- Điểm đánh giá người xử lý = làm tròn [20 + 0,6×năng lực + 0,25×độ phù hợp − ⌊mệt công vụ/8⌋ + điều chỉnh tính cách/quan hệ − nguy cơ phá việc], giới hạn 5–95. Điểm cộng tỷ lệ = làm tròn [điểm đánh giá ×0,4], giới hạn 5–35 điểm %. Tỷ lệ thành công = nền không giao ai + điểm cộng, tối đa 95%. Chỉ dùng tính cách đã biết; trung thành chưa xác minh được thay bằng giá trị trung tính 50, nên tỷ lệ hiển thị và tỷ lệ được chốt luôn thống nhất và không tiết lộ phẩm chất ẩn. Độ phù hợp chuyên môn là 100/65/20 cho đúng/liên quan/trái chuyên môn.',
+    '- Điểm hiệu dụng = năng lực − 4×⌊mệt công vụ/10⌋ + điều chỉnh tính cách/quan hệ − nguy cơ phá việc. Không cộng điểm nền 20 hoặc điểm đúng chuyên môn 25. Điểm cộng tỷ lệ = làm tròn [0,6×điểm hiệu dụng], giới hạn 5–60 điểm %. Tỷ lệ thành công = 30% + điểm cộng, tối đa 90%. Nhận việc +20 mệt (tối đa 100); cuối mùa hồi 10 nếu rảnh, hồi 5 nếu còn bận (tối thiểu 0). Hậu cung dùng thiện cảm thay năng lực. Chỉ dùng tính cách đã biết; trung thành chưa xác minh được thay bằng giá trị trung tính 50, nên tỷ lệ hiển thị và tỷ lệ được chốt luôn thống nhất và không tiết lộ phẩm chất ẩn. Chỉ người đúng chuyên môn được nhận việc, độ phù hợp là 100.',
   );
   line(
     '- Hiệu quả thưởng = làm tròn [45 + 0,6×năng lực + 0,3×độ phù hợp − ⌊mệt công vụ/5⌋ + điều chỉnh tính cách], giới hạn 10–180%. Phần thưởng cơ bản được nhân tỷ lệ này, làm tròn, tối thiểu 1; sau đó có thể thất thoát do phẩm chất. Quan hệ và bất mãn ảnh hưởng hợp tác, còn liêm chính ảnh hưởng thất thoát.',
@@ -346,7 +346,7 @@ void main(List<String> args) {
     '- Sửa đê thành công: tăng đê điều từ cơ bản 30 theo hiệu quả và phần nhận được sau thất thoát. Thất bại thường: đê điều −4, lòng dân −2. Thất bại nặng: đê điều −8, lòng dân −4, uy quyền −3, ngân khố −15, ngoài phí đã cấp.',
   );
   line(
-    '- Kiểm toán, mật thám, ngoại giao và sửa đê mới đều dùng tỷ lệ nền 35% nếu không giao ai; có người sẽ cộng theo đánh giá trên. Chỉ các kết quả chờ được tạo trước 0.16.0 mới giữ cơ chế cũ.',
+    '- Kiểm toán, mật thám, ngoại giao và sửa đê mới đều dùng tỷ lệ nền 30% nếu không giao ai; có người sẽ cộng theo đánh giá trên, tối đa 90%. Kết quả đã ngự phê trước lần cập nhật này giữ tỷ lệ và nhánh đã chốt.',
   );
   line();
   line('## Nguồn đối chiếu');

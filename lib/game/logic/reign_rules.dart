@@ -232,8 +232,8 @@ List<String> missionTerminalRisks(GameState s, MajorMission m) {
 
 String officerWorkHint(Courtier c, [GameState? state]) =>
     'Mệt ${c.strain}/100 · công trạng ${c.merit}${state?.hasCourtSystem == true ? ' khả dụng · ${c.majorMerits} thành tích lớn' : '/100'} · '
-    'giảm ${c.strain ~/ 8} điểm % thành công, ${c.strain ~/ 5} điểm % hiệu quả. '
-    'Nhận việc +12 mệt; rảnh hồi 8 mỗi ${state?.periodName ?? 'tuần'}, đang bận hồi 3. Mỗi 3 lần lập công tăng 3 ảnh hưởng, xin ${state?.seasonal == true ? 8 : 4} tiền/${state?.periodName ?? 'tuần'} × ${state?.seasonal == true ? 2 : 4} ${state?.periodName ?? 'tuần'}; trả thiếu làm phe −1/kỳ.';
+    'phạt ${officerFatiguePenalty(c.strain)} điểm đánh giá thành công, giảm ${c.strain ~/ 5} điểm % hiệu quả. '
+    'Nhận việc +$officerAssignmentStrain mệt; rảnh hồi $officerIdleRecovery mỗi ${state?.periodName ?? 'tuần'}, đang bận hồi $officerBusyRecovery. Mỗi 3 lần lập công tăng 3 ảnh hưởng, xin ${state?.seasonal == true ? 8 : 4} tiền/${state?.periodName ?? 'tuần'} × ${state?.seasonal == true ? 2 : 4} ${state?.periodName ?? 'tuần'}; trả thiếu làm phe −1/kỳ.';
 const emergencyHints = {
   'borrow':
       'Nhận 120 tiền · 1 hành động. Từ cuối tuần sau trả 15/tuần × 10 tuần (tổng 150). Thế gia +5, uy quyền −2. Chỉ một khoản vay đang chạy.',
